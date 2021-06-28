@@ -20,5 +20,24 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+
+    'no-console': 'error',
+    'no-debugger': 'error',
+    quotemark: 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'prefer-const': 'error',
+    'no-empty': [
+      'error',
+      {
+        allowEmptyCatch: true,
+      },
+    ],
+    'no-unused-vars': 'off',
+    'no-nested-ternary': 'error',
   },
 };
