@@ -10,12 +10,14 @@ export class StatesDistrictsController {
   ) {}
 
   @Get('states')
-  getStatesList(): States[] {
-    return this.statesDistrictsService.getStatesList()
+  async getStatesList(): Promise<States[]> {
+    return await this.statesDistrictsService.getStatesList()
   }
 
   @Get('districts/:stateId')
-  getDistrictsList(@Param() paramData: StateDistrictDto): Districts {
-    return this.statesDistrictsService.getDistrictsList(paramData.stateId)
+  async getDistrictsList(
+    @Param() paramData: StateDistrictDto,
+  ): Promise<Districts> {
+    return await this.statesDistrictsService.getDistrictsList(paramData.stateId)
   }
 }
