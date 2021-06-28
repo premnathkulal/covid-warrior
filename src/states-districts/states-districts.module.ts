@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
+import { DistrictsSchema } from './schemas/districts.schema'
+import { StatesSchema } from './schemas/states.schema'
 import { StatesDistrictsController } from './states-districts.controller'
-import { DistrictsSchema, StatesSchema } from './states-districts.model'
 import { StatesDistrictsService } from './states-districts.service'
 
 @Module({
