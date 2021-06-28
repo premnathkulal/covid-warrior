@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common'
-import { DISTRICTS, STATES } from 'src/database/data'
+import { StateDistrictDto } from './dto/states-districts.dto'
 import { Districts, States } from './interfaces/states-districts.interface'
 import { StatesDistrictsService } from './states-districts.service'
 
@@ -15,7 +15,7 @@ export class StatesDistrictsController {
   }
 
   @Get('districts/:stateId')
-  getDistrictsList(@Param() paramData: { stateId: number }): Districts {
+  getDistrictsList(@Param() paramData: StateDistrictDto): Districts {
     return this.statesDistrictsService.getDistrictsList(paramData.stateId)
   }
 }
