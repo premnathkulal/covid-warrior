@@ -1,15 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
-export type DistrictDocument = District & Document
-
+export type DistrictDocument = Districts & Document
 @Schema()
-export class District {
-  @Prop({ required: true })
-  district_id: number
+export class Districts {
+  @Prop()
+  state_id: number
 
-  @Prop({ required: true })
+  @Prop()
+  districts: District[]
+}
+export class District {
+  district_id: number
   district_name: string
 }
 
-export const DistrictsSchema = SchemaFactory.createForClass(District)
+export const DistrictsSchema = SchemaFactory.createForClass(Districts)

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { DISTRICTS } from 'src/database/data'
 import { Districts, States } from './interfaces/states-districts.interface'
 
 @Injectable()
@@ -19,7 +18,7 @@ export class StatesDistrictsService {
 
   async getDistrictsList(stateId: number): Promise<Districts> {
     const district = await this.districtsModule
-      .findOne({ stateId: stateId })
+      .findOne({ state_id: stateId })
       .exec()
     return district
   }

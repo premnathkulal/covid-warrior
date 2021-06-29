@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type StatesDto {
+  state_id: Int!
+  state_name: String!
+}
+
+type DistrictsDto {
+  state_id: Int!
+  districts: [DistrictDto!]!
+}
+
+type DistrictDto {
+  district_id: Int!
+  district_name: String!
+}
+
+type Query {
+  states: [StatesDto!]!
+  districts(stateId: Float!): DistrictsDto!
+}

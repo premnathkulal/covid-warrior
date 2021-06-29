@@ -4,6 +4,11 @@ export interface States {
 }
 
 export interface Districts {
+  state_id: number
+  districts: District[]
+}
+
+export interface District {
   district_id: number
   district_name: string
 }
