@@ -4,10 +4,14 @@ import { AppService } from './app.service'
 import { StatesDistrictsModule } from './states-districts/states-districts.module'
 import { MongooseModule } from '@nestjs/mongoose'
 import { GraphQLModule } from '@nestjs/graphql'
+import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
     StatesDistrictsModule,
+    UsersModule,
+    AuthModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
     }),
