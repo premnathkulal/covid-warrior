@@ -23,7 +23,22 @@ type UserDetailsDto {
   username: String!
 }
 
+type RegisterResponseDto {
+  response: String!
+  statusCode: Int!
+}
+
 type Query {
   states: [StatesDto!]!
   districts(stateId: Float!): DistrictsDto!
+}
+
+type Mutation {
+  register(input: UserDto!): RegisterResponseDto!
+}
+
+input UserDto {
+  name: String!
+  username: String!
+  password: String!
 }

@@ -5,8 +5,3 @@ export interface User extends mongoose.Document {
   username: string
   password: string
 }
-
-export interface RegisterResponse {
-  response: string
-  statusCode: number
-}

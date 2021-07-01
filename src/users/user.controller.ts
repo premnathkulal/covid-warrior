@@ -4,7 +4,7 @@ import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { LoginUserDto, UserDto } from './dto/user.dto'
 import { UsersService } from './users.service'
-import { RegisterResponse } from './interfaces/user.interface'
+import { RegisterResponseDto } from './dto/register.dto'
 
 @Controller('auth')
 export class UserController {
@@ -23,7 +23,7 @@ export class UserController {
   }
 
   @Post('register')
-  async register(@Body() userDetails: UserDto): Promise<RegisterResponse> {
+  async register(@Body() userDetails: UserDto): Promise<RegisterResponseDto> {
     return await this.userService.registerUser(userDetails)
   }
 
