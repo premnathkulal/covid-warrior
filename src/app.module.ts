@@ -15,6 +15,7 @@ import { ConfigModule } from '@nestjs/config'
     AuthModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      context: ({ req, res }) => ({ req, res }),
     }),
     MongooseModule.forRoot(
       'mongodb+srv://premnathkulal1998:Un5pa2w7pb45nDPy@cluster0.wfsyt.mongodb.net/covidWarrior?retryWrites=true&w=majority',

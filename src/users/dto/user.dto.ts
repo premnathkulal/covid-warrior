@@ -13,15 +13,6 @@ export class UserDetailsDto {
 }
 
 @ObjectType()
-export class LoginUserDto {
-  @Field(() => UserDetailsDto)
-  public userDetails: UserDetailsDto
-
-  @Field()
-  public token: string
-}
-
-@ObjectType()
 @InputType()
 export class UserDto {
   @Field()

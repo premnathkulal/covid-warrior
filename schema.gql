@@ -17,12 +17,6 @@ type DistrictsDto {
   districts: [DistrictDto!]!
 }
 
-type UserDetailsDto {
-  id: String!
-  name: String!
-  username: String!
-}
-
 type RegisterResponseDto {
   response: String!
   statusCode: Int!
