@@ -1,14 +1,46 @@
-import { Injectable } from '@nestjs/common'
-import { User } from './interfaces/user.interface'
+import { HttpException, Injectable } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
+import { UserDetailsDto, UserDto } from './dto/user.dto'
+import { RegisterResponse, User } from './interfaces/user.interface'
 
 @Injectable()
 export class UsersService {
-  private readonly users: User[] = [
-    { id: 1, name: 'Bran Stark', username: 'brans', password: 'bran123' },
-    { id: 2, name: 'Jhon Snow', username: 'snowman', password: 'snow123' },
-  ]
+  constructor(@InjectModel('Users') private readonly userModule: Model<User>) {}
 
   async findUser(userName: string): Promise<User | undefined> {
-    return this.users.find(user => userName === user.username)
+    const user = await this.userModule.findOne({
+      username: userName,
+    })
+    return user
+  }
+
+  async registerUser(userDetail: UserDto): Promise<RegisterResponse> {
+    if (!userDetail.username) {
+      this.httpException('User name required', 400)
+    }
+    if (!userDetail.password) {
+      this.httpException('Password required', 400)
+    }
+
+    const isUserExists = await this.findUser(userDetail.username)
+    if (!!isUserExists) {
+      this.httpException('User name already exists', 409)
+    }
+
+    const newUser = new this.userModule({
+      name: userDetail.name,
+      username: userDetail.username,
+      password: userDetail.password,
+    })
+    const result = await newUser.save()
+    return {
+      response: 'created',
+      statusCode: 201,
+    }
+  }
+
+  private httpException(exception: string, statusCode: number) {
+    throw new HttpException(exception, statusCode)
   }
 }

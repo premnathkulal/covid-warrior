@@ -10,14 +10,6 @@ export class StatesDto {
   @Field()
   public state_name: string
 }
-@ObjectType()
-export class DistrictsDto {
-  @Field(() => Int)
-  public state_id: number
-
-  @Field(() => [DistrictDto])
-  public districts: DistrictDto[]
-}
 
 @ObjectType()
 export class DistrictDto {
@@ -26,4 +18,12 @@ export class DistrictDto {
 
   @Field()
   public district_name: string
+}
+@ObjectType()
+export class DistrictsDto {
+  @Field(() => Int)
+  public state_id: number
+
+  @Field(() => [DistrictDto])
+  public districts: DistrictDto[]
 }

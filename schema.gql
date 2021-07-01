@@ -7,14 +7,20 @@ type StatesDto {
   state_name: String!
 }
 
+type DistrictDto {
+  district_id: Int!
+  district_name: String!
+}
+
 type DistrictsDto {
   state_id: Int!
   districts: [DistrictDto!]!
 }
 
-type DistrictDto {
-  district_id: Int!
-  district_name: String!
+type UserDetailsDto {
+  id: String!
+  name: String!
+  username: String!
 }
 
 type Query {
