@@ -7,6 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
+import { AppointmentSessionsModule } from './appointmentSessions/appointmentSession.module'
 
 @Module({
   imports: [
@@ -18,9 +19,10 @@ import { ConfigModule } from '@nestjs/config'
       context: ({ req, res }) => ({ req, res }),
     }),
     MongooseModule.forRoot(
-      'mongodb+srv://premnathkulal1998:Un5pa2w7pb45nDPy@cluster0.wfsyt.mongodb.net/covidWarrior?retryWrites=true&w=majority',
+      'mongodb+srv://premnathkulal1998:1Wtfp26D9xAfSQnX@cluster0.wfsyt.mongodb.net/covidWarrior?retryWrites=true&w=majority',
     ),
     ConfigModule.forRoot(),
+    AppointmentSessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

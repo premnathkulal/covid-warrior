@@ -1,0 +1,24 @@
+import { Injectable } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
+import { AppointmentCenter } from './interfaces/appointment-center.interface'
+
+@Injectable()
+export class AppointmentSessionsServices {
+  constructor(
+    @InjectModel('Appointmentcenter')
+    private readonly appointmentCenterModule: Model<AppointmentCenter>,
+  ) {}
+
+  async findVaccinationCenter({ ...args }): Promise<AppointmentCenter[]> {
+    const requestQuery = { date: args.date }
+    if (args.pinCode) {
+      requestQuery['pincode'] = parseInt(args.pinCode)
+    }
+    if (args.districtName) {
+      requestQuery['district_name'] = args.districtName
+    }
+    const result = await this.appointmentCenterModule.find(requestQuery).exec()
+    return result
+  }
+}
