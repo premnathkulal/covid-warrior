@@ -22,6 +22,31 @@ type RegisterResponseDto {
   statusCode: Int!
 }
 
+type AppointmentCenterDto {
+  center_id: Int!
+  name: String!
+  address: String!
+  state_name: String!
+  district_name: String!
+  block_name: String!
+  pincode: Int!
+  from: String!
+  to: String!
+  lat: Int!
+  long: Int!
+  fee_type: String!
+  session_id: String!
+  date: String!
+  available_capacity: Int!
+  available_capacity_dose1: Int!
+  available_capacity_dose2: Int!
+  fee: String!
+  allow_all_age: Boolean!
+  min_age_limit: Int!
+  vaccine: String!
+  slots: [String!]!
+}
+
 type Query {
   states: [StatesDto!]!
   districts(stateId: Float!): DistrictsDto!
@@ -29,10 +54,17 @@ type Query {
 
 type Mutation {
   register(input: UserDto!): RegisterResponseDto!
+  findCenters(input: AppointmentCenterInput!): [AppointmentCenterDto!]!
 }
 
 input UserDto {
   name: String!
   username: String!
   password: String!
+}
+
+input AppointmentCenterInput {
+  date: String!
+  pincode: Int
+  district_name: String!
 }

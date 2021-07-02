@@ -9,7 +9,7 @@ export class AppointmentSessionsController {
   ) {}
 
   @Get('findVaccinationCenter')
-  async findByPin(@Query() query): Promise<AppointmentCenter[]> {
+  async findCenters(@Query() query): Promise<AppointmentCenter[]> {
     return await this.appointmentSessionsServices.findVaccinationCenter(query)
   }
 }

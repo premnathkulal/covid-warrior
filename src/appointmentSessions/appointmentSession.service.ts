@@ -15,8 +15,8 @@ export class AppointmentSessionsServices {
     if (args.pinCode) {
       requestQuery['pincode'] = parseInt(args.pinCode)
     }
-    if (args.districtName) {
-      requestQuery['district_name'] = args.districtName
+    if (args.district_name) {
+      requestQuery['district_name'] = args.district_name
     }
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
     return result

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
-import { UserSchema } from 'src/users/schemas/user.schema'
 import { AppointmentSessionsController } from './appointmentSession.controller'
+import { AppointmentCenterResolver } from './appointmentSession.resolver'
 import { AppointmentSessionsServices } from './appointmentSession.service'
 import { AppointmentCenterSchema } from './schemas/appointment-centers.schema'
 
@@ -12,6 +12,6 @@ import { AppointmentCenterSchema } from './schemas/appointment-centers.schema'
     ]),
   ],
   controllers: [AppointmentSessionsController],
-  providers: [AppointmentSessionsServices],
+  providers: [AppointmentSessionsServices, AppointmentCenterResolver],
 })
 export class AppointmentSessionsModule {}
