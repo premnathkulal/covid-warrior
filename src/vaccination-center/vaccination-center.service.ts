@@ -18,7 +18,6 @@ export class VaccinationCenterServices {
     if (args.district_name) {
       requestQuery['district_name'] = args.district_name
     }
-    console.log(requestQuery)
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
     return result
   }
