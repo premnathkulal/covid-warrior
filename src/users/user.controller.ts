@@ -9,11 +9,20 @@ import {
 } from '@nestjs/common'
 import { AuthService } from '../auth/auth.service'
 import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
-import { UserDto } from './dto/user.dto'
 import { UsersService } from './users.service'
-import { RegisterResponseDto } from './dto/register.dto'
+import { RegisterResponse } from './dto/register.dto'
+import {
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger'
+import { RegisterInput } from './dto/register.input'
+import { LoginInput } from './dto/login.input'
+import { LoginUserResponse } from './dto/login.dto'
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class UserController {
   constructor(
@@ -21,9 +30,15 @@ export class UserController {
     private readonly userService: UsersService,
   ) {}
 
+  @ApiOkResponse({ type: LoginUserResponse })
+  @ApiUnauthorizedResponse({ description: 'Invalid credentials' })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req, @Res() response): Promise<any> {
+  async login(
+    @Request() req,
+    @Body() loginInput: LoginInput,
+    @Res() response,
+  ): Promise<any> {
     const authToken = await this.authService.login(req.user)
     response.cookie('authToken', authToken)
     const userDetails = {
@@ -33,14 +48,18 @@ export class UserController {
     response.send(userDetails)
   }
 
+  @ApiCreatedResponse({ type: RegisterResponse })
+  @ApiConflictResponse({ description: 'User name already exists' })
   @Post('register')
-  async register(@Body() userDetails: UserDto): Promise<RegisterResponseDto> {
+  async register(
+    @Body() userDetails: RegisterInput,
+  ): Promise<RegisterResponse> {
     return await this.userService.registerUser(userDetails)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('protected')
-  async info(@Request() req): Promise<any> {
-    return req.user
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('protected')
+  // async info(@Request() req): Promise<any> {
+  //   return req.user
+  // }
 }

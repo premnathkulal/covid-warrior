@@ -1,8 +1,8 @@
 import { HttpException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { RegisterResponseDto } from './dto/register.dto'
-import { UserDto } from './dto/user.dto'
+import { RegisterResponse } from './dto/register.dto'
+import { RegisterInput } from './dto/register.input'
 import { User } from './interfaces/user.interface'
 
 @Injectable()
@@ -16,7 +16,7 @@ export class UsersService {
     return user
   }
 
-  async registerUser(userDetail: UserDto): Promise<RegisterResponseDto> {
+  async registerUser(userDetail: RegisterInput): Promise<RegisterResponse> {
     if (!userDetail.username) {
       this.httpException('User name required', 400)
     }

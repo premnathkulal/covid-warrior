@@ -17,7 +17,13 @@ type DistrictsDto {
   districts: [DistrictDto!]!
 }
 
-type RegisterResponseDto {
+type UserDetails {
+  id: String!
+  name: String!
+  username: String!
+}
+
+type RegisterResponse {
   response: String!
   statusCode: Int!
 }
@@ -53,11 +59,11 @@ type Query {
 }
 
 type Mutation {
-  register(input: UserDto!): RegisterResponseDto!
+  register(input: RegisterInput!): RegisterResponse!
   findCenters(input: AppointmentCenterInput!): [VaccinationCenterDto!]!
 }
 
-input UserDto {
+input RegisterInput {
   name: String!
   username: String!
   password: String!

@@ -1,26 +1,17 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { ApiProperty } from '@nestjs/swagger'
 
 @ObjectType()
-export class UserDetailsDto {
+export class UserDetails {
+  @ApiProperty()
   @Field()
   public id: string
 
+  @ApiProperty()
   @Field()
   public name: string
 
+  @ApiProperty()
   @Field()
   public username: string
-}
-
-@ObjectType()
-@InputType()
-export class UserDto {
-  @Field()
-  public name: string
-
-  @Field()
-  public username: string
-
-  @Field()
-  public password: string
 }

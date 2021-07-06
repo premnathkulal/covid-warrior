@@ -2,11 +2,8 @@ import { Controller, Get, Param } from '@nestjs/common'
 import { StateDistrictDto } from './dto/states-districts.dto'
 import { StatesDistrictsService } from './states-districts.service'
 import {
-  ApiBadRequestResponse,
-  ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiQuery,
   ApiTags,
   ApiParam,
 } from '@nestjs/swagger'
