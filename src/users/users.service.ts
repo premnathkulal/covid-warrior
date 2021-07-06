@@ -2,8 +2,8 @@ import { HttpException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { RegisterResponse } from './dto/register.dto'
-import { RegisterInput } from './dto/register.input'
-import { User } from './interfaces/user.interface'
+import { RegisterInput } from './inputs/register.input'
+import { User } from './entities/user.entity'
 
 @Injectable()
 export class UsersService {

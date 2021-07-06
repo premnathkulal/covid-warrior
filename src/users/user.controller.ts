@@ -18,8 +18,8 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
-import { RegisterInput } from './dto/register.input'
-import { LoginInput } from './dto/login.input'
+import { RegisterInput } from './inputs/register.input'
+import { LoginInput } from './inputs/login.input'
 import { LoginUserResponse } from './dto/login.dto'
 
 @ApiTags('Authentication')

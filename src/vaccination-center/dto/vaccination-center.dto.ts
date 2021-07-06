@@ -68,15 +68,3 @@ export class VaccinationCenterDto {
   @Field(() => [String])
   public slots: string[]
 }
-
-@InputType()
-export class AppointmentCenterInput {
-  @Field()
-  public date: string
-
-  @Field(() => Int, { nullable: true })
-  public pincode: number
-
-  @Field()
-  public district_name: string
-}

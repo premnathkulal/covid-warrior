@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { VaccinationCenter } from './interfaces/vaccination-center.interface'
+import { VaccinationCenter } from './entities/vaccination-center.entity'
 
 @Injectable()
 export class VaccinationCenterServices {
@@ -17,6 +17,12 @@ export class VaccinationCenterServices {
     }
     if (args.district_name) {
       requestQuery['district_name'] = args.district_name
+    }
+    if (args.latitude) {
+      requestQuery['lat'] = args.latitude
+    }
+    if (args.longitude) {
+      requestQuery['long'] = args.longitude
     }
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
     return result

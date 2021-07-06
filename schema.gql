@@ -60,7 +60,7 @@ type Query {
 
 type Mutation {
   register(input: RegisterInput!): RegisterResponse!
-  findCenters(input: AppointmentCenterInput!): [VaccinationCenterDto!]!
+  findCenters(input: VaccinationCenterInput!): [VaccinationCenterDto!]!
 }
 
 input RegisterInput {
@@ -69,8 +69,10 @@ input RegisterInput {
   password: String!
 }
 
-input AppointmentCenterInput {
+input VaccinationCenterInput {
   date: String!
   pincode: Int
-  district_name: String!
+  district_name: String
+  latitude: Int
+  longitude: Int
 }
