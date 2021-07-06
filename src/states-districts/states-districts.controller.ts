@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common'
-import { StateDistrictDto } from './dto/states-districts.dto'
+import { StateDistrict } from './dto/states-districts.dto'
 import { StatesDistrictsService } from './states-districts.service'
 import {
   ApiNotFoundResponse,
@@ -27,7 +27,7 @@ export class StatesDistrictsController {
   @ApiNotFoundResponse({ description: 'State Not Found' })
   @Get('districts/:stateId')
   async getDistrictsList(
-    @Param() paramData: StateDistrictDto,
+    @Param() paramData: StateDistrict,
   ): Promise<Districts> {
     return await this.statesDistrictsService.getDistrictsList(paramData.stateId)
   }

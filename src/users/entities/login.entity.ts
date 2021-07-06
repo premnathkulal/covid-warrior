@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
-import { UserDetails } from './user.dto'
+import { UserDetails } from './user-details.entity'
 
 @ObjectType()
 export class LoginUserResponse {

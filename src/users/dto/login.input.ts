@@ -1,17 +1,14 @@
 import { Field, InputType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
+import { MinLength } from 'class-validator'
 
 @InputType()
-export class RegisterInput {
+export class LoginInput {
   @ApiProperty()
   @Field()
-  public name: string
-
-  @Field()
-  @ApiProperty()
   public username: string
 
-  @Field()
   @ApiProperty()
+  @Field()
   public password: string
 }

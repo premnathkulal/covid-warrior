@@ -2,19 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type StatesDto {
+type State {
   state_id: Int!
   state_name: String!
 }
 
-type DistrictDto {
-  district_id: Int!
-  district_name: String!
-}
-
-type DistrictsDto {
+type Districts {
   state_id: Int!
-  districts: [DistrictDto!]!
 }
 
 type UserDetails {
@@ -54,8 +48,8 @@ type VaccinationCenterDto {
 }
 
 type Query {
-  states: [StatesDto!]!
-  districts(stateId: Float!): DistrictsDto!
+  states: [State!]!
+  districts(stateId: Float!): Districts!
 }
 
 type Mutation {

@@ -6,21 +6,24 @@ import {
   Request,
   Res,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common'
 import { AuthService } from '../auth/auth.service'
 import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 import { UsersService } from './users.service'
-import { RegisterResponse } from './dto/register.dto'
+import { RegisterResponse } from './entities/register.entity'
 import {
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiNotImplementedResponse,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
-import { RegisterInput } from './inputs/register.input'
-import { LoginInput } from './inputs/login.input'
-import { LoginUserResponse } from './dto/login.dto'
+import { RegisterInput } from './dto/register.input'
+import { LoginInput } from './dto/login.input'
+import { LoginUserResponse } from './entities/login.entity'
+import { ValidationPipe } from './pipes/validation.pipe'
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -50,9 +53,11 @@ export class UserController {
 
   @ApiCreatedResponse({ type: RegisterResponse })
   @ApiConflictResponse({ description: 'User name already exists' })
+  @ApiNotImplementedResponse({ description: 'Invalid password pattern' })
   @Post('register')
+  @UsePipes()
   async register(
-    @Body() userDetails: RegisterInput,
+    @Body(new ValidationPipe()) userDetails: RegisterInput,
   ): Promise<RegisterResponse> {
     return await this.userService.registerUser(userDetails)
   }

@@ -1,32 +1,11 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
+import { ApiProperty } from '@nestjs/swagger'
+import { IsNumber, MaxLength } from 'class-validator'
 
 @ObjectType()
-export class StateDistrictDto {
+export class StateDistrict {
+  @ApiProperty()
+  @MaxLength(3)
   @Field(() => Int)
   stateId: number
-}
-@ObjectType()
-export class StatesDto {
-  @Field(() => Int)
-  public state_id: number
-
-  @Field()
-  public state_name: string
-}
-
-@ObjectType()
-export class DistrictDto {
-  @Field(() => Int)
-  public district_id: number
-
-  @Field()
-  public district_name: string
-}
-@ObjectType()
-export class DistrictsDto {
-  @Field(() => Int)
-  public state_id: number
-
-  @Field(() => [DistrictDto])
-  public districts: DistrictDto[]
 }
