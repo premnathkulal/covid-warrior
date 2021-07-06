@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
-export type AppointmentCenterDocument = AppointmentCenter & Document
+export type VaccinationCenterDocument = VaccinationCenter & Document
 
 @Schema()
-export class AppointmentCenter {
+export class VaccinationCenter {
   @Prop()
   center_id: number
 
@@ -72,5 +72,5 @@ export class AppointmentCenter {
   slots: string[]
 }
 
-export const AppointmentCenterSchema =
-  SchemaFactory.createForClass(AppointmentCenter)
+export const VaccinationCenterSchema =
+  SchemaFactory.createForClass(VaccinationCenter)

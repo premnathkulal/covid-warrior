@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 
-export interface AppointmentCenter extends mongoose.Document {
+export interface VaccinationCenter extends mongoose.Document {
   center_id: number
   name: string
   address: string

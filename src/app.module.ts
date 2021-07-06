@@ -7,7 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
-import { AppointmentSessionsModule } from './appointmentSessions/appointmentSession.module'
+import { VaccinationCenterModule } from './vaccination-center/vaccination-center.module'
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { AppointmentSessionsModule } from './appointmentSessions/appointmentSess
       'mongodb+srv://premnathkulal1998:1Wtfp26D9xAfSQnX@cluster0.wfsyt.mongodb.net/covidWarrior?retryWrites=true&w=majority',
     ),
     ConfigModule.forRoot(),
-    AppointmentSessionsModule,
+    VaccinationCenterModule,
   ],
   controllers: [AppController],
   providers: [AppService],

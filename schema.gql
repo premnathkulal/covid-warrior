@@ -22,7 +22,7 @@ type RegisterResponseDto {
   statusCode: Int!
 }
 
-type AppointmentCenterDto {
+type VaccinationCenterDto {
   center_id: Int!
   name: String!
   address: String!
@@ -54,7 +54,7 @@ type Query {
 
 type Mutation {
   register(input: UserDto!): RegisterResponseDto!
-  findCenters(input: AppointmentCenterInput!): [AppointmentCenterDto!]!
+  findCenters(input: AppointmentCenterInput!): [VaccinationCenterDto!]!
 }
 
 input UserDto {

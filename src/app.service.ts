@@ -1,8 +1,4 @@
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
-export class AppService {
-  getHello(): string {
-    return 'Om Namo Bhagavate Vasudevaya!'
-  }
-}
+export class AppService {}
