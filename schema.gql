@@ -47,6 +47,17 @@ type VaccinationCenterDto {
   slots: [String!]!
 }
 
+type Beneficiary {
+  id: String!
+  name: String!
+  birth_year: String!
+  gender_id: Float!
+  photo_id_type: Float!
+  photo_id_number: String!
+  comorbidity_ind: String!
+  consent_version: String!
+}
+
 type Query {
   states: [State!]!
   districts(stateId: Float!): Districts!

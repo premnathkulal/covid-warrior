@@ -10,13 +10,16 @@ import {
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { BeneficiaryService } from './beneficiary.service'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
-import { CreateBeneficiaryResponse } from './entities/create-beneficiary.entity'
+import { Beneficiaries } from './entities/beneficiary.entity'
+import { BeneficiaryResponse } from './entities/beneficiary-response.entity'
 
 @ApiTags('Beneficiary Registration APIs')
 @Controller('beneficiary')
@@ -26,19 +29,20 @@ export class BeneficiaryController {
   @ApiBearerAuth('JWT-auth')
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @ApiCreatedResponse({
-    type: CreateBeneficiaryResponse,
+    type: BeneficiaryResponse,
     description: 'Beneficiary added',
   })
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Body() createBeneficiary: CreateBeneficiary,
-  ): Promise<CreateBeneficiaryResponse> {
+  ): Promise<BeneficiaryResponse> {
     return await this.beneficiaryService.create(createBeneficiary)
   }
 
   @ApiBearerAuth('JWT-auth')
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
+  @ApiOkResponse({ type: Beneficiaries })
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
@@ -47,17 +51,24 @@ export class BeneficiaryController {
 
   @ApiBearerAuth('JWT-auth')
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
+  @ApiNotFoundResponse({ description: 'Could not found beneficiary' })
+  @ApiOkResponse({ type: Beneficiaries })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.beneficiaryService.findOne(id)
+  async findOne(@Param('id') id: string) {
+    return await this.beneficiaryService.findOne(id)
   }
 
   @ApiBearerAuth('JWT-auth')
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
+  @ApiNotFoundResponse({ description: 'Could not found beneficiary' })
+  @ApiCreatedResponse({
+    type: BeneficiaryResponse,
+    description: 'Beneficiary removed',
+  })
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.beneficiaryService.remove(id)
+  async remove(@Param('id') id: string): Promise<BeneficiaryResponse> {
+    return await this.beneficiaryService.remove(id)
   }
 }

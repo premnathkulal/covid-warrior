@@ -1,7 +1,7 @@
-import { HttpStatus, Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { CreateBeneficiaryResponse } from './entities/create-beneficiary.entity'
-import { Beneficiary } from './entities/beneficiary.entity'
+import { BeneficiaryResponse } from './entities/beneficiary-response.entity'
+import { Beneficiaries, Beneficiary } from './entities/beneficiary.entity'
 import { Model } from 'mongoose'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
 
@@ -37,7 +37,7 @@ export class BeneficiaryService {
 
   async create(
     createBeneficiary: CreateBeneficiary,
-  ): Promise<CreateBeneficiaryResponse> {
+  ): Promise<BeneficiaryResponse> {
     const newBeneficiary = new this.beneficiariesModule({
       ...createBeneficiary,
     })
@@ -48,23 +48,57 @@ export class BeneficiaryService {
     }
   }
 
-  async findAll() {
-    const beneficiaries = await this.beneficiariesModule.find().exec()
+  async findAll(): Promise<Beneficiaries> {
+    const result = await this.beneficiariesModule.find().exec()
+    const beneficiaries = this.mapBeneficiariesData(result)
+    return {
+      status: HttpStatus.OK,
+      beneficiaries,
+    }
+  }
+
+  async findOne(id: string): Promise<Beneficiaries> {
+    const beneficiaries = await this.getBeneficiaryById(id)
+    return {
+      status: HttpStatus.OK,
+      beneficiaries,
+    }
+  }
+
+  async remove(id: string): Promise<BeneficiaryResponse> {
+    const result = await await this.beneficiariesModule
+      .deleteOne({ _id: id })
+      .exec()
+    if (result.n === 0) {
+      throw new NotFoundException('Could not found beneficiary')
+    }
+    return {
+      status: HttpStatus.OK,
+      message: 'Beneficiary removed',
+    }
+  }
+
+  private async getBeneficiaryById(id: string): Promise<Beneficiary[]> {
+    const beneficiary = await this.beneficiariesModule
+      .findOne({ _id: id })
+      .exec()
+    if (!beneficiary) {
+      throw new NotFoundException('Could not found beneficiary')
+    }
+    const beneficiaries = this.mapBeneficiariesData([beneficiary])
     return beneficiaries
   }
 
-  findOne(id: string) {
-    return this.getBeneficiaryById(id)
-  }
-
-  remove(id: string) {
-    this.beneficiaries = this.beneficiaries.filter(
-      beneficiary => beneficiary.id !== id,
-    )
-    return this.beneficiaries
-  }
-
-  private getBeneficiaryById(id: string) {
-    return this.beneficiaries.find(beneficiary => beneficiary.id === id)
+  private mapBeneficiariesData(data: Beneficiary[]): Beneficiary[] {
+    return data.map((beneficiary: Beneficiary) => ({
+      id: beneficiary.id,
+      name: beneficiary.name,
+      birth_year: beneficiary.birth_year,
+      gender_id: beneficiary.gender_id,
+      photo_id_type: beneficiary.photo_id_type,
+      photo_id_number: beneficiary.photo_id_number,
+      comorbidity_ind: beneficiary.comorbidity_ind,
+      consent_version: beneficiary.consent_version,
+    }))
   }
 }

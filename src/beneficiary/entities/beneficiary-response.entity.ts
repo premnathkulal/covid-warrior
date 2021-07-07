@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger'
 
 @InputType()
 @ObjectType()
-export class CreateBeneficiaryResponse {
+export class BeneficiaryResponse {
   @ApiProperty()
   @Field()
   status: HttpStatus
