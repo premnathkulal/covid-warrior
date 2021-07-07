@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   UsePipes,
+  Request,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -37,8 +38,12 @@ export class BeneficiaryController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @UsePipes(new InputValidationPipe())
-  async create(@Body() createBeneficiary: CreateBeneficiary): Promise<any> {
-    // return await this.beneficiaryService.create(createBeneficiary)
+  async create(
+    @Request() req,
+    @Body() createBeneficiary: CreateBeneficiary,
+  ): Promise<any> {
+    const username = req.user.username
+    return await this.beneficiaryService.create(createBeneficiary, username)
   }
 
   @ApiBearerAuth('JWT-auth')
@@ -46,8 +51,9 @@ export class BeneficiaryController {
   @ApiOkResponse({ type: Beneficiaries })
   @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll() {
-    return await this.beneficiaryService.findAll()
+  async findAll(@Request() req) {
+    const username = req.user.username
+    return await this.beneficiaryService.findAll(username)
   }
 
   @ApiBearerAuth('JWT-auth')
@@ -56,8 +62,9 @@ export class BeneficiaryController {
   @ApiOkResponse({ type: Beneficiaries })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.beneficiaryService.findOne(id)
+  async findOne(@Request() req, @Param('id') id: string) {
+    const username = req.user.username
+    return await this.beneficiaryService.findOne(id, username)
   }
 
   @ApiBearerAuth('JWT-auth')
@@ -69,7 +76,11 @@ export class BeneficiaryController {
   })
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<BeneficiaryResponse> {
-    return await this.beneficiaryService.remove(id)
+  async remove(
+    @Request() req,
+    @Param('id') id: string,
+  ): Promise<BeneficiaryResponse> {
+    const username = req.user.username
+    return await this.beneficiaryService.remove(id, username)
   }
 }

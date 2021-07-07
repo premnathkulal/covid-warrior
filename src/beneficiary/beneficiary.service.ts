@@ -12,33 +12,12 @@ export class BeneficiaryService {
     private readonly beneficiariesModule: Model<Beneficiary>,
   ) {}
 
-  private beneficiaries = [
-    {
-      id: '1625585017629',
-      name: '1',
-      birth_year: '1',
-      gender_id: 0,
-      photo_id_type: 0,
-      photo_id_number: '1',
-      comorbidity_ind: '1',
-      consent_version: '1',
-    },
-    {
-      id: '1625585019015',
-      name: '2',
-      birth_year: '2',
-      gender_id: 0,
-      photo_id_type: 0,
-      photo_id_number: '2',
-      comorbidity_ind: '2',
-      consent_version: '2',
-    },
-  ]
-
   async create(
     createBeneficiary: CreateBeneficiary,
+    username: string,
   ): Promise<BeneficiaryResponse> {
     const newBeneficiary = new this.beneficiariesModule({
+      username: username,
       ...createBeneficiary,
     })
     await newBeneficiary.save()
@@ -48,8 +27,8 @@ export class BeneficiaryService {
     }
   }
 
-  async findAll(): Promise<Beneficiaries> {
-    const result = await this.beneficiariesModule.find().exec()
+  async findAll(username: string): Promise<Beneficiaries> {
+    const result = await this.beneficiariesModule.find({ username }).exec()
     const beneficiaries = this.mapBeneficiariesData(result)
     return {
       status: HttpStatus.OK,
@@ -57,17 +36,17 @@ export class BeneficiaryService {
     }
   }
 
-  async findOne(id: string): Promise<Beneficiaries> {
-    const beneficiaries = await this.getBeneficiaryById(id)
+  async findOne(id: string, username: string): Promise<Beneficiaries> {
+    const beneficiaries = await this.getBeneficiaryById(id, username)
     return {
       status: HttpStatus.OK,
       beneficiaries,
     }
   }
 
-  async remove(id: string): Promise<BeneficiaryResponse> {
+  async remove(id: string, username: string): Promise<BeneficiaryResponse> {
     const result = await await this.beneficiariesModule
-      .deleteOne({ _id: id })
+      .deleteOne({ _id: id, username })
       .exec()
     if (result.n === 0) {
       throw new NotFoundException('Could not found beneficiary')
@@ -78,9 +57,12 @@ export class BeneficiaryService {
     }
   }
 
-  private async getBeneficiaryById(id: string): Promise<Beneficiary[]> {
+  private async getBeneficiaryById(
+    id: string,
+    username: string,
+  ): Promise<Beneficiary[]> {
     const beneficiary = await this.beneficiariesModule
-      .findOne({ _id: id })
+      .findOne({ _id: id, username })
       .exec()
     if (!beneficiary) {
       throw new NotFoundException('Could not found beneficiary')

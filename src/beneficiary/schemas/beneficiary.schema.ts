@@ -6,6 +6,9 @@ export type BeneficiaryDocument = Beneficiary & Document
 @Schema()
 export class Beneficiary {
   @Prop({ required: true })
+  username: string
+
+  @Prop({ required: true })
   name: string
 
   @Prop({ required: true })

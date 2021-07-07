@@ -16,7 +16,6 @@ export class VaccinationCenterController {
   async findCenters(
     @Query() query: VaccinationCenterInput,
   ): Promise<VaccinationCenter[]> {
-    console.log(query)
     return await this.vaccinationCenterServices.findVaccinationCenter(query)
   }
 }
