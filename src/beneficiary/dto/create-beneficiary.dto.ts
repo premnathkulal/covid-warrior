@@ -1,15 +1,6 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
-import {
-  IsAlpha,
-  IsAlphanumeric,
-  IsNotEmpty,
-  IsNumber,
-  Matches,
-  MaxLength,
-  MinLength,
-  ValidateIf,
-} from 'class-validator'
+import { IsAlpha, IsNotEmpty, Matches, MaxLength } from 'class-validator'
 
 @InputType()
 @ObjectType()

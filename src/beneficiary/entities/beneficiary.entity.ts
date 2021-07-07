@@ -1,7 +1,24 @@
 import { HttpStatus } from '@nestjs/common'
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
-import * as mongoose from 'mongoose'
+@ObjectType()
+export class ScheduleDetails {
+  @ApiProperty()
+  @Field()
+  centerID: string
+
+  @ApiProperty()
+  @Field()
+  slot: string
+
+  @ApiProperty()
+  @Field()
+  date: string
+
+  @ApiProperty()
+  @Field()
+  vaccine: string
+}
 
 @ObjectType()
 export class Beneficiary {
@@ -36,6 +53,10 @@ export class Beneficiary {
   @ApiProperty()
   @Field()
   consent_version: string
+
+  @ApiProperty()
+  @Field({ nullable: true })
+  scheduleDetails?: ScheduleDetails
 }
 
 @ObjectType()

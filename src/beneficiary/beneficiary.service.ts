@@ -81,6 +81,7 @@ export class BeneficiaryService {
       photo_id_number: beneficiary.photo_id_number,
       comorbidity_ind: beneficiary.comorbidity_ind,
       consent_version: beneficiary.consent_version,
+      scheduleDetails: beneficiary.scheduleDetails,
     }))
   }
 }
