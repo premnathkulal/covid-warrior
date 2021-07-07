@@ -62,7 +62,8 @@ export class BeneficiaryService {
     const beneficiary = await this.beneficiariesModule
       .findOne({ _id: id })
       .exec()
-    beneficiary.scheduled = true
+    // const beneficiary = await this.getBeneficiaryById(id, username)
+    beneficiary.scheduled = !beneficiary.scheduled
     beneficiary.save()
   }
 

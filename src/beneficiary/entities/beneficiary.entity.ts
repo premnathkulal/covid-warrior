@@ -1,6 +1,7 @@
 import { HttpStatus } from '@nestjs/common'
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
+import * as mongoose from 'mongoose'
 @ObjectType()
 export class Beneficiary {
   @ApiProperty()
@@ -40,6 +41,7 @@ export class Beneficiary {
   scheduled: boolean
 }
 
+export type Entry = mongoose.Model<Beneficiary & Document>
 @ObjectType()
 export class Beneficiaries {
   @ApiProperty()

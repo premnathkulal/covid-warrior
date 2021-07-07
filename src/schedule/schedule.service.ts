@@ -1,10 +1,16 @@
-import { ConflictException, HttpStatus, Injectable } from '@nestjs/common'
+import {
+  ConflictException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { CreateSchedule } from './dto/create-schedule.dto'
 import { Model } from 'mongoose'
 import { Schedule } from './entities/schedule.entity'
 import { ScheduleResponse } from './entities/schedule-response.entity'
 import { BeneficiaryService } from 'src/beneficiary/beneficiary.service'
+import { UpdateSchedule } from './dto/update-schedule.dto'
 
 @Injectable()
 export class ScheduleService {
@@ -14,15 +20,23 @@ export class ScheduleService {
     private readonly beneficiaryService: BeneficiaryService,
   ) {}
 
+  async findOne(beneficiaryId: string): Promise<Schedule> {
+    const result = await this.getScheduleById(beneficiaryId)
+    if (!result) {
+      throw new NotFoundException('Schedule data not found')
+    }
+    return result
+  }
+
   async create(
     createScheduleDto: CreateSchedule,
     username: string,
   ): Promise<ScheduleResponse> {
-    const findBeneficiary = await this.getScheduleById(
+    const scheduleData = await this.getScheduleById(
       createScheduleDto.beneficiaryId,
     )
 
-    if (findBeneficiary[0]) {
+    if (scheduleData) {
       throw new ConflictException('Appointment already Scheduled')
     }
 
@@ -41,8 +55,56 @@ export class ScheduleService {
     }
   }
 
+  async update(
+    updateSchedule: UpdateSchedule,
+    beneficiaryId: string,
+    username: string,
+  ): Promise<ScheduleResponse> {
+    // const scheduleData = await this.getScheduleById(
+    //   createScheduleDto.beneficiaryId,
+    // )
+    let scheduleData = await this.scheduleModule.findOne({
+      beneficiaryId,
+    })
+    if (!scheduleData) {
+      throw new NotFoundException('Schedule data not found')
+    }
+    if (updateSchedule.centerID) {
+      scheduleData.centerID = updateSchedule.centerID
+    }
+    if (updateSchedule.slot) {
+      scheduleData.slot = updateSchedule.slot
+    }
+    if (updateSchedule.date) {
+      scheduleData.date = updateSchedule.date
+    }
+    if (updateSchedule.vaccine) {
+      scheduleData.vaccine = updateSchedule.vaccine
+    }
+    scheduleData.save()
+    return {
+      status: HttpStatus.OK,
+      message: 'Schedule details updated',
+    }
+  }
+
+  async remove(beneficiaryId: string, username: string) {
+    const scheduleData = await this.getScheduleById(beneficiaryId)
+
+    if (!scheduleData) {
+      throw new NotFoundException('Schedule data not found')
+    }
+
+    await this.beneficiaryService.setSchedule(beneficiaryId, username)
+    const result = await this.scheduleModule.deleteOne({ beneficiaryId }).exec()
+    return {
+      status: HttpStatus.OK,
+      message: 'Schedule details deleted',
+    }
+  }
+
   async getScheduleById(id: string): Promise<Schedule> {
-    const result = await this.scheduleModule.find({ beneficiaryId: id })
+    const result = await this.scheduleModule.findOne({ beneficiaryId: id })
     return result
   }
 }

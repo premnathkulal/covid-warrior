@@ -1,7 +1,7 @@
-import { Field } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, Matches } from 'class-validator'
-
+@ObjectType()
 export class CreateSchedule {
   @ApiProperty()
   @IsNotEmpty()
