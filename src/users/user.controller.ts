@@ -25,7 +25,7 @@ import { LoginInput } from './dto/login.input'
 import { LoginUserResponse } from './entities/login.entity'
 import { ValidationPipe } from './pipes/validation.pipe'
 
-@ApiTags('Authentication')
+@ApiTags('Authentication APIs')
 @Controller('auth')
 export class UserController {
   constructor(

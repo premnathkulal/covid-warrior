@@ -9,7 +9,7 @@ import {
 } from '@nestjs/swagger'
 import { State } from './entities/state.entity'
 import { Districts } from './entities/district.entity'
-@ApiTags('State and Districts')
+@ApiTags('State and Districts APIs')
 @Controller('states-districts')
 export class StatesDistrictsController {
   constructor(

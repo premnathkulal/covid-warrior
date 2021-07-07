@@ -4,7 +4,7 @@ import { VaccinationCenter } from './entities/vaccination-center.entity'
 import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { VaccinationCenterInput } from './dto/vaccination-center-query.input'
 
-@ApiTags('Vaccination Center')
+@ApiTags('Vaccination Center APIs')
 @Controller('vaccinationCenters')
 export class VaccinationCenterController {
   constructor(

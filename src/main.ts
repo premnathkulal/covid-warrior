@@ -11,6 +11,17 @@ async function bootstrap() {
     .setTitle('Covid Warrior')
     .setDescription('List of all Covid Warrior APIs')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
     .build()
   const document = SwaggerModule.createDocument(app, config)
   writeFileSync('./swagger-spec.json', JSON.stringify(document))
