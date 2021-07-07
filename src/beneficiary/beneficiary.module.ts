@@ -12,5 +12,6 @@ import { BeneficiarySchema } from './schemas/beneficiary.schema'
   ],
   controllers: [BeneficiaryController],
   providers: [BeneficiaryService],
+  exports: [BeneficiaryService],
 })
 export class BeneficiaryModule {}

@@ -47,13 +47,6 @@ type VaccinationCenterDto {
   slots: [String!]!
 }
 
-type ScheduleDetails {
-  centerID: String!
-  slot: String!
-  date: String!
-  vaccine: String!
-}
-
 type Beneficiary {
   id: String!
   name: String!
@@ -63,7 +56,7 @@ type Beneficiary {
   photo_id_number: String!
   comorbidity_ind: String!
   consent_version: String!
-  scheduleDetails: ScheduleDetails
+  scheduled: Boolean!
 }
 
 type Query {

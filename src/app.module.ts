@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
 import { VaccinationCenterModule } from './vaccination-center/vaccination-center.module'
 import { BeneficiaryModule } from './beneficiary/beneficiary.module';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { BeneficiaryModule } from './beneficiary/beneficiary.module';
     ConfigModule.forRoot(),
     VaccinationCenterModule,
     BeneficiaryModule,
+    ScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

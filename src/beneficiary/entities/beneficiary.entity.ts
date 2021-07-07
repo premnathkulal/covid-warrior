@@ -2,25 +2,6 @@ import { HttpStatus } from '@nestjs/common'
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 @ObjectType()
-export class ScheduleDetails {
-  @ApiProperty()
-  @Field()
-  centerID: string
-
-  @ApiProperty()
-  @Field()
-  slot: string
-
-  @ApiProperty()
-  @Field()
-  date: string
-
-  @ApiProperty()
-  @Field()
-  vaccine: string
-}
-
-@ObjectType()
 export class Beneficiary {
   @ApiProperty()
   @Field()
@@ -55,8 +36,8 @@ export class Beneficiary {
   consent_version: string
 
   @ApiProperty()
-  @Field({ nullable: true })
-  scheduleDetails?: ScheduleDetails
+  @Field()
+  scheduled: boolean
 }
 
 @ObjectType()

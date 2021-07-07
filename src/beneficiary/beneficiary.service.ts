@@ -18,6 +18,7 @@ export class BeneficiaryService {
   ): Promise<BeneficiaryResponse> {
     const newBeneficiary = new this.beneficiariesModule({
       username: username,
+      scheduled: false,
       ...createBeneficiary,
     })
     await newBeneficiary.save()
@@ -57,6 +58,14 @@ export class BeneficiaryService {
     }
   }
 
+  async setSchedule(id: string, username: string): Promise<void> {
+    const beneficiary = await this.beneficiariesModule
+      .findOne({ _id: id })
+      .exec()
+    beneficiary.scheduled = true
+    beneficiary.save()
+  }
+
   private async getBeneficiaryById(
     id: string,
     username: string,
@@ -81,7 +90,7 @@ export class BeneficiaryService {
       photo_id_number: beneficiary.photo_id_number,
       comorbidity_ind: beneficiary.comorbidity_ind,
       consent_version: beneficiary.consent_version,
-      scheduleDetails: beneficiary.scheduleDetails,
+      scheduled: beneficiary.scheduled,
     }))
   }
 }

@@ -2,21 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
 export type BeneficiaryDocument = Beneficiary & Document
-
-export class ScheduleDetails {
-  @Prop()
-  centerID: string
-
-  @Prop()
-  slot: string
-
-  @Prop()
-  date: string
-
-  @Prop()
-  vaccine: string
-}
-
 @Schema()
 export class Beneficiary {
   @Prop({ required: true })
@@ -44,7 +29,7 @@ export class Beneficiary {
   consent_version: string
 
   @Prop()
-  scheduleDetails: ScheduleDetails
+  scheduled: boolean
 }
 
 export const BeneficiarySchema = SchemaFactory.createForClass(Beneficiary)
