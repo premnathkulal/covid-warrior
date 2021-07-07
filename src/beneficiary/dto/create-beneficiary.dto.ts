@@ -1,34 +1,58 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
+import {
+  IsAlpha,
+  IsAlphanumeric,
+  IsNotEmpty,
+  IsNumber,
+  Matches,
+  MaxLength,
+  MinLength,
+  ValidateIf,
+} from 'class-validator'
 
 @InputType()
 @ObjectType()
 export class CreateBeneficiary {
   @ApiProperty()
+  @IsNotEmpty()
   @Field()
+  @IsAlpha()
   name: string
 
-  @ApiProperty()
+  @ApiProperty({ example: 'DD-MM-YYYY' })
+  @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
+    message: 'Date formate missing',
+  })
   @Field()
   birth_year: string
 
   @ApiProperty()
-  @Field(() => Int)
-  gender_id: number
+  @IsNotEmpty()
+  @MaxLength(1)
+  @Field()
+  gender_id: string
 
   @ApiProperty()
-  @Field(() => Int)
-  photo_id_type: number
+  @IsNotEmpty()
+  @MaxLength(1)
+  @Field()
+  photo_id_type: string
 
   @ApiProperty()
+  @IsNotEmpty()
   @Field()
   photo_id_number: string
 
-  @ApiProperty()
+  @ApiProperty({ default: 'N' })
+  @IsNotEmpty()
+  @MaxLength(1)
   @Field()
   comorbidity_ind: string
 
   @ApiProperty()
+  @IsNotEmpty()
+  @MaxLength(1)
   @Field()
   consent_version: string
 }

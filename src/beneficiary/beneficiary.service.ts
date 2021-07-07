@@ -41,7 +41,7 @@ export class BeneficiaryService {
     const newBeneficiary = new this.beneficiariesModule({
       ...createBeneficiary,
     })
-    const result = await newBeneficiary.save()
+    await newBeneficiary.save()
     return {
       status: HttpStatus.CREATED,
       message: 'Beneficiary added',

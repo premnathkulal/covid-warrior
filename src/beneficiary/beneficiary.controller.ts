@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -20,6 +21,7 @@ import { BeneficiaryService } from './beneficiary.service'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
 import { Beneficiaries } from './entities/beneficiary.entity'
 import { BeneficiaryResponse } from './entities/beneficiary-response.entity'
+import { InputValidationPipe } from './pipes/input-validation.pipe'
 
 @ApiTags('Beneficiary Registration APIs')
 @Controller('beneficiary')
@@ -34,10 +36,9 @@ export class BeneficiaryController {
   })
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(
-    @Body() createBeneficiary: CreateBeneficiary,
-  ): Promise<BeneficiaryResponse> {
-    return await this.beneficiaryService.create(createBeneficiary)
+  @UsePipes(new InputValidationPipe())
+  async create(@Body() createBeneficiary: CreateBeneficiary): Promise<any> {
+    // return await this.beneficiaryService.create(createBeneficiary)
   }
 
   @ApiBearerAuth('JWT-auth')
