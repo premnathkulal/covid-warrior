@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { DistrictsSchema } from './schemas/districts.schema'
-import { StatesSchema } from './schemas/states.schema'
+import { State, StatesSchema } from './schemas/states.schema'
 import { StatesDistrictsController } from './states-districts.controller'
 import { StatesDistrictsResolver } from './states-districts.resolver'
 import { StatesDistrictsService } from './states-districts.service'
@@ -9,7 +9,7 @@ import { StatesDistrictsService } from './states-districts.service'
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'States', schema: StatesSchema },
+      { name: 'State', schema: StatesSchema },
       { name: 'Districts', schema: DistrictsSchema },
     ]),
   ],

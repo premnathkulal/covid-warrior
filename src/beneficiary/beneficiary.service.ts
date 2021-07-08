@@ -1,15 +1,16 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { BeneficiaryResponse } from './entities/beneficiary-response.entity'
-import { Beneficiaries, Beneficiary } from './entities/beneficiary.entity'
+import { BeneficiaryResponse } from './dto/beneficiary-response.dto'
+import { Beneficiaries, Beneficiary } from './dto/beneficiary.dto'
 import { Model } from 'mongoose'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
+import { BeneficiaryDocument } from './schemas/beneficiary.schema'
 
 @Injectable()
 export class BeneficiaryService {
   constructor(
     @InjectModel('Beneficiary')
-    private readonly beneficiariesModule: Model<Beneficiary>,
+    private readonly beneficiariesModule: Model<BeneficiaryDocument>,
   ) {}
 
   async create(
@@ -81,8 +82,8 @@ export class BeneficiaryService {
     return beneficiaries
   }
 
-  private mapBeneficiariesData(data: Beneficiary[]): Beneficiary[] {
-    return data.map((beneficiary: Beneficiary) => ({
+  private mapBeneficiariesData(data: BeneficiaryDocument[]): Beneficiary[] {
+    return data.map((beneficiary: BeneficiaryDocument) => ({
       id: beneficiary.id,
       name: beneficiary.name,
       birth_year: beneficiary.birth_year,

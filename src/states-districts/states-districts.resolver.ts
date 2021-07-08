@@ -1,13 +1,13 @@
 import { Resolver, Query, Args } from '@nestjs/graphql'
-import { Districts } from './entities/district.entity'
-import { State } from './entities/state.entity'
+import { Districts } from './dto/district.dto'
+import { States } from './dto/state.dto'
 import { StatesDistrictsService } from './states-districts.service'
 
 @Resolver()
 export class StatesDistrictsResolver {
   constructor(private statesDistrictsService: StatesDistrictsService) {}
 
-  @Query(() => [State])
+  @Query(() => [States])
   async states() {
     const states = await this.statesDistrictsService.getStatesList()
     return states

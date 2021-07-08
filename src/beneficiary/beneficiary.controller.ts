@@ -20,8 +20,8 @@ import {
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { BeneficiaryService } from './beneficiary.service'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
-import { Beneficiaries } from './entities/beneficiary.entity'
-import { BeneficiaryResponse } from './entities/beneficiary-response.entity'
+import { Beneficiaries } from './dto/beneficiary.dto'
+import { BeneficiaryResponse } from './dto/beneficiary-response.dto'
 import { InputValidationPipe } from './pipes/input-validation.pipe'
 
 @ApiTags('Beneficiary Registration APIs')

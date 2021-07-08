@@ -2,8 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import { ApiProperty } from '@nestjs/swagger'
 
-export type DistrictDocument = Schedule & Document
-
+export type ScheduleDocument = Schedule & Document
 @Schema()
 export class Schedule {
   @ApiProperty()

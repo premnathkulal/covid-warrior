@@ -2,13 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type District {
+  district_id: Int!
+  district_name: String!
+}
+
+type Districts {
+  status: Float!
+  id: String!
+  state_id: Int!
+  districts: [District!]!
+}
+
 type State {
+  id: String!
   state_id: Int!
   state_name: String!
 }
 
-type Districts {
-  state_id: Int!
+type States {
+  status: Float!
+  data: [State!]!
 }
 
 type UserDetails {
@@ -22,7 +36,7 @@ type RegisterResponse {
   statusCode: Int!
 }
 
-type VaccinationCenterDto {
+type VaccinationCenter {
   center_id: Int!
   name: String!
   address: String!
@@ -60,13 +74,13 @@ type Beneficiary {
 }
 
 type Query {
-  states: [State!]!
+  states: [States!]!
   districts(stateId: Float!): Districts!
 }
 
 type Mutation {
   register(input: RegisterInput!): RegisterResponse!
-  findCenters(input: VaccinationCenterInput!): [VaccinationCenterDto!]!
+  findCenters(input: VaccinationCenterInput!): [VaccinationCenter!]!
 }
 
 input RegisterInput {

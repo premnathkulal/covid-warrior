@@ -1,24 +1,31 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { Districts } from './entities/district.entity'
-import { State } from './entities/state.entity'
+import { Districts } from './dto/district.dto'
+import { States } from './dto/state.dto'
+import { DistrictDocument } from './schemas/districts.schema'
+import { StateDocument } from './schemas/states.schema'
 
 @Injectable()
 export class StatesDistrictsService {
   constructor(
-    @InjectModel('States') private readonly statesModule: Model<State>,
+    @InjectModel('State')
+    private readonly statesModule: Model<StateDocument>,
     @InjectModel('Districts')
-    private readonly districtsModule: Model<Districts>,
+    private readonly districtsModule: Model<DistrictDocument>,
   ) {}
 
-  async getStatesList(): Promise<State[]> {
-    const states = await this.statesModule.find().exec()
-    return states.map((state: State) => ({
+  async getStatesList(): Promise<States> {
+    const result = await this.statesModule.find().exec()
+    const states = result.map(state => ({
       id: state.id,
       state_id: state.state_id,
       state_name: state.state_name,
     }))
+    return {
+      status: HttpStatus.OK,
+      data: states,
+    }
   }
 
   async getDistrictsList(stateId: number): Promise<Districts> {
@@ -30,6 +37,7 @@ export class StatesDistrictsService {
     }
 
     return {
+      status: HttpStatus.OK,
       id: districts.id,
       state_id: districts.state_id,
       districts: districts.districts,

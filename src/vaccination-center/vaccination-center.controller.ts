@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common'
 import { VaccinationCenterServices } from './vaccination-center.service'
-import { VaccinationCenter } from './entities/vaccination-center.entity'
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger'
-import { VaccinationCenterInput } from './dto/vaccination-center-query.input'
+import { VaccinationCenters } from './dto/vaccination-center.dto'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { VaccinationCenterInput } from './dto/vaccination-center-query.dto'
 
 @ApiTags('Vaccination Center APIs')
 @Controller('vaccinationCenters')
@@ -11,11 +11,11 @@ export class VaccinationCenterController {
     private readonly vaccinationCenterServices: VaccinationCenterServices,
   ) {}
 
-  @ApiOkResponse({ type: VaccinationCenter })
+  @ApiOkResponse({ type: VaccinationCenters })
   @Get('findVaccinationCenter')
   async findCenters(
     @Query() query: VaccinationCenterInput,
-  ): Promise<VaccinationCenter[]> {
+  ): Promise<VaccinationCenters> {
     return await this.vaccinationCenterServices.findVaccinationCenter(query)
   }
 }

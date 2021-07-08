@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
-import * as mongoose from 'mongoose'
+
 @ObjectType()
 export class Schedule {
   @ApiProperty()

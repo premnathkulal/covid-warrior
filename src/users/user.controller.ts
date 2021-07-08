@@ -11,7 +11,7 @@ import {
 import { AuthService } from '../auth/auth.service'
 import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 import { UsersService } from './users.service'
-import { RegisterResponse } from './entities/register.entity'
+import { RegisterResponse } from './dto/register.dto'
 import {
   ApiConflictResponse,
   ApiCreatedResponse,
@@ -20,9 +20,8 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
-import { RegisterInput } from './dto/register.input'
-import { LoginInput } from './dto/login.input'
-import { LoginUserResponse } from './entities/login.entity'
+import { RegisterInput } from './dto/register.dto'
+import { LoginUserResponse, LoginInput } from './dto/login.dto'
 import { ValidationPipe } from './pipes/validation.pipe'
 
 @ApiTags('Authentication APIs')

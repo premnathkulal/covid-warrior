@@ -4,7 +4,7 @@ import {
   ArgumentMetadata,
   NotImplementedException,
 } from '@nestjs/common'
-import { RegisterInput } from '../dto/register.input'
+import { RegisterInput } from '../dto/register.dto'
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {

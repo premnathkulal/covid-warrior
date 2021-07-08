@@ -1,13 +1,11 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
+import { MaxLength } from 'class-validator'
 
 @ObjectType()
-export class RegisterResponse {
+export class StateId {
   @ApiProperty()
-  @Field()
-  public response: string
-
-  @ApiProperty()
+  @MaxLength(3)
   @Field(() => Int)
-  public statusCode: number
+  stateId: number
 }

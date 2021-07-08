@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common'
-import { StateDistrict } from './dto/states-districts.dto'
+import { StateId } from './dto/state-id.dto'
 import { StatesDistrictsService } from './states-districts.service'
 import {
   ApiNotFoundResponse,
@@ -7,8 +7,8 @@ import {
   ApiTags,
   ApiParam,
 } from '@nestjs/swagger'
-import { State } from './entities/state.entity'
-import { Districts } from './entities/district.entity'
+import { Districts } from './dto/district.dto'
+import { States } from './dto/state.dto'
 @ApiTags('State and Districts APIs')
 @Controller('states-districts')
 export class StatesDistrictsController {
@@ -16,9 +16,9 @@ export class StatesDistrictsController {
     private readonly statesDistrictsService: StatesDistrictsService,
   ) {}
 
-  @ApiOkResponse({ type: State, isArray: true })
+  @ApiOkResponse({ type: States })
   @Get('states')
-  async getStatesList(): Promise<State[]> {
+  async getStatesList(): Promise<States> {
     return await this.statesDistrictsService.getStatesList()
   }
 
@@ -26,9 +26,7 @@ export class StatesDistrictsController {
   @ApiParam({ name: 'stateId', required: true })
   @ApiNotFoundResponse({ description: 'State Not Found' })
   @Get('districts/:stateId')
-  async getDistrictsList(
-    @Param() paramData: StateDistrict,
-  ): Promise<Districts> {
+  async getDistrictsList(@Param() paramData: StateId): Promise<Districts> {
     return await this.statesDistrictsService.getDistrictsList(paramData.stateId)
   }
 }

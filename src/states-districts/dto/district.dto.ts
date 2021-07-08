@@ -1,25 +1,33 @@
+import { HttpStatus } from '@nestjs/common'
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 
 @ObjectType()
 export class District {
-  @ApiProperty({ example: 269 })
+  @ApiProperty()
   @Field(() => Int)
   district_id: number
 
-  @ApiProperty({ example: 'Dakshina Kannada' })
+  @ApiProperty()
+  @Field()
   district_name: string
 }
 
 @ObjectType()
 export class Districts {
-  @ApiProperty({ example: '60d9910be37d6d6ed18bec11' })
+  @ApiProperty()
+  @Field()
+  status: HttpStatus
+
+  @ApiProperty()
+  @Field()
   id: string
 
-  @ApiProperty({ example: 16 })
+  @ApiProperty()
   @Field(() => Int)
   state_id: number
 
-  @ApiProperty({ type: [District] })
+  @ApiProperty({ type: District, isArray: true })
+  @Field(() => [District])
   districts: District[]
 }

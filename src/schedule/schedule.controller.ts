@@ -11,16 +11,25 @@ import {
 } from '@nestjs/common'
 import { ScheduleService } from './schedule.service'
 import { CreateSchedule } from './dto/create-schedule.dto'
-import { ApiTags } from '@nestjs/swagger'
-import { ScheduleResponse } from './entities/schedule-response.entity'
+import {
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger'
+import { ScheduleResponse } from './dto/schedule-response.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { UpdateSchedule } from './dto/update-schedule.dto'
+import { Schedule } from './dto/schedule.dto'
 
 @ApiTags('Schedule Appointment APIs')
 @Controller('schedule')
 export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) {}
 
+  @ApiCreatedResponse({ type: ScheduleResponse })
+  @ApiConflictResponse({ description: 'Appointment already Scheduled' })
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(
@@ -31,19 +40,23 @@ export class ScheduleController {
     return await this.scheduleService.create(createScheduleDto, username)
   }
 
+  @ApiOkResponse({ type: Schedule })
+  @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<Schedule> {
     return await this.scheduleService.findOne(id)
   }
 
+  @ApiOkResponse({ type: ScheduleResponse })
+  @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Request() req,
     @Param('id') beneficiaryId: string,
     @Body() updateScheduleDto: UpdateSchedule,
-  ) {
+  ): Promise<ScheduleResponse> {
     const username = req.user.username
     return await this.scheduleService.update(
       updateScheduleDto,
@@ -52,10 +65,15 @@ export class ScheduleController {
     )
   }
 
+  @ApiOkResponse({ type: ScheduleResponse })
+  @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Request() req, @Param('id') id: string) {
+  async remove(
+    @Request() req,
+    @Param('id') id: string,
+  ): Promise<ScheduleResponse> {
     const username = req.user.username
-    return this.scheduleService.remove(id, username)
+    return await this.scheduleService.remove(id, username)
   }
 }

@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { ApiProperty } from '@nestjs/swagger'
 import { Document } from 'mongoose'
 
 export type StateDocument = State & Document
@@ -7,7 +8,7 @@ export class State {
   @Prop({ required: true })
   state_id: number
 
-  @Prop({ required: true })
+  @ApiProperty({ example: 'Karnataka' })
   state_name: string
 }
 

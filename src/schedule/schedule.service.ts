@@ -7,16 +7,17 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { CreateSchedule } from './dto/create-schedule.dto'
 import { Model } from 'mongoose'
-import { Schedule } from './entities/schedule.entity'
-import { ScheduleResponse } from './entities/schedule-response.entity'
+import { Schedule } from './dto/schedule.dto'
+import { ScheduleResponse } from './dto/schedule-response.dto'
 import { BeneficiaryService } from 'src/beneficiary/beneficiary.service'
 import { UpdateSchedule } from './dto/update-schedule.dto'
+import { ScheduleDocument } from './schemas/schedule.scema'
 
 @Injectable()
 export class ScheduleService {
   constructor(
     @InjectModel('Schedule')
-    private readonly scheduleModule: Model<Schedule>,
+    private readonly scheduleModule: Model<ScheduleDocument>,
     private readonly beneficiaryService: BeneficiaryService,
   ) {}
 
@@ -88,7 +89,10 @@ export class ScheduleService {
     }
   }
 
-  async remove(beneficiaryId: string, username: string) {
+  async remove(
+    beneficiaryId: string,
+    username: string,
+  ): Promise<ScheduleResponse> {
     const scheduleData = await this.getScheduleById(beneficiaryId)
 
     if (!scheduleData) {

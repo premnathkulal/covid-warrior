@@ -1,9 +1,11 @@
+import { HttpStatus } from '@nestjs/common'
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 
 @ObjectType()
 export class State {
   @ApiProperty({ example: '60d9910be37d6d6ed18bec11' })
+  @Field()
   id: string
 
   @ApiProperty({ example: '16' })
@@ -13,4 +15,15 @@ export class State {
   @ApiProperty({ example: 'Karnataka' })
   @Field()
   state_name: string
+}
+
+@ObjectType()
+export class States {
+  @ApiProperty()
+  @Field()
+  status: HttpStatus
+
+  @ApiProperty({ type: State, isArray: true })
+  @Field(() => [State])
+  data: State[]
 }

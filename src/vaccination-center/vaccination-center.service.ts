@@ -1,16 +1,17 @@
-import { Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { VaccinationCenter } from './entities/vaccination-center.entity'
+import { VaccinationCenters } from './dto/vaccination-center.dto'
+import { VaccinationCenterDocument } from './schemas/vaccination-center.schema'
 
 @Injectable()
 export class VaccinationCenterServices {
   constructor(
     @InjectModel('Vaccinationcenter')
-    private readonly appointmentCenterModule: Model<VaccinationCenter>,
+    private readonly appointmentCenterModule: Model<VaccinationCenterDocument>,
   ) {}
 
-  async findVaccinationCenter({ ...args }): Promise<VaccinationCenter[]> {
+  async findVaccinationCenter({ ...args }): Promise<VaccinationCenters> {
     const requestQuery = { date: args.date }
     if (args.pinCode) {
       requestQuery['pincode'] = parseInt(args.pinCode)
@@ -25,6 +26,10 @@ export class VaccinationCenterServices {
       requestQuery['long'] = args.longitude
     }
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
-    return result
+
+    return {
+      status: HttpStatus.OK,
+      data: result,
+    }
   }
 }
