@@ -8,7 +8,7 @@ export class State {
   @Prop({ required: true })
   state_id: number
 
-  @ApiProperty({ example: 'Karnataka' })
+  @Prop({ required: true })
   state_name: string
 }
 

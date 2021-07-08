@@ -17,11 +17,13 @@ export class StatesDistrictsService {
 
   async getStatesList(): Promise<States> {
     const result = await this.statesModule.find().exec()
-    const states = result.map(state => ({
+
+    const states = await result.map(state => ({
       id: state.id,
       state_id: state.state_id,
       state_name: state.state_name,
     }))
+
     return {
       status: HttpStatus.OK,
       data: states,

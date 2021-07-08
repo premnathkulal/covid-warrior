@@ -4,15 +4,15 @@ import { ApiProperty } from '@nestjs/swagger'
 
 @ObjectType()
 export class State {
-  @ApiProperty({ example: '60d9910be37d6d6ed18bec11' })
+  @ApiProperty()
   @Field()
   id: string
 
-  @ApiProperty({ example: '16' })
+  @ApiProperty()
   @Field(() => Int)
   state_id: number
 
-  @ApiProperty({ example: 'Karnataka' })
+  @ApiProperty()
   @Field()
   state_name: string
 }
