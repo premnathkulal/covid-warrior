@@ -17,6 +17,7 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 import { ScheduleResponse } from './dto/schedule-response.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
@@ -30,6 +31,7 @@ export class ScheduleController {
 
   @ApiCreatedResponse({ type: ScheduleResponse })
   @ApiConflictResponse({ description: 'Appointment already Scheduled' })
+  @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(
@@ -42,6 +44,7 @@ export class ScheduleController {
 
   @ApiOkResponse({ type: Schedule })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
+  @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Schedule> {
@@ -50,6 +53,7 @@ export class ScheduleController {
 
   @ApiOkResponse({ type: ScheduleResponse })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
+  @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
@@ -67,6 +71,7 @@ export class ScheduleController {
 
   @ApiOkResponse({ type: ScheduleResponse })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
+  @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(
