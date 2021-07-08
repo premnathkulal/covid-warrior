@@ -3,7 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 import * as mongoose from 'mongoose'
 @ObjectType()
-export class Beneficiary {
+export class Beneficiary extends mongoose.Document {
   @ApiProperty()
   @Field()
   id: string
@@ -40,8 +40,6 @@ export class Beneficiary {
   @Field()
   scheduled: boolean
 }
-
-export type Entry = mongoose.Model<Beneficiary & Document>
 @ObjectType()
 export class Beneficiaries {
   @ApiProperty()
@@ -51,4 +49,15 @@ export class Beneficiaries {
   @ApiProperty({ type: Beneficiary, isArray: true })
   @Field(() => [Beneficiary])
   beneficiaries: Beneficiary[]
+}
+export interface BeneficiaryModel {
+  id: string
+  name: string
+  birth_year: string
+  gender_id: number
+  photo_id_type: number
+  photo_id_number: string
+  comorbidity_ind: string
+  consent_version: string
+  scheduled: boolean
 }

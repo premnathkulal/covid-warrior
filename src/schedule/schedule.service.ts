@@ -61,12 +61,8 @@ export class ScheduleService {
     beneficiaryId: string,
     username: string,
   ): Promise<ScheduleResponse> {
-    // const scheduleData = await this.getScheduleById(
-    //   createScheduleDto.beneficiaryId,
-    // )
-    let scheduleData = await this.scheduleModule.findOne({
-      beneficiaryId,
-    })
+    const scheduleData = await this.getScheduleById(beneficiaryId)
+
     if (!scheduleData) {
       throw new NotFoundException('Schedule data not found')
     }

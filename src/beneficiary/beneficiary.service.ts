@@ -1,7 +1,11 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { BeneficiaryResponse } from './dto/beneficiary-response.dto'
-import { Beneficiaries, Beneficiary } from './dto/beneficiary.dto'
+import {
+  Beneficiaries,
+  Beneficiary,
+  BeneficiaryModel,
+} from './dto/beneficiary.dto'
 import { Model } from 'mongoose'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
 import { BeneficiaryDocument } from './schemas/beneficiary.schema'
@@ -31,18 +35,25 @@ export class BeneficiaryService {
 
   async findAll(username: string): Promise<Beneficiaries> {
     const result = await this.beneficiariesModule.find({ username }).exec()
-    const beneficiaries = this.mapBeneficiariesData(result)
+    const beneficiaries = this.mapBeneficiariesData(result as Beneficiary[])
     return {
       status: HttpStatus.OK,
-      beneficiaries,
+      beneficiaries: beneficiaries as Beneficiary[],
     }
   }
 
   async findOne(id: string, username: string): Promise<Beneficiaries> {
-    const beneficiaries = await this.getBeneficiaryById(id, username)
+    let result = await this.getBeneficiaryById(id, username)
+
+    if (!result) {
+      throw new NotFoundException('Could not found beneficiary')
+    }
+
+    const beneficiaries = this.mapBeneficiariesData([result] as Beneficiary[])
+
     return {
       status: HttpStatus.OK,
-      beneficiaries,
+      beneficiaries: beneficiaries as Beneficiary[],
     }
   }
 
@@ -60,10 +71,7 @@ export class BeneficiaryService {
   }
 
   async setSchedule(id: string, username: string): Promise<void> {
-    const beneficiary = await this.beneficiariesModule
-      .findOne({ _id: id })
-      .exec()
-    // const beneficiary = await this.getBeneficiaryById(id, username)
+    const beneficiary = await this.getBeneficiaryById(id, username)
     beneficiary.scheduled = !beneficiary.scheduled
     beneficiary.save()
   }
@@ -71,19 +79,18 @@ export class BeneficiaryService {
   private async getBeneficiaryById(
     id: string,
     username: string,
-  ): Promise<Beneficiary[]> {
+  ): Promise<Beneficiary> {
     const beneficiary = await this.beneficiariesModule
       .findOne({ _id: id, username })
       .exec()
     if (!beneficiary) {
       throw new NotFoundException('Could not found beneficiary')
     }
-    const beneficiaries = this.mapBeneficiariesData([beneficiary])
-    return beneficiaries
+    return beneficiary as Beneficiary
   }
 
-  private mapBeneficiariesData(data: BeneficiaryDocument[]): Beneficiary[] {
-    return data.map((beneficiary: BeneficiaryDocument) => ({
+  private mapBeneficiariesData(data: Beneficiary[]): BeneficiaryModel[] {
+    return data.map((beneficiary: Beneficiary) => ({
       id: beneficiary.id,
       name: beneficiary.name,
       birth_year: beneficiary.birth_year,
