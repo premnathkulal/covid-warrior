@@ -12,6 +12,7 @@ import {
 import { ScheduleService } from './schedule.service'
 import { CreateSchedule } from './dto/create-schedule.dto'
 import {
+  ApiBearerAuth,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
@@ -29,6 +30,7 @@ import { Schedule } from './dto/schedule.dto'
 export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) {}
 
+  @ApiBearerAuth('JWT-auth')
   @ApiCreatedResponse({ type: ScheduleResponse })
   @ApiConflictResponse({ description: 'Appointment already Scheduled' })
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
@@ -42,6 +44,7 @@ export class ScheduleController {
     return await this.scheduleService.create(createScheduleDto, username)
   }
 
+  @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ type: Schedule })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
@@ -51,6 +54,7 @@ export class ScheduleController {
     return await this.scheduleService.findOne(id)
   }
 
+  @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ type: ScheduleResponse })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
@@ -69,6 +73,7 @@ export class ScheduleController {
     )
   }
 
+  @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ type: ScheduleResponse })
   @ApiNotFoundResponse({ description: 'Schedule data not found' })
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
