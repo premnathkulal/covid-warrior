@@ -16,11 +16,11 @@ export class LoginUserResponse {
 
 @InputType()
 export class LoginInput {
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @Field()
   public username: string
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @Field()
   public password: string
 }

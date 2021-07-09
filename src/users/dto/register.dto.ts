@@ -14,15 +14,15 @@ export class RegisterResponse {
 
 @InputType()
 export class RegisterInput {
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @Field()
   public name: string
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @Field()
   public username: string
 
-  @ApiProperty()
+  @ApiProperty({ required: true })
   @Field()
   public password: string
 }

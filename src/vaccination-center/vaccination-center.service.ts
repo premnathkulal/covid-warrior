@@ -13,8 +13,8 @@ export class VaccinationCenterServices {
 
   async findVaccinationCenter({ ...args }): Promise<VaccinationCenters> {
     const requestQuery = { date: args.date }
-    if (args.pinCode) {
-      requestQuery['pincode'] = parseInt(args.pinCode)
+    if (args.pincode) {
+      requestQuery['pincode'] = parseInt(args.pincode)
     }
     if (args.district_name) {
       requestQuery['district_name'] = args.district_name
@@ -25,6 +25,9 @@ export class VaccinationCenterServices {
     if (args.longitude) {
       requestQuery['long'] = args.longitude
     }
+
+    console.log(requestQuery)
+
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
 
     return {

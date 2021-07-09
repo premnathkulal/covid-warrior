@@ -70,7 +70,6 @@ export class UserController {
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   async getUserInfo(@Req() req): Promise<User> {
-    // const result = this.userService.findUser(req.user.username)
     return {
       status: HttpStatus.OK,
       userDetails: req.user,

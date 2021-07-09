@@ -3,34 +3,33 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsAlpha, IsNotEmpty, Matches, MaxLength } from 'class-validator'
 
 @InputType()
-@ObjectType()
 export class CreateBeneficiary {
-  @ApiProperty()
+  @ApiProperty({ example: 'Yudhistira' })
   @IsNotEmpty()
   @Field()
   @IsAlpha()
   name: string
 
-  @ApiProperty({ example: 'DD-MM-YYYY' })
+  @ApiProperty({ example: '02-07-2021' })
   @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
     message: 'Date formate missing',
   })
   @Field()
   birth_year: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '1' })
   @IsNotEmpty()
   @MaxLength(1)
   @Field()
   gender_id: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '0' })
   @IsNotEmpty()
   @MaxLength(1)
   @Field()
   photo_id_type: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '000000000000' })
   @IsNotEmpty()
   @Field()
   photo_id_number: string
@@ -41,7 +40,7 @@ export class CreateBeneficiary {
   @Field()
   comorbidity_ind: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '1' })
   @IsNotEmpty()
   @MaxLength(1)
   @Field()

@@ -4,7 +4,7 @@ import { IsNotEmpty, Matches } from 'class-validator'
 
 @InputType()
 export class VaccinationCenterInput {
-  @ApiProperty()
+  @ApiProperty({ example: '02-07-2021', required: true })
   @IsNotEmpty()
   @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
     message: 'Date formate missing',
@@ -12,19 +12,19 @@ export class VaccinationCenterInput {
   @Field()
   public date: string
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ example: '574211', required: false })
   @Field(() => Int, { nullable: true })
   public pincode: number
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ example: 'Dakshina Kannada', required: false })
   @Field({ nullable: true })
   public district_name: string
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ example: 12, required: false })
   @Field(() => Int, { nullable: true })
   public latitude: number
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ example: 75, required: false })
   @Field(() => Int, { nullable: true })
   public longitude: number
 }

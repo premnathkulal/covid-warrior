@@ -13,12 +13,12 @@ export class CreateSchedule {
   @Field()
   centerID: string
 
-  @ApiProperty()
+  @ApiProperty({ example: 'FORENOON' })
   @IsNotEmpty()
   @Field()
   slot: string
 
-  @ApiProperty()
+  @ApiProperty({ example: '20-02-2021' })
   @IsNotEmpty()
   @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
     message: 'Date formate missing',
@@ -26,7 +26,7 @@ export class CreateSchedule {
   @Field()
   date: string
 
-  @ApiProperty()
+  @ApiProperty({ example: 'COVISHIELD' })
   @IsNotEmpty()
   @Field()
   vaccine: string
