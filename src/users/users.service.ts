@@ -1,15 +1,14 @@
 import { HttpException, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { AuthService } from 'src/auth/auth.service'
 import { RegisterResponse, RegisterInput } from './dto/register.dto'
 import { User } from './dto/user.dto'
 import { UserDocument } from './schemas/user.schema'
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectModel('Users') private readonly userModule: Model<UserDocument>,
-  ) {}
+  constructor(@InjectModel('Users') public userModule: Model<UserDocument>) {}
 
   async findUser(userName: string): Promise<User | undefined> {
     const user = await this.userModule.findOne({

@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Param, UseGuards } from '@nestjs/common'
 import { StateId } from './dto/state-id.dto'
 import { StatesDistrictsService } from './states-districts.service'
 import {
@@ -9,6 +9,7 @@ import {
 } from '@nestjs/swagger'
 import { Districts } from './dto/district.dto'
 import { States } from './dto/state.dto'
+import { AuthGuard } from '@nestjs/passport'
 @ApiTags('State and Districts APIs')
 @Controller('states-districts')
 export class StatesDistrictsController {

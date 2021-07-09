@@ -2,7 +2,9 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Post,
+  Req,
   Request,
   Res,
   UseGuards,
@@ -13,6 +15,7 @@ import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 import { UsersService } from './users.service'
 import { RegisterResponse } from './dto/register.dto'
 import {
+  ApiBody,
   ApiConflictResponse,
   ApiCreatedResponse,
   ApiNotImplementedResponse,
@@ -23,6 +26,7 @@ import {
 import { RegisterInput } from './dto/register.dto'
 import { LoginUserResponse, LoginInput } from './dto/login.dto'
 import { ValidationPipe } from './pipes/validation.pipe'
+import { AuthGuard } from '@nestjs/passport'
 
 @ApiTags('Authentication APIs')
 @Controller('auth')
@@ -34,17 +38,14 @@ export class UserController {
 
   @ApiOkResponse({ type: LoginUserResponse })
   @ApiUnauthorizedResponse({ description: 'Invalid credentials' })
+  @ApiBody({ type: LoginInput })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(
-    @Request() req,
-    @Body() loginInput: LoginInput,
-    @Res() response,
-  ): Promise<any> {
+  async login(@Request() req, @Res() response): Promise<any> {
     const authToken = await this.authService.login(req.user)
     response.cookie('authToken', authToken)
     const userDetails = {
-      userDetails: req.user,
+      status: HttpStatus.OK,
       token: authToken,
     }
     response.send(userDetails)
@@ -61,9 +62,12 @@ export class UserController {
     return await this.userService.registerUser(userDetails)
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Get('protected')
-  // async info(@Request() req): Promise<any> {
-  //   return req.user
-  // }
+  @Get('/facebook')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLogin(@Req() req): Promise<any> {
+    return {
+      status: HttpStatus.OK,
+      token: req.user,
+    }
+  }
 }

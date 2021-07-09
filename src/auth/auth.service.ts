@@ -27,4 +27,23 @@ export class AuthService {
     const access_token = await this.jwtService.sign(payload)
     return access_token
   }
+
+  async manageOAuth(user: any): Promise<string> {
+    const isUserExists = await this.userService.findUser(user.username)
+    const jwtToken = this.login({
+      id: user.oAuthId,
+      username: user.username,
+    })
+
+    if (!!isUserExists) {
+      return jwtToken
+    }
+
+    const newUser = await new this.userService.userModule({
+      ...user,
+    })
+    newUser.save()
+
+    return jwtToken
+  }
 }

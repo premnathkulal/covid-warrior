@@ -8,14 +8,14 @@ import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
 import { ConfigModule } from '@nestjs/config'
 import { VaccinationCenterModule } from './vaccination-center/vaccination-center.module'
-import { BeneficiaryModule } from './beneficiary/beneficiary.module';
-import { ScheduleModule } from './schedule/schedule.module';
+import { BeneficiaryModule } from './beneficiary/beneficiary.module'
+import { ScheduleModule } from './schedule/schedule.module'
 
 @Module({
   imports: [
     StatesDistrictsModule,
-    UsersModule,
     AuthModule,
+    UsersModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       context: ({ req, res }) => ({ req, res }),
