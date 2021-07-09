@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
-import { Profile, Strategy } from 'passport-facebook'
+import { Profile, Strategy } from 'passport-google-oauth20'
 import { AuthService } from '../auth.service'
 
 @Injectable()
-export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
+export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private readonly authService: AuthService) {
     super({
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: 'http://localhost:3000/auth/facebook/',
-      scope: 'email',
-      profileFields: ['id', 'name'],
+      clientID: process.env.GOOGLE_APP_ID,
+      clientSecret: process.env.GOOGLE_APP_SECRET,
+      callbackURL: 'http://localhost:3000/auth/google',
+      scope: ['email', 'profile'],
     })
   }
 

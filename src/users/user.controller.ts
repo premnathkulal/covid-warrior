@@ -87,4 +87,16 @@ export class UserController {
     }
     response.send(userDetails)
   }
+
+  @ApiOkResponse({ type: LoginUserResponse })
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleLogin(@Req() req, @Res() response): Promise<void> {
+    response.cookie('authToken', req.user)
+    const userDetails = {
+      status: HttpStatus.OK,
+      token: req.user,
+    }
+    response.send(userDetails)
+  }
 }

@@ -5,6 +5,7 @@ import { UsersModule } from 'src/users/users.module'
 import { jwtConstants } from './auth.constants'
 import { AuthService } from './auth.service'
 import { FacebookStrategy } from './strategies/facebook.strategy'
+import { GoogleStrategy } from './strategies/google.strategy'
 import { JwtStrategy } from './strategies/jwt.strategy'
 import { LocalStrategy } from './strategies/local.strategy'
 
@@ -19,7 +20,13 @@ import { LocalStrategy } from './strategies/local.strategy'
       },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy, FacebookStrategy],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    FacebookStrategy,
+    GoogleStrategy,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}
