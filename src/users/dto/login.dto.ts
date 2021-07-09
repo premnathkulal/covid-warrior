@@ -1,12 +1,13 @@
+import { HttpStatus } from '@nestjs/common'
 import { Field, InputType, ObjectType } from '@nestjs/graphql'
 import { ApiProperty } from '@nestjs/swagger'
 import { UserDetails } from '../dto/user-details.dto'
 
 @ObjectType()
 export class LoginUserResponse {
-  @ApiProperty({ type: UserDetails })
-  @Field(() => UserDetails)
-  public userDetails: UserDetails
+  @ApiProperty()
+  @Field()
+  public status: HttpStatus
 
   @ApiProperty()
   @Field()

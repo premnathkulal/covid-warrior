@@ -15,6 +15,7 @@ import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard'
 import { UsersService } from './users.service'
 import { RegisterResponse } from './dto/register.dto'
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiConflictResponse,
   ApiCreatedResponse,
@@ -27,6 +28,8 @@ import { RegisterInput } from './dto/register.dto'
 import { LoginUserResponse, LoginInput } from './dto/login.dto'
 import { ValidationPipe } from './pipes/validation.pipe'
 import { AuthGuard } from '@nestjs/passport'
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { User, UserDetails } from './dto/user-details.dto'
 
 @ApiTags('Authentication APIs')
 @Controller('auth')
@@ -41,7 +44,7 @@ export class UserController {
   @ApiBody({ type: LoginInput })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req, @Res() response): Promise<any> {
+  async login(@Request() req, @Res() response): Promise<void> {
     const authToken = await this.authService.login(req.user)
     response.cookie('authToken', authToken)
     const userDetails = {
@@ -62,12 +65,27 @@ export class UserController {
     return await this.userService.registerUser(userDetails)
   }
 
-  @Get('/facebook')
-  @UseGuards(AuthGuard('facebook'))
-  async facebookLogin(@Req() req): Promise<any> {
+  @ApiOkResponse({ type: UserDetails })
+  @ApiBearerAuth()
+  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  async getUserInfo(@Req() req): Promise<User> {
+    // const result = this.userService.findUser(req.user.username)
     return {
+      status: HttpStatus.OK,
+      userDetails: req.user,
+    }
+  }
+
+  @ApiOkResponse({ type: LoginUserResponse })
+  @Get('facebook')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLogin(@Req() req, @Res() response): Promise<void> {
+    response.cookie('authToken', req.user)
+    const userDetails = {
       status: HttpStatus.OK,
       token: req.user,
     }
+    response.send(userDetails)
   }
 }
