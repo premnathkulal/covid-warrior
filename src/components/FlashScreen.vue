@@ -21,7 +21,7 @@ export default class FlashScreen extends Vue {}
 
 <style lang="scss">
 body {
-  background: $color-primary !important;
+  // background: $color-primary;
 }
 .flash-screen {
   display: flex;
@@ -31,7 +31,7 @@ body {
   height: 90vh;
 
   .title {
-    font-family: $sun-shiny;
+    // font-family: $sun-shiny;
     font-weight: bold;
     font-size: 2rem;
   }
