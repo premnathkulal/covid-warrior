@@ -31,7 +31,7 @@ body {
   height: 90vh;
 
   .title {
-    // font-family: $sun-shiny;
+    font-family: $combo;
     font-weight: bold;
     font-size: 2rem;
   }

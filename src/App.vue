@@ -1,43 +1,63 @@
 <template>
-  <v-app>
-    <v-card>
-      <v-toolbar class="toolbar" color="deep-purple accent-4" dark flat>
-        <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
+  <div id="app">
+    <v-app>
+      <v-card>
+        <v-toolbar class="toolbar primary" color="primary accent-4" dark flat>
+          <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
 
-        <v-toolbar-title class="toolbar-title">Covid Warrior</v-toolbar-title>
+          <div class="toolbar-title">
+            Covid Warrior
+            <lottie-player
+              autoplay
+              loop
+              mode="normal"
+              src="/assets/lotties/corona-virus.json"
+              style="width: 50px"
+              background="transparent"
+            ></lottie-player>
+          </div>
 
-        <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
+          <div class="text-center">
+            <v-menu>
+              <template v-slot:activator="{ on: menu, attrs }">
+                <v-btn
+                  color="black"
+                  dark
+                  v-bind="attrs"
+                  v-on="{ ...menu }"
+                  icon
+                >
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title>Login</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
 
-        <template v-slot:extension>
-          <v-tabs v-model="currentItem" fixed-tabs slider-color="white">
-            <v-tab v-for="item in itemes" :key="item" :href="'#tab-' + item">
-              {{ item }}
-            </v-tab>
-          </v-tabs>
-        </template>
-      </v-toolbar>
+          <template v-slot:extension>
+            <v-tabs v-model="currentItem" fixed-tabs slider-color="white">
+              <v-tab v-for="item in tabOptions" :key="item.name">
+                <span class="tab-title pr-4 d-none d-sm-block"
+                  >{{ item.name }}
+                </span>
+                <span class="tab-icon"
+                  ><v-icon :color="item.iconColor" x-large>{{
+                    item.icon
+                  }}</v-icon></span
+                >
+              </v-tab>
+            </v-tabs>
+          </template>
+        </v-toolbar>
+      </v-card>
 
-      <v-tabs-items v-model="currentItem">
-        <v-tab-item
-          v-for="item in items.concat(more)"
-          :key="item"
-          :value="'tab-' + item"
-        >
-          <v-card flat>
-            <v-card-text>
-              <h2>{{ item }}</h2>
-              {{ text }}
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
-    </v-card>
-
-    <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
+      <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item>
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
@@ -62,7 +82,8 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-  </v-app>
+    </v-app>
+  </div>
 </template>
 
 <script lang="ts">
@@ -71,11 +92,15 @@ import { Vue, Component } from 'vue-property-decorator'
 @Component
 export default class App extends Vue {
   currentItem = 'tab-Web'
-  itemes = ['Home', 'My Beneficiaries', 'Profile']
+  tabOptions = [
+    { name: 'Updates', icon: 'mdi-fire', iconColor: 'red' },
+    { name: 'Vaccination', icon: 'mdi-needle', iconColor: 'blue' },
+    { name: 'Profile', icon: 'mdi-account', iconColor: 'green' },
+  ]
   text = 'Hello, World.'
 
   drawer = null
-  items = [
+  itemees = [
     { title: 'Home', icon: 'mdi-view-dashboard' },
     { title: 'About', icon: 'mdi-forum' },
   ]
@@ -86,7 +111,21 @@ export default class App extends Vue {
 .toolbar {
   .toolbar-title {
     width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $combo;
+    font-weight: bold;
+    font-size: 2rem;
+    color: $black;
+    padding-top: 1rem;
+    margin-left: 2.5rem;
+  }
+  .tab-title {
+    color: $black;
+  }
+  .tab-icon {
+    width: 5rem;
   }
 }
 </style>
