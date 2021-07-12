@@ -13,19 +13,34 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
   },
+  ignorePatterns: ['shims*'],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-  },
-  overrides: [
-    {
-      files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)",
-      ],
-      env: {
-        jest: true,
+    "no-console": 'error',
+    "no-debugger": 'error',
+    quotemark: 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
       },
+    ],
+    'prefer-const': 'error',
+    'no-empty': [
+      'error',
+      {
+        allowEmptyCatch: true,
+      },
+    ],
+    'no-unused-vars': 'error',
+    'no-nested-ternary': 'error',
+  },
+  overrides: [{
+    files: [
+      "**/__tests__/*.{j,t}s?(x)",
+      "**/tests/unit/**/*.spec.{j,t}s?(x)",
+    ],
+    env: {
+      jest: true,
     },
-  ],
+  }, ],
 };
