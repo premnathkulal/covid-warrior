@@ -6,5 +6,11 @@
 $color-primary: #CEFFBA;
 $black: #000000;
 
+/* Gradient colors */
+$theme-gradient: linear-gradient(90deg,
+    rgba(206, 255, 186, 1) 20%,
+    rgba(182, 237, 163, 0.6693766937669376) 37%,
+    rgba(93, 172, 79, 1) 100%);
+
 /* FONT FAMILY */
 $combo: 'Combo';

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="toggle = false">
     <v-app>
       <v-card>
         <v-toolbar class="toolbar primary" color="primary accent-4" dark flat>
@@ -34,7 +34,9 @@
               </template>
               <v-list>
                 <v-list-item>
-                  <v-list-item-title>Login</v-list-item-title>
+                  <v-list-item-title @click.stop="toggle = true">
+                    <span class="btn">Login</span>
+                  </v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -83,13 +85,22 @@
       </v-list>
     </v-navigation-drawer> -->
     </v-app>
+
+    <div class="bottom-drawer" @click.stop="toggle = true" v-if="toggle">
+      <login />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import Login from '@/components/Authentication/Login.vue'
 
-@Component
+@Component({
+  components: {
+    Login,
+  },
+})
 export default class App extends Vue {
   currentItem = 'tab-Web'
   tabOptions = [
@@ -104,28 +115,41 @@ export default class App extends Vue {
     { title: 'Home', icon: 'mdi-view-dashboard' },
     { title: 'About', icon: 'mdi-forum' },
   ]
+  toggle = false
 }
 </script>
 
 <style lang="scss">
-.toolbar {
-  .toolbar-title {
+#app {
+  .toolbar {
+    .toolbar-title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $combo;
+      font-weight: bold;
+      font-size: 2rem;
+      color: $black;
+      padding-top: 1rem;
+      margin-left: 2.5rem;
+    }
+    .tab-title {
+      color: $black;
+    }
+    .tab-icon {
+      width: 5rem;
+    }
+  }
+  .bottom-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: $combo;
-    font-weight: bold;
-    font-size: 2rem;
-    color: $black;
-    padding-top: 1rem;
-    margin-left: 2.5rem;
-  }
-  .tab-title {
-    color: $black;
-  }
-  .tab-icon {
-    width: 5rem;
+    height: 80%;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    background: $theme-gradient;
   }
 }
 </style>
