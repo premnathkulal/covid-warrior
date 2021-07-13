@@ -1,8 +1,17 @@
 <template>
   <div class="login">
-    <h3 class="title">Login</h3>
+    <h3 class="title">Retgister</h3>
     <custom-input
-      id="login-username"
+      id="name"
+      v-model="userDetails.name.value"
+      placeHolder="Full Name"
+      inputType="text"
+      :errorMessage="userDetails.name.error"
+      @keyDownAction="keyDownAction('name')"
+      @blurAction="validate('name')"
+    />
+    <custom-input
+      id="username"
       v-model="userDetails.username.value"
       placeHolder="Username"
       inputType="text"
@@ -11,7 +20,7 @@
       @blurAction="validate('username')"
     />
     <custom-input
-      id="login-password"
+      id="password"
       v-model="userDetails.password.value"
       placeHolder="Password"
       inputType="password"
@@ -21,26 +30,15 @@
     />
     <custom-button
       :isDisabled="!disableButton()"
-      btnText="Login"
+      btnText="Register"
       btnName="normal-btn"
     />
     <custom-button
-      btnText="Register"
+      btnText="Login"
       btnType="cancel"
       btnName="normal-btn"
       @btnAction="$emit('toggleAuthScreen')"
     />
-    <h5 class="text-center pb-1">Or</h5>
-    <div class="social">
-      <div class="prem">
-        <div class="social-buttons">
-          <custom-button icon="mdi-google" btnName="google-btn" />
-        </div>
-        <div class="social-buttons">
-          <custom-button icon="mdi-facebook" btnName="facebook-btn" />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -56,8 +54,12 @@ import { formValidator, resetFormError } from '@/utils/formValidator'
     CustomButton,
   },
 })
-export default class Login extends Vue {
+export default class Register extends Vue {
   userDetails = {
+    name: {
+      value: '',
+      error: '',
+    },
     username: {
       value: '',
       error: '',
@@ -70,8 +72,10 @@ export default class Login extends Vue {
 
   disableButton(): boolean {
     return (
+      this.userDetails.name.value.length >= 4 &&
+      this.userDetails.username.value.length >= 4 &&
       this.userDetails.password.value.length >= 8 &&
-      this.userDetails.username.value.length >= 4
+      this.userDetails.password.error.length === 0
     )
   }
 

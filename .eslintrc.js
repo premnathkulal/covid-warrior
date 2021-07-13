@@ -15,7 +15,7 @@ module.exports = {
   },
   ignorePatterns: ['shims*'],
   rules: {
-    'no-console': 'error',
+    // 'no-console': 'error',
     'no-debugger': 'error',
     quotemark: 'off',
     'prettier/prettier': [

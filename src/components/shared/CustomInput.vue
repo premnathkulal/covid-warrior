@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-input">
+  <div class="custom-input pb-3">
     <div class="input-field">
       <input
         :id="id"
@@ -11,12 +11,11 @@
         :required="isRequired"
         @focus="showOption = true"
         @input="inputAction($event)"
-        @blur="blurAction()"
+        @blur="$emit('blurAction')"
+        @keydown="$emit('keyDownAction')"
       />
       <label class="label" :for="id">{{ label }}</label>
-      <span v-show="isError" class="input-error text-danger">{{
-        errorMessage
-      }}</span>
+      <span class="input-error text-danger">{{ errorMessage }}</span>
     </div>
   </div>
 </template>
@@ -57,7 +56,10 @@ export default class CustomInput extends Vue {
   justify-content: center;
 
   .input-field {
-    width: 80%;
+    width: 40%;
+    @media only screen and (max-width: 900px) {
+      width: 80%;
+    }
 
     .form-control {
       border: none;
@@ -97,7 +99,7 @@ export default class CustomInput extends Vue {
       font-size: 12px;
       position: relative;
       bottom: 0;
-      left: -1.2rem;
+      left: -4rem;
       letter-spacing: 0.3px;
     }
   }

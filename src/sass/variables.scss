@@ -8,6 +8,17 @@ $black: #000000;
 
 /* Gradient colors */
 $theme-gradient: linear-gradient(90deg, rgba(206, 255, 186, 1) 20%, rgba(176, 237, 163, 1) 37%, rgba(93, 172, 79, 1) 100%);
+$google-gradient: linear-gradient(90deg,
+    rgba(247, 0, 0, 0.8) 10%,
+    rgba(0, 0, 247, 0.8509485094850948) 41%,
+    rgba(254, 255, 0, 0.6097560975609756) 61%,
+    rgba(0, 200, 0, 0.6097560975609756) 79%);
+$facebook-gradient: linear-gradient(90deg,
+    rgba(2, 193, 247, 0.4552845528455285) 28%,
+    rgba(59, 108, 247, 0.8509485094850948) 75%);
+$button-gradient: linear-gradient(90deg,
+    rgba(45, 209, 144, 0.8184281842818428) 20%,
+    rgba(32, 131, 3, 0.6097560975609756) 86%);
 
 /* FONT FAMILY */
 $combo: 'Combo';

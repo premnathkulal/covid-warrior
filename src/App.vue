@@ -86,19 +86,27 @@
     </v-navigation-drawer> -->
     </v-app>
 
-    <div class="bottom-drawer" @click.stop="toggle = true" v-if="toggle">
-      <login />
-    </div>
+    <transition name="bottom-drawer">
+      <div class="bottom-drawer" @click.stop="toggle = true" v-show="toggle">
+        <login
+          @toggleAuthScreen="authScreen = 'register'"
+          v-if="authScreen === 'login'"
+        />
+        <register @toggleAuthScreen="authScreen = 'login'" v-else />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
+import Register from '@/components/Authentication/Register.vue'
 
 @Component({
   components: {
     Login,
+    Register,
   },
 })
 export default class App extends Vue {
@@ -116,6 +124,7 @@ export default class App extends Vue {
     { title: 'About', icon: 'mdi-forum' },
   ]
   toggle = false
+  authScreen = 'login'
 }
 </script>
 
@@ -150,6 +159,20 @@ export default class App extends Vue {
     border-top-left-radius: 3rem;
     border-top-right-radius: 3rem;
     background: $theme-gradient;
+  }
+
+  .bottom-drawer-enter,
+  .bottom-drawer-leave-to {
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  .bottom-drawer-enter-active,
+  .bottom-drawer-leave-active {
+    transition: all 0.5s;
   }
 }
 </style>
