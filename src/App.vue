@@ -146,7 +146,7 @@ export default class App extends Vue {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80%;
+    height: 70%;
     border-top-left-radius: 3rem;
     border-top-right-radius: 3rem;
     background: $theme-gradient;

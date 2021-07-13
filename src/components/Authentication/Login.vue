@@ -1,13 +1,19 @@
 <template>
   <div class="login">
     <h3 class="title">Login</h3>
+    <custom-input />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import CustomInput from '@/components/shared/CustomInput.vue'
 
-@Component
+@Component({
+  components: {
+    CustomInput,
+  },
+})
 export default class Login extends Vue {}
 </script>
 
