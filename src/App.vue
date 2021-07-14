@@ -1,7 +1,7 @@
 <template>
   <div id="app" @click="toggle = false">
     <v-app>
-      <v-card>
+      <v-card :elevation="0">
         <v-toolbar class="toolbar primary" color="primary accent-4" dark flat>
           <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
           <div class="toolbar-title">
@@ -37,7 +37,7 @@
           </div>
 
           <template v-slot:extension>
-            <v-tabs v-model="currentItem" fixed-tabs slider-color="green">
+            <v-tabs v-model="currentTabName" fixed-tabs slider-color="green">
               <v-tab
                 class="tab-options"
                 v-for="item in tabOptions"
@@ -55,6 +55,31 @@
             </v-tabs>
           </template>
         </v-toolbar>
+
+        <v-tabs-items
+          class="tab-items elevation-0"
+          content-class="elevation-0"
+          v-model="currentTabName"
+          touchless
+        >
+          <v-tab-item content-class="elevation-0">
+            <national-updates />
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-card-text>
+                <national-updates />
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-card-text>
+                <national-updates />
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
       </v-card>
 
       <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -101,15 +126,17 @@ import { Vue, Component } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
+import NationalUpdates from '@/components/Home/NationalUpdates.vue'
 
 @Component({
   components: {
     Login,
     Register,
+    NationalUpdates,
   },
 })
 export default class App extends Vue {
-  currentItem = 'tab-update'
+  currentTabName = 'tab-update'
   tabOptions = tabOptions
   drawer = null
   toggle = false
@@ -141,6 +168,7 @@ export default class App extends Vue {
       }
     }
   }
+
   .bottom-drawer {
     position: fixed;
     bottom: 0;
