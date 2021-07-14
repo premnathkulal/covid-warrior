@@ -4,7 +4,6 @@
       <v-card>
         <v-toolbar class="toolbar primary" color="primary accent-4" dark flat>
           <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
-
           <div class="toolbar-title">
             Covid Warrior
             <lottie-player
@@ -14,21 +13,16 @@
               src="/assets/lotties/corona-virus.json"
               style="width: 50px"
               background="transparent"
-            ></lottie-player>
+            >
+            </lottie-player>
           </div>
 
           <v-spacer></v-spacer>
 
           <div class="text-center">
             <v-menu>
-              <template v-slot:activator="{ on: menu, attrs }">
-                <v-btn
-                  color="black"
-                  dark
-                  v-bind="attrs"
-                  v-on="{ ...menu }"
-                  icon
-                >
+              <template v-slot:activator="{ on: menu }">
+                <v-btn color="black" v-on="{ ...menu }" icon>
                   <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>
@@ -43,16 +37,20 @@
           </div>
 
           <template v-slot:extension>
-            <v-tabs v-model="currentItem" fixed-tabs slider-color="white">
-              <v-tab v-for="item in tabOptions" :key="item.name">
+            <v-tabs v-model="currentItem" fixed-tabs slider-color="green">
+              <v-tab
+                class="tab-options"
+                v-for="item in tabOptions"
+                :key="item.name"
+              >
                 <span class="tab-title pr-4 d-none d-sm-block"
                   >{{ item.name }}
                 </span>
-                <span class="tab-icon"
-                  ><v-icon :color="item.iconColor" x-large>{{
-                    item.icon
-                  }}</v-icon></span
-                >
+                <span class="tab-icon">
+                  <v-icon :color="item.iconColor" x-large>
+                    {{ item.icon }}
+                  </v-icon>
+                </span>
               </v-tab>
             </v-tabs>
           </template>
@@ -102,6 +100,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
+import { tabOptions } from '@/utils/uiData'
 
 @Component({
   components: {
@@ -110,19 +109,9 @@ import Register from '@/components/Authentication/Register.vue'
   },
 })
 export default class App extends Vue {
-  currentItem = 'tab-Web'
-  tabOptions = [
-    { name: 'Updates', icon: 'mdi-fire', iconColor: 'red' },
-    { name: 'Vaccination', icon: 'mdi-needle', iconColor: 'blue' },
-    { name: 'Profile', icon: 'mdi-account', iconColor: 'green' },
-  ]
-  text = 'Hello, World.'
-
+  currentItem = 'tab-update'
+  tabOptions = tabOptions
   drawer = null
-  itemees = [
-    { title: 'Home', icon: 'mdi-view-dashboard' },
-    { title: 'About', icon: 'mdi-forum' },
-  ]
   toggle = false
   authScreen = 'login'
 }
@@ -143,11 +132,13 @@ export default class App extends Vue {
       padding-top: 1rem;
       margin-left: 2.5rem;
     }
-    .tab-title {
-      color: $black;
-    }
-    .tab-icon {
-      width: 5rem;
+    .tab-options {
+      .tab-title {
+        color: $black;
+      }
+      .tab-icon {
+        width: 5rem;
+      }
     }
   }
   .bottom-drawer {
