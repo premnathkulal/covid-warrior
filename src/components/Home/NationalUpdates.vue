@@ -6,10 +6,34 @@
     </div>
     <div class="updates-container">
       <div class="updates container-fluid">
-        <div class="updates-stats total-count">1</div>
-        <div class="updates-stats total-active ml-4">3</div>
-        <div class="updates-stats total-recovered ml-4">3</div>
-        <div class="updates-stats total-recovered ml-4">3</div>
+        <update-counter-card
+          animation="confirmed"
+          animationSize="100"
+          title="Confirmed"
+          count="30000"
+          className="total-count"
+        />
+        <update-counter-card
+          animation="active"
+          animationSize="74"
+          title="Active"
+          count="30000"
+          className="total-active"
+        />
+        <update-counter-card
+          animation="recovered"
+          animationSize="55"
+          title="Recovered"
+          count="30000"
+          className="total-recovered"
+        />
+        <update-counter-card
+          animation="death"
+          animationSize="55"
+          title="Death"
+          count="30000"
+          className="total-death"
+        />
       </div>
     </div>
   </div>
@@ -17,8 +41,9 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import UpdateCounterCard from '@/components/Home/UpdateCounterCard.vue'
 
-@Component
+@Component({ components: { UpdateCounterCard } })
 export default class NationalUpdates extends Vue {}
 </script>
 
@@ -51,7 +76,7 @@ export default class NationalUpdates extends Vue {}
 
 .updates-container {
   position: relative;
-  top: -5.5rem;
+  top: -4.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,18 +84,96 @@ export default class NationalUpdates extends Vue {}
   .updates {
     overflow-x: scroll;
     white-space: nowrap;
-
     width: 80%;
     @media only screen and (max-width: 1400px) {
       width: 100%;
     }
 
     &-stats {
-      background: red;
       width: 20rem;
       height: 12rem;
       display: inline-block;
+      border-radius: 0.8rem;
+
+      &:hover {
+        box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .stat-header {
+        display: flex;
+        padding: 0.5rem 1rem;
+
+        .stat-title {
+          font-weight: bold;
+          font-size: 1.5rem;
+          color: rgb(5, 7, 121);
+        }
+        .lottie-player {
+          margin-left: auto;
+        }
+      }
+      .stat-number {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.7rem;
+        padding: 1rem;
+      }
     }
+    .total-count {
+      background: linear-gradient(
+        47deg,
+        rgba(47, 173, 186, 1) 30%,
+        rgba(27, 213, 207, 1) 50%,
+        rgba(2, 245, 247, 1) 68%
+      );
+    }
+    .total-active {
+      background: linear-gradient(
+        45deg,
+        rgba(254, 79, 79, 1) 40%,
+        rgba(242, 120, 55, 1) 60%,
+        rgba(241, 122, 120, 1) 68%
+      );
+    }
+    .total-recovered {
+      background: linear-gradient(
+        45deg,
+        rgba(94, 205, 2, 1) 30%,
+        rgba(131, 242, 55, 1) 60%,
+        rgba(86, 245, 104, 1) 68%
+      );
+    }
+    .total-death {
+      background: linear-gradient(
+        45deg,
+        rgba(139, 158, 157, 1) 40%,
+        rgba(167, 189, 186, 1) 60%,
+        rgba(181, 204, 196, 1) 75%
+      );
+    }
+  }
+}
+
+@property --num {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.stat-number {
+  animation: counter 2s alternate ease-in-out forwards;
+  counter-reset: num var(--num);
+}
+.stat-number::after {
+  content: counter(num);
+}
+
+@keyframes counter {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--count);
   }
 }
 
