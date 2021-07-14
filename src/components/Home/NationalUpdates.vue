@@ -50,15 +50,10 @@ export default class NationalUpdates extends Vue {}
 <style lang="scss">
 .national-updates {
   .info-text {
-    background: linear-gradient(
-      90deg,
-      rgba(66, 173, 35, 0.7208672086720866) 19%,
-      rgba(2, 245, 247, 0.8157181571815718) 44%,
-      rgba(47, 186, 149, 0.8509485094850948) 75%
-    );
+    background: $green-blue-gradient;
     height: 10rem;
     width: 100%;
-    color: rgb(5, 7, 121);
+    color: $text-color;
 
     padding-top: 1.8rem;
     text-align: center;
@@ -72,84 +67,69 @@ export default class NationalUpdates extends Vue {}
       line-height: 0.8rem;
     }
   }
-}
+  .updates-container {
+    position: relative;
+    top: -4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.updates-container {
-  position: relative;
-  top: -4.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .updates {
-    overflow-x: scroll;
-    white-space: nowrap;
-    width: 80%;
-    @media only screen and (max-width: 1400px) {
-      width: 100%;
-    }
-
-    &-stats {
-      width: 20rem;
-      height: 12rem;
-      display: inline-block;
-      border-radius: 0.8rem;
-
-      &:hover {
-        box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+    .updates {
+      overflow-x: scroll;
+      white-space: nowrap;
+      width: 80%;
+      @media only screen and (max-width: 1400px) {
+        width: 100%;
       }
 
-      .stat-header {
-        display: flex;
-        padding: 0.5rem 1rem;
+      &-stats {
+        width: 20rem;
+        height: 12rem;
+        display: inline-block;
+        border-radius: 0.8rem;
 
-        .stat-title {
+        &:hover {
+          box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-header {
+          display: flex;
+          padding: 0.5rem 1rem;
+
+          .stat-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: $text-color;
+          }
+          .lottie-player {
+            margin-left: auto;
+          }
+        }
+        .stat-number {
+          text-align: center;
           font-weight: bold;
-          font-size: 1.5rem;
-          color: rgb(5, 7, 121);
-        }
-        .lottie-player {
-          margin-left: auto;
+          font-size: 1.7rem;
+          padding: 1rem;
+          animation: counter 2s alternate ease-in-out forwards;
+          counter-reset: num var(--num);
+
+          &::after {
+            content: counter(num);
+          }
         }
       }
-      .stat-number {
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.7rem;
-        padding: 1rem;
+      .total-count {
+        background: $blue-gradient;
       }
-    }
-    .total-count {
-      background: linear-gradient(
-        47deg,
-        rgba(47, 173, 186, 1) 30%,
-        rgba(27, 213, 207, 1) 50%,
-        rgba(2, 245, 247, 1) 68%
-      );
-    }
-    .total-active {
-      background: linear-gradient(
-        45deg,
-        rgba(254, 79, 79, 1) 40%,
-        rgba(242, 120, 55, 1) 60%,
-        rgba(241, 122, 120, 1) 68%
-      );
-    }
-    .total-recovered {
-      background: linear-gradient(
-        45deg,
-        rgba(94, 205, 2, 1) 30%,
-        rgba(131, 242, 55, 1) 60%,
-        rgba(86, 245, 104, 1) 68%
-      );
-    }
-    .total-death {
-      background: linear-gradient(
-        45deg,
-        rgba(139, 158, 157, 1) 40%,
-        rgba(167, 189, 186, 1) 60%,
-        rgba(181, 204, 196, 1) 75%
-      );
+      .total-active {
+        background: $red-gradient;
+      }
+      .total-recovered {
+        background: $green-gradient;
+      }
+      .total-death {
+        background: $gray-gradient;
+      }
     }
   }
 }
@@ -158,14 +138,6 @@ export default class NationalUpdates extends Vue {}
   syntax: '<integer>';
   initial-value: 0;
   inherits: false;
-}
-
-.stat-number {
-  animation: counter 2s alternate ease-in-out forwards;
-  counter-reset: num var(--num);
-}
-.stat-number::after {
-  content: counter(num);
 }
 
 @keyframes counter {
@@ -180,8 +152,5 @@ export default class NationalUpdates extends Vue {}
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  //   background: #ff0000;
 }
 </style>

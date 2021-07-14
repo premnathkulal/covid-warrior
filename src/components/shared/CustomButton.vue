@@ -35,12 +35,12 @@ export default class CustomButton extends Vue {
   .btn {
     outline: none;
     box-shadow: none;
-    color: black;
+    color: $black;
     font-weight: bold;
     font-size: 1.2em;
 
     &:hover {
-      color: white;
+      color: $white;
     }
   }
 

@@ -2,9 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Combo&display=swap');
 @import '@/sass/mixin.scss';
 
-/* SCSS HEX */
+/* SCSS Colors */
 $color-primary: #CEFFBA;
+$color-background: #eeffe7;
+$text-color: rgb(6, 6, 92);
+$form-control-background: rgba(142, 238, 142, 0.363);
+$input-box-border-color: rgb(83, 117, 3);
 $black: #000000;
+$white: #fff;
 
 /* Gradient colors */
 $theme-gradient: linear-gradient(90deg, rgba(206, 255, 186, 1) 20%, rgba(176, 237, 163, 1) 37%, rgba(93, 172, 79, 1) 100%);
@@ -19,6 +24,34 @@ $facebook-gradient: linear-gradient(90deg,
 $button-gradient: linear-gradient(90deg,
     rgba(45, 209, 144, 0.8184281842818428) 20%,
     rgba(32, 131, 3, 0.6097560975609756) 86%);
+$light-gray-gradient: linear-gradient(90deg,
+    rgba(139, 158, 157, 0.6666666666666667) 47%,
+    rgba(167, 189, 186, 0.6422764227642277) 60%,
+    rgba(181, 204, 196, 0.5962059620596206) 68%);
+$light-red-gradient: linear-gradient(45deg,
+    rgba(254, 79, 79, 0.2) 40%,
+    rgba(242, 120, 55, 0.2) 60%,
+    rgba(241, 122, 120, 0.2) 68%);
+$green-blue-gradient: linear-gradient(90deg,
+    rgba(66, 173, 35, 0.7208672086720866) 19%,
+    rgba(2, 245, 247, 0.8157181571815718) 44%,
+    rgba(47, 186, 149, 0.8509485094850948) 75%);
+$blue-gradient: linear-gradient(47deg,
+    rgba(47, 173, 186, 1) 30%,
+    rgba(27, 213, 207, 1) 50%,
+    rgba(2, 245, 247, 1) 68%);
+$red-gradient: linear-gradient(45deg,
+    rgba(254, 79, 79, 1) 40%,
+    rgba(242, 120, 55, 1) 60%,
+    rgba(241, 122, 120, 1) 68%);
+$green-gradient:linear-gradient(45deg,
+    rgba(94, 205, 2, 1) 30%,
+    rgba(131, 242, 55, 1) 60%,
+    rgba(86, 245, 104, 1) 68%);
+$gray-gradient:linear-gradient(45deg,
+    rgba(139, 158, 157, 1) 40%,
+    rgba(167, 189, 186, 1) 60%,
+    rgba(181, 204, 196, 1) 75%);
 
 /* FONT FAMILY */
 $combo: 'Combo';

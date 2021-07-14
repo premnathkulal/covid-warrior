@@ -2,7 +2,12 @@
   <div id="app" @click="toggle = false">
     <v-app>
       <v-card :elevation="0">
-        <v-toolbar class="toolbar primary" color="primary accent-4" dark flat>
+        <v-toolbar
+          class="toolbar primary fixed-top"
+          color="primary accent-4"
+          dark
+          flat
+        >
           <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
           <div class="toolbar-title">
             Covid Warrior
@@ -63,19 +68,19 @@
           touchless
         >
           <v-tab-item content-class="elevation-0">
-            <national-updates />
+            <home />
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
               <v-card-text>
-                <national-updates />
+                <home />
               </v-card-text>
             </v-card>
           </v-tab-item>
           <v-tab-item>
             <v-card flat>
               <v-card-text>
-                <national-updates />
+                <home />
               </v-card-text>
             </v-card>
           </v-tab-item>
@@ -126,13 +131,13 @@ import { Vue, Component } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
-import NationalUpdates from '@/components/Home/NationalUpdates.vue'
+import Home from '@/components/Home/Home.vue'
 
 @Component({
   components: {
     Login,
     Register,
-    NationalUpdates,
+    Home,
   },
 })
 export default class App extends Vue {
@@ -170,6 +175,7 @@ export default class App extends Vue {
   }
 
   .bottom-drawer {
+    z-index: 2;
     position: fixed;
     bottom: 0;
     left: 0;

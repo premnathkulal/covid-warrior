@@ -1,0 +1,167 @@
+<template>
+  <div class="states-list">
+    <div class="statewise-information mb-5">
+      <div class="state-header">
+        <p class="state-title">Karnataka</p>
+        <img class="state-map" src="/assets/states/KA.png" alt="state-map" />
+      </div>
+      <div class="data-field py-5">
+        <div class="display-data">
+          <p class="data-title">Confirmed</p>
+          <p class="data-count">305697</p>
+        </div>
+        <div class="display-data">
+          <p class="data-title text-danger">Active</p>
+          <p class="data-count">305697</p>
+        </div>
+        <div class="display-data">
+          <p class="data-title text-success">Recovered</p>
+          <p class="data-count">305697</p>
+        </div>
+        <div class="display-data">
+          <p class="data-title text-danger">Deaths</p>
+          <p class="data-count">305697</p>
+        </div>
+      </div>
+      <div class="delta-updates pr-4">
+        <div class="delta-header">
+          <p class="delta-title">Delta Plus Variant Updates</p>
+          <lottie-player
+            class="lottie-player"
+            autoplay
+            loop
+            mode="normal"
+            :src="`/assets/lotties/delta-anim.json`"
+            :style="`width: 80px`"
+            background="transparent"
+          >
+          </lottie-player>
+        </div>
+        <div class="delta">
+          <div class="delta-data">
+            <p class="data-title pr-5">Confirmed</p>
+            <p class="data-count">305697</p>
+          </div>
+          <div class="delta-data">
+            <p class="data-title pr-5 text-success">Recovered</p>
+            <p class="data-count">305697</p>
+          </div>
+          <div class="delta-data">
+            <p class="data-title pr-5 text-danger">Deaths</p>
+            <p class="data-count">305697</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import NationalUpdates from '@/components/Home/NationalUpdates.vue'
+
+@Component({
+  components: {
+    NationalUpdates,
+  },
+})
+export default class StateWiseList extends Vue {}
+</script>
+
+<style lang="scss">
+.states-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  color: $text-color;
+
+  .statewise-information {
+    background: $light-gray-gradient;
+    width: 80%;
+    @media only screen and (max-width: 1400px) {
+      width: 100%;
+    }
+    border-radius: 0.8rem;
+    padding: 1rem;
+
+    .state-header {
+      display: flex;
+
+      .state-title {
+        font-weight: bold;
+        font-size: 1.4rem;
+        padding: 0.5rem;
+      }
+
+      .state-map {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .data-field {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      font-weight: bold;
+      margin-top: 2rem;
+
+      .display-data {
+        .data-title {
+          font-size: 1rem;
+          line-height: 10px;
+        }
+        .data-count {
+          line-height: 5px;
+        }
+      }
+    }
+
+    .delta-updates {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: bold;
+      background: $light-red-gradient;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      padding-top: 1.5rem;
+
+      .delta-header {
+        display: flex;
+        justify-content: center;
+
+        font-size: 1.3rem;
+        border-radius: 0.5rem;
+        height: 5rem;
+
+        .delta-title {
+          padding: 0.5rem;
+        }
+
+        .lottie-player {
+          position: relative;
+          top: -1rem;
+        }
+      }
+      .delta {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+
+        .delta-data {
+          display: flex;
+
+          .data-title {
+            text-align: left;
+            width: 8rem;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

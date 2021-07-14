@@ -64,9 +64,9 @@ export default class CustomInput extends Vue {
     .form-control {
       border: none;
       outline: none;
-      border-bottom: 2px solid rgb(83, 117, 3);
-      color: black;
-      background: rgba(142, 238, 142, 0.363);
+      border-bottom: 2px solid $input-box-border-color;
+      color: $black;
+      background: $form-control-background;
       width: 100%;
       padding: 1rem 0.4rem;
       transition: 0.3s ease all;
@@ -91,7 +91,7 @@ export default class CustomInput extends Vue {
       font-size: 14px;
       top: -3.8rem;
       left: 1px;
-      color: black;
+      color: $black;
       opacity: 1;
     }
 

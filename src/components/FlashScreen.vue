@@ -20,9 +20,6 @@ export default class FlashScreen extends Vue {}
 </script>
 
 <style lang="scss">
-body {
-  // background: $color-primary;
-}
 .flash-screen {
   display: flex;
   align-items: center;
