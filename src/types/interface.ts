@@ -28,3 +28,20 @@ export interface StateWiseUpdates {
   statecode: string
   statenotes: string
 }
+
+export interface Address {
+  countryCode: string
+  countrySubdivision: string
+  countrySecondarySubdivision: string
+  municipality: string
+  postalCode: string
+  country: string
+  countryCodeISO3: string
+  freeformAddress: string
+  localName: string
+  position?: string
+}
+export interface FullAddress {
+  address: any
+  position: string
+}

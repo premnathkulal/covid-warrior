@@ -1,11 +1,22 @@
 <template>
   <div class="states-list">
     <template v-for="(data, index) in stateWiseUpdates.slice(1)">
-      <div class="statewise-information mb-5" :key="index">
+      <div
+        v-if="address.countrySubdivision === data.state"
+        class="statewise-information mb-5"
+        :key="index"
+      >
         <div class="state-header">
-          <p class="state-title">{{ data.state }}</p>
+          <p class="state-title">
+            {{ data.state
+            }}<span
+              v-if="address.countrySubdivision === data.state"
+              class="address pl-5"
+              >{{ address.freeformAddress }}</span
+            >
+          </p>
           <img
-            class="state-map"
+            class="state-map ml-auto"
             :src="`/assets/states/${data.statecode}.png`"
             :alt="data.statecode"
           />
@@ -65,7 +76,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import NationalUpdates from '@/components/Home/NationalUpdates.vue'
-import { StateWiseUpdates } from '@/types/interface'
+import { Address, StateWiseUpdates } from '@/types/interface'
 
 @Component({
   components: {
@@ -74,6 +85,7 @@ import { StateWiseUpdates } from '@/types/interface'
 })
 export default class StateWiseList extends Vue {
   @Prop({ default: null }) stateWiseUpdates!: StateWiseUpdates[]
+  @Prop({ default: null }) address!: Address[]
 }
 </script>
 
@@ -102,6 +114,10 @@ export default class StateWiseList extends Vue {
         font-weight: bold;
         font-size: 1.4rem;
         padding: 0.5rem;
+
+        .address {
+          font-size: 0.8rem;
+        }
       }
 
       .state-map {

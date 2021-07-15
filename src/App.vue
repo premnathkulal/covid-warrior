@@ -132,6 +132,10 @@ import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
 import Home from '@/components/Home/Home.vue'
+import { namespace } from 'vuex-class'
+import { LocationActions } from './types/types'
+
+const location = namespace('Location')
 
 @Component({
   components: {
@@ -146,6 +150,24 @@ export default class App extends Vue {
   drawer = null
   toggle = false
   authScreen = 'login'
+
+  @location.Action(LocationActions.ADDRESS)
+  public loadAdress!: () => void
+
+  success(position: any): void {
+    const latitude = position.coords.latitude
+    const longitude = position.coords.longitude
+    console.log(latitude, longitude)
+  }
+
+  error(err: any): void {
+    console.log(err)
+  }
+
+  created(): void {
+    navigator.geolocation.getCurrentPosition(this.success, this.error)
+    this.loadAdress()
+  }
 }
 </script>
 

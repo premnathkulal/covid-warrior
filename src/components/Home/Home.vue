@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <national-updates class="overall-data" :updatedData="stateWiseUpdates[0]" />
-    <state-wise-list class="states" :stateWiseUpdates="stateWiseUpdates" />
+    <state-wise-list
+      class="states"
+      :stateWiseUpdates="stateWiseUpdates"
+      :address="getAddress"
+    />
   </div>
 </template>
 
@@ -11,9 +15,10 @@ import NationalUpdates from '@/components/Home/NationalUpdates.vue'
 import StateWiseList from '@/components/Home/StateWiseList.vue'
 import { namespace } from 'vuex-class'
 import { UpdatesActions } from '@/types/types'
-import { StateWiseUpdates } from '@/types/interface'
+import { Address, StateWiseUpdates } from '@/types/interface'
 
 const updates = namespace('Updates')
+const location = namespace('Location')
 
 @Component({
   components: {
@@ -28,11 +33,15 @@ export default class Home extends Vue {
   @updates.Getter
   stateWiseUpdates!: StateWiseUpdates[]
 
+  @location.Getter
+  getAddress!: Address[]
+
   @updates.Action(UpdatesActions.UPDATES)
   public loadUpdates!: () => void
 
   created(): void {
     this.loadUpdates()
+    console.log(this.getAddress)
   }
 }
 </script>
