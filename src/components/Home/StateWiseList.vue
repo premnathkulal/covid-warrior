@@ -1,71 +1,80 @@
 <template>
   <div class="states-list">
-    <div class="statewise-information mb-5">
-      <div class="state-header">
-        <p class="state-title">Karnataka</p>
-        <img class="state-map" src="/assets/states/KA.png" alt="state-map" />
-      </div>
-      <div class="data-field py-5">
-        <div class="display-data">
-          <p class="data-title">Confirmed</p>
-          <p class="data-count">305697</p>
+    <template v-for="(data, index) in stateWiseUpdates.slice(1)">
+      <div class="statewise-information mb-5" :key="index">
+        <div class="state-header">
+          <p class="state-title">{{ data.state }}</p>
+          <img
+            class="state-map"
+            :src="`/assets/states/${data.statecode}.png`"
+            :alt="data.statecode"
+          />
         </div>
-        <div class="display-data">
-          <p class="data-title text-danger">Active</p>
-          <p class="data-count">305697</p>
-        </div>
-        <div class="display-data">
-          <p class="data-title text-success">Recovered</p>
-          <p class="data-count">305697</p>
-        </div>
-        <div class="display-data">
-          <p class="data-title text-danger">Deaths</p>
-          <p class="data-count">305697</p>
-        </div>
-      </div>
-      <div class="delta-updates pr-4">
-        <div class="delta-header">
-          <p class="delta-title">Delta Plus Variant Updates</p>
-          <lottie-player
-            class="lottie-player"
-            autoplay
-            loop
-            mode="normal"
-            :src="`/assets/lotties/delta-anim.json`"
-            :style="`width: 80px`"
-            background="transparent"
-          >
-          </lottie-player>
-        </div>
-        <div class="delta">
-          <div class="delta-data">
-            <p class="data-title pr-5">Confirmed</p>
-            <p class="data-count">305697</p>
+        <div class="data-field py-5">
+          <div class="display-data">
+            <p class="data-title">Confirmed</p>
+            <p class="data-count">{{ data.confirmed }}</p>
           </div>
-          <div class="delta-data">
-            <p class="data-title pr-5 text-success">Recovered</p>
-            <p class="data-count">305697</p>
+          <div class="display-data">
+            <p class="data-title text-danger">Active</p>
+            <p class="data-count">{{ data.active }}</p>
           </div>
-          <div class="delta-data">
-            <p class="data-title pr-5 text-danger">Deaths</p>
-            <p class="data-count">305697</p>
+          <div class="display-data">
+            <p class="data-title text-success">Recovered</p>
+            <p class="data-count">{{ data.recovered }}</p>
+          </div>
+          <div class="display-data">
+            <p class="data-title text-danger">Deaths</p>
+            <p class="data-count">{{ data.deaths }}</p>
           </div>
         </div>
+        <div class="delta-updates pr-4">
+          <div class="delta-header">
+            <p class="delta-title">Delta Plus Variant Updates</p>
+            <lottie-player
+              class="lottie-player"
+              autoplay
+              loop
+              mode="normal"
+              :src="`/assets/lotties/delta-anim.json`"
+              :style="`width: 80px`"
+              background="transparent"
+            >
+            </lottie-player>
+          </div>
+          <div class="delta">
+            <div class="delta-data">
+              <p class="data-title pr-5">Confirmed</p>
+              <p class="data-count">{{ data.deltaconfirmed }}</p>
+            </div>
+            <div class="delta-data">
+              <p class="data-title pr-5 text-success">Recovered</p>
+              <p class="data-count">{{ data.deltarecovered }}</p>
+            </div>
+            <div class="delta-data">
+              <p class="data-title pr-5 text-danger">Deaths</p>
+              <p class="data-count">{{ data.deltadeaths }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import NationalUpdates from '@/components/Home/NationalUpdates.vue'
+import { StateWiseUpdates } from '@/types/interface'
 
 @Component({
   components: {
     NationalUpdates,
   },
 })
-export default class StateWiseList extends Vue {}
+export default class StateWiseList extends Vue {
+  @Prop({ default: null }) stateWiseUpdates!: StateWiseUpdates[]
+}
 </script>
 
 <style lang="scss">
@@ -131,7 +140,6 @@ export default class StateWiseList extends Vue {}
       .delta-header {
         display: flex;
         justify-content: center;
-
         font-size: 1.3rem;
         border-radius: 0.5rem;
         height: 5rem;

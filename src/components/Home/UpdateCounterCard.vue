@@ -13,7 +13,7 @@
       >
       </lottie-player>
     </div>
-    <div class="data-number" :style="`--count: ${count}`"></div>
+    <div class="data-number" :id="className">0</div>
   </div>
 </template>
 
@@ -28,13 +28,33 @@ export default class UpdateCounterCard extends Vue {
   @Prop({ default: null }) color!: string
   @Prop({ default: null }) count!: string
   @Prop({ default: null }) className!: string
+
+  animateValue(obj: any, start: any, end: any, duration: any): void {
+    let startTimestamp: any = null
+    const step = (timestamp: any) => {
+      if (!startTimestamp) startTimestamp = timestamp
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1)
+      obj.innerHTML = Math.floor(progress * (end - start) + start)
+      if (progress < 1) {
+        window.requestAnimationFrame(step)
+      }
+    }
+    window.requestAnimationFrame(step)
+  }
+
+  created() {
+    setTimeout(() => {
+      const obj = document.getElementById(this.className)
+      this.animateValue(obj, 0, this.count, 2000)
+    }, 1000)
+  }
 }
 </script>
 
 <style lang="scss">
 .updated-data {
   width: 20rem;
-  height: 12rem;
+  height: 9rem;
   display: inline-block;
   border-radius: 0.8rem;
 
@@ -56,17 +76,11 @@ export default class UpdateCounterCard extends Vue {
     }
   }
   .data-number {
+    position: relative;
     text-align: center;
     font-weight: bold;
     font-size: 1.7rem;
-    padding: 1rem;
-
-    animation: counter 2s alternate ease-in-out forwards;
-    counter-reset: num var(--num);
-
-    &::after {
-      content: counter(num);
-    }
+    top: -1rem;
   }
 }
 .total-count {

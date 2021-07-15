@@ -4,34 +4,34 @@
       <p class="overview-title">COIVD-19 Cases Overview</p>
       <p class="updated-date">Updated 14 Jul 21</p>
     </div>
-    <div class="updates-container">
+    <div class="updates-container" v-if="updatedData">
       <div class="updates container-fluid">
         <update-counter-card
           animation="confirmed"
           animationSize="100"
           title="Confirmed"
-          count="30000"
+          :count="updatedData.confirmed"
           className="total-count"
         />
         <update-counter-card
           animation="active"
           animationSize="77"
           title="Active"
-          count="30000"
+          :count="updatedData.active"
           className="total-active"
         />
         <update-counter-card
           animation="recovered"
           animationSize="55"
           title="Recovered"
-          count="30000"
+          :count="updatedData.recovered"
           className="total-recovered"
         />
         <update-counter-card
           animation="death"
           animationSize="55"
           title="Death"
-          count="30000"
+          :count="updatedData.deaths"
           className="total-death"
         />
       </div>
@@ -40,14 +40,23 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import UpdateCounterCard from '@/components/Home/UpdateCounterCard.vue'
+import { StateWiseUpdates } from '@/types/interface'
+import { namespace } from 'vuex-class'
+
+const updates = namespace('Updates')
 
 @Component({ components: { UpdateCounterCard } })
-export default class NationalUpdates extends Vue {}
+export default class NationalUpdates extends Vue {
+  @updates.State
+  public isLoading!: boolean
+
+  @Prop({ default: null }) updatedData!: StateWiseUpdates
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .national-updates {
   .info-text {
     background: $green-blue-gradient;
@@ -77,26 +86,11 @@ export default class NationalUpdates extends Vue {}
     .updates {
       overflow-x: scroll;
       white-space: nowrap;
-      width: 80%;
+      width: 81.5%;
       @media only screen and (max-width: 1400px) {
         width: 100%;
       }
     }
-  }
-}
-
-@property --num {
-  syntax: '<integer>';
-  initial-value: 0;
-  inherits: false;
-}
-
-@keyframes counter {
-  from {
-    --num: 0;
-  }
-  to {
-    --num: var(--count);
   }
 }
 
