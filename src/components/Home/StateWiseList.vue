@@ -1,80 +1,74 @@
 <template>
   <div class="states-list">
-    <template v-for="(data, index) in stateWiseUpdates.slice(1)">
-      <div
-        v-if="address.countrySubdivision === data.state"
-        class="statewise-information mb-5"
-        :key="index"
-      >
-        <div class="state-header">
-          <p class="state-title">
-            {{ data.state
-            }}<span
-              v-if="address.countrySubdivision === data.state"
-              class="address pl-5"
-              >{{ address.freeformAddress }}</span
-            >
-          </p>
-          <img
-            class="state-map ml-auto"
-            :src="`/assets/states/${data.statecode}.png`"
-            :alt="data.statecode"
-          />
+    <div class="statewise-information mb-5">
+      <div class="state-header">
+        <p class="state-title">
+          {{ currentStateUpdates.state }}
+          <span
+            v-if="address.countrySubdivision === currentStateUpdates.state"
+            class="address pl-5"
+            >{{ address.freeformAddress }}</span
+          >
+        </p>
+        <img
+          class="state-map ml-auto"
+          :src="`/assets/states/${currentStateUpdates.statecode}.png`"
+          :alt="currentStateUpdates.statecode"
+        />
+      </div>
+      <div class="data-field py-5">
+        <div class="display-data">
+          <p class="data-title">Confirmed</p>
+          <p class="data-count">{{ currentStateUpdates.confirmed }}</p>
         </div>
-        <div class="data-field py-5">
-          <div class="display-data">
-            <p class="data-title">Confirmed</p>
-            <p class="data-count">{{ data.confirmed }}</p>
-          </div>
-          <div class="display-data">
-            <p class="data-title text-danger">Active</p>
-            <p class="data-count">{{ data.active }}</p>
-          </div>
-          <div class="display-data">
-            <p class="data-title text-success">Recovered</p>
-            <p class="data-count">{{ data.recovered }}</p>
-          </div>
-          <div class="display-data">
-            <p class="data-title text-danger">Deaths</p>
-            <p class="data-count">{{ data.deaths }}</p>
-          </div>
+        <div class="display-data">
+          <p class="data-title text-danger">Active</p>
+          <p class="data-count">{{ currentStateUpdates.active }}</p>
         </div>
-        <div class="delta-updates pr-4">
-          <div class="delta-header">
-            <p class="delta-title">Delta Plus Variant Updates</p>
-            <lottie-player
-              class="lottie-player"
-              autoplay
-              loop
-              mode="normal"
-              :src="`/assets/lotties/delta-anim.json`"
-              :style="`width: 80px`"
-              background="transparent"
-            >
-            </lottie-player>
+        <div class="display-data">
+          <p class="data-title text-success">Recovered</p>
+          <p class="data-count">{{ currentStateUpdates.recovered }}</p>
+        </div>
+        <div class="display-data">
+          <p class="data-title text-danger">Deaths</p>
+          <p class="data-count">{{ currentStateUpdates.deaths }}</p>
+        </div>
+      </div>
+      <div class="delta-updates pr-4">
+        <div class="delta-header">
+          <p class="delta-title">Delta Plus Variant Updates</p>
+          <lottie-player
+            class="lottie-player"
+            autoplay
+            loop
+            mode="normal"
+            :src="`/assets/lotties/delta-anim.json`"
+            :style="`width: 80px`"
+            background="transparent"
+          >
+          </lottie-player>
+        </div>
+        <div class="delta">
+          <div class="delta-data">
+            <p class="data-title pr-5">Confirmed</p>
+            <p class="data-count">{{ stateWiseUpdates.deltaconfirmed }}</p>
           </div>
-          <div class="delta">
-            <div class="delta-data">
-              <p class="data-title pr-5">Confirmed</p>
-              <p class="data-count">{{ data.deltaconfirmed }}</p>
-            </div>
-            <div class="delta-data">
-              <p class="data-title pr-5 text-success">Recovered</p>
-              <p class="data-count">{{ data.deltarecovered }}</p>
-            </div>
-            <div class="delta-data">
-              <p class="data-title pr-5 text-danger">Deaths</p>
-              <p class="data-count">{{ data.deltadeaths }}</p>
-            </div>
+          <div class="delta-data">
+            <p class="data-title pr-5 text-success">Recovered</p>
+            <p class="data-count">{{ stateWiseUpdates.deltarecovered }}</p>
+          </div>
+          <div class="delta-data">
+            <p class="data-title pr-5 text-danger">Deaths</p>
+            <p class="data-count">{{ stateWiseUpdates.deltadeaths }}</p>
           </div>
         </div>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import NationalUpdates from '@/components/Home/NationalUpdates.vue'
 import { Address, StateWiseUpdates } from '@/types/interface'
 
@@ -85,7 +79,30 @@ import { Address, StateWiseUpdates } from '@/types/interface'
 })
 export default class StateWiseList extends Vue {
   @Prop({ default: null }) stateWiseUpdates!: StateWiseUpdates[]
-  @Prop({ default: null }) address!: Address[]
+  @Prop({ default: null }) address!: Address
+
+  currentStateUpdates: StateWiseUpdates = {
+    active: '',
+    confirmed: '',
+    deaths: '',
+    deltaconfirmed: '',
+    deltadeaths: '',
+    deltarecovered: '',
+    lastupdatedtime: '',
+    migratedother: '',
+    recovered: '',
+    state: '',
+    statecode: '',
+    statenotes: '',
+  }
+
+  @Watch('stateWiseUpdates')
+  updateData() {
+    this.currentStateUpdates = this.stateWiseUpdates.filter(data => {
+      return this.address.countrySubdivision === data.state
+    })[0]
+    console.log(this.currentStateUpdates)
+  }
 }
 </script>
 

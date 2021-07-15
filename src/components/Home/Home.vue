@@ -50,7 +50,6 @@ export default class Home extends Vue {
 .home {
   background: $color-background;
   .overall-data {
-    z-index: 1;
     height: 16rem;
     background: $color-background;
     margin-top: 7rem;
@@ -59,7 +58,7 @@ export default class Home extends Vue {
     }
   }
   .states {
-    z-index: -1;
+    margin-top: 1rem;
   }
 }
 </style>
