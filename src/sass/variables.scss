@@ -36,22 +36,10 @@ $green-blue-gradient: linear-gradient(90deg,
     rgba(66, 173, 35, 0.7208672086720866) 19%,
     rgba(2, 245, 247, 0.8157181571815718) 44%,
     rgba(47, 186, 149, 0.8509485094850948) 75%);
-$blue-gradient: linear-gradient(47deg,
-    rgba(47, 173, 186, 1) 30%,
-    rgba(27, 213, 207, 1) 50%,
-    rgba(2, 245, 247, 1) 68%);
-$red-gradient: linear-gradient(45deg,
-    rgba(254, 79, 79, 1) 40%,
-    rgba(242, 120, 55, 1) 60%,
-    rgba(241, 122, 120, 1) 68%);
-$green-gradient:linear-gradient(45deg,
-    rgba(94, 205, 2, 1) 30%,
-    rgba(131, 242, 55, 1) 60%,
-    rgba(86, 245, 104, 1) 68%);
-$gray-gradient:linear-gradient(45deg,
-    rgba(139, 158, 157, 1) 40%,
-    rgba(167, 189, 186, 1) 60%,
-    rgba(181, 204, 196, 1) 75%);
+$blue-gradient: linear-gradient(to right, #2193b0, #6dd5ed);
+$red-gradient: linear-gradient(to left, #e52d27, #c91c22);
+$green-gradient:linear-gradient(to right, #56ab2f, #a8e063);
+$gray-gradient:linear-gradient(to left, #bdc3c7, #506981);
 
 /* FONT FAMILY */
 $combo: 'Combo';

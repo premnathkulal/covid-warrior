@@ -180,7 +180,7 @@ export default class App extends Vue {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70%;
+    height: 79%;
     border-top-left-radius: 3rem;
     border-top-right-radius: 3rem;
     background: $theme-gradient;

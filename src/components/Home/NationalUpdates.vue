@@ -15,7 +15,7 @@
         />
         <update-counter-card
           animation="active"
-          animationSize="74"
+          animationSize="77"
           title="Active"
           count="30000"
           className="total-active"
@@ -80,55 +80,6 @@ export default class NationalUpdates extends Vue {}
       width: 80%;
       @media only screen and (max-width: 1400px) {
         width: 100%;
-      }
-
-      &-stats {
-        width: 20rem;
-        height: 12rem;
-        display: inline-block;
-        border-radius: 0.8rem;
-
-        &:hover {
-          box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-header {
-          display: flex;
-          padding: 0.5rem 1rem;
-
-          .stat-title {
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: $text-color;
-          }
-          .lottie-player {
-            margin-left: auto;
-          }
-        }
-        .stat-number {
-          text-align: center;
-          font-weight: bold;
-          font-size: 1.7rem;
-          padding: 1rem;
-          animation: counter 2s alternate ease-in-out forwards;
-          counter-reset: num var(--num);
-
-          &::after {
-            content: counter(num);
-          }
-        }
-      }
-      .total-count {
-        background: $blue-gradient;
-      }
-      .total-active {
-        background: $red-gradient;
-      }
-      .total-recovered {
-        background: $green-gradient;
-      }
-      .total-death {
-        background: $gray-gradient;
       }
     }
   }

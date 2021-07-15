@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
     <h3 class="title">Retgister</h3>
     <custom-input
       id="name"
@@ -90,30 +90,7 @@ export default class Register extends Vue {
 </script>
 
 <style lang="scss">
-.login {
-  .title {
-    text-align: center;
-    padding: 2rem;
-    font-weight: bold;
-  }
-  .social {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .prem {
-      display: flex;
-      justify-content: space-between;
-
-      width: 40%;
-      @media only screen and (max-width: 900px) {
-        width: 80%;
-      }
-
-      .social-buttons {
-        width: 48%;
-      }
-    }
-  }
+.register {
+  @include form-style();
 }
 </style>

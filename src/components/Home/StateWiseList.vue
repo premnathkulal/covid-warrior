@@ -106,7 +106,6 @@ export default class StateWiseList extends Vue {}
       display: flex;
       justify-content: space-around;
       font-weight: bold;
-      margin-top: 2rem;
 
       .display-data {
         .data-title {

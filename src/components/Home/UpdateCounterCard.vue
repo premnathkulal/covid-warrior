@@ -1,7 +1,7 @@
 <template>
-  <div class="updates-stats mr-4" :class="`${className}`">
-    <div class="stat-header">
-      <p class="stat-title">{{ title }}</p>
+  <div class="updated-data mr-4" :class="`${className}`">
+    <div class="data-header">
+      <p class="data-title">{{ title }}</p>
       <lottie-player
         class="lottie-player"
         autoplay
@@ -13,7 +13,7 @@
       >
       </lottie-player>
     </div>
-    <div class="stat-number" :style="`--count: ${count}`"></div>
+    <div class="data-number" :style="`--count: ${count}`"></div>
   </div>
 </template>
 
@@ -31,4 +31,54 @@ export default class UpdateCounterCard extends Vue {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.updated-data {
+  width: 20rem;
+  height: 12rem;
+  display: inline-block;
+  border-radius: 0.8rem;
+
+  &:hover {
+    box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .data-header {
+    display: flex;
+    padding: 0.5rem 1rem;
+
+    .data-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: $text-color;
+    }
+    .lottie-player {
+      margin-left: auto;
+    }
+  }
+  .data-number {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.7rem;
+    padding: 1rem;
+
+    animation: counter 2s alternate ease-in-out forwards;
+    counter-reset: num var(--num);
+
+    &::after {
+      content: counter(num);
+    }
+  }
+}
+.total-count {
+  background: $blue-gradient;
+}
+.total-active {
+  background: $red-gradient;
+}
+.total-recovered {
+  background: $green-gradient;
+}
+.total-death {
+  background: $gray-gradient;
+}
+</style>
