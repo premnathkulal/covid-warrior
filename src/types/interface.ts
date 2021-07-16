@@ -45,3 +45,8 @@ export interface FullAddress {
   address: any
   position: string
 }
+
+export interface Position {
+  lat: number
+  lon: number
+}

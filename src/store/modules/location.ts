@@ -2,7 +2,7 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import { LocationActions, LocationMutations } from '@/types/types'
 import { getAddressDetails } from '@/utils/api'
 import { AxiosResponse } from 'axios'
-import { Address, FullAddress } from '@/types/interface'
+import { Address, FullAddress, Position } from '@/types/interface'
 
 @Module({ namespaced: true })
 class Location extends VuexModule {
@@ -32,13 +32,15 @@ class Location extends VuexModule {
   }
 
   @Action
-  public [LocationActions.ADDRESS](): void {
+  public [LocationActions.ADDRESS](position: Position): void {
     this.context.commit(LocationMutations.TOGGLE_LOADING)
-    getAddressDetails(15, 75).then((result: AxiosResponse) => {
-      const data = result.data.addresses[0]
-      this.context.commit(LocationMutations.TOGGLE_LOADING)
-      this.context.commit(LocationMutations.ADDRESS, data)
-    })
+    getAddressDetails(position.lat, position.lon).then(
+      (result: AxiosResponse) => {
+        const data = result.data.addresses[0]
+        this.context.commit(LocationMutations.TOGGLE_LOADING)
+        this.context.commit(LocationMutations.ADDRESS, data)
+      }
+    )
   }
 
   get getAddress(): Address {

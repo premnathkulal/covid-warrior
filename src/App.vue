@@ -134,6 +134,7 @@ import { tabOptions } from '@/utils/uiData'
 import Home from '@/components/Home/Home.vue'
 import { namespace } from 'vuex-class'
 import { LocationActions } from './types/types'
+import { Position } from './types/interface'
 
 const location = namespace('Location')
 
@@ -152,12 +153,12 @@ export default class App extends Vue {
   authScreen = 'login'
 
   @location.Action(LocationActions.ADDRESS)
-  public loadAdress!: () => void
+  public loadAdress!: (position: Position) => void
 
   success(position: any): void {
     const latitude = position.coords.latitude
     const longitude = position.coords.longitude
-    console.log(latitude, longitude)
+    this.loadAdress({ lat: latitude, lon: longitude })
   }
 
   error(err: any): void {
@@ -166,7 +167,6 @@ export default class App extends Vue {
 
   created(): void {
     navigator.geolocation.getCurrentPosition(this.success, this.error)
-    this.loadAdress()
   }
 }
 </script>

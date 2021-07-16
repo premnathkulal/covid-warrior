@@ -1,5 +1,5 @@
 <template>
-  <div class="states-list">
+  <div v-if="currentStateUpdates" class="states-list">
     <div class="statewise-information mb-5">
       <div class="state-header">
         <p class="state-title">
@@ -51,15 +51,15 @@
         <div class="delta">
           <div class="delta-data">
             <p class="data-title pr-5">Confirmed</p>
-            <p class="data-count">{{ stateWiseUpdates.deltaconfirmed }}</p>
+            <p class="data-count">{{ currentStateUpdates.deltaconfirmed }}</p>
           </div>
           <div class="delta-data">
             <p class="data-title pr-5 text-success">Recovered</p>
-            <p class="data-count">{{ stateWiseUpdates.deltarecovered }}</p>
+            <p class="data-count">{{ currentStateUpdates.deltarecovered }}</p>
           </div>
           <div class="delta-data">
             <p class="data-title pr-5 text-danger">Deaths</p>
-            <p class="data-count">{{ stateWiseUpdates.deltadeaths }}</p>
+            <p class="data-count">{{ currentStateUpdates.deltadeaths }}</p>
           </div>
         </div>
       </div>
@@ -97,11 +97,10 @@ export default class StateWiseList extends Vue {
   }
 
   @Watch('stateWiseUpdates')
-  updateData() {
+  updateData(): void {
     this.currentStateUpdates = this.stateWiseUpdates.filter(data => {
       return this.address.countrySubdivision === data.state
     })[0]
-    console.log(this.currentStateUpdates)
   }
 }
 </script>

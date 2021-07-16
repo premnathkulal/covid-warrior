@@ -6,6 +6,7 @@
       :stateWiseUpdates="stateWiseUpdates"
       :address="getAddress"
     />
+    <news />
   </div>
 </template>
 
@@ -13,6 +14,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import NationalUpdates from '@/components/Home/NationalUpdates.vue'
 import StateWiseList from '@/components/Home/StateWiseList.vue'
+import News from '@/components/Home/News.vue'
 import { namespace } from 'vuex-class'
 import { UpdatesActions } from '@/types/types'
 import { Address, StateWiseUpdates } from '@/types/interface'
@@ -24,6 +26,7 @@ const location = namespace('Location')
   components: {
     NationalUpdates,
     StateWiseList,
+    News,
   },
 })
 export default class Home extends Vue {
@@ -41,7 +44,6 @@ export default class Home extends Vue {
 
   created(): void {
     this.loadUpdates()
-    console.log(this.getAddress)
   }
 }
 </script>

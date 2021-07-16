@@ -31,7 +31,7 @@ module.exports = {
         allowEmptyCatch: true,
       },
     ],
-    'no-unused-vars': 'error',
+    'no-unused-vars': 'warn',
     'no-nested-ternary': 'error',
   },
   overrides: [{
