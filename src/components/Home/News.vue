@@ -1,25 +1,27 @@
 <template>
   <div class="news-container">
     <div class="news">
-      <div v-for="(item, index) in topNewsList" :key="index">
-        <a
-          :href="item.url"
-          target="_blank"
-          class="short-news py-3 text-dark text-decoration-none"
-        >
-          <div class="image"><img :src="item.multimedia[0].url" /></div>
-          <div class="news-contents">
-            <div class="title">{{ item.title }}</div>
-            <div class="abstract d-none d-sm-block">{{ item.abstract }}</div>
-            <div class="news-publish-info d-none d-sm-flex pt-3 mt-auto">
-              <div class="date">{{ item.byline }}</div>
-              <div class="name ms-auto">
-                {{ item.published_date.slice(0, 10) }}
+      <template v-for="(item, index) in topNewsList">
+        <div :key="index">
+          <a
+            :href="item.url"
+            target="_blank"
+            class="short-news py-3 text-dark text-decoration-none"
+          >
+            <div class="image"><img :src="item.multimedia[0].url" /></div>
+            <div class="news-contents">
+              <div class="title">{{ item.title }}</div>
+              <div class="abstract d-none d-sm-block">{{ item.abstract }}</div>
+              <div class="news-publish-info d-none d-sm-flex pt-3 mt-auto">
+                <div class="date">{{ item.byline }}</div>
+                <div class="name ms-auto">
+                  {{ item.published_date.slice(0, 10) }}
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+      </template>
     </div>
   </div>
 </template>

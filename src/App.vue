@@ -153,20 +153,24 @@ export default class App extends Vue {
   authScreen = 'login'
 
   @location.Action(LocationActions.ADDRESS)
+  // eslint-disable-next-line no-unused-vars
   public loadAdress!: (position: Position) => void
 
-  success(position: any): void {
-    const latitude = position.coords.latitude
-    const longitude = position.coords.longitude
-    this.loadAdress({ lat: latitude, lon: longitude })
-  }
-
-  error(err: any): void {
-    console.log(err)
+  locationTracker(): void {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        this.loadAdress({ lat: latitude, lon: longitude })
+      },
+      () => {
+        // Error
+      }
+    )
   }
 
   created(): void {
-    navigator.geolocation.getCurrentPosition(this.success, this.error)
+    this.locationTracker()
   }
 }
 </script>

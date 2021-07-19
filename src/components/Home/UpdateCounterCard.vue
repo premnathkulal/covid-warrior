@@ -29,12 +29,17 @@ export default class UpdateCounterCard extends Vue {
   @Prop({ default: null }) count!: string
   @Prop({ default: null }) className!: string
 
-  animateValue(obj: any, start: any, end: any, duration: any): void {
-    let startTimestamp: any = null
-    const step = (timestamp: any) => {
+  animateValue(
+    obj: HTMLElement,
+    start: number,
+    end: number,
+    duration: number
+  ): void {
+    let startTimestamp: number | null = null
+    const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp
       const progress = Math.min((timestamp - startTimestamp) / duration, 1)
-      obj.innerHTML = Math.floor(progress * (end - start) + start)
+      obj.innerHTML = Math.floor(progress * (end - start) + start).toString()
       if (progress < 1) {
         window.requestAnimationFrame(step)
       }
@@ -42,10 +47,12 @@ export default class UpdateCounterCard extends Vue {
     window.requestAnimationFrame(step)
   }
 
-  created() {
+  created(): void {
     setTimeout(() => {
       const obj = document.getElementById(this.className)
-      this.animateValue(obj, 0, this.count, 2000)
+      if (obj) {
+        this.animateValue(obj, 0, +this.count, 2000)
+      }
     }, 1000)
   }
 }

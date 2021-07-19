@@ -42,11 +42,24 @@ export interface Address {
   position?: string
 }
 export interface FullAddress {
-  address: any
+  address: Address
   position: string
 }
 
 export interface Position {
   lat: number
   lon: number
+}
+
+export interface Multimedia {
+  url: string
+}
+
+export interface TopNews {
+  section: string
+  title: string
+  url: string
+  byline: string
+  published_date: string
+  multimedia: Multimedia[]
 }

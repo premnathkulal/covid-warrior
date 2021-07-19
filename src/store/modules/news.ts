@@ -1,14 +1,24 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import { topStoriesAPI } from '@/utils/api'
 import { newsActions, newsMutations } from '@/types/types'
+import { TopNews } from '@/types/interface'
 
 @Module({ namespaced: true })
 class News extends VuexModule {
   isLoading = false
-  topNews = []
+  topNews: TopNews[] = [
+    {
+      section: '',
+      title: '',
+      url: '',
+      byline: '',
+      published_date: '',
+      multimedia: [{ url: '' }],
+    },
+  ]
 
   @Mutation
-  public [newsMutations.TOP_NEWS](data: any): void {
+  public [newsMutations.TOP_NEWS](data: TopNews[]): void {
     this.topNews = data
   }
 
@@ -29,7 +39,8 @@ class News extends VuexModule {
       })
   }
 
-  get topNewsList(): any {
+  get topNewsList(): TopNews[] {
+    console.log(this.topNews[0])
     return this.topNews
   }
 }
