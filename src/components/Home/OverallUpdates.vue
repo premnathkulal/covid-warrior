@@ -4,8 +4,8 @@
       <p class="overview-title">COIVD-19 Cases Overview</p>
       <p class="updated-date">Updated 14 Jul 21</p>
     </div>
-    <div class="updates-container" v-if="updatedData">
-      <div class="updates container-fluid">
+    <div class="updates-container">
+      <div class="updates container-fluid" v-if="updatedData && !isLoading">
         <update-counter-card
           animation="confirmed"
           animationSize="100"
@@ -35,6 +35,11 @@
           className="total-death"
         />
       </div>
+      <div class="updates container-fluid" v-else>
+        <template v-for="(i, index) in 4">
+          <update-counter-card-card-loader :key="index" />
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -42,12 +47,13 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import UpdateCounterCard from '@/components/Home/UpdateCounterCard.vue'
+import UpdateCounterCardCardLoader from '@/components/Home/UpdateCounterCardLoader.vue'
 import { StateWiseUpdates } from '@/types/interface'
 import { namespace } from 'vuex-class'
 
 const updates = namespace('Updates')
 
-@Component({ components: { UpdateCounterCard } })
+@Component({ components: { UpdateCounterCard, UpdateCounterCardCardLoader } })
 export default class NationalUpdates extends Vue {
   @updates.State
   public isLoading!: boolean

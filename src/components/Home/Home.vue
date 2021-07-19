@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import NationalUpdates from '@/components/Home/NationalUpdates.vue'
+import NationalUpdates from '@/components/Home/OverallUpdates.vue'
 import StateWiseList from '@/components/Home/StateWiseList.vue'
 import News from '@/components/Home/News.vue'
 import { namespace } from 'vuex-class'

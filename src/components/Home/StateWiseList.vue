@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import NationalUpdates from '@/components/Home/NationalUpdates.vue'
+import NationalUpdates from '@/components/Home/OverallUpdates.vue'
 import { Address, StateWiseUpdates } from '@/types/interface'
 
 @Component({
