@@ -25,7 +25,7 @@ export default class UpdateCounterCardCardLoadr extends Vue {
   height: 9rem;
   display: inline-block;
   border-radius: 0.8rem;
-  background: #fff;
+  background: $white;
 
   &:hover {
     box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);

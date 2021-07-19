@@ -1,6 +1,9 @@
 <template>
-  <div v-if="currentStateUpdates" class="states-list">
-    <div class="statewise-information mb-5">
+  <div class="states-list">
+    <div
+      v-if="currentStateUpdates && !isLoading && !loading"
+      class="statewise-information mb-5"
+    >
       <div class="state-header">
         <p class="state-title">
           {{ currentStateUpdates.state }}
@@ -64,22 +67,35 @@
         </div>
       </div>
     </div>
+    <template v-else-if="isLoading || currentStateUpdates || loading">
+      <state-wise-list-loader />
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import NationalUpdates from '@/components/Home/OverallUpdates.vue'
 import { Address, StateWiseUpdates } from '@/types/interface'
+import NationalUpdates from '@/components/Home/OverallUpdates.vue'
+import StateWiseListLoader from '@/components/Home/StateWiseListLoader.vue'
+import { namespace } from 'vuex-class'
+
+const updates = namespace('Updates')
 
 @Component({
   components: {
     NationalUpdates,
+    StateWiseListLoader,
   },
 })
 export default class StateWiseList extends Vue {
   @Prop({ default: null }) stateWiseUpdates!: StateWiseUpdates[]
   @Prop({ default: null }) address!: Address
+
+  @updates.State
+  public isLoading!: boolean
+
+  loading = false
 
   currentStateUpdates: StateWiseUpdates = {
     active: '',
@@ -97,10 +113,14 @@ export default class StateWiseList extends Vue {
   }
 
   @Watch('stateWiseUpdates')
-  updateData(): void {
-    this.currentStateUpdates = this.stateWiseUpdates.filter(data => {
-      return this.address.countrySubdivision === data.state
+  async updateData(): Promise<void> {
+    this.loading = true
+    this.currentStateUpdates = await this.stateWiseUpdates.filter(data => {
+      if (this.address.countrySubdivision === data.state) {
+        return true
+      }
     })[0]
+    this.loading = false
   }
 }
 </script>

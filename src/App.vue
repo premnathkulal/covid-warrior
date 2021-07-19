@@ -135,7 +135,9 @@ import Home from '@/components/Home/Home.vue'
 import { namespace } from 'vuex-class'
 import { LocationActions } from './types/types'
 import { Position } from './types/interface'
+import { UpdatesActions } from '@/types/types'
 
+const updates = namespace('Updates')
 const location = namespace('Location')
 
 @Component({
@@ -156,15 +158,20 @@ export default class App extends Vue {
   // eslint-disable-next-line no-unused-vars
   public loadAdress!: (position: Position) => void
 
+  @updates.Action(UpdatesActions.UPDATES)
+  public loadUpdates!: () => void
+
   locationTracker(): void {
     navigator.geolocation.getCurrentPosition(
       position => {
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
         this.loadAdress({ lat: latitude, lon: longitude })
+        this.loadUpdates()
       },
       () => {
         // Error
+        this.loadUpdates()
       }
     )
   }

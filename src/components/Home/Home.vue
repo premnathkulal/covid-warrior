@@ -16,7 +16,6 @@ import NationalUpdates from '@/components/Home/OverallUpdates.vue'
 import StateWiseList from '@/components/Home/StateWiseList.vue'
 import News from '@/components/Home/News.vue'
 import { namespace } from 'vuex-class'
-import { UpdatesActions } from '@/types/types'
 import { Address, StateWiseUpdates } from '@/types/interface'
 
 const updates = namespace('Updates')
@@ -38,13 +37,6 @@ export default class Home extends Vue {
 
   @location.Getter
   getAddress!: Address[]
-
-  @updates.Action(UpdatesActions.UPDATES)
-  public loadUpdates!: () => void
-
-  created(): void {
-    this.loadUpdates()
-  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="news-container">
-    <div class="news">
+    <div class="news" v-if="topNewsList && !isLoading">
       <template v-for="(item, index) in topNewsList">
         <div :key="index">
           <a
@@ -23,6 +23,7 @@
         </div>
       </template>
     </div>
+    <template v-else-if="!topNewsList || isLoading"><news-loader /></template>
   </div>
 </template>
 
@@ -30,11 +31,19 @@
 import { newsActions } from '@/types/types'
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import NewsLoader from '@/components/Home/NewsLoader.vue'
 
 const news = namespace('News')
 
-@Component
+@Component({
+  components: {
+    NewsLoader,
+  },
+})
 export default class News extends Vue {
+  @news.State
+  public isLoading!: boolean
+
   @news.Getter
   public topNewsList!: string
 
