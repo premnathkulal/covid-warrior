@@ -76,8 +76,8 @@ export default class News extends Vue {
       cursor: pointer;
       .image {
         img {
-          width: 15rem !important;
-          height: 10rem !important;
+          width: 15rem;
+          height: 10rem;
         }
       }
       .news-contents {
@@ -101,8 +101,8 @@ export default class News extends Vue {
       @media screen and (max-width: 768px) {
         .image {
           img {
-            width: 10rem !important;
-            height: 8rem !important;
+            width: 10rem;
+            height: 8rem;
           }
         }
         .news-contents {

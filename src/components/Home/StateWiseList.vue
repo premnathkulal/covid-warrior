@@ -112,10 +112,12 @@ export default class StateWiseList extends Vue {
     statenotes: '',
   }
 
+  @Watch('address')
   @Watch('stateWiseUpdates')
   async updateData(): Promise<void> {
     this.loading = true
     this.currentStateUpdates = await this.stateWiseUpdates.filter(data => {
+      // console.log(this.address.countrySubdivision, data.state)
       if (this.address.countrySubdivision === data.state) {
         return true
       }
@@ -135,7 +137,7 @@ export default class StateWiseList extends Vue {
   color: $text-color;
 
   .statewise-information {
-    background: $light-gray-gradient;
+    background: $dark-gray-gradient;
     width: 80%;
     @media only screen and (max-width: 1400px) {
       width: 100%;

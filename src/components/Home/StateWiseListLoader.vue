@@ -75,20 +75,20 @@ export default class StateWiseListLoader extends Vue {}
       margin-right: 0.5rem;
       width: 10rem;
       height: 1.5rem;
-      background: #ddd;
+      background: $dark-gray;
       animation: pulse-bg 1.5s infinite;
     }
     .address {
       margin-right: 0.5rem;
       width: 7rem;
       height: 1rem;
-      background: #ddd;
+      background: $dark-gray;
       animation: pulse-bg 1.5s infinite;
     }
     .state-map {
       width: 3rem;
       height: 3rem;
-      background: #ddd;
+      background: $dark-gray;
       animation: pulse-bg 1.5s infinite;
     }
   }
@@ -104,14 +104,14 @@ export default class StateWiseListLoader extends Vue {}
       .data-title {
         width: 4rem;
         height: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         margin-right: 0.5rem;
         animation: pulse-bg 1.5s infinite;
       }
       .data-count {
         width: 5rem;
         height: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
     }
@@ -122,7 +122,7 @@ export default class StateWiseListLoader extends Vue {}
     flex-direction: column;
     justify-content: center;
     font-weight: bold;
-    background: rgba(221, 221, 221, 0.521);
+    background: $gray-background;
     border-radius: 0.5rem;
     padding: 0.5rem;
     padding-top: 1.5rem;
@@ -138,7 +138,7 @@ export default class StateWiseListLoader extends Vue {}
         width: 16rem;
         height: 2rem;
         margin-right: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
 
@@ -148,7 +148,7 @@ export default class StateWiseListLoader extends Vue {}
         width: 4rem;
         height: 4rem;
         margin-right: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
     }
@@ -164,30 +164,18 @@ export default class StateWiseListLoader extends Vue {}
           width: 7rem;
           height: 1rem;
           margin-right: 1rem;
-          background: #ddd;
+          background: $dark-gray;
           animation: pulse-bg 1.5s infinite;
         }
 
         .data-count {
           width: 7rem;
           height: 1rem;
-          background: #ddd;
+          background: $dark-gray;
           animation: pulse-bg 1.5s infinite;
         }
       }
     }
-  }
-}
-
-@keyframes pulse-bg {
-  0% {
-    background-color: #ddd;
-  }
-  50% {
-    background-color: #d0d0d0;
-  }
-  100% {
-    background-color: #ddd;
   }
 }
 </style>

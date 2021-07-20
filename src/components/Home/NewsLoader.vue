@@ -37,13 +37,13 @@ export default class NewsLoader extends Vue {}
     border-radius: 0.5rem;
     margin-bottom: 0.8rem;
     cursor: pointer;
-    background: rgb(243, 241, 241);
+    background: $gray-background;
 
     .image {
       .img {
         width: 10rem;
         height: 10rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
     }
@@ -57,19 +57,19 @@ export default class NewsLoader extends Vue {}
         margin-bottom: 1rem;
         width: 15rem;
         height: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
       .abstract {
         width: 34rem;
         height: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
       .small-abstract {
         width: 24rem;
         height: 1rem;
-        background: #ddd;
+        background: $dark-gray;
         animation: pulse-bg 1.5s infinite;
       }
       .news-publish-info {
@@ -77,13 +77,13 @@ export default class NewsLoader extends Vue {}
         .name {
           width: 8rem;
           height: 1rem;
-          background: #ddd;
+          background: $dark-gray;
           animation: pulse-bg 1.5s infinite;
         }
         .date {
           width: 8rem;
           height: 1rem;
-          background: #ddd;
+          background: $dark-gray;
           animation: pulse-bg 1.5s infinite;
         }
       }
@@ -99,12 +99,12 @@ export default class NewsLoader extends Vue {}
         .title {
           width: 10rem;
           height: 1rem;
-          background: #ddd;
+          background: $dark-gray;
         }
         .abstract {
           width: 6rem;
           height: 1rem;
-          background: #ddd;
+          background: $dark-gray;
           animation: pulse-bg 1.5s infinite;
         }
       }
@@ -115,16 +115,5 @@ export default class NewsLoader extends Vue {}
     }
   }
 }
-
-@keyframes pulse-bg {
-  0% {
-    background-color: #ddd;
-  }
-  50% {
-    background-color: #d0d0d0;
-  }
-  100% {
-    background-color: #ddd;
-  }
-}
+// @include pulse-bg();
 </style>

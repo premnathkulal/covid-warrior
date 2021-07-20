@@ -39,14 +39,14 @@ export default class UpdateCounterCardCardLoadr extends Vue {
       width: 150px;
       height: 24px;
       margin-right: 0.5rem;
-      background: #ddd;
+      background: $dark-gray;
       animation: pulse-bg 1.5s infinite;
     }
     .lottie-player {
       width: 3.6rem;
       height: 3.6rem;
       margin-left: auto;
-      background: #ddd;
+      background: $dark-gray;
       animation: pulse-bg 1.5s infinite;
     }
   }
@@ -56,21 +56,9 @@ export default class UpdateCounterCardCardLoadr extends Vue {
     margin: auto;
     position: relative;
     top: -0.2rem;
-    background: #ddd;
+    background: $dark-gray;
     animation: pulse-bg 1.5s infinite;
     align-content: center;
-  }
-}
-
-@keyframes pulse-bg {
-  0% {
-    background-color: #ddd;
-  }
-  50% {
-    background-color: #d0d0d0;
-  }
-  100% {
-    background-color: #ddd;
   }
 }
 </style>

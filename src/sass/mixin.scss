@@ -26,3 +26,19 @@
         }
     }
 }
+
+@mixin pulse-bg {
+    @keyframes pulse-bg {
+        0% {
+            background-color: $dark-gray;
+        }
+
+        50% {
+            background-color: $light-gray;
+        }
+
+        100% {
+            background-color: $dark-gray;
+        }
+    }
+}

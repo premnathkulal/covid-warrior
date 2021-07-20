@@ -183,6 +183,7 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+@include pulse-bg();
 #app {
   .toolbar {
     .toolbar-title {
