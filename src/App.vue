@@ -71,18 +71,10 @@
             <home />
           </v-tab-item>
           <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <home />
-              </v-card-text>
-            </v-card>
+            <vaccination-centers />
           </v-tab-item>
           <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <home />
-              </v-card-text>
-            </v-card>
+            <home />
           </v-tab-item>
         </v-tabs-items>
       </v-card>
@@ -136,6 +128,7 @@ import { namespace } from 'vuex-class'
 import { LocationActions } from './types/types'
 import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
+import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
 
 const updates = namespace('Updates')
 const location = namespace('Location')
@@ -145,6 +138,7 @@ const location = namespace('Location')
     Login,
     Register,
     Home,
+    VaccinationCenters,
   },
 })
 export default class App extends Vue {
