@@ -1,5 +1,6 @@
 <template>
   <div class="vaccination-center">
+    <vaccination-center-form />
     <vaccination-centers-list />
   </div>
 </template>
@@ -7,10 +8,12 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import VaccinationCentersList from '@/components/vaccination/VaccinationCentersList.vue'
+import VaccinationCenterForm from '@/components/vaccination/VaccinationCenterForm.vue'
 
 @Component({
   components: {
     VaccinationCentersList,
+    VaccinationCenterForm,
   },
 })
 export default class VaccinationCenters extends Vue {}
@@ -19,12 +22,9 @@ export default class VaccinationCenters extends Vue {}
 <style lang="scss">
 .vaccination-center {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: $color-background;
-  margin-top: 7rem;
-  @media only screen and (max-width: 960px) {
-    margin-top: 6.5rem !important;
-  }
 }
 </style>

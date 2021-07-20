@@ -52,6 +52,7 @@ export default class VaccinationCenterInfo extends Vue {}
   padding: 0.5rem;
   margin: 1rem 0.8rem;
   border-radius: 0.8rem;
+  margin-top: 1rem;
 
   .info-header {
     padding: 0.2rem;
@@ -84,7 +85,7 @@ export default class VaccinationCenterInfo extends Vue {}
       margin: 0 5rem;
       display: flex;
       align-items: center;
-      background: $color-background;
+      background: rgba($color-background, 0.5);
       border-radius: 0.8rem;
       padding: 1rem;
       flex: 1;
@@ -118,7 +119,7 @@ export default class VaccinationCenterInfo extends Vue {}
     }
   }
 
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1000px) {
     .info-body {
       display: block;
       .vaccine-info-field {
