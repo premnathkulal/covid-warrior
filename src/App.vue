@@ -200,6 +200,7 @@ export default class App extends Vue {
         width: 5rem;
       }
     }
+    z-index: 1;
   }
 
   .bottom-drawer {
