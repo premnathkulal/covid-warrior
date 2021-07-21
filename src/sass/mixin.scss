@@ -5,12 +5,26 @@
         font-weight: bold;
     }
 
+    .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .form-input {
+            width: 40%;
+
+            @media only screen and (max-width: 900px) {
+                width: 80%;
+            }
+        }
+    }
+
     .social {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .prem {
+        .social-btn-field {
             display: flex;
             justify-content: space-between;
             width: 40%;
@@ -19,7 +33,7 @@
                 width: 80%;
             }
 
-            .social-buttons {
+            .social-btn {
                 width: 48%;
             }
         }

@@ -1,44 +1,49 @@
 <template>
   <div class="register">
     <h3 class="title">Retgister</h3>
-    <custom-input
-      id="name"
-      v-model="userDetails.name.value"
-      placeHolder="Full Name"
-      inputType="text"
-      :errorMessage="userDetails.name.error"
-      @keyDownAction="keyDownAction('name')"
-      @blurAction="validate('name')"
-    />
-    <custom-input
-      id="username"
-      v-model="userDetails.username.value"
-      placeHolder="Username"
-      inputType="text"
-      :errorMessage="userDetails.username.error"
-      @keyDownAction="keyDownAction('username')"
-      @blurAction="validate('username')"
-    />
-    <custom-input
-      id="password"
-      v-model="userDetails.password.value"
-      placeHolder="Password"
-      inputType="password"
-      :errorMessage="userDetails.password.error"
-      @keyDownAction="keyDownAction('password')"
-      @blurAction="validate('password')"
-    />
-    <custom-button
-      :isDisabled="!disableButton()"
-      btnText="Register"
-      btnName="normal-btn"
-    />
-    <custom-button
-      btnText="Login"
-      btnType="cancel"
-      btnName="normal-btn"
-      @btnAction="$emit('toggleAuthScreen')"
-    />
+
+    <div class="form">
+      <div class="form-input">
+        <custom-input
+          id="name"
+          v-model="userDetails.name.value"
+          placeHolder="Full Name"
+          inputType="text"
+          :errorMessage="userDetails.name.error"
+          @keyDownAction="keyDownAction('name')"
+          @blurAction="validate('name')"
+        />
+        <custom-input
+          id="username"
+          v-model="userDetails.username.value"
+          placeHolder="Username"
+          inputType="text"
+          :errorMessage="userDetails.username.error"
+          @keyDownAction="keyDownAction('username')"
+          @blurAction="validate('username')"
+        />
+        <custom-input
+          id="password"
+          v-model="userDetails.password.value"
+          placeHolder="Password"
+          inputType="password"
+          :errorMessage="userDetails.password.error"
+          @keyDownAction="keyDownAction('password')"
+          @blurAction="validate('password')"
+        />
+        <custom-button
+          :isDisabled="!disableButton()"
+          btnText="Register"
+          btnName="normal-btn"
+        />
+        <custom-button
+          btnText="Login"
+          btnType="cancel"
+          btnName="normal-btn"
+          @btnAction="$emit('toggleAuthScreen')"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

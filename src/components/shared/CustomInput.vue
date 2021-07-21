@@ -56,10 +56,7 @@ export default class CustomInput extends Vue {
   justify-content: center;
 
   .input-field {
-    width: 40%;
-    @media only screen and (max-width: 900px) {
-      width: 80%;
-    }
+    width: 100%;
 
     .form-control {
       border: none;

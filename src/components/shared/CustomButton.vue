@@ -52,10 +52,7 @@ export default class CustomButton extends Vue {
     }
   }
   .normal-btn {
-    width: 40%;
-    @media only screen and (max-width: 900px) {
-      width: 80%;
-    }
+    width: 100%;
     background: $button-gradient;
   }
   .google-btn {
