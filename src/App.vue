@@ -203,7 +203,7 @@ export default class App extends Vue {
   }
 
   .bottom-drawer {
-    z-index: 2;
+    z-index: 3;
     position: fixed;
     bottom: 0;
     left: 0;

@@ -16,7 +16,7 @@ export default class VaccinationCentersList extends Vue {}
 
 <style lang="scss">
 .vaccination-center-list {
-  padding-top: 15rem;
+  padding-top: 17rem;
   width: 80%;
   position: relative;
   z-index: 0;

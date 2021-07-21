@@ -1,5 +1,8 @@
 <template>
   <div class="vaccination-center-form">
+    <div class="btn-mobile d-flex d-md-none">
+      <p class="btn-text">Book Appointment</p>
+    </div>
     <div class="form">
       <div
         class="toggle-btn d-flex d-md-none justify-content-end"
@@ -64,6 +67,9 @@
         </div>
       </span>
     </div>
+    <div class="btn d-none d-md-flex">
+      <p class="btn-text">Book Appointment</p>
+    </div>
   </div>
 </template>
 
@@ -87,29 +93,33 @@ export default class VaccinationCenterForm extends Vue {
 <style lang="scss">
 .vaccination-center-form {
   position: fixed;
-  z-index: 3000;
+  z-index: 2;
   top: 7rem;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   background: $color-background;
 
   @media only screen and (max-width: 960px) {
-    top: 6.4rem;
-    box-shadow: 0px 5px 8px rgb(168, 167, 167);
+    top: 6.5rem;
+    box-shadow: 0px 1px 8px rgb(168, 167, 167);
   }
   .form {
     margin: 2rem 0 1rem 1rem;
     display: flex;
+    justify-content: space-around;
     width: 80%;
-    flex-wrap: wrap;
     .form-inputs {
+      width: 100%;
+      padding: 0 0.5rem;
       .select {
-        width: 23%;
         margin-right: 1rem;
       }
     }
   }
+
   @media only screen and (max-width: 960px) {
     .form {
       display: block;
@@ -118,11 +128,12 @@ export default class VaccinationCenterForm extends Vue {
       width: 100%;
       .form-inputs {
         display: none;
+        margin-top: 1rem;
         .select {
           width: 100%;
           margin-right: 1rem;
         }
-        height: 18rem;
+        height: 16.5rem;
         overflow-y: scroll;
       }
       .toggle-btn {
@@ -132,6 +143,37 @@ export default class VaccinationCenterForm extends Vue {
           cursor: pointer;
         }
       }
+    }
+  }
+  .btn {
+    width: 80%;
+    display: flex;
+    .btn-text {
+      margin-left: auto;
+      border-radius: 0.3rem;
+      margin-top: -1rem;
+      background: $button-gradient;
+      padding: 0.4rem;
+      color: $white;
+      box-shadow: 0px 5px 8px rgb(168, 167, 167);
+    }
+  }
+  .btn-mobile {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: $green-button;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px -2px 8px rgb(168, 167, 167);
+    z-index: 0;
+    .btn-text {
+      padding-top: 1rem;
+      font-weight: bold;
+      color: $white;
     }
   }
 }
