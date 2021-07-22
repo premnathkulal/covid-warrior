@@ -13,6 +13,7 @@
         @input="inputAction($event)"
         @blur="$emit('blurAction')"
         @keydown="$emit('keyDownAction')"
+        :disabled="disabled"
       />
       <label class="label" :for="id">{{ label }}</label>
       <span class="input-error text-danger">{{ errorMessage }}</span>
@@ -33,6 +34,7 @@ export default class CustomInput extends Vue {
   @Prop(Boolean) isError!: boolean
   @Prop(Boolean) isRequired!: boolean
   @Prop({ default: false }) allowFilter!: boolean
+  @Prop({ default: false }) disabled!: boolean
 
   label = this.placeHolder
 
@@ -94,9 +96,8 @@ export default class CustomInput extends Vue {
 
     .input-error {
       font-size: 12px;
-      position: relative;
-      bottom: 0;
-      left: -4rem;
+      position: absolute;
+      left: 0rem;
       letter-spacing: 0.3px;
     }
   }

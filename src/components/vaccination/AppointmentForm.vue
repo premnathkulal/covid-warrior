@@ -1,6 +1,13 @@
 <template>
   <v-row class="appointment" justify="center">
-    <beneficiary :dialog="dialog" @toggleDialog="toggleDialog" />
+    <beneficiary
+      :dialog="beneficiaryDalog"
+      @toggleDialog="toggleBeneficiaryDalog"
+    />
+    <schedule-appointment
+      :dialog="scheduleDalog"
+      @toggleDialog="toggleScheduleDalog"
+    />
     <v-dialog
       v-model="showDialog"
       fullscreen
@@ -16,7 +23,9 @@
           <p class="pt-4 text-dark title">Appointments</p>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn light text @click="toggleDialog()"> Add Beneficiary </v-btn>
+            <v-btn light text @click="toggleBeneficiaryDalog()">
+              Add Beneficiary
+            </v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <div class="beneficiary-list-field container">
@@ -31,7 +40,9 @@
                   <h5>Premnath</h5>
                   <v-spacer></v-spacer> <v-spacer></v-spacer>
                   <!-- <span class="btn-text">Schedule</span> -->
-                  <span class="btn-text">Update</span>
+                  <span class="btn-text" @click.stop="toggleScheduleDalog()"
+                    >Update</span
+                  >
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                   <p class="appointment-info">
@@ -63,10 +74,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
+import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
 
 @Component({
   components: {
     Beneficiary,
+    ScheduleAppointment,
   },
 })
 export default class AppointmentForm extends Vue {
@@ -75,10 +88,16 @@ export default class AppointmentForm extends Vue {
   sound = true
   widgets = false
   alert = true
-  dialog = false
+  beneficiaryDalog = false
+  scheduleDalog = false
 
-  toggleDialog(): void {
-    this.dialog = !this.dialog
+  toggleBeneficiaryDalog(): void {
+    this.beneficiaryDalog = !this.beneficiaryDalog
+  }
+
+  toggleScheduleDalog(): void {
+    this.scheduleDalog = !this.scheduleDalog
+    console.log('Hello')
   }
 }
 </script>

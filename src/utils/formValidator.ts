@@ -1,15 +1,17 @@
-import { LoginDetails, RegisterDetails } from '@/types/interface'
+import {
+  // BeneficiaryDetails,
+  // LoginDetails,
+  RegisterDetails,
+} from '@/types/interface'
 
-const formValidator = (
-  value: string,
-  formDetails: RegisterDetails | LoginDetails
-): void => {
+// eslint-disable-next-line
+const formValidator = (value: string, formDetails: any): void => {
   if (value === 'name') {
     if ((formDetails as RegisterDetails).name.value.length < 4) {
       ;(formDetails as RegisterDetails).name.error =
         'Name must be atleast 4 letters'
     } else {
-      formDetails.username.error = ''
+      formDetails.name.error = ''
     }
   }
   if (value === 'username') {
@@ -26,20 +28,35 @@ const formValidator = (
       formDetails.password.error = ''
     }
   }
+  if (value === 'Aadhar Card') {
+    if (!(formDetails.idNumber.value.length === 12)) {
+      formDetails.idNumber.error = 'idNumber must be atleast 12 letters'
+    } else {
+      formDetails.idNumber.error = ''
+    }
+  }
+  if (value === 'Pan Card') {
+    if (!(formDetails.idNumber.value.length === 10)) {
+      formDetails.idNumber.error = 'idNumber must be atleast 10 letters'
+    } else {
+      formDetails.idNumber.error = ''
+    }
+  }
 }
 
-const resetFormError = (
-  property: string,
-  formDetails: RegisterDetails | LoginDetails
-): void => {
+// eslint-disable-next-line
+const resetFormError = (property: string, formDetails: any): void => {
   if (property === 'name') {
-    ;(formDetails as RegisterDetails).name.error = ''
+    formDetails.name.error = ''
   }
   if (property === 'username') {
     formDetails.username.error = ''
   }
   if (property === 'password') {
     formDetails.password.error = ''
+  }
+  if (property === 'photoIdNumber') {
+    formDetails.idNumber.error = ''
   }
 }
 

@@ -14,6 +14,14 @@ export interface RegisterDetails {
   password: PropertyValues
 }
 
+export interface BeneficiaryDetails {
+  name: PropertyValues
+  birthDate: PropertyValues
+  gender: PropertyValues
+  photoIdType: PropertyValues
+  idNumber: PropertyValues
+}
+
 export interface StateWiseUpdates {
   active: string
   confirmed: string

@@ -181,6 +181,7 @@ export default class VaccinationCenterForm extends Vue {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0px -2px 8px rgb(168, 167, 167);
+  z-index: 2;
   .btn-text {
     padding-top: 1rem;
     font-weight: bold;
