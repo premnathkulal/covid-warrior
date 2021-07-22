@@ -9,11 +9,12 @@
         :value="value"
         :type="inputType"
         :required="isRequired"
+        :disabled="disabled"
         @focus="showOption = true"
         @input="inputAction($event)"
         @blur="$emit('blurAction')"
         @keydown="$emit('keyDownAction')"
-        :disabled="disabled"
+        @keypress="$emit('keypressAction')"
       />
       <label class="label" :for="id">{{ label }}</label>
       <span class="input-error text-danger">{{ errorMessage }}</span>
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class CustomInput extends Vue {
@@ -35,8 +36,12 @@ export default class CustomInput extends Vue {
   @Prop(Boolean) isRequired!: boolean
   @Prop({ default: false }) allowFilter!: boolean
   @Prop({ default: false }) disabled!: boolean
-
   label = this.placeHolder
+
+  @Watch('placeHolder')
+  applyPlaceHolder(): void {
+    this.label = this.placeHolder
+  }
 
   blurAction(): void {
     this.$emit('blurAction')

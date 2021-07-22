@@ -33,10 +33,18 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" scrollable>
+              <v-date-picker
+                v-model="beneficiaryDetails.date"
+                :max="date"
+                scrollable
+              >
                 <v-spacer></v-spacer>
                 <v-btn text color="dark" @click="modal = false"> Cancel </v-btn>
-                <v-btn text color="dark" @click="$refs.dialog.save(date)">
+                <v-btn
+                  text
+                  color="dark"
+                  @click="$refs.dialog.save(beneficiaryDetails.date)"
+                >
                   OK
                 </v-btn>
               </v-date-picker>
@@ -54,17 +62,18 @@
             v-model="selectedPhotoIdType"
             label="Select Photo ID Type"
             solo
-            @change="changePhotoIdType()"
           ></v-select>
           <custom-input
             id="photoId"
             v-model="beneficiaryDetails.idNumber.value"
-            placeHolder="ID Number"
+            @input="convertToUppercase(beneficiaryDetails.idNumber.value)"
+            :placeHolder="photoIdPlaceholder"
             inputType="text"
             :errorMessage="beneficiaryDetails.idNumber.error"
             :disabled="desableInputBox()"
             @keyDownAction="keyDownAction('photoIdNumber')"
             @blurAction="validate(selectedPhotoIdType)"
+            @keypressAction="idNumberKeyPressActions($event)"
           />
         </v-card-text>
         <v-card-actions>
@@ -85,7 +94,12 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import CustomInput from '@/components/shared/CustomInput.vue'
 import CustomButton from '@/components/shared/CustomButton.vue'
-import { formValidator, resetFormError } from '@/utils/formValidator'
+import {
+  formValidator,
+  isNumber,
+  resetFormError,
+  setLimitToInput,
+} from '@/utils/formValidator'
 
 @Component({
   components: {
@@ -103,6 +117,7 @@ export default class Beneficiary extends Vue {
   errorMessage = '*This Field is required'
   selectedGender = 'Male'
   selectedPhotoIdType = ''
+  photoIdPlaceholder = 'ID Number'
 
   beneficiaryDetails = {
     name: {
@@ -110,7 +125,7 @@ export default class Beneficiary extends Vue {
       error: '',
     },
     birthDate: {
-      value: '',
+      value: this.date,
       error: '',
     },
     idNumber: {
@@ -122,6 +137,16 @@ export default class Beneficiary extends Vue {
   @Watch('dialog')
   toggleDialog(): void {
     this.showDialog = this.dialog
+  }
+
+  @Watch('selectedPhotoIdType')
+  getPlaceholder(): any {
+    this.beneficiaryDetails.idNumber.value = ''
+    resetFormError('photoIdNumber', this.beneficiaryDetails)
+    if (this.selectedPhotoIdType) {
+      this.photoIdPlaceholder = `${(this.photoIdPlaceholder =
+        this.selectedPhotoIdType)} Number`
+    }
   }
 
   validate(property: string): void {
@@ -136,10 +161,6 @@ export default class Beneficiary extends Vue {
     return !this.selectedPhotoIdType
   }
 
-  changePhotoIdType(): void {
-    this.beneficiaryDetails.idNumber.value = ''
-  }
-
   addBenebiciary(): void {
     if (this.beneficiaryDetails.name.value === '') {
       this.beneficiaryDetails.name.error = this.errorMessage
@@ -151,6 +172,26 @@ export default class Beneficiary extends Vue {
     ) {
       console.log('Adding...')
     }
+  }
+  idNumberKeyPressActions(event: KeyboardEvent): boolean | void {
+    if (this.selectedPhotoIdType === 'Aadhar Card') {
+      return isNumber(
+        event,
+        'aadharcard',
+        parseInt(this.beneficiaryDetails.idNumber.value)
+      )
+    } else if (this.selectedPhotoIdType === 'Pan Card') {
+      return setLimitToInput(
+        event,
+        'pancard',
+        this.beneficiaryDetails.idNumber.value
+      )
+    }
+    return true
+  }
+
+  convertToUppercase(value: string): void {
+    this.beneficiaryDetails.idNumber.value = value.toUpperCase()
   }
 }
 </script>

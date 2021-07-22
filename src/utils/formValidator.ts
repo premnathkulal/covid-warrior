@@ -29,15 +29,17 @@ const formValidator = (value: string, formDetails: any): void => {
     }
   }
   if (value === 'Aadhar Card') {
-    if (!(formDetails.idNumber.value.length === 12)) {
-      formDetails.idNumber.error = 'idNumber must be atleast 12 letters'
+    const aadharPattern = /^[2-9]{1}[0-9]{11}$/
+    if (!aadharPattern.test(formDetails.idNumber.value)) {
+      formDetails.idNumber.error = 'Enter Valid Aadhar Number'
     } else {
       formDetails.idNumber.error = ''
     }
   }
   if (value === 'Pan Card') {
-    if (!(formDetails.idNumber.value.length === 10)) {
-      formDetails.idNumber.error = 'idNumber must be atleast 10 letters'
+    const panCardPattern = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
+    if (!panCardPattern.test(formDetails.idNumber.value)) {
+      formDetails.idNumber.error = 'Enter Valid Pan Card Number'
     } else {
       formDetails.idNumber.error = ''
     }
@@ -60,4 +62,31 @@ const resetFormError = (property: string, formDetails: any): void => {
   }
 }
 
-export { formValidator, resetFormError }
+const isNumber = (evt: KeyboardEvent, id = 'id', value = 0): boolean | void => {
+  evt = (evt ? evt : window.event) as KeyboardEvent
+  const charCode = evt.keyCode
+  if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46) {
+    evt.preventDefault()
+  } else if (!(value.toString().length <= 5) && id === 'pincode') {
+    evt.preventDefault()
+  } else if (!(value.toString().length <= 11) && id === 'aadharcard') {
+    evt.preventDefault()
+  } else {
+    return true
+  }
+}
+
+const setLimitToInput = (
+  evt: KeyboardEvent,
+  id = 'id',
+  value: string
+): boolean | void => {
+  evt = (evt ? evt : window.event) as KeyboardEvent
+  if (!(value.toString().length <= 9) && id === 'pancard') {
+    evt.preventDefault()
+  } else {
+    return true
+  }
+}
+
+export { formValidator, resetFormError, isNumber, setLimitToInput }

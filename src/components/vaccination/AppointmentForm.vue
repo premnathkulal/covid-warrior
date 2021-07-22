@@ -6,8 +6,10 @@
     />
     <schedule-appointment
       :dialog="scheduleDalog"
+      :formType="formType"
       @toggleDialog="toggleScheduleDalog"
     />
+    <alert-box :dialog="alertBox" @toggleAlertBox="toggleAlertBox" />
     <v-dialog
       v-model="showDialog"
       fullscreen
@@ -40,7 +42,9 @@
                   <h5>Premnath</h5>
                   <v-spacer></v-spacer> <v-spacer></v-spacer>
                   <!-- <span class="btn-text">Schedule</span> -->
-                  <span class="btn-text" @click.stop="toggleScheduleDalog()"
+                  <span
+                    class="btn-text"
+                    @click.stop="toggleScheduleDalog('update')"
                     >Update</span
                   >
                 </v-expansion-panel-header>
@@ -61,6 +65,9 @@
                     <span class="appointment-info-label">Adress:</span>
                     Hello, World
                   </p>
+                  <div class="delete-btn" @click="alertBox = true">
+                    Remove Beneficiary
+                  </div>
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
@@ -75,11 +82,13 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
 import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
+import AlertBox from '@/components/shared/AlertBox.vue'
 
 @Component({
   components: {
     Beneficiary,
     ScheduleAppointment,
+    AlertBox,
   },
 })
 export default class AppointmentForm extends Vue {
@@ -90,14 +99,25 @@ export default class AppointmentForm extends Vue {
   alert = true
   beneficiaryDalog = false
   scheduleDalog = false
+  formType = 'schedule'
+  alertBox = false
 
   toggleBeneficiaryDalog(): void {
     this.beneficiaryDalog = !this.beneficiaryDalog
   }
 
-  toggleScheduleDalog(): void {
+  toggleScheduleDalog(formType = 'schedule'): void {
     this.scheduleDalog = !this.scheduleDalog
-    console.log('Hello')
+    this.formType = formType
+  }
+
+  toggleAlertBox(msg: boolean): void {
+    console.log(msg)
+
+    if (msg) {
+      console.log('deleted')
+    }
+    this.alertBox = false
   }
 }
 </script>
@@ -123,6 +143,16 @@ export default class AppointmentForm extends Vue {
       .appointment-info-label {
         font-weight: bold;
       }
+    }
+    .delete-btn {
+      background: $light-red;
+      color: $white;
+      font-weight: bold;
+      font-size: 0.9rem;
+      width: 10rem;
+      padding: 0.5rem;
+      border-radius: 0.3rem;
+      cursor: pointer;
     }
   }
 }
