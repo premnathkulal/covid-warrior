@@ -8,8 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import '@lottiefiles/lottie-player'
 import vuetify from './plugins/vuetify'
+import { dateFormate } from './utils/filters'
 
 Vue.config.productionTip = false
+Vue.filter('dateFormate', dateFormate)
 
 new Vue({
   router,

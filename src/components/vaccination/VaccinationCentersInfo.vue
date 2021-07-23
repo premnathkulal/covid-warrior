@@ -17,7 +17,7 @@
           <p class="field-title pb-3 d-none d-sm-block">Vaccination Details</p>
           <div class="d-flex">
             <p class="label d-none d-md-block">Date :</p>
-            <p class="date">03-07-2021</p>
+            <p class="date">{{ '03-07-2021' | dateFormate }}</p>
           </div>
           <div class="d-flex">
             <p class="label d-none d-md-block">Vaccine Name :</p>

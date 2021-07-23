@@ -45,6 +45,7 @@
               <v-date-picker
                 v-model="scheduleDetails.date"
                 :max="date"
+                color="primary text-dark"
                 scrollable
               >
                 <v-spacer></v-spacer>

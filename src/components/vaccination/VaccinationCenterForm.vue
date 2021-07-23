@@ -57,14 +57,19 @@
                 <v-text-field
                   v-model="date"
                   label="Date"
-                  color="dark"
+                  color="light"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker :min="currentDate" v-model="date" scrollable>
+              <v-date-picker
+                color="primary text-dark"
+                :min="currentDate"
+                v-model="date"
+                scrollable
+              >
                 <v-spacer></v-spacer>
                 <v-btn text color="dark" @click="datePickerModal = false">
                   Cancel
@@ -212,5 +217,9 @@ export default class VaccinationCenterForm extends Vue {
     font-weight: bold;
     color: $white;
   }
+}
+
+.theme--dark input[type='date']::-webkit-calendar-picker-indicator {
+  background-color: rgb(221, 7, 7);
 }
 </style>
