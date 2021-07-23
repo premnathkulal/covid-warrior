@@ -10,7 +10,7 @@
           >
             <div class="image"><img :src="item.multimedia[0].url" /></div>
             <div class="news-contents">
-              <div class="title">{{ item.title }}</div>
+              <div class="news-title">{{ item.title }}</div>
               <div class="abstract d-none d-sm-block">{{ item.abstract }}</div>
               <div class="news-publish-info d-none d-sm-flex pt-3 mt-auto">
                 <div class="date">{{ item.byline }}</div>
@@ -31,7 +31,7 @@
 import { newsActions } from '@/types/types'
 import { Vue, Component } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import NewsLoader from '@/components/Home/NewsLoader.vue'
+import NewsLoader from '@/components/Home/page-loaders/NewsLoader.vue'
 
 const news = namespace('News')
 
@@ -85,7 +85,7 @@ export default class News extends Vue {
         display: flex;
         flex-direction: column;
         padding-left: 1rem;
-        .title {
+        .news-title {
           font-weight: bold;
           font-size: 1.2rem;
           padding-bottom: 1rem;
@@ -106,8 +106,8 @@ export default class News extends Vue {
           }
         }
         .news-contents {
-          .title {
-            font-size: 1rem;
+          .news-title {
+            font-size: 1rem !important;
           }
         }
       }

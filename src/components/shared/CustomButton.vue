@@ -5,7 +5,7 @@
       class="btn btn-block"
       :class="[{ 'outline-button': btnType === 'cancel' }, btnName]"
       :disabled="isDisabled"
-      @click="$emit('btnAction')"
+      @click.stop="$emit('btnAction')"
     >
       {{ btnText }}
       <v-icon v-if="icon" class="text-light">{{ icon }}</v-icon>

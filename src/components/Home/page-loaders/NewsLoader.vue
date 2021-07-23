@@ -115,5 +115,4 @@ export default class NewsLoader extends Vue {}
     }
   }
 }
-// @include pulse-bg();
 </style>

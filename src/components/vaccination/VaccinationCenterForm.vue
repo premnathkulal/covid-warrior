@@ -19,30 +19,36 @@
           :class="showForm ? 'd-block d-md-flex' : 'd-none d-md-flex'"
         >
           <v-select
+            v-model="state"
             class="select"
             :items="items"
             label="Solo field"
             dense
             solo
+            @change="onFilter()"
           ></v-select>
           <v-select
+            v-model="district"
             class="select"
             :items="items"
             label="Solo field"
             dense
             solo
+            @change="onFilter()"
           ></v-select>
           <v-select
+            v-model="vaccine"
             class="select"
             :items="items"
             label="Solo field"
             dense
             solo
+            @change="onFilter()"
           ></v-select>
           <div class="select">
             <v-dialog
               ref="dialog"
-              v-model="modal"
+              v-model="datePickerModal"
               :return-value.sync="date"
               persistent
               width="290px"
@@ -58,10 +64,19 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" scrollable>
+              <v-date-picker :min="currentDate" v-model="date" scrollable>
                 <v-spacer></v-spacer>
-                <v-btn text color="dark" @click="modal = false"> Cancel </v-btn>
-                <v-btn text color="dark" @click="$refs.dialog.save(date)">
+                <v-btn text color="dark" @click="datePickerModal = false">
+                  Cancel
+                </v-btn>
+                <v-btn
+                  text
+                  color="dark"
+                  @click="
+                    $refs.dialog.save(date)
+                    onFilter()
+                  "
+                >
                   OK
                 </v-btn>
               </v-date-picker>
@@ -69,8 +84,8 @@
           </div>
         </span>
       </div>
-      <div class="btn d-none d-md-flex" @click="showDialog = true">
-        <p class="btn-text">Book Appointment</p>
+      <div class="button d-none d-md-flex">
+        <p class="btn-text" @click="showDialog = true">Book Appointment</p>
       </div>
     </div>
   </div>
@@ -85,11 +100,16 @@ import AppointmentForm from '@/components/vaccination/AppointmentForm.vue'
 })
 export default class VaccinationCenterForm extends Vue {
   items = ['Foo', 'Bar', 'Fizz', 'Buzz']
-  date = new Date().toISOString().substr(0, 7)
+  currentDate = new Date().toISOString().substr(0, 10)
   menu = false
-  modal = false
+  datePickerModal = false
   showForm = false
   showDialog = false
+
+  state = ''
+  district = ''
+  vaccine = ''
+  date = this.currentDate
 
   toggleForm(): void {
     this.showForm = !this.showForm
@@ -97,6 +117,10 @@ export default class VaccinationCenterForm extends Vue {
 
   toggleDialog(): void {
     this.showDialog = !this.showDialog
+  }
+
+  onFilter(): void {
+    console.log(this.state, this.district, this.vaccine, this.date)
   }
 }
 </script>
@@ -157,7 +181,7 @@ export default class VaccinationCenterForm extends Vue {
     }
   }
 }
-.btn {
+.button {
   width: 80%;
   display: flex;
   .btn-text {
@@ -167,6 +191,7 @@ export default class VaccinationCenterForm extends Vue {
     background: $button-gradient;
     padding: 0.4rem;
     color: $white;
+    cursor: pointer;
     box-shadow: 0px 5px 8px rgb(168, 167, 167);
   }
 }
@@ -178,8 +203,8 @@ export default class VaccinationCenterForm extends Vue {
   background: $green-button;
   display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
+  justify-content: center;
   box-shadow: 0px -2px 8px rgb(168, 167, 167);
   z-index: 2;
   .btn-text {

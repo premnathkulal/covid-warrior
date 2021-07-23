@@ -139,4 +139,12 @@ export default class ScheduleAppointment extends Vue {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-list .v-list-item--active {
+  background-color: $color-primary !important;
+}
+
+.v-list .v-list-item--active .v-list-item__title {
+  color: $black !important;
+}
+</style>

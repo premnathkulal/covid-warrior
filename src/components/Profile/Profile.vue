@@ -5,9 +5,9 @@
         <v-icon class="profile-img-placeholder">mdi-account-circle</v-icon>
       </div>
       <div class="profile-info">
-        <div class="iserId">My Im13age</div>
-        <div class="username">My Im13age</div>
-        <div class="name">My Im13age</div>
+        <div class="iserId">ondjhdhgjhgh1234</div>
+        <div class="username">username</div>
+        <div class="name">Name Name</div>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@ export default class Profile extends Vue {}
   background: $color-background;
 
   .profile-card {
+    margin: 1rem;
     background: $white;
     border-radius: 0.5rem;
     box-shadow: 0 1rem 1rem rgb(230, 230, 230);
@@ -39,7 +40,7 @@ export default class Profile extends Vue {}
       align-items: center;
       justify-content: center;
       .profile-img-placeholder {
-        font-size: 12rem;
+        font-size: 8rem;
       }
     }
     .profile-info {
