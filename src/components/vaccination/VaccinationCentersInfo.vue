@@ -68,10 +68,10 @@ export default class VaccinationCenterInfo extends Vue {}
       border-radius: 0.5rem;
     }
     .paid {
-      background: rgb(255, 94, 0);
+      background: $light-red;
     }
     .free {
-      background: rgb(122, 247, 40);
+      background: $lemon-green;
     }
   }
 
@@ -106,7 +106,7 @@ export default class VaccinationCenterInfo extends Vue {}
         width: 25%;
         padding: 1rem;
         margin-left: auto;
-        background: $color-background-light;
+        background: $dark-gray;
         border-radius: 0.8rem;
         line-height: 0.5rem;
         font-weight: 300;

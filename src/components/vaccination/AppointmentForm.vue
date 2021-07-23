@@ -9,7 +9,11 @@
       :formType="formType"
       @toggleDialog="toggleScheduleDalog"
     />
-    <alert-box :dialog="alertBox" @toggleAlertBox="toggleAlertBox" />
+    <alert-box
+      :msg="'Are you sure want to remove this beneficiary?'"
+      :dialog="alertBox"
+      @toggleAlertBox="toggleAlertBox"
+    />
     <v-dialog
       v-model="showDialog"
       fullscreen

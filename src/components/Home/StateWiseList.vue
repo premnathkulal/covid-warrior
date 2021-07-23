@@ -137,7 +137,7 @@ export default class StateWiseList extends Vue {
   color: $text-color;
 
   .statewise-information {
-    background: $dark-gray-gradient;
+    background: $white;
     width: 80%;
     @media only screen and (max-width: 1400px) {
       width: 100%;
@@ -186,7 +186,7 @@ export default class StateWiseList extends Vue {
       flex-direction: column;
       justify-content: center;
       font-weight: bold;
-      background: $light-red-gradient;
+      background: $dark-gray;
       border-radius: 0.5rem;
       padding: 0.5rem;
       padding-top: 1.5rem;

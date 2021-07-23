@@ -74,7 +74,7 @@
             <vaccination-centers />
           </v-tab-item>
           <v-tab-item>
-            <home />
+            <profile />
           </v-tab-item>
         </v-tabs-items>
       </v-card>
@@ -129,6 +129,7 @@ import { LocationActions } from './types/types'
 import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
 import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
+import Profile from '@/components/Profile/Profile.vue'
 
 const updates = namespace('Updates')
 const location = namespace('Location')
@@ -139,6 +140,7 @@ const location = namespace('Location')
     Register,
     Home,
     VaccinationCenters,
+    Profile,
   },
 })
 export default class App extends Vue {

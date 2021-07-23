@@ -140,7 +140,7 @@ export default class Beneficiary extends Vue {
   }
 
   @Watch('selectedPhotoIdType')
-  getPlaceholder(): any {
+  getPlaceholder(): void {
     this.beneficiaryDetails.idNumber.value = ''
     resetFormError('photoIdNumber', this.beneficiaryDetails)
     if (this.selectedPhotoIdType) {
