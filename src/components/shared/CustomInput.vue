@@ -32,8 +32,8 @@ export default class CustomInput extends Vue {
   @Prop({ default: null }) placeHolder!: string
   @Prop({ default: null }) errorMessage!: string
   @Prop({ default: null }) inputType!: string
-  @Prop(Boolean) isError!: boolean
-  @Prop(Boolean) isRequired!: boolean
+  @Prop({ default: false }) isError!: boolean
+  @Prop({ default: false }) isRequired!: boolean
   @Prop({ default: false }) allowFilter!: boolean
   @Prop({ default: false }) disabled!: boolean
   label = this.placeHolder

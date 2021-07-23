@@ -26,11 +26,12 @@
           <v-btn icon light @click="$emit('toggleDialog')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <p class="pt-4 text-dark title">Appointments</p>
+          <span class="page-title">Appointments</span>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
+          <v-toolbar-items class="add-btn">
             <v-btn light text @click="toggleBeneficiaryDalog()">
-              Add Beneficiary
+              <v-icon>mdi-plus-circle-outline</v-icon>
+              <span class="pl-1 d-none d-md-block">Add Beneficiary</span>
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
@@ -97,10 +98,6 @@ import AlertBox from '@/components/shared/AlertBox.vue'
 })
 export default class AppointmentForm extends Vue {
   @Prop({ default: false }) showDialog!: boolean
-  notifications = false
-  sound = true
-  widgets = false
-  alert = true
   beneficiaryDalog = false
   scheduleDalog = false
   formType = 'schedule'
@@ -116,8 +113,6 @@ export default class AppointmentForm extends Vue {
   }
 
   toggleAlertBox(msg: boolean): void {
-    console.log(msg)
-
     if (msg) {
       console.log('deleted')
     }
@@ -159,5 +154,10 @@ export default class AppointmentForm extends Vue {
       cursor: pointer;
     }
   }
+}
+.page-title {
+  color: $black;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 </style>

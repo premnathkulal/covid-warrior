@@ -13,12 +13,12 @@
       >
       </lottie-player>
     </div>
-    <div class="data-number" :id="className">0</div>
+    <div class="data-number" ref="childElement" :id="className">0</div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class UpdateCounterCard extends Vue {
@@ -28,6 +28,8 @@ export default class UpdateCounterCard extends Vue {
   @Prop({ default: null }) color!: string
   @Prop({ default: null }) count!: string
   @Prop({ default: null }) className!: string
+
+  obj = document.getElementById(this.className)
 
   animateValue(
     obj: HTMLElement,
@@ -47,13 +49,11 @@ export default class UpdateCounterCard extends Vue {
     window.requestAnimationFrame(step)
   }
 
-  created(): void {
-    setTimeout(() => {
-      const obj = document.getElementById(this.className)
-      if (obj) {
-        this.animateValue(obj, 0, +this.count, 2000)
-      }
-    }, 1000)
+  mounted(): void {
+    const obj = document.getElementById(this.className)
+    if (obj) {
+      this.animateValue(obj, 0, +this.count, 2000)
+    }
   }
 }
 </script>
@@ -66,7 +66,7 @@ export default class UpdateCounterCard extends Vue {
   border-radius: 0.8rem;
 
   &:hover {
-    box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 0.2rem rgba(0, 0, 0, 0.2);
   }
 
   .data-header {

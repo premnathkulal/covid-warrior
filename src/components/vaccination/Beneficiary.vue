@@ -54,6 +54,7 @@
             :items="gender"
             v-model="selectedGender"
             label="Gender"
+            class="select"
             solo
           ></v-select>
           <v-select
@@ -61,6 +62,7 @@
             :items="photoIdType"
             v-model="selectedPhotoIdType"
             label="Select Photo ID Type"
+            class="select"
             solo
           ></v-select>
           <custom-input
@@ -196,4 +198,12 @@ export default class Beneficiary extends Vue {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-list .v-list-item--active {
+  background-color: $color-primary !important;
+}
+
+.v-list .v-list-item--active .v-list-item__title {
+  color: $black !important;
+}
+</style>

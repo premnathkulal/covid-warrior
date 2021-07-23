@@ -8,7 +8,6 @@
           dark
           flat
         >
-          <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
           <div class="toolbar-title">
             Covid Warrior
             <lottie-player
@@ -21,9 +20,7 @@
             >
             </lottie-player>
           </div>
-
           <v-spacer></v-spacer>
-
           <div class="text-center">
             <v-menu>
               <template v-slot:activator="{ on: menu }">
@@ -40,79 +37,38 @@
               </v-list>
             </v-menu>
           </div>
-
           <template v-slot:extension>
             <v-tabs v-model="currentTabName" fixed-tabs slider-color="green">
-              <v-tab
-                class="tab-options"
-                v-for="item in tabOptions"
-                :key="item.name"
-              >
-                <span class="tab-title pr-4 d-none d-sm-block"
-                  >{{ item.name }}
-                </span>
-                <span class="tab-icon">
-                  <v-icon :color="item.iconColor" x-large>
-                    {{ item.icon }}
-                  </v-icon>
-                </span>
-              </v-tab>
+              <template v-for="item in tabOptions">
+                <v-tab class="tab-options" :to="item.to" :key="item.name">
+                  <span class="tab-title pr-4 d-none d-sm-block">{{
+                    item.name
+                  }}</span>
+                  <span class="tab-icon">
+                    <v-icon :color="item.iconColor" x-large>
+                      {{ item.icon }}
+                    </v-icon>
+                  </span>
+                </v-tab>
+              </template>
             </v-tabs>
           </template>
         </v-toolbar>
-
-        <v-tabs-items
-          class="tab-items elevation-0"
-          content-class="elevation-0"
-          v-model="currentTabName"
-          touchless
-        >
-          <v-tab-item content-class="elevation-0">
-            <home />
-          </v-tab-item>
-          <v-tab-item>
-            <vaccination-centers />
-          </v-tab-item>
-          <v-tab-item>
-            <profile />
-          </v-tab-item>
-        </v-tabs-items>
       </v-card>
-
-      <!-- <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
-      <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
+      <router-view />
     </v-app>
-
     <transition name="bottom-drawer">
       <div class="bottom-drawer" @click.stop="toggle = true" v-show="toggle">
         <login
           @toggleAuthScreen="authScreen = 'register'"
+          @hideAuthScreen="toggle = false"
           v-if="authScreen === 'login'"
         />
-        <register @toggleAuthScreen="authScreen = 'login'" v-else />
+        <register
+          v-else
+          @toggleAuthScreen="authScreen = 'login'"
+          @hideAuthScreen="toggle = false"
+        />
       </div>
     </transition>
   </div>
@@ -166,7 +122,7 @@ export default class App extends Vue {
         this.loadUpdates()
       },
       () => {
-        // Error
+        // TODO: Error
         this.loadUpdates()
       }
     )
@@ -195,6 +151,7 @@ export default class App extends Vue {
       margin-left: 2.5rem;
     }
     .tab-options {
+      text-decoration: none;
       .tab-title {
         color: $black;
       }

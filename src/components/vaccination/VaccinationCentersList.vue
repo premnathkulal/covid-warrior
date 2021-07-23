@@ -24,5 +24,6 @@ export default class VaccinationCentersList extends Vue {}
     padding-top: 10rem;
     width: 100%;
   }
+  margin-bottom: 3.5rem;
 }
 </style>

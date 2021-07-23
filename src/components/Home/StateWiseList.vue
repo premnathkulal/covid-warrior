@@ -77,7 +77,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { Address, StateWiseUpdates } from '@/types/interface'
 import NationalUpdates from '@/components/Home/OverallUpdates.vue'
-import StateWiseListLoader from '@/components/Home/StateWiseListLoader.vue'
+import StateWiseListLoader from '@/components/Home/page-loaders/StateWiseListLoader.vue'
 import { namespace } from 'vuex-class'
 
 const updates = namespace('Updates')
@@ -115,14 +115,21 @@ export default class StateWiseList extends Vue {
   @Watch('address')
   @Watch('stateWiseUpdates')
   async updateData(): Promise<void> {
+    this.getUpdates()
+  }
+
+  async getUpdates(): Promise<void> {
     this.loading = true
     this.currentStateUpdates = await this.stateWiseUpdates.filter(data => {
-      // console.log(this.address.countrySubdivision, data.state)
       if (this.address.countrySubdivision === data.state) {
         return true
       }
     })[0]
     this.loading = false
+  }
+
+  async mounted(): Promise<void> {
+    this.getUpdates()
   }
 }
 </script>

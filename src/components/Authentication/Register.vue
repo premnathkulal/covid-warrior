@@ -35,12 +35,13 @@
           :isDisabled="!disableButton()"
           btnText="Register"
           btnName="normal-btn"
+          @btnAction="register"
         />
         <custom-button
           btnText="Login"
           btnType="cancel"
           btnName="normal-btn"
-          @btnAction="$emit('toggleAuthScreen')"
+          @btnAction="toggleAuthScreen()"
         />
       </div>
     </div>
@@ -90,6 +91,25 @@ export default class Register extends Vue {
 
   keyDownAction(property: string): void {
     resetFormError(property, this.userDetails)
+  }
+
+  toggleAuthScreen(): void {
+    this.userDetails.name.value = ''
+    this.userDetails.username.value = ''
+    this.userDetails.password.value = ''
+    this.$emit('toggleAuthScreen')
+  }
+
+  register(): void {
+    console.log(
+      this.userDetails.name.value,
+      this.userDetails.username.value,
+      this.userDetails.password.value
+    )
+    this.userDetails.name.value = ''
+    this.userDetails.username.value = ''
+    this.userDetails.password.value = ''
+    this.$emit('hideAuthScreen')
   }
 }
 </script>

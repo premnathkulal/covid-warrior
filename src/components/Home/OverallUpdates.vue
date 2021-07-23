@@ -5,7 +5,10 @@
       <p class="updated-date">Updated 14 Jul 21</p>
     </div>
     <div class="updates-container">
-      <div class="updates container-fluid" v-if="updatedData && !isLoading">
+      <div
+        class="updates container-fluid pb-2"
+        v-if="updatedData && !isLoading"
+      >
         <update-counter-card
           animation="confirmed"
           animationSize="100"
@@ -47,7 +50,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import UpdateCounterCard from '@/components/Home/UpdateCounterCard.vue'
-import UpdateCounterCardCardLoader from '@/components/Home/UpdateCounterCardLoader.vue'
+import UpdateCounterCardCardLoader from '@/components/Home/page-loaders/UpdateCounterCardLoader.vue'
 import { StateWiseUpdates } from '@/types/interface'
 import { namespace } from 'vuex-class'
 
@@ -104,4 +107,12 @@ export default class NationalUpdates extends Vue {
   width: 0;
   background: transparent;
 }
+
+// @media only screen and (min-width: 700px) {
+//   ::-webkit-scrollbar-thumb {
+//     margin-top: 1rem;
+//     background: red;
+//     border-radius: 0px;
+//   }
+// }
 </style>
