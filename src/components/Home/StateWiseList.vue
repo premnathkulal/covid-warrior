@@ -115,6 +115,10 @@ export default class StateWiseList extends Vue {
   @Watch('address')
   @Watch('stateWiseUpdates')
   async updateData(): Promise<void> {
+    this.getUpdates()
+  }
+
+  async getUpdates(): Promise<void> {
     this.loading = true
     this.currentStateUpdates = await this.stateWiseUpdates.filter(data => {
       if (this.address.countrySubdivision === data.state) {
@@ -122,6 +126,10 @@ export default class StateWiseList extends Vue {
       }
     })[0]
     this.loading = false
+  }
+
+  async mounted(): Promise<void> {
+    this.getUpdates()
   }
 }
 </script>
