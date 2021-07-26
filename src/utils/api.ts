@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 const TOM_TOM_API = 'https://api.tomtom.com/search/2/'
 const COVID_19_API = 'https://api.covid19india.org/data.json'
 const NEWS_API = 'https://api.nytimes.com/svc/'
+const COVID_WARRIOR_API = 'http://localhost:3000/'
 
 const getUpdates = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_19_API
@@ -26,4 +27,34 @@ const topStoriesAPI = (): Promise<AxiosResponse> => {
   )
 }
 
-export { getUpdates, getAddressDetails, topStoriesAPI }
+const statesAPI = (): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/states`)
+}
+
+const districtsAPI = (stateId: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/districts/${stateId}`)
+}
+
+const pinCodesAPI = (districtId: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/pincodes/${districtId}`)
+}
+
+const vaccinationCentersAPI = (queryParam: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(
+    `${BASE_URL}vaccinationCenters/findVaccinationCenter?${queryParam}`
+  )
+}
+
+export {
+  getUpdates,
+  getAddressDetails,
+  topStoriesAPI,
+  statesAPI,
+  districtsAPI,
+  pinCodesAPI,
+  vaccinationCentersAPI,
+}

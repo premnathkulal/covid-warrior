@@ -1,7 +1,9 @@
 <template>
   <div class="vaccination-center-list">
-    <template v-for="(item, index) in 4">
-      <vaccinationCenter-info :key="index" />
+    <template v-if="vaccinationCentersList.length">
+      <template v-for="(item, index) in vaccinationCentersList">
+        <vaccinationCenter-info :centerInfo="item" :key="index" />
+      </template>
     </template>
   </div>
 </template>
@@ -9,9 +11,15 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import VaccinationCenterInfo from '@/components/vaccination/VaccinationCentersInfo.vue'
+import { namespace } from 'vuex-class'
+
+const vaccinationCenter = namespace('VaccinationCenter')
 
 @Component({ components: { VaccinationCenterInfo } })
-export default class VaccinationCentersList extends Vue {}
+export default class VaccinationCentersList extends Vue {
+  @vaccinationCenter.Getter
+  vaccinationCentersList!: any[]
+}
 </script>
 
 <style lang="scss">

@@ -21,8 +21,9 @@
           <v-select
             v-model="state"
             class="select"
-            :items="items"
-            label="Solo field"
+            :items="states"
+            item-text="state_name"
+            label="Select State"
             dense
             solo
             @change="onFilter()"
@@ -30,20 +31,23 @@
           <v-select
             v-model="district"
             class="select"
-            :items="items"
-            label="Solo field"
+            :items="districtsList"
+            item-text="district_name"
+            label="Select District"
             dense
             solo
             @change="onFilter()"
+            :disabled="!state"
           ></v-select>
           <v-select
-            v-model="vaccine"
+            v-model="Pincode"
             class="select"
             :items="items"
-            label="Solo field"
+            label="Select Pincode"
             dense
             solo
             @change="onFilter()"
+            :disabled="!district"
           ></v-select>
           <div class="select">
             <v-dialog
@@ -97,13 +101,20 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import AppointmentForm from '@/components/vaccination/AppointmentForm.vue'
+import { namespace } from 'vuex-class'
+import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
+
+const stateDistricts = namespace('StateDistricts')
+const vaccinationCenter = namespace('VaccinationCenter')
 
 @Component({
   components: { AppointmentForm },
 })
 export default class VaccinationCenterForm extends Vue {
+  @Prop({ default: null }) states!: any[]
+
   items = ['Foo', 'Bar', 'Fizz', 'Buzz']
   currentDate = new Date().toISOString().substr(0, 10)
   menu = false
@@ -113,8 +124,47 @@ export default class VaccinationCenterForm extends Vue {
 
   state = ''
   district = ''
-  vaccine = ''
+  Pincode = ''
   date = this.currentDate
+
+  @stateDistricts.Getter
+  districtsList!: any[]
+
+  @vaccinationCenter.Getter
+  vaccinationCenterList!: any[]
+
+  @stateDistricts.Action(StateDistrictsActions.DISTRICTS)
+  public loadDistrictsList!: (stateId: string) => void
+
+  @stateDistricts.Action(StateDistrictsActions.PINCODES)
+  public loadPinCodesList!: (stateId: string) => void
+
+  @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
+  public loadVaccinationCenters!: (filterData: {
+    state?: string
+    district?: string
+    pincode?: string
+    date: string
+    lat?: string
+    lon?: string
+  }) => void
+
+  @Watch('state')
+  loadDistricts(): void {
+    const stateInfo: any = this.states.filter((state: any) => {
+      return state.state_name === this.state
+    })
+    this.loadDistrictsList(stateInfo[0].state_id)
+  }
+
+  @Watch('district')
+  createPinCodes(): void {
+    const districtInfo: any = this.districtsList.filter((district: any) => {
+      return district.district_name === this.district
+    })
+    // console.log(districtInfo[0].district_id)
+    // this.loadPinCodesList(districtInfo[0].district_id)
+  }
 
   toggleForm(): void {
     this.showForm = !this.showForm
@@ -125,7 +175,12 @@ export default class VaccinationCenterForm extends Vue {
   }
 
   onFilter(): void {
-    console.log(this.state, this.district, this.vaccine, this.date)
+    this.loadVaccinationCenters({
+      state: this.state,
+      district: this.district,
+      date: this.date,
+    })
+    // console.log(this.state, this.district, this.Pincode, this.date)
   }
 }
 </script>

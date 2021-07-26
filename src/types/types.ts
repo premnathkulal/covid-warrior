@@ -24,3 +24,26 @@ export const newsMutations = {
 export const newsActions = {
   TOP_NEWS: 'TOP_NEWS_ACTION',
 }
+
+export const StateDistrictsMutations = {
+  LOADING: 'LOADING_MUTATION',
+  STATES: 'STATES_MUTATION',
+  DISTRICTS: 'DISTRICTS_MUTATION',
+  PINCODES: 'PINCODES_MUTATION',
+}
+
+export const StateDistrictsActions = {
+  STATES: 'STATES_ACTION',
+  DISTRICTS: 'DISTRICTS_ACTION',
+  PINCODES: 'PINCODES_ACTION',
+}
+
+export const VaccinationCenterMutations = {
+  LOADING: 'LOADING_MUTATION',
+  VACCINATION_CENTER: 'VACCINATION_CENTER_MUTATION',
+}
+
+export const VaccinationCenterActions = {
+  STATES: 'STATES_ACTION',
+  VACCINATION_CENTER: 'VACCINATION_CENTER_ACTION',
+}
