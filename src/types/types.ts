@@ -8,12 +8,14 @@ export const UpdatesActions = {
 }
 
 export const LocationMutations = {
-  ADDRESS: 'ADDRESS_MUTATION',
   TOGGLE_LOADING: 'TOGGLE_LOADING_MUTATION',
+  ADDRESS: 'ADDRESS_MUTATION',
+  SET_LAT_LON: 'SET_LAT_LON_MUTATION',
 }
 
 export const LocationActions = {
   ADDRESS: 'ADDRESS_ACTION',
+  SET_LAT_LON: 'SET_LAT_LON_ACTION',
 }
 
 export const newsMutations = {

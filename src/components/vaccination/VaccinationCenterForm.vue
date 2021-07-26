@@ -40,14 +40,19 @@
             :disabled="!state"
           ></v-select>
           <v-select
-            v-model="Pincode"
+            v-model="pincodes"
             class="select"
-            :items="items"
-            label="Select Pincode"
-            dense
-            solo
+            :hint="`${pincodes ? pincodes.pincode : ''}`"
+            :items="pinCodesList"
+            item-text="name"
+            label="Select Area"
+            persistent-hint
+            return-object
+            single-line
             @change="onFilter()"
             :disabled="!district"
+            dense
+            solo
           ></v-select>
           <div class="select">
             <v-dialog
@@ -124,11 +129,14 @@ export default class VaccinationCenterForm extends Vue {
 
   state = ''
   district = ''
-  Pincode = ''
+  pincodes = ''
   date = this.currentDate
 
   @stateDistricts.Getter
   districtsList!: any[]
+
+  @stateDistricts.Getter
+  pinCodesList!: any[]
 
   @vaccinationCenter.Getter
   vaccinationCenterList!: any[]
@@ -162,8 +170,7 @@ export default class VaccinationCenterForm extends Vue {
     const districtInfo: any = this.districtsList.filter((district: any) => {
       return district.district_name === this.district
     })
-    // console.log(districtInfo[0].district_id)
-    // this.loadPinCodesList(districtInfo[0].district_id)
+    this.loadPinCodesList(districtInfo[0].district_id)
   }
 
   toggleForm(): void {
@@ -180,7 +187,6 @@ export default class VaccinationCenterForm extends Vue {
       district: this.district,
       date: this.date,
     })
-    // console.log(this.state, this.district, this.Pincode, this.date)
   }
 }
 </script>
@@ -195,7 +201,6 @@ export default class VaccinationCenterForm extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: $color-background;
 
   @media only screen and (max-width: 960px) {
     top: 6.5rem;

@@ -19,10 +19,18 @@ class Location extends VuexModule {
     position: '',
   }
   public isLoading = false
+  public latitude = 0
+  public longitude = 0
 
   @Mutation
   public [LocationMutations.TOGGLE_LOADING](): void {
     this.isLoading = !this.isLoading
+  }
+
+  @Mutation
+  public [LocationMutations.SET_LAT_LON](position: any): void {
+    this.latitude = Math.floor(position.latitude)
+    this.longitude = Math.floor(position.longitude)
   }
 
   @Mutation
@@ -34,6 +42,10 @@ class Location extends VuexModule {
   @Action
   public [LocationActions.ADDRESS](position: Position): void {
     this.context.commit(LocationMutations.TOGGLE_LOADING)
+    this.context.commit(LocationMutations.SET_LAT_LON, {
+      latitude: position.lat,
+      longitude: position.lon,
+    })
     getAddressDetails(position.lat, position.lon).then(
       (result: AxiosResponse) => {
         const data = result.data.addresses[0]

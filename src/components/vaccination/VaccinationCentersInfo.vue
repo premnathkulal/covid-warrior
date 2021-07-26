@@ -1,12 +1,5 @@
 <template>
-  <div class="vaccination-center-info pl-5">
-    <div class="info-header">
-      <p class="name">{{ centerInfo.name }}</p>
-      <p v-if="centerInfo.fee_type === 'Free'" class="fee-type p-1 free">
-        Free
-      </p>
-      <p v-else class="fee-type p-1 paid">Paid</p>
-    </div>
+  <div class="vaccination-center-info">
     <div class="info-body">
       <div class="adress mt-4">
         <p class="address">{{ centerInfo.address }}</p>
@@ -53,33 +46,6 @@ export default class VaccinationCenterInfo extends Vue {
 
 <style lang="scss">
 .vaccination-center-info {
-  background: $white;
-  padding: 0.5rem;
-  margin: 1rem 0.8rem;
-  border-radius: 0.8rem;
-  margin-top: 1rem;
-
-  .info-header {
-    padding: 0.2rem;
-    display: flex;
-    font-weight: bold;
-    .name {
-      font-size: 1.2rem;
-    }
-    .fee-type {
-      margin-left: auto;
-      font-size: 0.8rem;
-      color: $white;
-      border-radius: 0.5rem;
-    }
-    .paid {
-      background: $light-red;
-    }
-    .free {
-      background: $lemon-green;
-    }
-  }
-
   .info-body {
     display: flex;
     .adress {
@@ -88,7 +54,6 @@ export default class VaccinationCenterInfo extends Vue {
       width: 15rem;
     }
     .vaccine-info-field {
-      margin: 0 2rem;
       display: flex;
       align-items: center;
       background: rgba($color-background, 0.5);
@@ -97,7 +62,6 @@ export default class VaccinationCenterInfo extends Vue {
       flex: 1;
 
       .vaccine-info {
-        // width: 70%;
         line-height: 0.8rem;
         padding-right: 1rem;
         .field-title {
@@ -110,7 +74,6 @@ export default class VaccinationCenterInfo extends Vue {
         }
       }
       .slots {
-        // width: 50%;
         padding: 1rem;
         margin-left: auto;
         background: $dark-gray;
@@ -136,14 +99,10 @@ export default class VaccinationCenterInfo extends Vue {
         }
         .slots {
           // width: 50%;
+          padding: 1rem 0.5rem;
         }
       }
     }
-  }
-
-  &:hover {
-    box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.09);
-    transition: all 0.3s ease;
   }
 }
 </style>

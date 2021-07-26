@@ -30,7 +30,7 @@ class VaccinationCenter extends VuexModule {
       queryParam += `&pincode=${filterData.pincode}`
     }
     if (filterData.lan && filterData.lon) {
-      queryParam += `&lat=${filterData.lat}&longitude=${filterData.lon}`
+      queryParam += `&latitude=${filterData.lat}&longitude=${filterData.lon}`
     }
     if (filterData.state) {
       queryParam += `&state_name=${filterData.state}`

@@ -51,6 +51,9 @@ class StateDistricts extends VuexModule {
           response.data.districts
         )
       })
+      .catch(() => {
+        this.context.commit(StateDistrictsMutations.DISTRICTS, [])
+      })
       .finally(() => {
         this.context.commit(StateDistrictsMutations.LOADING)
       })
@@ -70,6 +73,9 @@ class StateDistricts extends VuexModule {
           StateDistrictsMutations.PINCODES,
           response.data.pincodes
         )
+      })
+      .catch(() => {
+        this.context.commit(StateDistrictsMutations.PINCODES, [])
       })
       .finally(() => {
         this.context.commit(StateDistrictsMutations.LOADING)

@@ -137,6 +137,7 @@ export default class App extends Vue {
 <style lang="scss">
 @include pulse-bg();
 #app {
+  background: $color-background;
   .toolbar {
     .toolbar-title {
       width: 100%;
