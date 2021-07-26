@@ -19,6 +19,9 @@ export class VaccinationCenterServices {
     if (args.district_name) {
       requestQuery['district_name'] = args.district_name
     }
+    if (args.state_name) {
+      requestQuery['state_name'] = args.state_name
+    }
     if (args.latitude) {
       requestQuery['lat'] = args.latitude
     }
