@@ -50,10 +50,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import CustomInput from '@/components/shared/CustomInput.vue'
 import CustomButton from '@/components/shared/CustomButton.vue'
 import { formValidator, resetFormError } from '@/utils/formValidator'
+import { namespace } from 'vuex-class'
+import { LoginActions } from '@/types/types'
+
+const login = namespace('Login')
 
 @Component({
   components: {
@@ -62,6 +66,20 @@ import { formValidator, resetFormError } from '@/utils/formValidator'
   },
 })
 export default class Login extends Vue {
+  @login.Getter
+  errorMessage!: string
+
+  @login.Getter
+  isLoginSuccess!: string
+
+  @login.Action(LoginActions.LOGIN)
+  // eslint-disable-next-line no-unused-vars
+  public userLogin!: (authCredentials: any) => void
+
+  @login.Action(LoginActions.SET_ERROR)
+  // eslint-disable-next-line no-unused-vars
+  public resetError!: (isError: boolean) => void
+
   userDetails = {
     username: {
       value: '',
@@ -71,6 +89,21 @@ export default class Login extends Vue {
       value: '',
       error: '',
     },
+  }
+
+  @Watch('errorMessage')
+  setErrorMessage(): void {
+    this.userDetails.password.error = this.errorMessage
+    console.log(this.errorMessage, this.userDetails)
+  }
+
+  @Watch('isLoginSuccess')
+  loginSuccess(): void {
+    if (this.isLoginSuccess) {
+      this.userDetails.username.value = ''
+      this.userDetails.password.value = ''
+      this.$emit('hideAuthScreen')
+    }
   }
 
   disableButton(): boolean {
@@ -85,6 +118,7 @@ export default class Login extends Vue {
   }
 
   keyDownAction(property: string): void {
+    this.resetError(false)
     resetFormError(property, this.userDetails)
   }
 
@@ -95,13 +129,10 @@ export default class Login extends Vue {
   }
 
   login(): void {
-    console.log(
-      this.userDetails.username.value,
-      this.userDetails.password.value
-    )
-    this.userDetails.username.value = ''
-    this.userDetails.password.value = ''
-    this.$emit('hideAuthScreen')
+    this.userLogin({
+      username: this.userDetails.username.value,
+      password: this.userDetails.password.value,
+    })
   }
 }
 </script>

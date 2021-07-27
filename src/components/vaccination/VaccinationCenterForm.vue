@@ -42,9 +42,10 @@
           <v-select
             v-model="pincodes"
             class="select"
-            :hint="`${pincodes ? pincodes.pincode : ''}`"
+            :hint="`${pincodes ? pincodes.name : ''}`"
             :items="pinCodesList"
-            item-text="name"
+            item-text="pincode"
+            item-value="pincode"
             label="Select Area"
             persistent-hint
             return-object

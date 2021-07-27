@@ -49,6 +49,14 @@ const vaccinationCentersAPI = (queryParam: string): Promise<AxiosResponse> => {
   )
 }
 
+const loginAPI = (authCredentials: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.post(`${BASE_URL}auth/login`, {
+    username: authCredentials.username,
+    password: authCredentials.password,
+  })
+}
+
 export {
   getUpdates,
   getAddressDetails,
@@ -57,4 +65,5 @@ export {
   districtsAPI,
   pinCodesAPI,
   vaccinationCentersAPI,
+  loginAPI,
 }

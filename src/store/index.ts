@@ -5,6 +5,7 @@ import Location from '@/store/modules/location'
 import News from '@/store/modules/news'
 import StateDistricts from '@/store/modules/stateDistricts'
 import VaccinationCenter from '@/store/modules/vaccinationCenter'
+import Login from '@/store/modules/login'
 
 Vue.use(Vuex)
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
     News,
     StateDistricts,
     VaccinationCenter,
+    Login,
   },
 })
