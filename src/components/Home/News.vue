@@ -61,6 +61,7 @@ export default class News extends Vue {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1rem 0.8rem;
 
   .news {
     width: 80%;

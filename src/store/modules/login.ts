@@ -1,5 +1,5 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { loginAPI } from '@/utils/api'
+import { googleAuthAPI, loginAPI } from '@/utils/api'
 import { LoginActions, LoginMutations } from '@/types/types'
 import Cookies from 'js-cookie'
 
@@ -45,6 +45,17 @@ class Login extends VuexModule {
       })
       .finally(() => {
         this.context.commit(LoginMutations.LOADING)
+      })
+  }
+
+  @Action
+  ['LoginActions.GOOGLE_LOGIN'](): Promise<void> {
+    return googleAuthAPI()
+      .then(response => {
+        console.log(response)
+      })
+      .catch((error: any) => {
+        console.log(error)
       })
   }
 

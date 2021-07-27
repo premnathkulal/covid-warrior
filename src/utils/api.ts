@@ -66,6 +66,11 @@ const registerAPI = (userDetails: any): Promise<AxiosResponse> => {
   })
 }
 
+const googleAuthAPI = (): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}auth/google`)
+}
+
 export {
   getUpdates,
   getAddressDetails,
@@ -76,4 +81,5 @@ export {
   vaccinationCentersAPI,
   loginAPI,
   registerAPI,
+  googleAuthAPI,
 }

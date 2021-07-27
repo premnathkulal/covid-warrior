@@ -39,7 +39,11 @@
     <div class="social">
       <div class="social-btn-field">
         <div class="social-btn">
-          <custom-button icon="mdi-google" btnName="google-btn" />
+          <custom-button
+            @btnAction="googleLogin()"
+            icon="mdi-google"
+            btnName="google-btn"
+          />
         </div>
         <div class="social-btn">
           <custom-button icon="mdi-facebook" btnName="facebook-btn" />
@@ -79,6 +83,9 @@ export default class Login extends Vue {
   @login.Action(LoginActions.SET_ERROR)
   // eslint-disable-next-line no-unused-vars
   public resetError!: (isError: boolean) => void
+
+  @login.Action('LoginActions.GOOGLE_LOGIN')
+  public googleAuthLogin!: () => void
 
   userDetails = {
     username: {
@@ -133,6 +140,10 @@ export default class Login extends Vue {
       username: this.userDetails.username.value,
       password: this.userDetails.password.value,
     })
+  }
+
+  googleLogin(): void {
+    this.googleAuthLogin()
   }
 }
 </script>
