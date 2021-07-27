@@ -57,6 +57,15 @@ const loginAPI = (authCredentials: any): Promise<AxiosResponse> => {
   })
 }
 
+const registerAPI = (userDetails: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.post(`${BASE_URL}auth/register`, {
+    name: userDetails.name,
+    username: userDetails.username,
+    password: userDetails.password,
+  })
+}
+
 export {
   getUpdates,
   getAddressDetails,
@@ -66,4 +75,5 @@ export {
   pinCodesAPI,
   vaccinationCentersAPI,
   loginAPI,
+  registerAPI,
 }

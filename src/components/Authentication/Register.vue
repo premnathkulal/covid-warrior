@@ -49,10 +49,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import CustomInput from '@/components/shared/CustomInput.vue'
 import CustomButton from '@/components/shared/CustomButton.vue'
 import { formValidator, resetFormError } from '@/utils/formValidator'
+import { namespace } from 'vuex-class'
+import { RegisterActions } from '@/types/types'
+
+const register = namespace('Register')
 
 @Component({
   components: {
@@ -76,6 +80,36 @@ export default class Register extends Vue {
     },
   }
 
+  @register.Getter
+  userNameErrorMsg!: string
+
+  @register.Getter
+  passwordErrorMsg!: string
+
+  @register.Getter
+  isRegisterSuccess!: boolean
+
+  @register.Action(RegisterActions.REGISTER)
+  public userRegister!: (userDetails: any) => void
+
+  @register.Action(RegisterActions.SET_ERROR)
+  public setError!: (errMsg: string) => void
+
+  @Watch('userNameErrorMsg')
+  userNameError(): void {
+    this.userDetails.username.error = this.userNameErrorMsg
+  }
+
+  @Watch('passwordErrorMsg')
+  passwordError(): void {
+    this.userDetails.password.error = this.passwordErrorMsg
+  }
+
+  @Watch('isRegisterSuccess')
+  registrationSuccess(): void {
+    this.toggleAuthScreen()
+  }
+
   disableButton(): boolean {
     return (
       this.userDetails.name.value.length >= 4 &&
@@ -90,6 +124,7 @@ export default class Register extends Vue {
   }
 
   keyDownAction(property: string): void {
+    this.setError('')
     resetFormError(property, this.userDetails)
   }
 
@@ -101,15 +136,15 @@ export default class Register extends Vue {
   }
 
   register(): void {
-    console.log(
-      this.userDetails.name.value,
-      this.userDetails.username.value,
-      this.userDetails.password.value
-    )
-    this.userDetails.name.value = ''
-    this.userDetails.username.value = ''
-    this.userDetails.password.value = ''
-    this.$emit('hideAuthScreen')
+    this.userRegister({
+      name: this.userDetails.name.value,
+      username: this.userDetails.username.value,
+      password: this.userDetails.password.value,
+    })
+    // this.userDetails.name.value = ''
+    // this.userDetails.username.value = ''
+    // this.userDetails.password.value = ''
+    // this.$emit('hideAuthScreen')
   }
 }
 </script>

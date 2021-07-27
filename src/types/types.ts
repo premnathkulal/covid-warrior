@@ -59,9 +59,19 @@ export const LoginMutations = {
 }
 
 export const LoginActions = {
-  STATES: 'STATES_ACTION',
   LOGIN: 'LOGIN_ACTION',
   LOGOUT: 'LOGOUT_ACTION',
   IS_LOGGED_IN: 'IS_LOGGED_IN_ACTION',
+  SET_ERROR: 'SET_ERROR_ACTION',
+}
+
+export const RegisterMutations = {
+  LOADING: 'LOADING_MUTATION',
+  REGISTER: 'REGISTER_MUTATION',
+  SET_ERROR: 'SET_ERROR_MUTATION',
+}
+
+export const RegisterActions = {
+  REGISTER: 'REGISTER_ACTION',
   SET_ERROR: 'SET_ERROR_ACTION',
 }

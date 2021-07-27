@@ -1,5 +1,5 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { loginAPI, topStoriesAPI } from '@/utils/api'
+import { loginAPI } from '@/utils/api'
 import { LoginActions, LoginMutations } from '@/types/types'
 import Cookies from 'js-cookie'
 
@@ -9,26 +9,11 @@ class Login extends VuexModule {
   loginError = ''
   loginSuccess = false
   token = ''
-  topNews: any[] = [
-    {
-      section: '',
-      title: '',
-      url: '',
-      byline: '',
-      published_date: '',
-      multimedia: [{ url: '' }],
-    },
-  ]
 
   @Mutation
   public [LoginMutations.LOADING](): void {
     this.isLoading = !this.isLoading
   }
-
-  //   @Mutation
-  //   public [LoginMutations.IS_LOGGED_IN](): void {
-
-  //   }
 
   @Mutation
   public [LoginMutations.LOGIN](token: string): void {
@@ -57,7 +42,6 @@ class Login extends VuexModule {
       })
       .catch((error: any) => {
         this.context.commit(LoginMutations.SET_ERROR, true)
-        console.log(error)
       })
       .finally(() => {
         this.context.commit(LoginMutations.LOADING)
