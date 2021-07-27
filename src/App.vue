@@ -30,7 +30,13 @@
               </template>
               <v-list>
                 <v-list-item>
-                  <v-list-item-title @click.stop="toggle = true">
+                  <v-list-item-title
+                    v-if="userToken"
+                    @click.stop="userLogout()"
+                  >
+                    <span class="btn">Logout</span>
+                  </v-list-item-title>
+                  <v-list-item-title v-else @click.stop="toggle = true">
                     <span class="btn">Login</span>
                   </v-list-item-title>
                 </v-list-item>
@@ -81,7 +87,7 @@ import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
 import Home from '@/components/Home/Home.vue'
 import { namespace } from 'vuex-class'
-import { LocationActions } from './types/types'
+import { LocationActions, LoginActions, RegisterActions } from './types/types'
 import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
 import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
@@ -89,6 +95,8 @@ import Profile from '@/components/Profile/Profile.vue'
 
 const updates = namespace('Updates')
 const location = namespace('Location')
+const login = namespace('Login')
+const register = namespace('Register')
 
 @Component({
   components: {
@@ -105,6 +113,15 @@ export default class App extends Vue {
   drawer = null
   toggle = false
   authScreen = 'login'
+
+  @login.Getter
+  userToken!: string
+
+  @login.Action(LoginActions.IS_LOGGED_IN)
+  public isUserLoggedIn!: () => void
+
+  @login.Action(LoginActions.LOGOUT)
+  public logout!: () => void
 
   @location.Action(LocationActions.ADDRESS)
   // eslint-disable-next-line no-unused-vars
@@ -128,8 +145,14 @@ export default class App extends Vue {
     )
   }
 
+  userLogout(): void {
+    this.logout()
+    window.location.reload()
+  }
+
   created(): void {
     this.locationTracker()
+    this.isUserLoggedIn()
   }
 }
 </script>
@@ -137,6 +160,7 @@ export default class App extends Vue {
 <style lang="scss">
 @include pulse-bg();
 #app {
+  background: $color-background;
   .toolbar {
     .toolbar-title {
       width: 100%;

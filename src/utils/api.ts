@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 const TOM_TOM_API = 'https://api.tomtom.com/search/2/'
 const COVID_19_API = 'https://api.covid19india.org/data.json'
 const NEWS_API = 'https://api.nytimes.com/svc/'
+const COVID_WARRIOR_API = 'https://covid-warrior-app.herokuapp.com/'
 
 const getUpdates = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_19_API
@@ -26,4 +27,59 @@ const topStoriesAPI = (): Promise<AxiosResponse> => {
   )
 }
 
-export { getUpdates, getAddressDetails, topStoriesAPI }
+const statesAPI = (): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/states`)
+}
+
+const districtsAPI = (stateId: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/districts/${stateId}`)
+}
+
+const pinCodesAPI = (districtId: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}states-districts/pincode/${districtId}`)
+}
+
+const vaccinationCentersAPI = (queryParam: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(
+    `${BASE_URL}vaccinationCenters/findVaccinationCenter?${queryParam}`
+  )
+}
+
+const loginAPI = (authCredentials: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.post(`${BASE_URL}auth/login`, {
+    username: authCredentials.username,
+    password: authCredentials.password,
+  })
+}
+
+const registerAPI = (userDetails: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.post(`${BASE_URL}auth/register`, {
+    name: userDetails.name,
+    username: userDetails.username,
+    password: userDetails.password,
+  })
+}
+
+const googleAuthAPI = (): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axios.get(`${BASE_URL}auth/google`)
+}
+
+export {
+  getUpdates,
+  getAddressDetails,
+  topStoriesAPI,
+  statesAPI,
+  districtsAPI,
+  pinCodesAPI,
+  vaccinationCentersAPI,
+  loginAPI,
+  registerAPI,
+  googleAuthAPI,
+}

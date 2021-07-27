@@ -15,7 +15,7 @@
               <div class="news-publish-info d-none d-sm-flex pt-3 mt-auto">
                 <div class="date">{{ item.byline }}</div>
                 <div class="name ms-auto">
-                  {{ item.published_date.slice(0, 10) }}
+                  {{ item.published_date.slice(0, 10) | dateFormate }}
                 </div>
               </div>
             </div>
@@ -61,6 +61,7 @@ export default class News extends Vue {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1rem 0.8rem;
 
   .news {
     width: 80%;

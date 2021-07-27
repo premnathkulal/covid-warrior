@@ -2,7 +2,7 @@
   <div class="national-updates">
     <div class="info-text">
       <p class="overview-title">COIVD-19 Cases Overview</p>
-      <p class="updated-date">Updated 14 Jul 21</p>
+      <p class="updated-date">Updated {{ new Date() | dateFormate }}</p>
     </div>
     <div class="updates-container">
       <div

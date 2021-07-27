@@ -15,7 +15,7 @@
             @keyDownAction="keyDownAction('name')"
             @blurAction="validate('name')"
           />
-          <div>
+          <div class="select">
             <v-dialog
               ref="dialog"
               v-model="modal"
@@ -34,17 +34,14 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="beneficiaryDetails.date"
+                v-model="date"
                 :max="date"
+                color="primary text-dark"
                 scrollable
               >
                 <v-spacer></v-spacer>
                 <v-btn text color="dark" @click="modal = false"> Cancel </v-btn>
-                <v-btn
-                  text
-                  color="dark"
-                  @click="$refs.dialog.save(beneficiaryDetails.date)"
-                >
+                <v-btn text color="dark" @click="$refs.dialog.save(date)">
                   OK
                 </v-btn>
               </v-date-picker>

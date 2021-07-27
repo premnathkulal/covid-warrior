@@ -1,0 +1,3225 @@
+[{
+        "district_id": 269,
+        "pincodes": [{
+                "name": "Addoor",
+                "pincode": 574145
+            },
+            {
+                "name": "Adyapady",
+                "pincode": 574142
+            },
+            {
+                "name": "Adyar",
+                "pincode": 575007
+            },
+            {
+                "name": "Aikala",
+                "pincode": 574141
+            },
+            {
+                "name": "Amblamogaru",
+                "pincode": 575017
+            },
+            {
+                "name": "AshoknagarMR",
+                "pincode": 575006
+            },
+            {
+                "name": "Assaigoli",
+                "pincode": 574199
+            },
+            {
+                "name": "Athikaribettu",
+                "pincode": 574154
+            },
+            {
+                "name": "Badagayedapadavu",
+                "pincode": 574267
+            },
+            {
+                "name": "Baikampady",
+                "pincode": 575011
+            },
+            {
+                "name": "Bajal",
+                "pincode": 575007
+            },
+            {
+                "name": "Bajpe Airport",
+                "pincode": 574142
+            },
+            {
+                "name": "Bajpe",
+                "pincode": 574142
+            },
+            {
+                "name": "Bala",
+                "pincode": 575030
+            },
+            {
+                "name": "Balepuni Bantwal",
+                "pincode": 574153
+            },
+            {
+                "name": "Balkunje",
+                "pincode": 574154
+            },
+            {
+                "name": "Balmatta",
+                "pincode": 575002
+            },
+            {
+                "name": "Bijai",
+                "pincode": 575004
+            },
+            {
+                "name": "Bikkarnakatte",
+                "pincode": 575008
+            },
+            {
+                "name": "Boliyar",
+                "pincode": 574153
+            },
+            {
+                "name": "Boloor",
+                "pincode": 575003
+            },
+            {
+                "name": "Bondanthila",
+                "pincode": 575029
+            },
+            {
+                "name": "Bondel",
+                "pincode": 575008
+            },
+            {
+                "name": "Chelairu",
+                "pincode": 574146
+            },
+            {
+                "name": "Chelur Bantwal",
+                "pincode": 574153
+            },
+            {
+                "name": "Chitrapu",
+                "pincode": 574154
+            },
+            {
+                "name": "Delanthabettu",
+                "pincode": 575030
+            },
+            {
+                "name": "Derlakatte",
+                "pincode": 575018
+            },
+            {
+                "name": "District Courts Dakshina Kannada",
+                "pincode": 575003
+            },
+            {
+                "name": "Elathur",
+                "pincode": 574150
+            },
+            {
+                "name": "Elinje",
+                "pincode": 574141
+            },
+            {
+                "name": "Falnir",
+                "pincode": 575001
+            },
+            {
+                "name": "Farangipet",
+                "pincode": 574143
+            },
+            {
+                "name": "Fisheries College",
+                "pincode": 575002
+            },
+            {
+                "name": "Gandhinagar Dakshina Kannada",
+                "pincode": 575003
+            },
+            {
+                "name": "Ganjimat",
+                "pincode": 574144
+            },
+            {
+                "name": "Gurpur",
+                "pincode": 574145
+            },
+            {
+                "name": "Haleangady NA",
+                "pincode": 574146
+            },
+            {
+                "name": "Hampankatta",
+                "pincode": 575001
+            },
+            {
+                "name": "Harekala",
+                "pincode": 574199
+            },
+            {
+                "name": "Jeppinamogaru",
+                "pincode": 575007
+            },
+            {
+                "name": "Jokatte",
+                "pincode": 575011
+            },
+            {
+                "name": "Kairangala Bantwal",
+                "pincode": 574153
+            },
+            {
+                "name": "Kakva",
+                "pincode": 574154
+            },
+            {
+                "name": "Kalavara",
+                "pincode": 574142
+            },
+            {
+                "name": "Kandavara",
+                "pincode": 574151
+            },
+            {
+                "name": "Kankanady",
+                "pincode": 575002
+            },
+            {
+                "name": "Kannur",
+                "pincode": 575007
+            },
+            {
+                "name": "Karnad",
+                "pincode": 574154
+            },
+            {
+                "name": "Karnire",
+                "pincode": 574154
+            },
+            {
+                "name": "Kateel",
+                "pincode": 574148
+            },
+            {
+                "name": "Katipalla",
+                "pincode": 575030
+            },
+            {
+                "name": "Kavathar",
+                "pincode": 574154
+            },
+            {
+                "name": "Kavur",
+                "pincode": 575015
+            },
+            {
+                "name": "Kemral Panchayat",
+                "pincode": 574146
+            },
+            {
+                "name": "Kenchanakere",
+                "pincode": 574154
+            },
+            {
+                "name": "Kenjar",
+                "pincode": 574142
+            },
+            {
+                "name": "Kinnigoli",
+                "pincode": 574150
+            },
+            {
+                "name": "Kinnikambla",
+                "pincode": 574151
+            },
+            {
+                "name": "Kinya",
+                "pincode": 575023
+            },
+            {
+                "name": "Kodiyalbail",
+                "pincode": 575003
+            },
+            {
+                "name": "Kodmannu Bantwal",
+                "pincode": 574143
+            },
+            {
+                "name": "Koikude",
+                "pincode": 574146
+            },
+            {
+                "name": "Kolambe",
+                "pincode": 574142
+            },
+            {
+                "name": "Kolavoor",
+                "pincode": 574144
+            },
+            {
+                "name": "Kollur",
+                "pincode": 574141
+            },
+            {
+                "name": "Kompadavu",
+                "pincode": 574144
+            },
+            {
+                "name": "Konaje",
+                "pincode": 574199
+            },
+            {
+                "name": "Konchady",
+                "pincode": 575008
+            },
+            {
+                "name": "Kotekar",
+                "pincode": 575022
+            },
+            {
+                "name": "Krishnapura",
+                "pincode": 575014
+            },
+            {
+                "name": "Kudupu",
+                "pincode": 575028
+            },
+            {
+                "name": "Kulai",
+                "pincode": 575019
+            },
+            {
+                "name": "Kulshekar",
+                "pincode": 575005
+            },
+            {
+                "name": "Kulur",
+                "pincode": 575013
+            },
+            {
+                "name": "Kumpala",
+                "pincode": 575022
+            },
+            {
+                "name": "Kuppepadavu",
+                "pincode": 574144
+            },
+            {
+                "name": "Kurnad Bantwal",
+                "pincode": 574153
+            },
+            {
+                "name": "Kuthethur",
+                "pincode": 575030
+            },
+            {
+                "name": "Kuthethur Bajav",
+                "pincode": 575030
+            },
+            {
+                "name": "Leewell",
+                "pincode": 575001
+            },
+            {
+                "name": "Madhya",
+                "pincode": 575030
+            },
+            {
+                "name": "Malalipanchayath",
+                "pincode": 574151
+            },
+            {
+                "name": "Mallur",
+                "pincode": 575029
+            },
+            {
+                "name": "Mangalagangothri",
+                "pincode": 574199
+            },
+            {
+                "name": "Mangalanthi",
+                "pincode": 575018
+            },
+            {
+                "name": "Mangalore Collectorate",
+                "pincode": 575001
+            },
+            {
+                "name": "Mangalore",
+                "pincode": 575001
+            },
+            {
+                "name": "Meenakaliya",
+                "pincode": 575010
+            },
+            {
+                "name": "Mercara Hill",
+                "pincode": 575002
+            },
+            {
+                "name": "Mermajal Bantwal",
+                "pincode": 574143
+            },
+            {
+                "name": "Mogaru",
+                "pincode": 574144
+            },
+            {
+                "name": "Montepadavu",
+                "pincode": 574153
+            },
+            {
+                "name": "Moodushedde",
+                "pincode": 575028
+            },
+            {
+                "name": "MSEZ Colony",
+                "pincode": 575019
+            },
+            {
+                "name": "Muchur",
+                "pincode": 574144
+            },
+            {
+                "name": "Muduperar",
+                "pincode": 574151
+            },
+            {
+                "name": "Mukka",
+                "pincode": 574146
+            },
+            {
+                "name": "Mulki Bazar",
+                "pincode": 574154
+            },
+            {
+                "name": "Mulki East",
+                "pincode": 574154
+            },
+            {
+                "name": "Mulki",
+                "pincode": 574154
+            },
+            {
+                "name": "Munnur",
+                "pincode": 575017
+            },
+            {
+                "name": "Nadugodu",
+                "pincode": 574150
+            },
+            {
+                "name": "Nagori",
+                "pincode": 575007
+            },
+            {
+                "name": "Naringana Bantwal",
+                "pincode": 575018
+            },
+            {
+                "name": "Neermarga",
+                "pincode": 575029
+            },
+            {
+                "name": "Neerude",
+                "pincode": 574144
+            },
+            {
+                "name": "PACE Campus",
+                "pincode": 574199
+            },
+            {
+                "name": "Padil",
+                "pincode": 575007
+            },
+            {
+                "name": "Padu",
+                "pincode": 575029
+            },
+            {
+                "name": "Padupanambur",
+                "pincode": 574146
+            },
+            {
+                "name": "Paduperar",
+                "pincode": 574142
+            },
+            {
+                "name": "Panambur",
+                "pincode": 575010
+            },
+            {
+                "name": "Panjimogaru",
+                "pincode": 575013
+            },
+            {
+                "name": "Panjinadka",
+                "pincode": 574154
+            },
+            {
+                "name": "Pavur",
+                "pincode": 574199
+            },
+            {
+                "name": "Pedamale",
+                "pincode": 575029
+            },
+            {
+                "name": "Pejavara",
+                "pincode": 574142
+            },
+            {
+                "name": "Permannur",
+                "pincode": 575017
+            },
+            {
+                "name": "Permude",
+                "pincode": 574509
+            },
+            {
+                "name": "Phajiru Bantwal",
+                "pincode": 574199
+            },
+            {
+                "name": "Pudu",
+                "pincode": 574143
+            },
+            {
+                "name": "Punaroor",
+                "pincode": 574150
+            },
+            {
+                "name": "Sadashivanagar",
+                "pincode": 574154
+            },
+            {
+                "name": "Sandspit",
+                "pincode": 575013
+            },
+            {
+                "name": "Sasihithlu",
+                "pincode": 574146
+            },
+            {
+                "name": "Shakthinagar Dakshina Kannada",
+                "pincode": 575016
+            },
+            {
+                "name": "Shimanthoor",
+                "pincode": 574154
+            },
+            {
+                "name": "Sibrikere",
+                "pincode": 574144
+            },
+            {
+                "name": "Someshwar Uchil",
+                "pincode": 575023
+            },
+            {
+                "name": "Srinivasnagar",
+                "pincode": 575025
+            },
+            {
+                "name": "Surathkal",
+                "pincode": 575014
+            },
+            {
+                "name": "Surinje",
+                "pincode": 575030
+            },
+            {
+                "name": "Talapady",
+                "pincode": 575023
+            },
+            {
+                "name": "Thokur",
+                "pincode": 574146
+            },
+            {
+                "name": "Thumbe Bantwal",
+                "pincode": 574143
+            },
+            {
+                "name": "Ulaibettu",
+                "pincode": 574145
+            },
+            {
+                "name": "Ullal",
+                "pincode": 575020
+            },
+            {
+                "name": "Valachil",
+                "pincode": 574143
+            },
+            {
+                "name": "Vamanjoor",
+                "pincode": 575028
+            },
+            {
+                "name": "Yekkar",
+                "pincode": 574509
+            },
+            {
+                "name": "Adyanadka",
+                "pincode": 574260
+            },
+            {
+                "name": "Agrar",
+                "pincode": 574211
+            },
+            {
+                "name": "Aivernad",
+                "pincode": 574239
+            },
+            {
+                "name": "Ajilamogru",
+                "pincode": 574211
+            },
+            {
+                "name": "Ajjavara",
+                "pincode": 574239
+            },
+            {
+                "name": "Ajjibettu",
+                "pincode": 574324
+            },
+            {
+                "name": "Alangar",
+                "pincode": 574227
+            },
+            {
+                "name": "Alankar",
+                "pincode": 574285
+            },
+            {
+                "name": "Aldangady",
+                "pincode": 574217
+            },
+            {
+                "name": "Aletty",
+                "pincode": 574239
+            },
+            {
+                "name": "Alike",
+                "pincode": 574235
+            },
+            {
+                "name": "Allipade",
+                "pincode": 574211
+            },
+            {
+                "name": "Ammunje",
+                "pincode": 574219
+            },
+            {
+                "name": "Amtady",
+                "pincode": 574211
+            },
+            {
+                "name": "Anathady",
+                "pincode": 574253
+            },
+            {
+                "name": "Andinje",
+                "pincode": 574242
+            },
+            {
+                "name": "Arambody",
+                "pincode": 574237
+            },
+            {
+                "name": "Aramboor",
+                "pincode": 574314
+            },
+            {
+                "name": "Aranthodu",
+                "pincode": 574314
+            },
+            {
+                "name": "Arasinamakki",
+                "pincode": 574198
+            },
+            {
+                "name": "Ariadka",
+                "pincode": 574223
+            },
+            {
+                "name": "Arla",
+                "pincode": 574211
+            },
+            {
+                "name": "Aryapu",
+                "pincode": 574210
+            },
+            {
+                "name": "Ashwathapura",
+                "pincode": 574227
+            },
+            {
+                "name": "Badagabellur",
+                "pincode": 574219
+            },
+            {
+                "name": "Badagakajekar",
+                "pincode": 574233
+            },
+            {
+                "name": "Badagannur",
+                "pincode": 574223
+            },
+            {
+                "name": "Bajathur",
+                "pincode": 574241
+            },
+            {
+                "name": "Bajre",
+                "pincode": 574242
+            },
+            {
+                "name": "Balanja",
+                "pincode": 574217
+            },
+            {
+                "name": "Balila",
+                "pincode": 574212
+            },
+            {
+                "name": "Ballya",
+                "pincode": 574221
+            },
+            {
+                "name": "Balpa",
+                "pincode": 574232
+            },
+            {
+                "name": "Balthila",
+                "pincode": 574253
+            },
+            {
+                "name": "Balugodu",
+                "pincode": 574218
+            },
+            {
+                "name": "Banangady",
+                "pincode": 574274
+            },
+            {
+                "name": "Bandar",
+                "pincode": 574326
+            },
+            {
+                "name": "Bangady",
+                "pincode": 574214
+            },
+            {
+                "name": "Bannur",
+                "pincode": 574203
+            },
+            {
+                "name": "Bantval",
+                "pincode": 574211
+            },
+            {
+                "name": "Barebettu",
+                "pincode": 574323
+            },
+            {
+                "name": "Barya",
+                "pincode": 574326
+            },
+            {
+                "name": "Belal",
+                "pincode": 574240
+            },
+            {
+                "name": "Bellare",
+                "pincode": 574212
+            },
+            {
+                "name": "Belloor",
+                "pincode": 574219
+            },
+            {
+                "name": "Belthangady",
+                "pincode": 574214
+            },
+            {
+                "name": "Belvai",
+                "pincode": 574213
+            },
+            {
+                "name": "Benjanapadavu",
+                "pincode": 574219
+            },
+            {
+                "name": "Bettampady",
+                "pincode": 574259
+            },
+            {
+                "name": "Bilinele",
+                "pincode": 574238
+            },
+            {
+                "name": "Biliyoor",
+                "pincode": 574325
+            },
+            {
+                "name": "Biliyoorkatte",
+                "pincode": 574243
+            },
+            {
+                "name": "Bobbekri",
+                "pincode": 574328
+            },
+            {
+                "name": "Bolanthuru",
+                "pincode": 574222
+            },
+            {
+                "name": "Bollaje Sulya",
+                "pincode": 574248
+            },
+            {
+                "name": "Bolwar",
+                "pincode": 574201
+            },
+            {
+                "name": "Borimar",
+                "pincode": 574253
+            },
+            {
+                "name": "Budoli",
+                "pincode": 574253
+            },
+            {
+                "name": "Charmadi",
+                "pincode": 574228
+            },
+            {
+                "name": "Charvaka",
+                "pincode": 574328
+            },
+            {
+                "name": "Chickmudnoor",
+                "pincode": 574203
+            },
+            {
+                "name": "Chokkadi",
+                "pincode": 574212
+            },
+            {
+                "name": "Court HillPuttur",
+                "pincode": 574201
+            },
+            {
+                "name": "Dandegoli",
+                "pincode": 574324
+            },
+            {
+                "name": "DarbePuttur",
+                "pincode": 574202
+            },
+            {
+                "name": "Darbethadka",
+                "pincode": 574210
+            },
+            {
+                "name": "Daregudde",
+                "pincode": 574213
+            },
+            {
+                "name": "Devachalla",
+                "pincode": 574218
+            },
+            {
+                "name": "Devarahalli Sulya",
+                "pincode": 574238
+            },
+            {
+                "name": "Dharmasthala",
+                "pincode": 574216
+            },
+            {
+                "name": "Doddathota",
+                "pincode": 574248
+            },
+            {
+                "name": "Dolpady",
+                "pincode": 574328
+            },
+            {
+                "name": "Duggaladka Sulya",
+                "pincode": 574239
+            },
+            {
+                "name": "Gandibagilu Beltangadi",
+                "pincode": 574228
+            },
+            {
+                "name": "Gardady",
+                "pincode": 574217
+            },
+            {
+                "name": "Gerukatte",
+                "pincode": 574217
+            },
+            {
+                "name": "Golithattu",
+                "pincode": 574229
+            },
+            {
+                "name": "Goonadka Sulya",
+                "pincode": 574234
+            },
+            {
+                "name": "Gundia",
+                "pincode": 574229
+            },
+            {
+                "name": "Guruvayanakere Beltangadi",
+                "pincode": 574217
+            },
+            {
+                "name": "Guthigar",
+                "pincode": 574218
+            },
+            {
+                "name": "Haleneranky",
+                "pincode": 574241
+            },
+            {
+                "name": "Hariharapallathadka",
+                "pincode": 574218
+            },
+            {
+                "name": "Hirebandady",
+                "pincode": 574241
+            },
+            {
+                "name": "Hosabettu",
+                "pincode": 574227
+            },
+            {
+                "name": "Ichilampady",
+                "pincode": 574229
+            },
+            {
+                "name": "Idkidu",
+                "pincode": 574220
+            },
+            {
+                "name": "Ilanthila",
+                "pincode": 574241
+            },
+            {
+                "name": "IRA",
+                "pincode": 574323
+            },
+            {
+                "name": "Irde",
+                "pincode": 574259
+            },
+            {
+                "name": "Ishwaramangala",
+                "pincode": 574313
+            },
+            {
+                "name": "Jakribettu",
+                "pincode": 574211
+            },
+            {
+                "name": "Jalsur",
+                "pincode": 574239
+            },
+            {
+                "name": "Jodumarga",
+                "pincode": 574219
+            },
+            {
+                "name": "Kabaka",
+                "pincode": 574220
+            },
+            {
+                "name": "Kadaba Dakshina Kannada",
+                "pincode": 574221
+            },
+            {
+                "name": "Kadabettu",
+                "pincode": 574265
+            },
+            {
+                "name": "Kadandale",
+                "pincode": 574226
+            },
+            {
+                "name": "Kaddya",
+                "pincode": 574230
+            },
+            {
+                "name": "Kadeshwalya",
+                "pincode": 574325
+            },
+            {
+                "name": "Kadirudyavara",
+                "pincode": 574228
+            },
+            {
+                "name": "Kagekana",
+                "pincode": 574253
+            },
+            {
+                "name": "Kaikara",
+                "pincode": 574210
+            },
+            {
+                "name": "Kaimana",
+                "pincode": 574202
+            },
+            {
+                "name": "Kakkinje",
+                "pincode": 574228
+            },
+            {
+                "name": "Kalanja",
+                "pincode": 574212
+            },
+            {
+                "name": "Kallabettu",
+                "pincode": 574197
+            },
+            {
+                "name": "Kalladka",
+                "pincode": 574222
+            },
+            {
+                "name": "Kallamundkur",
+                "pincode": 574274
+            },
+            {
+                "name": "Kalleri",
+                "pincode": 574326
+            },
+            {
+                "name": "Kallige",
+                "pincode": 574219
+            },
+            {
+                "name": "Kalmadka",
+                "pincode": 574212
+            },
+            {
+                "name": "Kalmakar",
+                "pincode": 574218
+            },
+            {
+                "name": "Kalmanja",
+                "pincode": 574228
+            },
+            {
+                "name": "Kamila Sulya",
+                "pincode": 574218
+            },
+            {
+                "name": "Kanakamajal",
+                "pincode": 574223
+            },
+            {
+                "name": "KaniyurBeltangady",
+                "pincode": 574217
+            },
+            {
+                "name": "KaniyurPuttur",
+                "pincode": 574328
+            },
+            {
+                "name": "Kanyadi",
+                "pincode": 574240
+            },
+            {
+                "name": "Kanyana",
+                "pincode": 574279
+            },
+            {
+                "name": "Karaya",
+                "pincode": 574326
+            },
+            {
+                "name": "Karikala Sulya",
+                "pincode": 574232
+            },
+            {
+                "name": "Karimanel",
+                "pincode": 574242
+            },
+            {
+                "name": "Karingana",
+                "pincode": 574222
+            },
+            {
+                "name": "Karinje",
+                "pincode": 574265
+            },
+            {
+                "name": "Karnoor",
+                "pincode": 574313
+            },
+            {
+                "name": "Karopady",
+                "pincode": 574279
+            },
+            {
+                "name": "Karpe",
+                "pincode": 574237
+            },
+            {
+                "name": "Kashipatna",
+                "pincode": 574236
+            },
+            {
+                "name": "Kav",
+                "pincode": 574223
+            },
+            {
+                "name": "Kavalkatte",
+                "pincode": 574265
+            },
+            {
+                "name": "Kayarthadka",
+                "pincode": 574216
+            },
+            {
+                "name": "Kedambady",
+                "pincode": 574210
+            },
+            {
+                "name": "Kedila",
+                "pincode": 574220
+            },
+            {
+                "name": "Kemminje",
+                "pincode": 574202
+            },
+            {
+                "name": "Kenya",
+                "pincode": 574232
+            },
+            {
+                "name": "Killur",
+                "pincode": 574214
+            },
+            {
+                "name": "Kodangai",
+                "pincode": 574243
+            },
+            {
+                "name": "Kodangallu",
+                "pincode": 574197
+            },
+            {
+                "name": "Kodapadavu",
+                "pincode": 574222
+            },
+            {
+                "name": "Kodimbady",
+                "pincode": 574325
+            },
+            {
+                "name": "Kodimbala",
+                "pincode": 574221
+            },
+            {
+                "name": "Kodiyala",
+                "pincode": 574212
+            },
+            {
+                "name": "Koila",
+                "pincode": 574211
+            },
+            {
+                "name": "Koila Cattle FarmK.C.Farm Puttur(dk)",
+                "pincode": 574241
+            },
+            {
+                "name": "Kokkada",
+                "pincode": 574198
+            },
+            {
+                "name": "Kokrady",
+                "pincode": 574242
+            },
+            {
+                "name": "Kolchar Sulya",
+                "pincode": 574239
+            },
+            {
+                "name": "Kollamogru",
+                "pincode": 574218
+            },
+            {
+                "name": "Kolnadu",
+                "pincode": 574323
+            },
+            {
+                "name": "Kombar",
+                "pincode": 574230
+            },
+            {
+                "name": "Konalu",
+                "pincode": 574229
+            },
+            {
+                "name": "Koyyur",
+                "pincode": 574214
+            },
+            {
+                "name": "Kudambettu",
+                "pincode": 574324
+            },
+            {
+                "name": "Kudippady",
+                "pincode": 574220
+            },
+            {
+                "name": "Kudmar",
+                "pincode": 574202
+            },
+            {
+                "name": "Kudripadavu",
+                "pincode": 574274
+            },
+            {
+                "name": "Kudupallathadka",
+                "pincode": 574279
+            },
+            {
+                "name": "Kukkedy Belthagady",
+                "pincode": 574242
+            },
+            {
+                "name": "Kukkujadka Sulya",
+                "pincode": 574212
+            },
+            {
+                "name": "Kula",
+                "pincode": 574243
+            },
+            {
+                "name": "Kulalu",
+                "pincode": 574323
+            },
+            {
+                "name": "Kumbra",
+                "pincode": 574210
+            },
+            {
+                "name": "Kuriya",
+                "pincode": 574210
+            },
+            {
+                "name": "Kuriyala",
+                "pincode": 574211
+            },
+            {
+                "name": "Kurunjibag Sulya",
+                "pincode": 574327
+            },
+            {
+                "name": "Kuthkunja",
+                "pincode": 574232
+            },
+            {
+                "name": "Kutlur",
+                "pincode": 574109
+            },
+            {
+                "name": "Kutrupady",
+                "pincode": 574221
+            },
+            {
+                "name": "Kuvettu",
+                "pincode": 574224
+            },
+            {
+                "name": "Laila",
+                "pincode": 574214
+            },
+            {
+                "name": "Loretto",
+                "pincode": 574211
+            },
+            {
+                "name": "Machina",
+                "pincode": 574224
+            },
+            {
+                "name": "Madanthyar",
+                "pincode": 574224
+            },
+            {
+                "name": "Madappady",
+                "pincode": 574218
+            },
+            {
+                "name": "Madav",
+                "pincode": 574210
+            },
+            {
+                "name": "Malady",
+                "pincode": 574224
+            },
+            {
+                "name": "Malavanthige",
+                "pincode": 574214
+            },
+            {
+                "name": "Manchi",
+                "pincode": 574323
+            },
+            {
+                "name": "Mandekole",
+                "pincode": 574239
+            },
+            {
+                "name": "Mangalapadavu",
+                "pincode": 574243
+            },
+            {
+                "name": "Mani",
+                "pincode": 574253
+            },
+            {
+                "name": "Manikar Sulya",
+                "pincode": 574212
+            },
+            {
+                "name": "Maninalkur",
+                "pincode": 574265
+            },
+            {
+                "name": "Mantrady",
+                "pincode": 574236
+            },
+            {
+                "name": "Mardala",
+                "pincode": 574230
+            },
+            {
+                "name": "Markanja",
+                "pincode": 574248
+            },
+            {
+                "name": "Marody",
+                "pincode": 574236
+            },
+            {
+                "name": "Maroor",
+                "pincode": 574197
+            },
+            {
+                "name": "Mavinakatte",
+                "pincode": 574324
+            },
+            {
+                "name": "Melanthabettu",
+                "pincode": 574214
+            },
+            {
+                "name": "Mijar",
+                "pincode": 574225
+            },
+            {
+                "name": "Mithabail",
+                "pincode": 574226
+            },
+            {
+                "name": "Modankap",
+                "pincode": 574219
+            },
+            {
+                "name": "Mogru",
+                "pincode": 574241
+            },
+            {
+                "name": "Moodambail",
+                "pincode": 574260
+            },
+            {
+                "name": "Moodbidri",
+                "pincode": 574227
+            },
+            {
+                "name": "Moodumarnad",
+                "pincode": 574213
+            },
+            {
+                "name": "Mottethadka",
+                "pincode": 574202
+            },
+            {
+                "name": "Mudukodi",
+                "pincode": 574242
+            },
+            {
+                "name": "Mudupadukodi",
+                "pincode": 574265
+            },
+            {
+                "name": "Mundaje",
+                "pincode": 574228
+            },
+            {
+                "name": "Mundur",
+                "pincode": 574202
+            },
+            {
+                "name": "Mupperia",
+                "pincode": 574212
+            },
+            {
+                "name": "Murulya",
+                "pincode": 574328
+            },
+            {
+                "name": "Murva",
+                "pincode": 574243
+            },
+            {
+                "name": "Nadugallu",
+                "pincode": 574218
+            },
+            {
+                "name": "Nainad",
+                "pincode": 574233
+            },
+            {
+                "name": "Nala",
+                "pincode": 574217
+            },
+            {
+                "name": "Naravi",
+                "pincode": 574109
+            },
+            {
+                "name": "Narikombu",
+                "pincode": 574231
+            },
+            {
+                "name": "Narimogru",
+                "pincode": 574202
+            },
+            {
+                "name": "NavoorBantval",
+                "pincode": 574211
+            },
+            {
+                "name": "NavoorBelt",
+                "pincode": 574214
+            },
+            {
+                "name": "Nayarmoole",
+                "pincode": 574243
+            },
+            {
+                "name": "Neerkaje",
+                "pincode": 574243
+            },
+            {
+                "name": "NehrunagarPuttur DK",
+                "pincode": 574203
+            },
+            {
+                "name": "Nekkilady34",
+                "pincode": 574325
+            },
+            {
+                "name": "Nellikar",
+                "pincode": 574107
+            },
+            {
+                "name": "Nellur Kemraje",
+                "pincode": 574248
+            },
+            {
+                "name": "Nellyadi",
+                "pincode": 574229
+            },
+            {
+                "name": "Neralakatte",
+                "pincode": 574253
+            },
+            {
+                "name": "Neria Belthagady",
+                "pincode": 574228
+            },
+            {
+                "name": "Nettana",
+                "pincode": 574230
+            },
+            {
+                "name": "Niddodi",
+                "pincode": 574274
+            },
+            {
+                "name": "Nidle",
+                "pincode": 574216
+            },
+            {
+                "name": "Nidpalli",
+                "pincode": 574259
+            },
+            {
+                "name": "Nittade",
+                "pincode": 574242
+            },
+            {
+                "name": "Noojibalthila",
+                "pincode": 574221
+            },
+            {
+                "name": "Odiyoor",
+                "pincode": 574243
+            },
+            {
+                "name": "Old Town Ujire Beltangadi",
+                "pincode": 574240
+            },
+            {
+                "name": "Padangady",
+                "pincode": 574217
+            },
+            {
+                "name": "Padnur",
+                "pincode": 574220
+            },
+            {
+                "name": "Padukonaje",
+                "pincode": 574236
+            },
+            {
+                "name": "Padumarnad",
+                "pincode": 574213
+            },
+            {
+                "name": "Pailar Sulya",
+                "pincode": 574248
+            },
+            {
+                "name": "Paladka",
+                "pincode": 574226
+            },
+            {
+                "name": "Palthady",
+                "pincode": 574210
+            },
+            {
+                "name": "Pambethady",
+                "pincode": 574232
+            },
+            {
+                "name": "Panaje",
+                "pincode": 574259
+            },
+            {
+                "name": "Panakaje",
+                "pincode": 574224
+            },
+            {
+                "name": "Panemangalore",
+                "pincode": 574231
+            },
+            {
+                "name": "Panja",
+                "pincode": 574232
+            },
+            {
+                "name": "Panjikal",
+                "pincode": 574211
+            },
+            {
+                "name": "Perabe",
+                "pincode": 574285
+            },
+            {
+                "name": "Perady",
+                "pincode": 574236
+            },
+            {
+                "name": "Peral Sulya",
+                "pincode": 574239
+            },
+            {
+                "name": "Peramogru",
+                "pincode": 574325
+            },
+            {
+                "name": "Peranja",
+                "pincode": 574197
+            },
+            {
+                "name": "Perlampady",
+                "pincode": 574212
+            },
+            {
+                "name": "Permanu",
+                "pincode": 574214
+            },
+            {
+                "name": "Pernaje",
+                "pincode": 574223
+            },
+            {
+                "name": "Perne",
+                "pincode": 574325
+            },
+            {
+                "name": "Peruvai",
+                "pincode": 574260
+            },
+            {
+                "name": "Peruvaje",
+                "pincode": 574212
+            },
+            {
+                "name": "Petrame",
+                "pincode": 574198
+            },
+            {
+                "name": "Pilya",
+                "pincode": 574217
+            },
+            {
+                "name": "Polali",
+                "pincode": 574219
+            },
+            {
+                "name": "Puchamogru",
+                "pincode": 574237
+            },
+            {
+                "name": "Puduvettu",
+                "pincode": 574216
+            },
+            {
+                "name": "Puncha",
+                "pincode": 574243
+            },
+            {
+                "name": "Punchappady",
+                "pincode": 574202
+            },
+            {
+                "name": "Punjalkatte",
+                "pincode": 574233
+            },
+            {
+                "name": "Puthila",
+                "pincode": 574326
+            },
+            {
+                "name": "PutturD.K",
+                "pincode": 574201
+            },
+            {
+                "name": "Ramakunja",
+                "pincode": 574241
+            },
+            {
+                "name": "Rayee",
+                "pincode": 574211
+            },
+            {
+                "name": "Rekya",
+                "pincode": 574229
+            },
+            {
+                "name": "Renjilady",
+                "pincode": 574221
+            },
+            {
+                "name": "S.D.M.C.Ujire Beltangadi",
+                "pincode": 574240
+            },
+            {
+                "name": "Sajipamudu",
+                "pincode": 574231
+            },
+            {
+                "name": "Sajipamunnur",
+                "pincode": 574231
+            },
+            {
+                "name": "Sajipanadu",
+                "pincode": 574231
+            },
+            {
+                "name": "Sajipapadu",
+                "pincode": 574231
+            },
+            {
+                "name": "Salethur",
+                "pincode": 574323
+            },
+            {
+                "name": "Samedakalapu Beltangadi",
+                "pincode": 574216
+            },
+            {
+                "name": "Sampaje",
+                "pincode": 574234
+            },
+            {
+                "name": "Sampige",
+                "pincode": 574227
+            },
+            {
+                "name": "Sarapady",
+                "pincode": 574211
+            },
+            {
+                "name": "Sarve",
+                "pincode": 574202
+            },
+            {
+                "name": "Sathya Sai Vihar",
+                "pincode": 574235
+            },
+            {
+                "name": "Savanal",
+                "pincode": 574214
+            },
+            {
+                "name": "SavanurPuttur",
+                "pincode": 574202
+            },
+            {
+                "name": "Savya",
+                "pincode": 574242
+            },
+            {
+                "name": "Shamboor",
+                "pincode": 574231
+            },
+            {
+                "name": "Shanthigodu",
+                "pincode": 574202
+            },
+            {
+                "name": "Sharavoor",
+                "pincode": 574285
+            },
+            {
+                "name": "Shibaje",
+                "pincode": 574198
+            },
+            {
+                "name": "Shirady",
+                "pincode": 574229
+            },
+            {
+                "name": "Shirthady",
+                "pincode": 574236
+            },
+            {
+                "name": "Shishila",
+                "pincode": 574198
+            },
+            {
+                "name": "Siddakatte",
+                "pincode": 574237
+            },
+            {
+                "name": "Sirlalu",
+                "pincode": 574217
+            },
+            {
+                "name": "Sonangeri Sulya",
+                "pincode": 574239
+            },
+            {
+                "name": "Soole Padavu",
+                "pincode": 574313
+            },
+            {
+                "name": "Sornad",
+                "pincode": 574211
+            },
+            {
+                "name": "Subramanya",
+                "pincode": 574238
+            },
+            {
+                "name": "Sulkeri",
+                "pincode": 574109
+            },
+            {
+                "name": "Sullia Gandhinagar Sulya",
+                "pincode": 574239
+            },
+            {
+                "name": "Sullia",
+                "pincode": 574239
+            },
+            {
+                "name": "Sunkadakatte",
+                "pincode": 574230
+            },
+            {
+                "name": "Taccode",
+                "pincode": 574197
+            },
+            {
+                "name": "Tannirpantha Beltangadi",
+                "pincode": 574326
+            },
+            {
+                "name": "Tenkakajekar",
+                "pincode": 574233
+            },
+            {
+                "name": "Tenkakarandur",
+                "pincode": 574217
+            },
+            {
+                "name": "Thekkar",
+                "pincode": 574241
+            },
+            {
+                "name": "Thodar",
+                "pincode": 574227
+            },
+            {
+                "name": "Thodikana",
+                "pincode": 574314
+            },
+            {
+                "name": "Thotathady",
+                "pincode": 574228
+            },
+            {
+                "name": "Ubbaradka Mithur",
+                "pincode": 574248
+            },
+            {
+                "name": "Ujire",
+                "pincode": 574240
+            },
+            {
+                "name": "Ujirpade",
+                "pincode": 574203
+            },
+            {
+                "name": "Uli",
+                "pincode": 574326
+            },
+            {
+                "name": "Uppinangady",
+                "pincode": 574241
+            },
+            {
+                "name": "Uruvalu",
+                "pincode": 574326
+            },
+            {
+                "name": "Valpady",
+                "pincode": 574236
+            },
+            {
+                "name": "Vamadapadavu",
+                "pincode": 574324
+            },
+            {
+                "name": "Veerakamba",
+                "pincode": 574222
+            },
+            {
+                "name": "Venur",
+                "pincode": 574242
+            },
+            {
+                "name": "Vidyagiri Moodbidri",
+                "pincode": 574227
+            },
+            {
+                "name": "Vittal Mudnur",
+                "pincode": 574243
+            },
+            {
+                "name": "Vittal",
+                "pincode": 574243
+            },
+            {
+                "name": "Vodilnala",
+                "pincode": 574217
+            },
+            {
+                "name": "Vogga",
+                "pincode": 574265
+            },
+            {
+                "name": "Volalu",
+                "pincode": 574241
+            },
+            {
+                "name": "Yedamangala",
+                "pincode": 574221
+            },
+            {
+                "name": "Yenekal",
+                "pincode": 574238
+            },
+            {
+                "name": "Yenmur",
+                "pincode": 574328
+            }
+        ]
+    },
+    {
+        "district_id": 286,
+        "pincodes": [{
+                "name": "Belmannu",
+                "pincode": 576111
+            },
+            {
+                "name": "Bolakodi",
+                "pincode": 576121
+            },
+            {
+                "name": "Inna",
+                "pincode": 576121
+            },
+            {
+                "name": "Iruvail",
+                "pincode": 574144
+            },
+            {
+                "name": "Mundkur",
+                "pincode": 576121
+            },
+            {
+                "name": "Nandalike",
+                "pincode": 576111
+            },
+            {
+                "name": "Sacherigudde",
+                "pincode": 576121
+            },
+            {
+                "name": "Ajekar",
+                "pincode": 574101
+            },
+            {
+                "name": "Andar",
+                "pincode": 574101
+            },
+            {
+                "name": "Attur",
+                "pincode": 576117
+            },
+            {
+                "name": "Bailur",
+                "pincode": 574102
+            },
+            {
+                "name": "Bajegoli",
+                "pincode": 574122
+            },
+            {
+                "name": "Belady",
+                "pincode": 574129
+            },
+            {
+                "name": "Belanje",
+                "pincode": 576112
+            },
+            {
+                "name": "Bola",
+                "pincode": 574110
+            },
+            {
+                "name": "Borkatte",
+                "pincode": 574107
+            },
+            {
+                "name": "Chara",
+                "pincode": 576112
+            },
+            {
+                "name": "Doopadakatte",
+                "pincode": 574110
+            },
+            {
+                "name": "Durga",
+                "pincode": 576117
+            },
+            {
+                "name": "Ellare",
+                "pincode": 574108
+            },
+            {
+                "name": "Gundyadka",
+                "pincode": 574102
+            },
+            {
+                "name": "Hadiangady",
+                "pincode": 574101
+            },
+            {
+                "name": "Hebri",
+                "pincode": 576112
+            },
+            {
+                "name": "Hermunde",
+                "pincode": 574101
+            },
+            {
+                "name": "Hirgana",
+                "pincode": 576117
+            },
+            {
+                "name": "Hiriangady",
+                "pincode": 574104
+            },
+            {
+                "name": "Hosmar",
+                "pincode": 574107
+            },
+            {
+                "name": "Idu",
+                "pincode": 574109
+            },
+            {
+                "name": "Irvathur",
+                "pincode": 574114
+            },
+            {
+                "name": "Jarkala",
+                "pincode": 574101
+            },
+            {
+                "name": "Kabbinale",
+                "pincode": 576112
+            },
+            {
+                "name": "Kadthala",
+                "pincode": 574108
+            },
+            {
+                "name": "Kallya",
+                "pincode": 574110
+            },
+            {
+                "name": "Kanajar",
+                "pincode": 574102
+            },
+            {
+                "name": "Kanthavara",
+                "pincode": 574129
+            },
+            {
+                "name": "Karkala Bazar",
+                "pincode": 574104
+            },
+            {
+                "name": "Karkala",
+                "pincode": 574104
+            },
+            {
+                "name": "Karkala West",
+                "pincode": 574104
+            },
+            {
+                "name": "Kedinje",
+                "pincode": 574110
+            },
+            {
+                "name": "Kervashe",
+                "pincode": 574122
+            },
+            {
+                "name": "Kuchur",
+                "pincode": 576112
+            },
+            {
+                "name": "Kukkuje",
+                "pincode": 574108
+            },
+            {
+                "name": "Kukkundur",
+                "pincode": 576117
+            },
+            {
+                "name": "Kukkundur West",
+                "pincode": 576117
+            },
+            {
+                "name": "Kuntady",
+                "pincode": 574244
+            },
+            {
+                "name": "Mala",
+                "pincode": 574122
+            },
+            {
+                "name": "Manjalthar",
+                "pincode": 574122
+            },
+            {
+                "name": "Miyar",
+                "pincode": 574107
+            },
+            {
+                "name": "Mudradi",
+                "pincode": 576112
+            },
+            {
+                "name": "Muniyal",
+                "pincode": 574108
+            },
+            {
+                "name": "Nakre",
+                "pincode": 576117
+            },
+            {
+                "name": "Nallur",
+                "pincode": 574122
+            },
+            {
+                "name": "Ninjoor",
+                "pincode": 574244
+            },
+            {
+                "name": "Nire",
+                "pincode": 574102
+            },
+            {
+                "name": "Nitte",
+                "pincode": 574110
+            },
+            {
+                "name": "Nooralbettu",
+                "pincode": 574107
+            },
+            {
+                "name": "Palli",
+                "pincode": 574244
+            },
+            {
+                "name": "Parappadi",
+                "pincode": 574110
+            },
+            {
+                "name": "Renjala",
+                "pincode": 574114
+            },
+            {
+                "name": "Sanur",
+                "pincode": 574114
+            },
+            {
+                "name": "Shivapura",
+                "pincode": 576112
+            },
+            {
+                "name": "Sitanadi",
+                "pincode": 576112
+            },
+            {
+                "name": "Someshwara",
+                "pincode": 576112
+            },
+            {
+                "name": "Tellar",
+                "pincode": 576117
+            },
+            {
+                "name": "Vanjarakatte",
+                "pincode": 574129
+            },
+            {
+                "name": "Varanga",
+                "pincode": 574108
+            },
+            {
+                "name": "Vishwasnagar",
+                "pincode": 574108
+            },
+            {
+                "name": "Yennehole",
+                "pincode": 574101
+            },
+            {
+                "name": "Yerlapady",
+                "pincode": 574102
+            },
+            {
+                "name": "Achladi",
+                "pincode": 576225
+            },
+            {
+                "name": "Adi udupi",
+                "pincode": 576101
+            },
+            {
+                "name": "Admar",
+                "pincode": 574119
+            },
+            {
+                "name": "Airody",
+                "pincode": 576226
+            },
+            {
+                "name": "Ajrihara",
+                "pincode": 576283
+            },
+            {
+                "name": "Alevoor",
+                "pincode": 574118
+            },
+            {
+                "name": "Alur",
+                "pincode": 576233
+            },
+            {
+                "name": "Amasebail",
+                "pincode": 576227
+            },
+            {
+                "name": "Ambalapadi",
+                "pincode": 576103
+            },
+            {
+                "name": "Ampar",
+                "pincode": 576211
+            },
+            {
+                "name": "Anagalli",
+                "pincode": 576211
+            },
+            {
+                "name": "Ardi",
+                "pincode": 576212
+            },
+            {
+                "name": "Arekandige",
+                "pincode": 576124
+            },
+            {
+                "name": "Aroor",
+                "pincode": 576213
+            },
+            {
+                "name": "Asodu",
+                "pincode": 576222
+            },
+            {
+                "name": "Athradi",
+                "pincode": 576107
+            },
+            {
+                "name": "Avarse",
+                "pincode": 576223
+            },
+            {
+                "name": "Avral",
+                "pincode": 574103
+            },
+            {
+                "name": "Bada",
+                "pincode": 574117
+            },
+            {
+                "name": "Badagabettu",
+                "pincode": 576107
+            },
+            {
+                "name": "Badakere",
+                "pincode": 576224
+            },
+            {
+                "name": "Badanidiyur",
+                "pincode": 576115
+            },
+            {
+                "name": "Baidabettu",
+                "pincode": 576234
+            },
+            {
+                "name": "Baikadi",
+                "pincode": 576213
+            },
+            {
+                "name": "Balkur",
+                "pincode": 576211
+            },
+            {
+                "name": "Bannadi",
+                "pincode": 576225
+            },
+            {
+                "name": "Bannanje",
+                "pincode": 576101
+            },
+            {
+                "name": "Barkur",
+                "pincode": 576210
+            },
+            {
+                "name": "Barkur Town",
+                "pincode": 576210
+            },
+            {
+                "name": "Basrur",
+                "pincode": 576211
+            },
+            {
+                "name": "Beejadi",
+                "pincode": 576222
+            },
+            {
+                "name": "Belapu",
+                "pincode": 574117
+            },
+            {
+                "name": "Bellampalli",
+                "pincode": 576124
+            },
+            {
+                "name": "Bellarpadi",
+                "pincode": 576113
+            },
+            {
+                "name": "Belur Devasthanabettu",
+                "pincode": 576221
+            },
+            {
+                "name": "Belve",
+                "pincode": 576212
+            },
+            {
+                "name": "Bennekudru",
+                "pincode": 576210
+            },
+            {
+                "name": "Bhairanje",
+                "pincode": 576107
+            },
+            {
+                "name": "Bhantakal",
+                "pincode": 574115
+            },
+            {
+                "name": "Bijur",
+                "pincode": 576232
+            },
+            {
+                "name": "Brahmavara",
+                "pincode": 576213
+            },
+            {
+                "name": "Byndoor",
+                "pincode": 576214
+            },
+            {
+                "name": "Chanthar",
+                "pincode": 576213
+            },
+            {
+                "name": "Cherkadi",
+                "pincode": 576215
+            },
+            {
+                "name": "Chitpadi",
+                "pincode": 576101
+            },
+            {
+                "name": "Chittoor",
+                "pincode": 576233
+            },
+            {
+                "name": "Devalkunda",
+                "pincode": 576230
+            },
+            {
+                "name": "Dist. Offices Complex Manipal",
+                "pincode": 576104
+            },
+            {
+                "name": "Doddanagudde",
+                "pincode": 576102
+            },
+            {
+                "name": "Gandhi maidan",
+                "pincode": 576201
+            },
+            {
+                "name": "Ganguli",
+                "pincode": 576216
+            },
+            {
+                "name": "Golihole",
+                "pincode": 576214
+            },
+            {
+                "name": "Guddeangadi",
+                "pincode": 576113
+            },
+            {
+                "name": "Gujjadi",
+                "pincode": 576247
+            },
+            {
+                "name": "Gulvadi",
+                "pincode": 576283
+            },
+            {
+                "name": "Gummahola",
+                "pincode": 576212
+            },
+            {
+                "name": "Hadavu",
+                "pincode": 576235
+            },
+            {
+                "name": "Hakladi",
+                "pincode": 576235
+            },
+            {
+                "name": "Haladi 28",
+                "pincode": 576222
+            },
+            {
+                "name": "Haladi 76",
+                "pincode": 576222
+            },
+            {
+                "name": "Halasinakatte",
+                "pincode": 574113
+            },
+            {
+                "name": "Halladi harkadi",
+                "pincode": 576210
+            },
+            {
+                "name": "Hallihole",
+                "pincode": 576229
+            },
+            {
+                "name": "Halnadu",
+                "pincode": 576211
+            },
+            {
+                "name": "Haluvalli",
+                "pincode": 576215
+            },
+            {
+                "name": "Hanehalli",
+                "pincode": 576210
+            },
+            {
+                "name": "Hanglur Kundpaura",
+                "pincode": 576217
+            },
+            {
+                "name": "Haradi",
+                "pincode": 576213
+            },
+            {
+                "name": "Hardalli mandalli",
+                "pincode": 576222
+            },
+            {
+                "name": "Harkur",
+                "pincode": 576233
+            },
+            {
+                "name": "Hattiangadi",
+                "pincode": 576283
+            },
+            {
+                "name": "Havanje",
+                "pincode": 576124
+            },
+            {
+                "name": "Hejmadi",
+                "pincode": 574103
+            },
+            {
+                "name": "Hejmadikodi",
+                "pincode": 574103
+            },
+            {
+                "name": "Hemmadi",
+                "pincode": 576230
+            },
+            {
+                "name": "Hengavalli",
+                "pincode": 576212
+            },
+            {
+                "name": "Heranjal",
+                "pincode": 576219
+            },
+            {
+                "name": "Herga",
+                "pincode": 576107
+            },
+            {
+                "name": "Herikudru",
+                "pincode": 576230
+            },
+            {
+                "name": "Herur",
+                "pincode": 576213
+            },
+            {
+                "name": "Herur 92",
+                "pincode": 574115
+            },
+            {
+                "name": "Heskethur",
+                "pincode": 576210
+            },
+            {
+                "name": "Hiliyana",
+                "pincode": 576212
+            },
+            {
+                "name": "Hirebettu",
+                "pincode": 576107
+            },
+            {
+                "name": "Hiriadka",
+                "pincode": 576113
+            },
+            {
+                "name": "Hoode",
+                "pincode": 576115
+            },
+            {
+                "name": "Hosadu",
+                "pincode": 576247
+            },
+            {
+                "name": "Hosala",
+                "pincode": 576210
+            },
+            {
+                "name": "Hosangadi",
+                "pincode": 576282
+            },
+            {
+                "name": "Hungarcutta",
+                "pincode": 576218
+            },
+            {
+                "name": "Hunsemakki",
+                "pincode": 576222
+            },
+            {
+                "name": "Idurkunhady",
+                "pincode": 576233
+            },
+            {
+                "name": "Innanje",
+                "pincode": 576122
+            },
+            {
+                "name": "Jadkal",
+                "pincode": 576233
+            },
+            {
+                "name": "Jansale",
+                "pincode": 576229
+            },
+            {
+                "name": "Janvarkatte",
+                "pincode": 576223
+            },
+            {
+                "name": "Japthi",
+                "pincode": 576211
+            },
+            {
+                "name": "Kadekar",
+                "pincode": 576103
+            },
+            {
+                "name": "Kadur",
+                "pincode": 576234
+            },
+            {
+                "name": "Kakkunje",
+                "pincode": 576222
+            },
+            {
+                "name": "Kalathur South",
+                "pincode": 574106
+            },
+            {
+                "name": "Kallianapura",
+                "pincode": 576114
+            },
+            {
+                "name": "Kalthod",
+                "pincode": 576219
+            },
+            {
+                "name": "Kamalashile",
+                "pincode": 576229
+            },
+            {
+                "name": "Kandlur",
+                "pincode": 576211
+            },
+            {
+                "name": "Kanyana",
+                "pincode": 576230
+            },
+            {
+                "name": "Karje",
+                "pincode": 576215
+            },
+            {
+                "name": "Karkada",
+                "pincode": 576225
+            },
+            {
+                "name": "Karkunje",
+                "pincode": 576283
+            },
+            {
+                "name": "KatapadiUdupi",
+                "pincode": 574105
+            },
+            {
+                "name": "Kattebelthur",
+                "pincode": 576230
+            },
+            {
+                "name": "Kattingere",
+                "pincode": 576120
+            },
+            {
+                "name": "Kaup",
+                "pincode": 574106
+            },
+            {
+                "name": "Kavadi",
+                "pincode": 576210
+            },
+            {
+                "name": "Kavradi",
+                "pincode": 576211
+            },
+            {
+                "name": "Kedur",
+                "pincode": 576231
+            },
+            {
+                "name": "Kelarkalabettu",
+                "pincode": 576105
+            },
+            {
+                "name": "Kemmannu",
+                "pincode": 576115
+            },
+            {
+                "name": "Kemmundel",
+                "pincode": 574119
+            },
+            {
+                "name": "Kenchanur",
+                "pincode": 576283
+            },
+            {
+                "name": "Kenjur",
+                "pincode": 576234
+            },
+            {
+                "name": "Keradi",
+                "pincode": 576233
+            },
+            {
+                "name": "Kergal",
+                "pincode": 576219
+            },
+            {
+                "name": "Khambadakone",
+                "pincode": 576219
+            },
+            {
+                "name": "Kidiyur",
+                "pincode": 576103
+            },
+            {
+                "name": "Kirimanjeshwara",
+                "pincode": 576219
+            },
+            {
+                "name": "Koderi",
+                "pincode": 576219
+            },
+            {
+                "name": "Kodi",
+                "pincode": 576217
+            },
+            {
+                "name": "Kodi Kanyana",
+                "pincode": 576226
+            },
+            {
+                "name": "Kodibengre",
+                "pincode": 576218
+            },
+            {
+                "name": "Kodladi",
+                "pincode": 576283
+            },
+            {
+                "name": "Kodupanjimar",
+                "pincode": 574116
+            },
+            {
+                "name": "Kokkarne",
+                "pincode": 576234
+            },
+            {
+                "name": "Kolalagiri",
+                "pincode": 576105
+            },
+            {
+                "name": "Kollur",
+                "pincode": 576220
+            },
+            {
+                "name": "Koni",
+                "pincode": 576217
+            },
+            {
+                "name": "Korangrapadi",
+                "pincode": 574118
+            },
+            {
+                "name": "Korgi",
+                "pincode": 576231
+            },
+            {
+                "name": "Kota",
+                "pincode": 576221
+            },
+            {
+                "name": "Kotathattu",
+                "pincode": 576221
+            },
+            {
+                "name": "Koteshwara",
+                "pincode": 576222
+            },
+            {
+                "name": "Krodabailur",
+                "pincode": 576227
+            },
+            {
+                "name": "Krodashrama",
+                "pincode": 576106
+            },
+            {
+                "name": "Kudi",
+                "pincode": 576113
+            },
+            {
+                "name": "Kudrukere",
+                "pincode": 576108
+            },
+            {
+                "name": "Kukkehalli",
+                "pincode": 576124
+            },
+            {
+                "name": "Kukkikatte",
+                "pincode": 576101
+            },
+            {
+                "name": "Kulanje",
+                "pincode": 576227
+            },
+            {
+                "name": "Kumbhashi",
+                "pincode": 576257
+            },
+            {
+                "name": "Kumragodu",
+                "pincode": 576213
+            },
+            {
+                "name": "Kundabarandadi",
+                "pincode": 576235
+            },
+            {
+                "name": "Kundapura",
+                "pincode": 576201
+            },
+            {
+                "name": "Kundapura Market",
+                "pincode": 576201
+            },
+            {
+                "name": "Kunjal",
+                "pincode": 576213
+            },
+            {
+                "name": "Kunjarugiri",
+                "pincode": 574105
+            },
+            {
+                "name": "Kunjibettu",
+                "pincode": 576102
+            },
+            {
+                "name": "Kuthpadi",
+                "pincode": 574118
+            },
+            {
+                "name": "Kuthyar",
+                "pincode": 574116
+            },
+            {
+                "name": "Machattu",
+                "pincode": 576227
+            },
+            {
+                "name": "Madamakki",
+                "pincode": 576212
+            },
+            {
+                "name": "Majur",
+                "pincode": 574106
+            },
+            {
+                "name": "Mallar",
+                "pincode": 574106
+            },
+            {
+                "name": "Malpe",
+                "pincode": 576108
+            },
+            {
+                "name": "Manchikodi",
+                "pincode": 576102
+            },
+            {
+                "name": "Mandarthi",
+                "pincode": 576223
+            },
+            {
+                "name": "Manipal East",
+                "pincode": 576104
+            },
+            {
+                "name": "Manipal",
+                "pincode": 576104
+            },
+            {
+                "name": "Manipal Industrial Area",
+                "pincode": 576104
+            },
+            {
+                "name": "Manipura",
+                "pincode": 576120
+            },
+            {
+                "name": "Manipura West",
+                "pincode": 574105
+            },
+            {
+                "name": "Manur",
+                "pincode": 576221
+            },
+            {
+                "name": "Maravanthe",
+                "pincode": 576224
+            },
+            {
+                "name": "Marne",
+                "pincode": 576120
+            },
+            {
+                "name": "Matapadi",
+                "pincode": 576213
+            },
+            {
+                "name": "Mattar",
+                "pincode": 574116
+            },
+            {
+                "name": "Mattu",
+                "pincode": 574105
+            },
+            {
+                "name": "Mayyadi",
+                "pincode": 576214
+            },
+            {
+                "name": "Melhosur",
+                "pincode": 576233
+            },
+            {
+                "name": "Mission Compound",
+                "pincode": 576101
+            },
+            {
+                "name": "Molahalli",
+                "pincode": 576222
+            },
+            {
+                "name": "Moodubelle",
+                "pincode": 576120
+            },
+            {
+                "name": "Moodumata",
+                "pincode": 576219
+            },
+            {
+                "name": "Muddumane",
+                "pincode": 576223
+            },
+            {
+                "name": "Mudlakatte",
+                "pincode": 576217
+            },
+            {
+                "name": "Mudmunda",
+                "pincode": 576233
+            },
+            {
+                "name": "Mudur",
+                "pincode": 576233
+            },
+            {
+                "name": "Nada",
+                "pincode": 576230
+            },
+            {
+                "name": "Nadur",
+                "pincode": 576223
+            },
+            {
+                "name": "Nalkur",
+                "pincode": 576234
+            },
+            {
+                "name": "Nanchar",
+                "pincode": 576234
+            },
+            {
+                "name": "Nandikur",
+                "pincode": 574111
+            },
+            {
+                "name": "Navunda",
+                "pincode": 576224
+            },
+            {
+                "name": "Neelavara",
+                "pincode": 576213
+            },
+            {
+                "name": "Nittur",
+                "pincode": 576103
+            },
+            {
+                "name": "Nujadi",
+                "pincode": 576233
+            },
+            {
+                "name": "Padebettu",
+                "pincode": 574111
+            },
+            {
+                "name": "Padubelle",
+                "pincode": 574116
+            },
+            {
+                "name": "Padubidri",
+                "pincode": 574111
+            },
+            {
+                "name": "Padur",
+                "pincode": 574106
+            },
+            {
+                "name": "Paduvari",
+                "pincode": 576214
+            },
+            {
+                "name": "Paduyermal",
+                "pincode": 574119
+            },
+            {
+                "name": "Palimar",
+                "pincode": 574112
+            },
+            {
+                "name": "Panchanbettu",
+                "pincode": 576113
+            },
+            {
+                "name": "Pangala",
+                "pincode": 576122
+            },
+            {
+                "name": "Paniyur",
+                "pincode": 574117
+            },
+            {
+                "name": "Parampalli",
+                "pincode": 576225
+            },
+            {
+                "name": "Parkala",
+                "pincode": 576107
+            },
+            {
+                "name": "Patla",
+                "pincode": 576107
+            },
+            {
+                "name": "Perdur",
+                "pincode": 576124
+            },
+            {
+                "name": "Pernal",
+                "pincode": 574116
+            },
+            {
+                "name": "Pernankila",
+                "pincode": 576113
+            },
+            {
+                "name": "Pilar Udupi",
+                "pincode": 574113
+            },
+            {
+                "name": "Pithrodi",
+                "pincode": 574118
+            },
+            {
+                "name": "Puttur",
+                "pincode": 576105
+            },
+            {
+                "name": "Ragihaklu Navunda",
+                "pincode": 576224
+            },
+            {
+                "name": "Rattadi",
+                "pincode": 576227
+            },
+            {
+                "name": "Saibarkatte",
+                "pincode": 576210
+            },
+            {
+                "name": "Saligrama Udupi",
+                "pincode": 576225
+            },
+            {
+                "name": "Salikeri",
+                "pincode": 576213
+            },
+            {
+                "name": "Salvadi",
+                "pincode": 576222
+            },
+            {
+                "name": "Santhekatte",
+                "pincode": 576105
+            },
+            {
+                "name": "Santhekatte kalathur",
+                "pincode": 576215
+            },
+            {
+                "name": "Santhur",
+                "pincode": 574111
+            },
+            {
+                "name": "Sasthan",
+                "pincode": 576226
+            },
+            {
+                "name": "Shankaranarayana",
+                "pincode": 576227
+            },
+            {
+                "name": "Shankarapura",
+                "pincode": 574115
+            },
+            {
+                "name": "Shedimane",
+                "pincode": 576212
+            },
+            {
+                "name": "Shenapura",
+                "pincode": 576235
+            },
+            {
+                "name": "Shiriyara",
+                "pincode": 576210
+            },
+            {
+                "name": "Shiroor",
+                "pincode": 576124
+            },
+            {
+                "name": "Shiruru Udupi",
+                "pincode": 576228
+            },
+            {
+                "name": "Shirva",
+                "pincode": 574116
+            },
+            {
+                "name": "Shivalli",
+                "pincode": 576102
+            },
+            {
+                "name": "Siddapura Udupi",
+                "pincode": 576229
+            },
+            {
+                "name": "Sooda",
+                "pincode": 574116
+            },
+            {
+                "name": "Souda",
+                "pincode": 576222
+            },
+            {
+                "name": "Subhash Nagar",
+                "pincode": 574105
+            },
+            {
+                "name": "Taggarshe",
+                "pincode": 576214
+            },
+            {
+                "name": "Tallur Udupi",
+                "pincode": 576230
+            },
+            {
+                "name": "Tarapathi",
+                "pincode": 576232
+            },
+            {
+                "name": "Tekkatte",
+                "pincode": 576231
+            },
+            {
+                "name": "Tenkabettu",
+                "pincode": 576105
+            },
+            {
+                "name": "Tenkanidiyur",
+                "pincode": 576106
+            },
+            {
+                "name": "Thottam",
+                "pincode": 576108
+            },
+            {
+                "name": "Trasi",
+                "pincode": 576235
+            },
+            {
+                "name": "Uchila",
+                "pincode": 574117
+            },
+            {
+                "name": "Udupi Courts",
+                "pincode": 576101
+            },
+            {
+                "name": "Udupi",
+                "pincode": 576101
+            },
+            {
+                "name": "Udyavara",
+                "pincode": 574118
+            },
+            {
+                "name": "Uliyaragoli",
+                "pincode": 574106
+            },
+            {
+                "name": "Ullur",
+                "pincode": 576229
+            },
+            {
+                "name": "Ultoor",
+                "pincode": 576231
+            },
+            {
+                "name": "Uppinakudru",
+                "pincode": 576230
+            },
+            {
+                "name": "Uppunda",
+                "pincode": 576232
+            },
+            {
+                "name": "Uppur",
+                "pincode": 576105
+            },
+            {
+                "name": "Vakwadi",
+                "pincode": 576257
+            },
+            {
+                "name": "Vandar",
+                "pincode": 576223
+            },
+            {
+                "name": "Vandse",
+                "pincode": 576233
+            },
+            {
+                "name": "Yadyadi mathyadi",
+                "pincode": 576222
+            },
+            {
+                "name": "Yedabettu",
+                "pincode": 576226
+            },
+            {
+                "name": "Yedamoge",
+                "pincode": 576282
+            },
+            {
+                "name": "Yedthadi",
+                "pincode": 576210
+            },
+            {
+                "name": "Yedthare",
+                "pincode": 576214
+            },
+            {
+                "name": "Yelajith",
+                "pincode": 576214
+            },
+            {
+                "name": "Yellur",
+                "pincode": 574113
+            },
+            {
+                "name": "Yermal",
+                "pincode": 574119
+            }
+        ]
+    }
+]
