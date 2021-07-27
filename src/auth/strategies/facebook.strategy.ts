@@ -9,7 +9,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
     super({
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: 'http://localhost:3000/auth/facebook/',
+      callbackURL: 'https://covid-warrior-app.herokuapp.com/auth/facebook/',
       scope: 'email',
       profileFields: ['id', 'name'],
     })
