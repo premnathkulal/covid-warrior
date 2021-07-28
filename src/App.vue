@@ -87,7 +87,7 @@ import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
 import Home from '@/components/Home/Home.vue'
 import { namespace } from 'vuex-class'
-import { LocationActions, LoginActions, RegisterActions } from './types/types'
+import { LocationActions, LoginActions } from './types/types'
 import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
 import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
@@ -96,7 +96,6 @@ import Profile from '@/components/Profile/Profile.vue'
 const updates = namespace('Updates')
 const location = namespace('Location')
 const login = namespace('Login')
-const register = namespace('Register')
 
 @Component({
   components: {

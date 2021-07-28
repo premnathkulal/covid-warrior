@@ -71,3 +71,45 @@ export interface TopNews {
   published_date: string
   multimedia: Multimedia[]
 }
+
+export interface VaccinationCenter {
+  address: string
+  block_name: string
+  center_id: number
+  date: string
+  district_name: string
+  fee: string
+  fee_type: string
+  lat: number
+  long: number
+  name: string
+  pincode: number
+  slots: string[]
+  state_name: string
+  vaccine: string
+}
+
+export interface VaccinationCenterFilter {
+  date: string
+  district?: string
+  state?: string
+  pincode?: string
+  lat?: number
+  lon?: number
+}
+
+export interface State {
+  id: string
+  state_id: number
+  state_name: string
+}
+
+export interface Districts {
+  district_id: number
+  district_name: string
+}
+
+export interface PinCode {
+  name: string
+  pincode: number
+}

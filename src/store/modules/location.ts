@@ -28,9 +28,9 @@ class Location extends VuexModule {
   }
 
   @Mutation
-  public [LocationMutations.SET_LAT_LON](position: any): void {
-    this.latitude = Math.floor(position.latitude)
-    this.longitude = Math.floor(position.longitude)
+  public [LocationMutations.SET_LAT_LON](position: Position): void {
+    this.latitude = Math.floor(position.lat)
+    this.longitude = Math.floor(position.lon)
   }
 
   @Mutation

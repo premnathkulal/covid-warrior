@@ -11,6 +11,7 @@ import VaccinationCentersList from '@/components/vaccination/VaccinationCentersL
 import VaccinationCenterForm from '@/components/vaccination/VaccinationCenterForm.vue'
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
+import { State, VaccinationCenterFilter } from '@/types/interface'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
@@ -35,27 +36,21 @@ export default class VaccinationCenters extends Vue {
   public longitude!: number
 
   @stateDistricts.Getter
-  statesList!: any[]
+  statesList!: State[]
 
   @stateDistricts.Action(StateDistrictsActions.STATES)
   public loadStatesList!: () => void
 
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
-  public loadVaccinationCenters!: (filterData: {
-    state?: string
-    district?: string
-    pincode?: string
-    date: string
-    latitude?: number
-    longitude?: number
-  }) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
 
   created(): void {
     this.loadStatesList()
     this.loadVaccinationCenters({
       date: this.date,
-      latitude: this.latitude,
-      longitude: this.longitude,
+      lat: this.latitude,
+      lon: this.longitude,
     })
   }
 }

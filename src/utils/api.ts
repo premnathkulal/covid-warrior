@@ -1,9 +1,10 @@
+import { LoginDetails, RegisterDetails } from '@/types/interface'
 import axios, { AxiosResponse } from 'axios'
 
 const TOM_TOM_API = 'https://api.tomtom.com/search/2/'
 const COVID_19_API = 'https://api.covid19india.org/data.json'
 const NEWS_API = 'https://api.nytimes.com/svc/'
-const COVID_WARRIOR_API = 'http://localhost:3000/'
+const COVID_WARRIOR_API = 'https://covid-warrior-app.herokuapp.com/'
 
 const getUpdates = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_19_API
@@ -49,29 +50,33 @@ const vaccinationCentersAPI = (queryParam: string): Promise<AxiosResponse> => {
   )
 }
 
-const loginAPI = (authCredentials: any): Promise<AxiosResponse> => {
+const loginAPI = (authCredentials: LoginDetails): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axios.post(`${BASE_URL}auth/login`, {
-    username: authCredentials.username,
-    password: authCredentials.password,
+    username: authCredentials.username.value,
+    password: authCredentials.password.value,
   })
 }
 
-const registerAPI = (userDetails: any): Promise<AxiosResponse> => {
+const registerAPI = (userDetails: RegisterDetails): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axios.post(`${BASE_URL}auth/register`, {
-    name: userDetails.name,
-    username: userDetails.username,
-    password: userDetails.password,
+    name: userDetails.name.value,
+    username: userDetails.username.value,
+    password: userDetails.password.value,
   })
 }
 
-const googleAuthAPI = (googleAuthCode: any): Promise<AxiosResponse> => {
+const googleAuthAPI = (
+  googleAuthCode: string | (string | null)[]
+): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axios.get(`${BASE_URL}auth/google?code=${googleAuthCode}`)
 }
 
-const facebookAuthAPI = (facebookAuthCode: any): Promise<AxiosResponse> => {
+const facebookAuthAPI = (
+  facebookAuthCode: string | (string | null)[]
+): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axios.get(`${BASE_URL}auth/facebook?code=${facebookAuthCode}`)
 }

@@ -1,14 +1,15 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { districtsAPI, vaccinationCentersAPI } from '@/utils/api'
+import { vaccinationCentersAPI } from '@/utils/api'
 import {
   VaccinationCenterMutations,
   VaccinationCenterActions,
 } from '@/types/types'
+import { VaccinationCenterFilter } from '@/types/interface'
 
 @Module({ namespaced: true })
 class VaccinationCenter extends VuexModule {
   isLoading = false
-  vaccinationCenters: any[] = [{}]
+  vaccinationCenters: VaccinationCenter[] = []
 
   @Mutation
   public [VaccinationCenterMutations.LOADING](): void {
@@ -16,20 +17,22 @@ class VaccinationCenter extends VuexModule {
   }
 
   @Mutation
-  public [VaccinationCenterMutations.VACCINATION_CENTER](data: any[]): void {
+  public [VaccinationCenterMutations.VACCINATION_CENTER](
+    data: VaccinationCenter[]
+  ): void {
     this.vaccinationCenters = data
   }
 
   @Action
   async [VaccinationCenterActions.VACCINATION_CENTER](
-    filterData: any
+    filterData: VaccinationCenterFilter
   ): Promise<void> {
     this.context.commit(VaccinationCenterMutations.LOADING)
     let queryParam = `date=${filterData.date}`
     if (filterData.pincode) {
       queryParam += `&pincode=${filterData.pincode}`
     }
-    if (filterData.lan && filterData.lon) {
+    if (filterData.lat && filterData.lon) {
       queryParam += `&latitude=${filterData.lat}&longitude=${filterData.lon}`
     }
     if (filterData.state) {
@@ -50,7 +53,7 @@ class VaccinationCenter extends VuexModule {
       })
   }
 
-  get vaccinationCentersList(): any[] {
+  get vaccinationCentersList(): VaccinationCenter[] {
     return this.vaccinationCenters
   }
 }

@@ -2,6 +2,7 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import { facebookAuthAPI, googleAuthAPI, loginAPI } from '@/utils/api'
 import { LoginActions, LoginMutations } from '@/types/types'
 import Cookies from 'js-cookie'
+import { LoginDetails } from '@/types/interface'
 
 @Module({ namespaced: true })
 class Login extends VuexModule {
@@ -33,14 +34,14 @@ class Login extends VuexModule {
   }
 
   @Action
-  [LoginActions.LOGIN](authCredentials: any): Promise<void> {
+  [LoginActions.LOGIN](authCredentials: LoginDetails): Promise<void> {
     this.context.commit(LoginMutations.LOADING)
     return loginAPI(authCredentials)
       .then(response => {
         this.context.commit(LoginMutations.LOGIN, response.data.token)
         this.context.commit(LoginMutations.SET_ERROR, false)
       })
-      .catch((error: any) => {
+      .catch(() => {
         this.context.commit(LoginMutations.SET_ERROR, true)
       })
       .finally(() => {
@@ -49,7 +50,9 @@ class Login extends VuexModule {
   }
 
   @Action
-  [LoginActions.GOOGLE_LOGIN](googleAuthCode: any): Promise<void> {
+  [LoginActions.GOOGLE_LOGIN](
+    googleAuthCode: string | (string | null)[]
+  ): Promise<void> {
     return googleAuthAPI(googleAuthCode)
       .then(response => {
         this.context.commit(LoginMutations.LOGIN, response.data.token)
@@ -64,7 +67,9 @@ class Login extends VuexModule {
   }
 
   @Action
-  [LoginActions.FACEBOOK_LOGIN](facebookAuthCode: any): Promise<void> {
+  [LoginActions.FACEBOOK_LOGIN](
+    facebookAuthCode: string | (string | null)[]
+  ): Promise<void> {
     console.log('KOO')
     return facebookAuthAPI(facebookAuthCode)
       .then(response => {

@@ -65,6 +65,7 @@ import { formValidator, resetFormError } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { LoginActions } from '@/types/types'
 import Cookies from 'js-cookie'
+import { LoginDetails } from '@/types/interface'
 
 const login = namespace('Login')
 
@@ -83,17 +84,21 @@ export default class Login extends Vue {
 
   @login.Action(LoginActions.LOGIN)
   // eslint-disable-next-line no-unused-vars
-  public userLogin!: (authCredentials: any) => void
+  public userLogin!: (authCredentials: LoginDetails) => void
 
   @login.Action(LoginActions.SET_ERROR)
   // eslint-disable-next-line no-unused-vars
   public resetError!: (isError: boolean) => void
 
   @login.Action(LoginActions.GOOGLE_LOGIN)
-  public googleAuthLogin!: (googleAuthCode: any) => void
+  // eslint-disable-next-line no-unused-vars
+  public googleAuthLogin!: (googleAuthCode: string | (string | null)[]) => void
 
   @login.Action(LoginActions.FACEBOOK_LOGIN)
-  public facebookAuthLogin!: (facebookAuthCode: any) => void
+  public facebookAuthLogin!: (
+    // eslint-disable-next-line no-unused-vars
+    facebookAuthCode: string | (string | null)[]
+  ) => void
 
   userDetails = {
     username: {
@@ -109,14 +114,14 @@ export default class Login extends Vue {
   googleQuery = {
     client_id:
       '494955613474-2btd5ni02oqpdq1u03iebp0okvi4q5ok.apps.googleusercontent.com',
-    redirect_uri: 'http://localhost:8080',
+    redirect_uri: 'https://covid-warrior-fe.herokuapp.com',
     response_type: 'code',
     scope: 'profile',
   }
 
   facebookQuery = {
     client_id: '316546040012795',
-    redirect_uri: 'http://localhost:8080/',
+    redirect_uri: 'https://covid-warrior-fe.herokuapp.com/',
     response_type: 'code',
     scope: 'email',
   }
@@ -163,10 +168,7 @@ export default class Login extends Vue {
   }
 
   login(): void {
-    this.userLogin({
-      username: this.userDetails.username.value,
-      password: this.userDetails.password.value,
-    })
+    this.userLogin(this.userDetails)
   }
 
   initAuthUrl(): void {
@@ -179,7 +181,7 @@ export default class Login extends Vue {
       .join('&')
   }
 
-  redirectToAuthPage(authType: string) {
+  redirectToAuthPage(authType: string): void {
     this.authType = authType
     Cookies.set('authType', authType)
     if (this.authType === 'google') {
@@ -203,7 +205,7 @@ export default class Login extends Vue {
     }
   }
 
-  created() {
+  created(): void {
     this.initAuthUrl()
   }
 }

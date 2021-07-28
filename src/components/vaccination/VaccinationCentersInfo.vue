@@ -37,10 +37,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { VaccinationCenter } from '@/types/interface'
 
 @Component
 export default class VaccinationCenterInfo extends Vue {
-  @Prop({ default: null }) centerInfo!: any
+  @Prop({ default: null }) centerInfo!: VaccinationCenter
 }
 </script>
 

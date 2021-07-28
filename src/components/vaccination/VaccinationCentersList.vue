@@ -23,13 +23,14 @@
 import { Vue, Component } from 'vue-property-decorator'
 import VaccinationCenterInfo from '@/components/vaccination/VaccinationCentersInfo.vue'
 import { namespace } from 'vuex-class'
+import { VaccinationCenter } from '@/types/interface'
 
 const vaccinationCenter = namespace('VaccinationCenter')
 
 @Component({ components: { VaccinationCenterInfo } })
 export default class VaccinationCentersList extends Vue {
   @vaccinationCenter.Getter
-  vaccinationCentersList!: any[]
+  vaccinationCentersList!: VaccinationCenter[]
 }
 </script>
 

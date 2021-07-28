@@ -111,6 +111,13 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import AppointmentForm from '@/components/vaccination/AppointmentForm.vue'
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
+import {
+  Districts,
+  PinCode,
+  State,
+  VaccinationCenter,
+  VaccinationCenterFilter,
+} from '@/types/interface'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
@@ -119,9 +126,7 @@ const vaccinationCenter = namespace('VaccinationCenter')
   components: { AppointmentForm },
 })
 export default class VaccinationCenterForm extends Vue {
-  @Prop({ default: null }) states!: any[]
-
-  items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+  @Prop({ default: null }) states!: State[]
   currentDate = new Date().toISOString().substr(0, 10)
   menu = false
   datePickerModal = false
@@ -134,33 +139,29 @@ export default class VaccinationCenterForm extends Vue {
   date = this.currentDate
 
   @stateDistricts.Getter
-  districtsList!: any[]
+  districtsList!: Districts[]
 
   @stateDistricts.Getter
-  pinCodesList!: any[]
+  pinCodesList!: PinCode[]
 
   @vaccinationCenter.Getter
-  vaccinationCenterList!: any[]
+  vaccinationCenterList!: VaccinationCenter[]
 
   @stateDistricts.Action(StateDistrictsActions.DISTRICTS)
-  public loadDistrictsList!: (stateId: string) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadDistrictsList!: (stateId: number) => void
 
   @stateDistricts.Action(StateDistrictsActions.PINCODES)
-  public loadPinCodesList!: (stateId: string) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadPinCodesList!: (stateId: number) => void
 
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
-  public loadVaccinationCenters!: (filterData: {
-    state?: string
-    district?: string
-    pincode?: string
-    date: string
-    lat?: string
-    lon?: string
-  }) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
 
   @Watch('state')
   loadDistricts(): void {
-    const stateInfo: any = this.states.filter((state: any) => {
+    const stateInfo: State[] = this.states.filter((state: State) => {
       return state.state_name === this.state
     })
     this.loadDistrictsList(stateInfo[0].state_id)
@@ -168,9 +169,11 @@ export default class VaccinationCenterForm extends Vue {
 
   @Watch('district')
   createPinCodes(): void {
-    const districtInfo: any = this.districtsList.filter((district: any) => {
-      return district.district_name === this.district
-    })
+    const districtInfo: Districts[] = this.districtsList.filter(
+      (district: Districts) => {
+        return district.district_name === this.district
+      }
+    )
     this.loadPinCodesList(districtInfo[0].district_id)
   }
 

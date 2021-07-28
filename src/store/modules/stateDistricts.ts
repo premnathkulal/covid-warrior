@@ -1,18 +1,14 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import {
-  topStoriesAPI,
-  statesAPI,
-  districtsAPI,
-  pinCodesAPI,
-} from '@/utils/api'
+import { statesAPI, districtsAPI, pinCodesAPI } from '@/utils/api'
 import { StateDistrictsMutations, StateDistrictsActions } from '@/types/types'
+import { Districts, PinCode, State } from '@/types/interface'
 
 @Module({ namespaced: true })
 class StateDistricts extends VuexModule {
   isLoading = false
-  states: any[] = [{}]
-  districts: any[] = [{}]
-  pinCodes: any[] = [{}]
+  states: State[] = []
+  districts: Districts[] = []
+  pinCodes: PinCode[] = []
 
   @Mutation
   public [StateDistrictsMutations.LOADING](): void {
@@ -20,7 +16,7 @@ class StateDistricts extends VuexModule {
   }
 
   @Mutation
-  public [StateDistrictsMutations.STATES](data: any[]): void {
+  public [StateDistrictsMutations.STATES](data: State[]): void {
     this.states = data
   }
 
@@ -37,7 +33,7 @@ class StateDistricts extends VuexModule {
   }
 
   @Mutation
-  public [StateDistrictsMutations.DISTRICTS](data: any[]): void {
+  public [StateDistrictsMutations.DISTRICTS](data: Districts[]): void {
     this.districts = data
   }
 
@@ -60,7 +56,7 @@ class StateDistricts extends VuexModule {
   }
 
   @Mutation
-  public [StateDistrictsMutations.PINCODES](data: any[]): void {
+  public [StateDistrictsMutations.PINCODES](data: PinCode[]): void {
     this.pinCodes = data
   }
 
@@ -82,15 +78,15 @@ class StateDistricts extends VuexModule {
       })
   }
 
-  get statesList(): any[] {
+  get statesList(): State[] {
     return this.states
   }
 
-  get districtsList(): any[] {
+  get districtsList(): Districts[] {
     return this.districts
   }
 
-  get pinCodesList(): any[] {
+  get pinCodesList(): PinCode[] {
     return this.pinCodes
   }
 }
