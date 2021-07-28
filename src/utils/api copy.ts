@@ -68,12 +68,12 @@ const registerAPI = (userDetails: any): Promise<AxiosResponse> => {
 
 const googleAuthAPI = (googleAuthCode: any): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}auth/google?code=${googleAuthCode}`)
+  return axios.get(`${BASE_URL}auth/facebook?code=${googleAuthCode}`)
 }
 
-const facebookAuthAPI = (facebookAuthCode: any): Promise<AxiosResponse> => {
+const facebookAuthAPI = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}auth/facebook?code=${facebookAuthCode}`)
+  return axios.get(`${BASE_URL}auth/facebook`)
 }
 
 export {

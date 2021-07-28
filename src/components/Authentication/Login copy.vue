@@ -40,18 +40,20 @@
       <div class="social-btn-field">
         <div class="social-btn">
           <custom-button
-            @btnAction="redirectToAuthPage('google')"
+            @btnAction="googleAuthLogin()"
             icon="mdi-google"
             btnName="google-btn"
           />
         </div>
         <div class="social-btn">
           <custom-button
-            @btnAction="redirectToAuthPage('facebook')"
+            @btnAction="facebookAuthLogin()"
             icon="mdi-facebook"
             btnName="facebook-btn"
           />
         </div>
+        <div @click="prem()">Sign in with Google</div>
+        <!-- <div @click="prem()">Sign in with Facebook</div> -->
       </div>
     </div>
   </div>
@@ -64,7 +66,12 @@ import CustomButton from '@/components/shared/CustomButton.vue'
 import { formValidator, resetFormError } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { LoginActions } from '@/types/types'
-import Cookies from 'js-cookie'
+
+declare global {
+  interface Window {
+    gapi: any
+  }
+}
 
 const login = namespace('Login')
 
@@ -90,10 +97,10 @@ export default class Login extends Vue {
   public resetError!: (isError: boolean) => void
 
   @login.Action(LoginActions.GOOGLE_LOGIN)
-  public googleAuthLogin!: (googleAuthCode: any) => void
+  public googleAuthLoginn!: (googleAuthCode: any) => void
 
   @login.Action(LoginActions.FACEBOOK_LOGIN)
-  public facebookAuthLogin!: (facebookAuthCode: any) => void
+  public facebookAuthLogin!: () => void
 
   userDetails = {
     username: {
@@ -119,6 +126,7 @@ export default class Login extends Vue {
     redirect_uri: 'http://localhost:8080/',
     response_type: 'code',
     scope: 'email',
+    // profileFields: ['id', 'name'],
   }
 
   googleAuthurl = `https://accounts.google.com/o/oauth2/v2/auth?`
@@ -169,7 +177,36 @@ export default class Login extends Vue {
     })
   }
 
-  initAuthUrl(): void {
+  async googleAuthLogin(): Promise<void> {
+    // this.googleAuthLoginn()
+  }
+
+  initClient(config: any) {
+    return new Promise((resolve, reject) => {
+      window.gapi.load('auth2', () => {
+        window.gapi.auth2
+          .init(config)
+          .then(() => {
+            resolve(window.gapi)
+          })
+          .catch((error: any) => {
+            reject(error)
+          })
+      })
+    })
+  }
+
+  mounted(): void {
+    console.log(this.$route.query.code)
+    this.googleAuthLoginn(this.$route.query.code)
+    // if (!this.$route.query.code) {
+    //   this.$router.push('/')
+    //   return
+    // }
+  }
+
+  created() {
+    // this.initClient()
     this.googleAuthurl += Object.entries(this.googleQuery)
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join('&')
@@ -179,32 +216,8 @@ export default class Login extends Vue {
       .join('&')
   }
 
-  redirectToAuthPage(authType: string) {
-    this.authType = authType
-    Cookies.set('authType', authType)
-    if (this.authType === 'google') {
-      window.location.href = this.googleAuthurl
-    } else if (this.authType === 'facebook') {
-      window.location.href = this.faceBookAuthUrl
-    }
-  }
-
-  mounted(): void {
-    const authType = Cookies.get('authType')
-    Cookies.remove('authType')
-    if (authType === 'google') {
-      this.googleAuthLogin(this.$route.query.code)
-    } else if (authType === 'facebook') {
-      this.facebookAuthLogin(this.$route.query.code)
-    }
-    if (this.$route.query.code) {
-      this.$router.push('/')
-      return
-    }
-  }
-
-  created() {
-    this.initAuthUrl()
+  prem() {
+    window.location.href = this.faceBookAuthUrl
   }
 }
 </script>
