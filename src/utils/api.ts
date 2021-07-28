@@ -1,5 +1,6 @@
 import { LoginDetails, RegisterDetails } from '@/types/interface'
 import axios, { AxiosResponse } from 'axios'
+import axiosApi from '@/utils/axiosInterceptor'
 
 const TOM_TOM_API = 'https://api.tomtom.com/search/2/'
 const COVID_19_API = 'https://api.covid19india.org/data.json'
@@ -30,29 +31,29 @@ const topStoriesAPI = (): Promise<AxiosResponse> => {
 
 const statesAPI = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}states-districts/states`)
+  return axiosApi.get(`${BASE_URL}states-districts/states`)
 }
 
 const districtsAPI = (stateId: string): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}states-districts/districts/${stateId}`)
+  return axiosApi.get(`${BASE_URL}states-districts/districts/${stateId}`)
 }
 
 const pinCodesAPI = (districtId: string): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}states-districts/pincode/${districtId}`)
+  return axiosApi.get(`${BASE_URL}states-districts/pincode/${districtId}`)
 }
 
 const vaccinationCentersAPI = (queryParam: string): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(
+  return axiosApi.get(
     `${BASE_URL}vaccinationCenters/findVaccinationCenter?${queryParam}`
   )
 }
 
 const loginAPI = (authCredentials: LoginDetails): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.post(`${BASE_URL}auth/login`, {
+  return axiosApi.post(`${BASE_URL}auth/login`, {
     username: authCredentials.username.value,
     password: authCredentials.password.value,
   })
@@ -60,7 +61,7 @@ const loginAPI = (authCredentials: LoginDetails): Promise<AxiosResponse> => {
 
 const registerAPI = (userDetails: RegisterDetails): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.post(`${BASE_URL}auth/register`, {
+  return axiosApi.post(`${BASE_URL}auth/register`, {
     name: userDetails.name.value,
     username: userDetails.username.value,
     password: userDetails.password.value,
@@ -71,14 +72,14 @@ const googleAuthAPI = (
   googleAuthCode: string | (string | null)[]
 ): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}auth/google?code=${googleAuthCode}`)
+  return axiosApi.get(`${BASE_URL}auth/google?code=${googleAuthCode}`)
 }
 
 const facebookAuthAPI = (
   facebookAuthCode: string | (string | null)[]
 ): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axios.get(`${BASE_URL}auth/facebook?code=${facebookAuthCode}`)
+  return axiosApi.get(`${BASE_URL}auth/facebook?code=${facebookAuthCode}`)
 }
 
 export {
