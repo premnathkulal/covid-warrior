@@ -12,7 +12,8 @@ export class VaccinationCenterServices {
   ) {}
 
   async findVaccinationCenter({ ...args }): Promise<VaccinationCenters> {
-    const requestQuery = { date: args.date }
+    const date = this.dateFormateConverter(args.date)
+    const requestQuery = { date }
     if (args.pincode) {
       requestQuery['pincode'] = parseInt(args.pincode)
     }
@@ -37,5 +38,13 @@ export class VaccinationCenterServices {
       status: HttpStatus.OK,
       data: result,
     }
+  }
+
+  private dateFormateConverter(value: Date) {
+    const date = new Date(value)
+    const dd = date.getDate()
+    const mm = date.getMonth() + 1
+    const yyyy = date.getFullYear()
+    return `${dd < 10 ? `0${dd}` : dd}-${mm < 10 ? `0${mm}` : mm}-${yyyy}`
   }
 }
