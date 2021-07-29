@@ -1,6 +1,6 @@
 export const UpdatesMutations = {
   UPDATES: 'UPDATES_MUTATION',
-  TOGGLE_LOADING: 'TOGGLE_LOADING_MUTATION',
+  LOADING: 'TOGGLE_LOADING_MUTATION',
 }
 
 export const UpdatesActions = {
@@ -8,7 +8,7 @@ export const UpdatesActions = {
 }
 
 export const LocationMutations = {
-  TOGGLE_LOADING: 'TOGGLE_LOADING_MUTATION',
+  LOADING: 'TOGGLE_LOADING_MUTATION',
   ADDRESS: 'ADDRESS_MUTATION',
   SET_LAT_LON: 'SET_LAT_LON_MUTATION',
 }
@@ -77,5 +77,40 @@ export const RegisterMutations = {
 
 export const RegisterActions = {
   REGISTER: 'REGISTER_ACTION',
+  SET_ERROR: 'SET_ERROR_ACTION',
+}
+
+export const ProfileMutations = {
+  LOADING: 'LOADING_MUTATION',
+  PROFILE: 'PROFILE_MUTATION',
+}
+
+export const ProfileActions = {
+  PROFILE: 'PROFILE_ACTION',
+}
+
+export const BeneficiaryMutations = {
+  LOADING: 'LOADING_MUTATION',
+  ADD_BENEFICIARY: 'ADD_BENEFICIARY_MUTATION',
+  SET_ERROR: 'SET_ERROR_MUTATION',
+  SET_SUCCESS: 'SET_SUCCESS_MUTATION',
+  BENEFICIARIES: 'BENEFICIARIES_MUTATION',
+}
+
+export const BeneficiaryActions = {
+  ADD_BENEFICIARY: 'ADD_BENEFICIARY_ACTION',
+  SET_ERROR: 'SET_ERROR_ACTION',
+  BENEFICIARIES: 'BENEFICIARIES_ACTION',
+}
+
+export const ScheduleMutations = {
+  LOADING: 'LOADING_MUTATION',
+  SCHEDULE: 'SCHEDULE_MUTATION',
+  SET_ERROR: 'SET_ERROR_MUTATION',
+  SET_SUCCESS: 'SET_SUCCESS_MUTATION',
+}
+
+export const ScheduleActions = {
+  SCHEDULE: 'SCHEDULE_ACTION',
   SET_ERROR: 'SET_ERROR_ACTION',
 }

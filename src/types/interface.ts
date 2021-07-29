@@ -22,6 +22,17 @@ export interface BeneficiaryDetails {
   idNumber: PropertyValues
 }
 
+export interface BeneficiaryDetailsResponse {
+  name: string
+  birth_year: string
+  comorbidity_ind: string
+  consent_version: string
+  gender_id: string
+  id: string
+  photo_id_number: string
+  photo_id_type: string
+  scheduled: boolean
+}
 export interface StateWiseUpdates {
   active: string
   confirmed: string
@@ -112,4 +123,10 @@ export interface Districts {
 export interface PinCode {
   name: string
   pincode: number
+}
+
+export interface ProfileInfo {
+  id: string
+  name: string
+  username: string
 }

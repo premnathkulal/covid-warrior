@@ -39,21 +39,28 @@
           <div class="beneficiary-info">
             <v-expansion-panels>
               <v-expansion-panel
-                v-for="(item, i) in 5"
+                v-for="(beneficiary, i) in beneficiaries"
                 :key="i"
                 class="info-card"
               >
                 <v-expansion-panel-header>
-                  <h5>Premnath</h5>
+                  <h5>{{ beneficiary.name }}</h5>
                   <v-spacer></v-spacer> <v-spacer></v-spacer>
                   <!-- <span class="btn-text">Schedule</span> -->
                   <span
                     class="btn-text"
+                    v-if="beneficiary.scheduled"
                     @click.stop="toggleScheduleDalog('update')"
                     >Update</span
                   >
+                  <span
+                    class="btn-text"
+                    v-else
+                    @click.stop="toggleScheduleDalog('schedule')"
+                    >Schedule</span
+                  >
                 </v-expansion-panel-header>
-                <v-expansion-panel-content>
+                <v-expansion-panel-content v-if="beneficiary.scheduled">
                   <p class="appointment-info">
                     <span class="appointment-info-label">Date:</span>
                     Hello, World
@@ -88,6 +95,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
 import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
 import AlertBox from '@/components/shared/AlertBox.vue'
+import { namespace } from 'vuex-class'
+import { BeneficiaryActions } from '@/types/types'
+import { BeneficiaryDetailsResponse } from '@/types/interface'
+
+const beneficiary = namespace('Beneficiary')
 
 @Component({
   components: {
@@ -103,6 +115,12 @@ export default class AppointmentForm extends Vue {
   formType = 'schedule'
   alertBox = false
 
+  @beneficiary.Getter
+  public beneficiaries!: BeneficiaryDetailsResponse[]
+
+  @beneficiary.Action(BeneficiaryActions.BENEFICIARIES)
+  public loadBeneficiaries!: () => void
+
   toggleBeneficiaryDalog(): void {
     this.beneficiaryDalog = !this.beneficiaryDalog
   }
@@ -117,6 +135,10 @@ export default class AppointmentForm extends Vue {
       console.log('deleted')
     }
     this.alertBox = false
+  }
+
+  created(): void {
+    this.loadBeneficiaries()
   }
 }
 </script>

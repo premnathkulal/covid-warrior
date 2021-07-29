@@ -1,4 +1,8 @@
-import { LoginDetails, RegisterDetails } from '@/types/interface'
+import {
+  BeneficiaryDetails,
+  LoginDetails,
+  RegisterDetails,
+} from '@/types/interface'
 import axios, { AxiosResponse } from 'axios'
 import axiosApi from '@/utils/axiosInterceptor'
 
@@ -82,6 +86,31 @@ const facebookAuthAPI = (
   return axiosApi.get(`${BASE_URL}auth/facebook?code=${facebookAuthCode}`)
 }
 
+const profileAPI = (): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.get(`${BASE_URL}auth/profile`)
+}
+
+const addBeneficiaryAPI = (
+  beneficiaryDetails: BeneficiaryDetails
+): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.post(`${BASE_URL}beneficiary`, {
+    name: beneficiaryDetails.name.value,
+    birth_year: beneficiaryDetails.birthDate.value,
+    gender_id: beneficiaryDetails.gender.value,
+    photo_id_type: beneficiaryDetails.photoIdType.value,
+    photo_id_number: beneficiaryDetails.idNumber.value,
+    comorbidity_ind: 'N',
+    consent_version: '1',
+  })
+}
+
+const getBeneficiariesAPI = () => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.get(`${BASE_URL}beneficiary`)
+}
+
 export {
   getUpdates,
   getAddressDetails,
@@ -94,4 +123,7 @@ export {
   registerAPI,
   googleAuthAPI,
   facebookAuthAPI,
+  profileAPI,
+  addBeneficiaryAPI,
+  getBeneficiariesAPI,
 }

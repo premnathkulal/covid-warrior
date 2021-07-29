@@ -7,7 +7,7 @@ axiosApi.interceptors.request.use(config => {
   const token = Cookies.get('jwtToken')
   if (token) {
     config.headers = {
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     }
   }
   return config

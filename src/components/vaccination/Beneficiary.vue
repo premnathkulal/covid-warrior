@@ -48,16 +48,16 @@
             </v-dialog>
           </div>
           <v-select
-            :items="gender"
-            v-model="selectedGender"
+            :items="genderList"
+            v-model="gender"
             label="Gender"
             class="select"
             solo
           ></v-select>
           <v-select
-            id="photoIdType"
-            :items="photoIdType"
-            v-model="selectedPhotoIdType"
+            id="photoIdTypeList"
+            :items="photoIdTypeList"
+            v-model="photoIdType"
             label="Select Photo ID Type"
             class="select"
             solo
@@ -71,7 +71,7 @@
             :errorMessage="beneficiaryDetails.idNumber.error"
             :disabled="desableInputBox()"
             @keyDownAction="keyDownAction('photoIdNumber')"
-            @blurAction="validate(selectedPhotoIdType)"
+            @blurAction="validate(photoIdType)"
             @keypressAction="idNumberKeyPressActions($event)"
           />
         </v-card-text>
@@ -99,6 +99,11 @@ import {
   resetFormError,
   setLimitToInput,
 } from '@/utils/formValidator'
+import { BeneficiaryActions } from '@/types/types'
+import { namespace } from 'vuex-class'
+import { BeneficiaryDetails } from '@/types/interface'
+
+const beneficiary = namespace('Beneficiary')
 
 @Component({
   components: {
@@ -110,21 +115,17 @@ export default class Beneficiary extends Vue {
   @Prop({ default: false }) dialog!: boolean
   showDialog = false
   date = new Date().toISOString().substr(0, 10)
-  gender = ['Male', 'Female', 'Other']
-  photoIdType = ['Aadhar Card', 'Pan Card']
+  genderList = ['Male', 'Female', 'Other']
+  photoIdTypeList = ['Aadhar Card', 'Pan Card']
   modal = false
   errorMessage = '*This Field is required'
-  selectedGender = 'Male'
-  selectedPhotoIdType = ''
+  gender = 'Male'
+  photoIdType = ''
   photoIdPlaceholder = 'ID Number'
 
   beneficiaryDetails = {
     name: {
       value: '',
-      error: '',
-    },
-    birthDate: {
-      value: this.date,
       error: '',
     },
     idNumber: {
@@ -133,18 +134,56 @@ export default class Beneficiary extends Vue {
     },
   }
 
+  @beneficiary.Getter
+  public beneficiaryError!: string
+
+  @beneficiary.Getter
+  public beneficiarySuccess!: boolean
+
+  @beneficiary.Action(BeneficiaryActions.SET_ERROR)
+  public setErrorMsg!: (errorMessage: string) => void
+
+  @beneficiary.Action(BeneficiaryActions.ADD_BENEFICIARY)
+  public addBeneficiary!: (beneficiaryDetails: BeneficiaryDetails) => void
+
+  @Watch('beneficiaryError')
+  setError(): void {
+    if (this.beneficiaryError) {
+      this.beneficiaryDetails.idNumber.error = this.beneficiaryError
+    }
+  }
+
+  @Watch('beneficiarySuccess')
+  onSuccess(): void {
+    if (this.beneficiarySuccess) {
+      this.beneficiaryDetails = {
+        name: {
+          value: '',
+          error: '',
+        },
+        idNumber: {
+          value: '',
+          error: '',
+        },
+      }
+      this.gender = 'Male'
+      this.photoIdType = ''
+      this.$emit('toggleDialog')
+    }
+  }
+
   @Watch('dialog')
   toggleDialog(): void {
     this.showDialog = this.dialog
   }
 
-  @Watch('selectedPhotoIdType')
+  @Watch('photoIdType')
   getPlaceholder(): void {
     this.beneficiaryDetails.idNumber.value = ''
     resetFormError('photoIdNumber', this.beneficiaryDetails)
-    if (this.selectedPhotoIdType) {
+    if (this.photoIdType) {
       this.photoIdPlaceholder = `${(this.photoIdPlaceholder =
-        this.selectedPhotoIdType)} Number`
+        this.photoIdType)} Number`
     }
   }
 
@@ -153,11 +192,12 @@ export default class Beneficiary extends Vue {
   }
 
   keyDownAction(property: string): void {
+    this.setErrorMsg('')
     resetFormError(property, this.beneficiaryDetails)
   }
 
   desableInputBox(): boolean {
-    return !this.selectedPhotoIdType
+    return !this.photoIdType
   }
 
   addBenebiciary(): void {
@@ -169,17 +209,32 @@ export default class Beneficiary extends Vue {
       !this.beneficiaryDetails.idNumber.error &&
       !this.beneficiaryDetails.name.error
     ) {
-      console.log('Adding...')
+      const beneficiaryDetails = {
+        ...this.beneficiaryDetails,
+        birthDate: {
+          value: this.date,
+          error: '',
+        },
+        photoIdType: {
+          value: this.photoIdTypeList.indexOf(this.photoIdType).toString(),
+          error: '',
+        },
+        gender: {
+          value: this.genderList.indexOf(this.gender).toString(),
+          error: '',
+        },
+      }
+      this.addBeneficiary(beneficiaryDetails)
     }
   }
   idNumberKeyPressActions(event: KeyboardEvent): boolean | void {
-    if (this.selectedPhotoIdType === 'Aadhar Card') {
+    if (this.photoIdType === 'Aadhar Card') {
       return isNumber(
         event,
         'aadharcard',
         parseInt(this.beneficiaryDetails.idNumber.value)
       )
-    } else if (this.selectedPhotoIdType === 'Pan Card') {
+    } else if (this.photoIdType === 'Pan Card') {
       return setLimitToInput(
         event,
         'pancard',

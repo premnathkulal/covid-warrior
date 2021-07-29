@@ -5,19 +5,34 @@
         <v-icon class="profile-img-placeholder">mdi-account-circle</v-icon>
       </div>
       <div class="profile-info">
-        <div class="iserId">ondjhdhgjhgh1234</div>
-        <div class="username">username</div>
-        <div class="name">Name Name</div>
+        <div class="name">{{ getProfileInfo.name }}</div>
+        <div class="iserId">{{ getProfileInfo.id }}</div>
+        <div class="username">{{ getProfileInfo.username }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { ProfileInfo } from '@/types/interface'
+import { ProfileActions } from '@/types/types'
 import { Vue, Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+
+const profile = namespace('Profile')
 
 @Component
-export default class Profile extends Vue {}
+export default class Profile extends Vue {
+  @profile.Getter
+  public getProfileInfo!: ProfileInfo
+
+  @profile.Action(ProfileActions.PROFILE)
+  public loadProfileData!: () => void
+
+  created(): void {
+    this.loadProfileData()
+  }
+}
 </script>
 
 <style lang="scss">
