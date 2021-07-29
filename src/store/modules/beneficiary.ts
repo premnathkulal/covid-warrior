@@ -1,6 +1,10 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import { BeneficiaryActions, BeneficiaryMutations } from '@/types/types'
-import { addBeneficiaryAPI, getBeneficiariesAPI } from '@/utils/api'
+import {
+  addBeneficiaryAPI,
+  deleteBeneficiaryAPI,
+  getBeneficiariesAPI,
+} from '@/utils/api'
 import {
   BeneficiaryDetails,
   BeneficiaryDetailsResponse,
@@ -64,7 +68,6 @@ class Beneficiary extends VuexModule {
     this.context.commit(BeneficiaryMutations.LOADING)
     getBeneficiariesAPI()
       .then(response => {
-        console.log(response.data.beneficiaries)
         this.context.commit(
           BeneficiaryMutations.BENEFICIARIES,
           response.data.beneficiaries
@@ -72,6 +75,23 @@ class Beneficiary extends VuexModule {
       })
       .catch(() => {
         //
+      })
+      .finally(() => {
+        this.context.commit(BeneficiaryMutations.LOADING)
+      })
+  }
+
+  @Action
+  public [BeneficiaryActions.DELETE_BENEFICIARIES](id: string): void {
+    console.log(id)
+
+    this.context.commit(BeneficiaryMutations.LOADING)
+    deleteBeneficiaryAPI(id)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
       })
       .finally(() => {
         this.context.commit(BeneficiaryMutations.LOADING)

@@ -4,26 +4,6 @@
       <v-card>
         <v-card-title> </v-card-title>
         <v-card-text>
-          <custom-input
-            id="pincode"
-            placeHolder="Pincode"
-            inputType="text"
-            v-model="pincode"
-            @keypressAction="checkInputIsNumber($event, 'pincode', pincode)"
-          />
-          <v-select
-            v-model="scheduleDetails.centerName"
-            :items="centerId"
-            label="Center Id"
-            :disabled="disableInput()"
-            solo
-          ></v-select>
-          <v-select
-            v-model="scheduleDetails.slot"
-            :items="slots"
-            label="Select Slot"
-            solo
-          ></v-select>
           <div>
             <v-dialog
               ref="dialog"
@@ -44,7 +24,7 @@
               </template>
               <v-date-picker
                 v-model="scheduleDetails.date"
-                :max="date"
+                :min="date"
                 color="primary text-dark"
                 scrollable
               >
@@ -60,16 +40,41 @@
               </v-date-picker>
             </v-dialog>
           </div>
+          <custom-input
+            id="pincode"
+            placeHolder="Pincode"
+            inputType="text"
+            v-model="pincode"
+            @keypressAction="checkInputIsNumber($event, 'pincode', pincode)"
+          />
+          <v-select
+            v-model="scheduleDetails.centerId"
+            :items="vaccinationCenters"
+            item-text="name"
+            item-value="center_id"
+            label="Center Name"
+            :disabled="disableInput()"
+            solo
+          ></v-select>
+          <v-select
+            v-model="scheduleDetails.slot"
+            :items="slots"
+            label="Select Slot"
+            :disabled="!scheduleDetails.centerId"
+            solo
+          ></v-select>
           <v-select
             v-model="scheduleDetails.vaccine"
             :items="vaccine"
             label="vaccine"
+            :disabled="!scheduleDetails.centerId"
             solo
           ></v-select>
           <custom-button
-            :btnText="formType === 'schedule' ? 'Confirm' : 'Update'"
             btnName="normal-btn"
+            :btnText="formType === 'schedule' ? 'Confirm' : 'Update'"
             :isDisabled="disableButton()"
+            @btnAction="formType === 'schedule' ? schedule() : update()"
           />
           <custom-button
             btnText="Cancel"
@@ -88,6 +93,13 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import CustomInput from '@/components/shared/CustomInput.vue'
 import CustomButton from '@/components/shared/CustomButton.vue'
 import { isNumber } from '@/utils/formValidator'
+import { namespace } from 'vuex-class'
+import { VaccinationCenter, VaccinationCenterFilter } from '@/types/interface'
+import { ScheduleActions, VaccinationCenterActions } from '@/types/types'
+import Schedule from '@/store/modules/schedule'
+
+const vaccinationCenter = namespace('VaccinationCenter')
+const schedule = namespace('Schedule')
 
 @Component({
   components: {
@@ -98,26 +110,74 @@ import { isNumber } from '@/utils/formValidator'
 export default class ScheduleAppointment extends Vue {
   @Prop({ default: false }) dialog!: boolean
   @Prop({ default: 'schedule' }) formType!: boolean
+  @Prop({ default: null }) idNumber!: boolean
 
   date = new Date().toISOString().substr(0, 10)
   showDialog = false
   gender = ['Male', 'Female', 'Other']
   photoIdType = ['Aadhar Card', 'Pan Card']
-  centerId = ['123456', '123456']
-  slots = ['123456', '123456']
-  vaccine = ['COVAXIN', 'COVISHIELD']
+  slots: string[] = []
+  vaccine: string[] = []
   modal = false
-  errorMessage = '*This Field is required'
+  errorMessage = '* This Field is required'
   selectedPhotoIdType = ''
   pincode = ''
   checkInputIsNumber = isNumber
 
   scheduleDetails = {
     beneficiaryId: '',
-    centerName: '',
+    centerId: '',
     slot: '',
     date: this.date,
     vaccine: '',
+  }
+  vaccinationCenters: VaccinationCenter[] = []
+
+  @vaccinationCenter.Getter
+  vaccinationCentersList!: VaccinationCenter[]
+
+  @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
+  // eslint-disable-next-line no-unused-vars
+  public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
+
+  @schedule.Action(ScheduleActions.SCHEDULE)
+  // eslint-disable-next-line no-unused-vars
+  public scheduleSlot!: (scheduleDetails: any) => void
+
+  @schedule.Action(ScheduleActions.UPDATE)
+  // eslint-disable-next-line no-unused-vars
+  public updateSchedule!: (scheduleDetails: any) => void
+
+  @Watch('pincode')
+  loadVaccinationCenter(): void {
+    this.vaccinationCenters = []
+    if (this.pincode.length === 6) {
+      setTimeout(() => {
+        this.loadVaccinationCenters({
+          date: this.scheduleDetails.date,
+          pincode: this.pincode,
+        })
+      }, 1000)
+    }
+  }
+
+  @Watch('vaccinationCentersList')
+  setVaccinationCenters(): void {
+    this.vaccinationCenters = this.vaccinationCentersList
+  }
+
+  @Watch('scheduleDetails.centerId')
+  setSlots(): void {
+    this.scheduleDetails.slot = ''
+    this.scheduleDetails.vaccine = ''
+    this.vaccinationCenters.forEach((center: VaccinationCenter) => {
+      if (
+        center.center_id.toString() === this.scheduleDetails.centerId.toString()
+      ) {
+        this.slots = center.slots
+        this.vaccine.push(center.vaccine)
+      }
+    })
   }
 
   @Watch('dialog')
@@ -132,10 +192,28 @@ export default class ScheduleAppointment extends Vue {
 
   disableButton(): boolean {
     return !(
-      this.scheduleDetails.centerName &&
+      this.scheduleDetails.centerId &&
       this.scheduleDetails.slot &&
       this.scheduleDetails.vaccine
     )
+  }
+
+  schedule(): void {
+    this.scheduleSlot({
+      ...this.scheduleDetails,
+      beneficiaryId: this.idNumber,
+    })
+  }
+
+  update(): void {
+    this.updateSchedule({
+      ...this.scheduleDetails,
+      beneficiaryId: this.idNumber,
+    })
+  }
+
+  created() {
+    //
   }
 }
 </script>

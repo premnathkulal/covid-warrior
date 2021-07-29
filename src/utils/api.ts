@@ -111,6 +111,35 @@ const getBeneficiariesAPI = () => {
   return axiosApi.get(`${BASE_URL}beneficiary`)
 }
 
+const scheduleAPI = (scheduleDetails: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.post(`${BASE_URL}schedule`, {
+    ...scheduleDetails,
+    centerID: scheduleDetails.centerId.toString(),
+  })
+}
+
+const updateScheduleAPI = (scheduleDetails: any): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.patch(
+    `${BASE_URL}schedule/${scheduleDetails.beneficiaryId}`,
+    {
+      ...scheduleDetails,
+      centerID: scheduleDetails.centerId.toString(),
+    }
+  )
+}
+
+const loadScheduleByIdAPI = (idNumber: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.get(`${BASE_URL}schedule/${idNumber}`)
+}
+
+const deleteBeneficiaryAPI = (id: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.delete(`${BASE_URL}beneficiary/${id}`)
+}
+
 export {
   getUpdates,
   getAddressDetails,
@@ -126,4 +155,8 @@ export {
   profileAPI,
   addBeneficiaryAPI,
   getBeneficiariesAPI,
+  scheduleAPI,
+  updateScheduleAPI,
+  loadScheduleByIdAPI,
+  deleteBeneficiaryAPI,
 }

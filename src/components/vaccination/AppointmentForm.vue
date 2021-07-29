@@ -7,6 +7,7 @@
     <schedule-appointment
       :dialog="scheduleDalog"
       :formType="formType"
+      :idNumber="idNumber"
       @toggleDialog="toggleScheduleDalog"
     />
     <alert-box
@@ -38,50 +39,70 @@
         <div class="beneficiary-list-field container">
           <div class="beneficiary-info">
             <v-expansion-panels>
-              <v-expansion-panel
-                v-for="(beneficiary, i) in beneficiaries"
-                :key="i"
-                class="info-card"
-              >
-                <v-expansion-panel-header>
-                  <h5>{{ beneficiary.name }}</h5>
-                  <v-spacer></v-spacer> <v-spacer></v-spacer>
-                  <!-- <span class="btn-text">Schedule</span> -->
-                  <span
-                    class="btn-text"
-                    v-if="beneficiary.scheduled"
-                    @click.stop="toggleScheduleDalog('update')"
-                    >Update</span
-                  >
-                  <span
-                    class="btn-text"
-                    v-else
-                    @click.stop="toggleScheduleDalog('schedule')"
-                    >Schedule</span
-                  >
-                </v-expansion-panel-header>
-                <v-expansion-panel-content v-if="beneficiary.scheduled">
-                  <p class="appointment-info">
-                    <span class="appointment-info-label">Date:</span>
-                    Hello, World
-                  </p>
-                  <p class="appointment-info">
-                    <span class="appointment-info-label">Slot:</span>
-                    Hello, World
-                  </p>
-                  <p class="appointment-info">
-                    <span class="appointment-info-label">Vaccine:</span>
-                    Hello, World
-                  </p>
-                  <p class="appointment-info">
-                    <span class="appointment-info-label">Adress:</span>
-                    Hello, World
-                  </p>
-                  <div class="delete-btn" @click="alertBox = true">
-                    Remove Beneficiary
-                  </div>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
+              <template v-for="(beneficiary, i) in beneficiaries">
+                <v-expansion-panel
+                  @click="
+                    loadScheduleData(
+                      beneficiary.photo_id_number,
+                      beneficiary.scheduled
+                    )
+                  "
+                  :key="i"
+                  class="info-card"
+                >
+                  <v-expansion-panel-header>
+                    <h5>{{ beneficiary.name }}</h5>
+                    <v-spacer></v-spacer> <v-spacer></v-spacer>
+                    <!-- <span class="btn-text">Schedule</span> -->
+                    <span
+                      class="btn-text"
+                      v-if="beneficiary.scheduled"
+                      @click.stop="
+                        toggleScheduleDalog(
+                          'update',
+                          beneficiary.photo_id_number
+                        )
+                      "
+                      >Update</span
+                    >
+                    <span
+                      class="btn-text"
+                      v-else
+                      @click.stop="
+                        toggleScheduleDalog(
+                          'schedule',
+                          beneficiary.photo_id_number
+                        )
+                      "
+                      >Schedule</span
+                    >
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content v-if="beneficiary.scheduled">
+                    <p class="appointment-info">
+                      <span class="appointment-info-label">Date:</span>
+                      {{ getScheduleInfo.date | dateFormate }}
+                    </p>
+                    <p class="appointment-info">
+                      <span class="appointment-info-label">Slot:</span>
+                      {{ getScheduleInfo.slot }}
+                    </p>
+                    <p class="appointment-info">
+                      <span class="appointment-info-label">Vaccine:</span>
+                      {{ getScheduleInfo.vaccine }}
+                    </p>
+                    <p class="appointment-info">
+                      <span class="appointment-info-label">Adress:</span>
+                      {{ getScheduleInfo.centerID }}
+                    </p>
+                    <div
+                      class="delete-btn"
+                      @click="showConfirmBox(beneficiary.photo_id_number)"
+                    >
+                      Remove Beneficiary
+                    </div>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </template>
             </v-expansion-panels>
           </div>
         </div>
@@ -96,10 +117,11 @@ import Beneficiary from '@/components/vaccination/Beneficiary.vue'
 import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
 import AlertBox from '@/components/shared/AlertBox.vue'
 import { namespace } from 'vuex-class'
-import { BeneficiaryActions } from '@/types/types'
+import { BeneficiaryActions, ScheduleActions } from '@/types/types'
 import { BeneficiaryDetailsResponse } from '@/types/interface'
 
 const beneficiary = namespace('Beneficiary')
+const schedule = namespace('Schedule')
 
 @Component({
   components: {
@@ -114,27 +136,51 @@ export default class AppointmentForm extends Vue {
   scheduleDalog = false
   formType = 'schedule'
   alertBox = false
+  idNumber = ''
 
   @beneficiary.Getter
   public beneficiaries!: BeneficiaryDetailsResponse[]
 
+  @schedule.Getter
+  public getScheduleInfo!: any
+
   @beneficiary.Action(BeneficiaryActions.BENEFICIARIES)
   public loadBeneficiaries!: () => void
+
+  @schedule.Action(ScheduleActions.SCHEDULE_BY_ID)
+  // eslint-disable-next-line no-unused-vars
+  public loadScheduleById!: (idNumber: string) => void
+
+  @beneficiary.Action(BeneficiaryActions.DELETE_BENEFICIARIES)
+  // eslint-disable-next-line no-unused-vars
+  public deleteBeneficiary!: (idNumber: string) => void
 
   toggleBeneficiaryDalog(): void {
     this.beneficiaryDalog = !this.beneficiaryDalog
   }
 
-  toggleScheduleDalog(formType = 'schedule'): void {
+  toggleScheduleDalog(formType = 'schedule', idNumber: string): void {
     this.scheduleDalog = !this.scheduleDalog
     this.formType = formType
+    this.idNumber = idNumber
   }
 
   toggleAlertBox(msg: boolean): void {
     if (msg) {
-      console.log('deleted')
+      this.deleteBeneficiary(this.idNumber)
     }
     this.alertBox = false
+  }
+
+  loadScheduleData(photoIdNumber: string, isScheduled: boolean): void {
+    if (isScheduled) {
+      this.loadScheduleById(photoIdNumber)
+    }
+  }
+
+  showConfirmBox(photoIdNumber: string): void {
+    this.idNumber = photoIdNumber
+    this.alertBox = true
   }
 
   created(): void {

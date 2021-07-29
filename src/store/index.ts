@@ -9,6 +9,7 @@ import Login from '@/store/modules/login'
 import Register from '@/store/modules/register'
 import Profile from '@/store/modules/profile'
 import Beneficiary from '@/store/modules/beneficiary'
+import Schedule from '@/store/modules/schedule'
 
 Vue.use(Vuex)
 
@@ -26,5 +27,6 @@ export default new Vuex.Store({
     Register,
     Profile,
     Beneficiary,
+    Schedule,
   },
 })
