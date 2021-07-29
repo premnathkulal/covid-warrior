@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { dateFormateConverter } from 'src/utils/dateFormateConverter'
 import { VaccinationCenters } from './dto/vaccination-center.dto'
 import { VaccinationCenterDocument } from './schemas/vaccination-center.schema'
 
@@ -12,7 +13,7 @@ export class VaccinationCenterServices {
   ) {}
 
   async findVaccinationCenter({ ...args }): Promise<VaccinationCenters> {
-    const date = this.dateFormateConverter(args.date)
+    const date = dateFormateConverter(args.date)
     const requestQuery = { date }
     if (args.pincode) {
       requestQuery['pincode'] = parseInt(args.pincode)
@@ -29,22 +30,10 @@ export class VaccinationCenterServices {
     if (args.longitude) {
       requestQuery['long'] = args.longitude
     }
-
-    console.log(requestQuery)
-
     const result = await this.appointmentCenterModule.find(requestQuery).exec()
-
     return {
       status: HttpStatus.OK,
       data: result,
     }
-  }
-
-  private dateFormateConverter(value: Date) {
-    const date = new Date(value)
-    const dd = date.getDate()
-    const mm = date.getMonth() + 1
-    const yyyy = date.getFullYear()
-    return `${dd < 10 ? `0${dd}` : dd}-${mm < 10 ? `0${mm}` : mm}-${yyyy}`
   }
 }

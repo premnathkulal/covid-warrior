@@ -20,7 +20,7 @@ export class CreateSchedule {
 
   @ApiProperty({ example: '20-02-2021' })
   @IsNotEmpty()
-  @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
+  @Matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, {
     message: 'Date formate missing',
   })
   @Field()

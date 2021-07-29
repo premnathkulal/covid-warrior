@@ -4,14 +4,16 @@ import { IsAlpha, IsNotEmpty, Matches, MaxLength } from 'class-validator'
 
 @InputType()
 export class CreateBeneficiary {
-  @ApiProperty({ example: 'Yudhistira' })
+  @ApiProperty({ example: 'Dharmaraja Yudhistira' })
   @IsNotEmpty()
   @Field()
-  @IsAlpha()
+  @Matches(/^([a-z]+\s)*[a-z]+$/, {
+    message: 'name must contain only letters (a-zA-Z) and space',
+  })
   name: string
 
   @ApiProperty({ example: '02-07-2021' })
-  @Matches(/^([0-9]{2}-){2}[0-9]{4}$/, {
+  @Matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, {
     message: 'Date formate missing',
   })
   @Field()

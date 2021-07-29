@@ -9,6 +9,7 @@ import {
 import { Model } from 'mongoose'
 import { CreateBeneficiary } from './dto/create-beneficiary.dto'
 import { BeneficiaryDocument } from './schemas/beneficiary.schema'
+import { dateFormateConverter } from 'src/utils/dateFormateConverter'
 
 @Injectable()
 export class BeneficiaryService {
@@ -21,10 +22,19 @@ export class BeneficiaryService {
     createBeneficiary: CreateBeneficiary,
     username: string,
   ): Promise<BeneficiaryResponse> {
+    let result = await this.getBeneficiaryByPhotoId(
+      createBeneficiary.photo_id_number,
+    )
+
+    if (result) {
+      throw new NotFoundException('Beneficiary already added')
+    }
+
     const newBeneficiary = new this.beneficiariesModule({
       username: username,
       scheduled: false,
       ...createBeneficiary,
+      birth_year: dateFormateConverter(createBeneficiary.birth_year),
     })
     await newBeneficiary.save()
     return {
@@ -42,8 +52,8 @@ export class BeneficiaryService {
     }
   }
 
-  async findOne(id: string, username: string): Promise<Beneficiaries> {
-    let result = await this.getBeneficiaryById(id, username)
+  async findOne(photoId: string, username: string): Promise<Beneficiaries> {
+    let result = await this.getBeneficiaryByPhotoId(photoId)
 
     if (!result) {
       throw new NotFoundException('Could not found beneficiary')
@@ -57,9 +67,12 @@ export class BeneficiaryService {
     }
   }
 
-  async remove(id: string, username: string): Promise<BeneficiaryResponse> {
+  async remove(
+    photoId: string,
+    username: string,
+  ): Promise<BeneficiaryResponse> {
     const result = await await this.beneficiariesModule
-      .deleteOne({ _id: id, username })
+      .deleteOne({ photo_id_number: photoId, username })
       .exec()
     if (result.n === 0) {
       throw new NotFoundException('Could not found beneficiary')
@@ -70,22 +83,16 @@ export class BeneficiaryService {
     }
   }
 
-  async setSchedule(id: string, username: string): Promise<void> {
-    const beneficiary = await this.getBeneficiaryById(id, username)
+  async setSchedule(photoId: string, username: string): Promise<void> {
+    const beneficiary = await this.getBeneficiaryByPhotoId(photoId)
     beneficiary.scheduled = !beneficiary.scheduled
     beneficiary.save()
   }
 
-  private async getBeneficiaryById(
-    id: string,
-    username: string,
-  ): Promise<Beneficiary> {
+  private async getBeneficiaryByPhotoId(photoId: string): Promise<Beneficiary> {
     const beneficiary = await this.beneficiariesModule
-      .findOne({ _id: id, username })
+      .findOne({ photo_id_number: photoId })
       .exec()
-    if (!beneficiary) {
-      throw new NotFoundException('Could not found beneficiary')
-    }
     return beneficiary as Beneficiary
   }
 
