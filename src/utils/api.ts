@@ -137,7 +137,7 @@ const loadScheduleByIdAPI = (idNumber: string): Promise<AxiosResponse> => {
 
 const deleteBeneficiaryAPI = (id: string): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
-  return axiosApi.delete(`${BASE_URL}beneficiary/${id}`)
+  return axiosApi.delete(`${BASE_URL}schedule/${id}`)
 }
 
 export {
