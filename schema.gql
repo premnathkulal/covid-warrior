@@ -86,6 +86,7 @@ type Schedule {
   vaccine: String!
   centerName: String!
   centerAddress: String!
+  pincode: String!
 }
 
 type Query {

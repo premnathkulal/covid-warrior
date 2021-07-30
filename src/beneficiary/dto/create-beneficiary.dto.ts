@@ -7,8 +7,8 @@ export class CreateBeneficiary {
   @ApiProperty({ example: 'Dharmaraja Yudhistira' })
   @IsNotEmpty()
   @Field()
-  @Matches(/^([a-z]+\s)*[a-z]+$/, {
-    message: 'name must contain only letters (a-zA-Z) and space',
+  @Matches(/^([a-zA-Z]+\s)*[a-zA-z]+$/, {
+    message: 'Name must contain only letters (a-zA-Z) and space',
   })
   name: string
 
