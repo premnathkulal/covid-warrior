@@ -71,8 +71,8 @@ export class ScheduleController {
         slot,
         date,
         vaccine,
-        centerAddress: result.data[0].name,
-        centerName: result.data[0].address,
+        centerName: result.data[0].name,
+        centerAddress: result.data[0].address,
       },
     }
   }
