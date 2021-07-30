@@ -45,6 +45,7 @@ class Beneficiary extends VuexModule {
     this.context.commit(BeneficiaryMutations.SET_SUCCESS, false)
     addBeneficiaryAPI(beneficiaryDetails)
       .then(() => {
+        this.context.dispatch(BeneficiaryActions.BENEFICIARIES)
         this.context.commit(BeneficiaryMutations.SET_SUCCESS, true)
       })
       .catch(error => {
@@ -60,6 +61,7 @@ class Beneficiary extends VuexModule {
 
   @Mutation
   public [BeneficiaryMutations.BENEFICIARIES](data: any): void {
+    console.log(data)
     this.beneficiaryList = data
   }
 
@@ -83,12 +85,10 @@ class Beneficiary extends VuexModule {
 
   @Action
   public [BeneficiaryActions.DELETE_BENEFICIARIES](id: string): void {
-    console.log(id)
-
     this.context.commit(BeneficiaryMutations.LOADING)
     deleteBeneficiaryAPI(id)
-      .then(response => {
-        console.log(response)
+      .then(() => {
+        this.context.dispatch(BeneficiaryActions.BENEFICIARIES)
       })
       .catch(error => {
         console.log(error)

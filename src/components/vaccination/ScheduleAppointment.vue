@@ -24,7 +24,7 @@
               </template>
               <v-date-picker
                 v-model="scheduleDetails.date"
-                :min="date"
+                :min="currentDate"
                 color="primary text-dark"
                 scrollable
               >
@@ -35,7 +35,7 @@
                   color="dark"
                   @click="$refs.dialog.save(scheduleDetails.date)"
                 >
-                  OK
+                  OOK
                 </v-btn>
               </v-date-picker>
             </v-dialog>
@@ -96,7 +96,6 @@ import { isNumber } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { VaccinationCenter, VaccinationCenterFilter } from '@/types/interface'
 import { ScheduleActions, VaccinationCenterActions } from '@/types/types'
-import Schedule from '@/store/modules/schedule'
 
 const vaccinationCenter = namespace('VaccinationCenter')
 const schedule = namespace('Schedule')
@@ -109,10 +108,10 @@ const schedule = namespace('Schedule')
 })
 export default class ScheduleAppointment extends Vue {
   @Prop({ default: false }) dialog!: boolean
-  @Prop({ default: 'schedule' }) formType!: boolean
-  @Prop({ default: null }) idNumber!: boolean
+  @Prop({ default: 'schedule' }) formType!: string
+  @Prop({ default: null }) idNumber!: string
 
-  date = new Date().toISOString().substr(0, 10)
+  currentDate = new Date().toISOString().substr(0, 10)
   showDialog = false
   gender = ['Male', 'Female', 'Other']
   photoIdType = ['Aadhar Card', 'Pan Card']
@@ -122,6 +121,7 @@ export default class ScheduleAppointment extends Vue {
   errorMessage = '* This Field is required'
   selectedPhotoIdType = ''
   pincode = ''
+  date = this.currentDate
   checkInputIsNumber = isNumber
 
   scheduleDetails = {
@@ -136,6 +136,12 @@ export default class ScheduleAppointment extends Vue {
   @vaccinationCenter.Getter
   vaccinationCentersList!: VaccinationCenter[]
 
+  @schedule.Getter
+  scheduleSuccess!: boolean
+
+  @schedule.Getter
+  public getScheduleInfo!: any
+
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
   // eslint-disable-next-line no-unused-vars
   public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
@@ -147,6 +153,10 @@ export default class ScheduleAppointment extends Vue {
   @schedule.Action(ScheduleActions.UPDATE)
   // eslint-disable-next-line no-unused-vars
   public updateSchedule!: (scheduleDetails: any) => void
+
+  @schedule.Action(ScheduleActions.SCHEDULE_BY_ID)
+  // eslint-disable-next-line no-unused-vars
+  public loadScheduleById!: (idNumber: string) => void
 
   @Watch('pincode')
   loadVaccinationCenter(): void {
@@ -166,6 +176,17 @@ export default class ScheduleAppointment extends Vue {
     this.vaccinationCenters = this.vaccinationCentersList
   }
 
+  @Watch('scheduleSuccess')
+  onSuccess(): void {
+    this.scheduleDetails = {
+      beneficiaryId: '',
+      centerId: '',
+      slot: '',
+      date: this.date,
+      vaccine: '',
+    }
+  }
+
   @Watch('scheduleDetails.centerId')
   setSlots(): void {
     this.scheduleDetails.slot = ''
@@ -183,6 +204,22 @@ export default class ScheduleAppointment extends Vue {
   @Watch('dialog')
   toggleDialog(): void {
     this.showDialog = this.dialog
+  }
+
+  @Watch('formType')
+  loadScheduleInfoById(): void {
+    if (this.formType === 'update') {
+      this.loadScheduleById(this.idNumber)
+    }
+  }
+
+  @Watch('getScheduleInfo')
+  setScheduleInfo(): void {
+    if (this.formType === 'update') {
+      // this.pincode = this.getScheduleInfo.pincode
+      this.date = this.getScheduleInfo.date
+      this.scheduleDetails = { ...this.getScheduleInfo }
+    }
   }
 
   disableInput(): boolean {

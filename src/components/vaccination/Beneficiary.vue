@@ -35,7 +35,7 @@
               </template>
               <v-date-picker
                 v-model="date"
-                :max="date"
+                :max="currentDate"
                 color="primary text-dark"
                 scrollable
               >
@@ -114,7 +114,7 @@ const beneficiary = namespace('Beneficiary')
 export default class Beneficiary extends Vue {
   @Prop({ default: false }) dialog!: boolean
   showDialog = false
-  date = new Date().toISOString().substr(0, 10)
+  currentDate = new Date().toISOString().substr(0, 10)
   genderList = ['Male', 'Female', 'Other']
   photoIdTypeList = ['Aadhar Card', 'Pan Card']
   modal = false
@@ -122,6 +122,7 @@ export default class Beneficiary extends Vue {
   gender = 'Male'
   photoIdType = ''
   photoIdPlaceholder = 'ID Number'
+  date = this.currentDate
 
   beneficiaryDetails = {
     name: {

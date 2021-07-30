@@ -1,7 +1,11 @@
 <template>
   <div class="vaccination-center">
     <appointment-form :showDialog="showDialog" @toggleDialog="toggleDialog()" />
-    <div class="btn-mobile d-flex d-md-none" @click="toggleDialog()">
+    <div
+      v-if="isLoginSuccess"
+      class="btn-mobile d-flex d-md-none"
+      @click="toggleDialog()"
+    >
       <p class="btn-text">Book Appointment</p>
     </div>
     <div class="vaccination-center-form">
@@ -99,7 +103,7 @@
           </div>
         </span>
       </div>
-      <div class="button d-none d-md-flex">
+      <div v-if="isLoginSuccess" class="button d-none d-md-flex">
         <p class="btn-text" @click="showDialog = true">Book Appointment</p>
       </div>
     </div>
@@ -121,6 +125,7 @@ import {
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
+const login = namespace('Login')
 
 @Component({
   components: { AppointmentForm },
@@ -146,6 +151,9 @@ export default class VaccinationCenterForm extends Vue {
 
   @vaccinationCenter.Getter
   vaccinationCenterList!: VaccinationCenter[]
+
+  @login.Getter
+  public isLoginSuccess!: boolean
 
   @stateDistricts.Action(StateDistrictsActions.DISTRICTS)
   // eslint-disable-next-line no-unused-vars

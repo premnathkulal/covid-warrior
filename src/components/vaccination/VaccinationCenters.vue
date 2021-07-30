@@ -11,12 +11,11 @@ import VaccinationCentersList from '@/components/vaccination/VaccinationCentersL
 import VaccinationCenterForm from '@/components/vaccination/VaccinationCenterForm.vue'
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
-import { Position, State, VaccinationCenterFilter } from '@/types/interface'
+import { State, VaccinationCenterFilter } from '@/types/interface'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
 const location = namespace('Location')
-
 @Component({
   components: {
     VaccinationCentersList,

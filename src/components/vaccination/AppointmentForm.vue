@@ -80,7 +80,7 @@
                   <v-expansion-panel-content v-if="beneficiary.scheduled">
                     <p class="appointment-info">
                       <span class="appointment-info-label">Date:</span>
-                      {{ getScheduleInfo.date | dateFormate }}
+                      {{ getScheduleInfo.date }}
                     </p>
                     <p class="appointment-info">
                       <span class="appointment-info-label">Slot:</span>
@@ -91,8 +91,12 @@
                       {{ getScheduleInfo.vaccine }}
                     </p>
                     <p class="appointment-info">
+                      <span class="appointment-info-label">Center Name:</span>
+                      {{ getScheduleInfo.centerName }}
+                    </p>
+                    <p class="appointment-info">
                       <span class="appointment-info-label">Adress:</span>
-                      {{ getScheduleInfo.centerID }}
+                      {{ getScheduleInfo.centerAddress }}
                     </p>
                     <div
                       class="delete-btn"
@@ -112,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
 import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
 import AlertBox from '@/components/shared/AlertBox.vue'
@@ -122,6 +126,7 @@ import { BeneficiaryDetailsResponse } from '@/types/interface'
 
 const beneficiary = namespace('Beneficiary')
 const schedule = namespace('Schedule')
+const login = namespace('Login')
 
 @Component({
   components: {
@@ -155,6 +160,16 @@ export default class AppointmentForm extends Vue {
   // eslint-disable-next-line no-unused-vars
   public deleteBeneficiary!: (idNumber: string) => void
 
+  @login.Getter
+  public isLoginSuccess!: boolean
+
+  @Watch('isLoginSuccess')
+  loadBeneficiaryList(): void {
+    if (this.isLoginSuccess && this.beneficiaries.length === 0) {
+      this.loadBeneficiaries()
+    }
+  }
+
   toggleBeneficiaryDalog(): void {
     this.beneficiaryDalog = !this.beneficiaryDalog
   }
@@ -166,7 +181,7 @@ export default class AppointmentForm extends Vue {
   }
 
   toggleAlertBox(msg: boolean): void {
-    if (msg) {
+    if (msg && this.isLoginSuccess) {
       this.deleteBeneficiary(this.idNumber)
     }
     this.alertBox = false
@@ -184,7 +199,7 @@ export default class AppointmentForm extends Vue {
   }
 
   created(): void {
-    this.loadBeneficiaries()
+    this.loadBeneficiaryList()
   }
 }
 </script>

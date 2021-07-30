@@ -1,5 +1,9 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { ScheduleActions, ScheduleMutations } from '@/types/types'
+import {
+  BeneficiaryActions,
+  ScheduleActions,
+  ScheduleMutations,
+} from '@/types/types'
 import {
   scheduleAPI,
   updateScheduleAPI,
@@ -39,8 +43,13 @@ class Schedule extends VuexModule {
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
 
     scheduleAPI(scheduleDetails)
-      .then(response => {
+      .then(() => {
         this.context.commit(ScheduleMutations.SET_SUCCESS, true)
+        this.context.dispatch(
+          `Beneficiary/${BeneficiaryActions.BENEFICIARIES}`,
+          null,
+          { root: true }
+        )
       })
       .catch(error => {
         this.context.commit(
@@ -59,8 +68,12 @@ class Schedule extends VuexModule {
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
 
     updateScheduleAPI(scheduleDetails)
-      .then(response => {
+      .then(() => {
         this.context.commit(ScheduleMutations.SET_SUCCESS, true)
+        this.context.dispatch(
+          ScheduleActions.SCHEDULE_BY_ID,
+          scheduleDetails.beneficiaryId
+        )
       })
       .catch(error => {
         this.context.commit(
@@ -84,7 +97,10 @@ class Schedule extends VuexModule {
     this.context.commit(ScheduleMutations.SCHEDULE_BY_ID, {})
     loadScheduleByIdAPI(idNumber)
       .then(response => {
-        this.context.commit(ScheduleMutations.SCHEDULE_BY_ID, response.data)
+        this.context.commit(
+          ScheduleMutations.SCHEDULE_BY_ID,
+          response.data.scheduleData
+        )
       })
       .catch(error => {
         console.log(error)
@@ -94,11 +110,11 @@ class Schedule extends VuexModule {
       })
   }
 
-  get beneficiaryError(): string {
+  get scheduleError(): string {
     return this.errorMessage
   }
 
-  get beneficiarySuccess(): boolean {
+  get scheduleSuccess(): boolean {
     return this.isSuccess
   }
 

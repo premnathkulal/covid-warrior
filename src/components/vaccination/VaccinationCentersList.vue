@@ -16,6 +16,21 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </template>
+    <template v-else>
+      <div class="emty-state">
+        <lottie-player
+          class="lottie-player"
+          autoplay
+          loop
+          mode="normal"
+          :src="`/assets/lotties/empty-state.json`"
+          :style="`width: 200px`"
+          background="transparent"
+        >
+        </lottie-player>
+        <p class="emty-text">No Center Found</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -48,5 +63,13 @@ export default class VaccinationCentersList extends Vue {
     width: 100%;
   }
   margin-bottom: 3.5rem;
+
+  .emty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 30vh;
+  }
 }
 </style>
