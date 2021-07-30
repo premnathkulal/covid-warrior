@@ -96,7 +96,9 @@ export class ScheduleService {
     }
 
     await this.beneficiaryService.setSchedule(beneficiaryId, username)
-    const result = await this.scheduleModule.deleteOne({ beneficiaryId }).exec()
+    await this.scheduleModule.deleteOne({ beneficiaryId }).exec()
+    await this.beneficiaryService.remove(beneficiaryId, username)
+
     return {
       status: HttpStatus.OK,
       message: 'Schedule details deleted',
