@@ -35,7 +35,7 @@
                   color="dark"
                   @click="$refs.dialog.save(scheduleDetails.date)"
                 >
-                  OOK
+                  OK
                 </v-btn>
               </v-date-picker>
             </v-dialog>
@@ -158,10 +158,11 @@ export default class ScheduleAppointment extends Vue {
   // eslint-disable-next-line no-unused-vars
   public loadScheduleById!: (idNumber: string) => void
 
+  @Watch('date')
   @Watch('pincode')
   loadVaccinationCenter(): void {
     this.vaccinationCenters = []
-    if (this.pincode.length === 6) {
+    if (this.pincode && this.pincode.length === 6) {
       setTimeout(() => {
         this.loadVaccinationCenters({
           date: this.scheduleDetails.date,
@@ -216,9 +217,8 @@ export default class ScheduleAppointment extends Vue {
   @Watch('getScheduleInfo')
   setScheduleInfo(): void {
     if (this.formType === 'update') {
-      // this.pincode = this.getScheduleInfo.pincode
       this.date = this.getScheduleInfo.date
-      this.scheduleDetails = { ...this.getScheduleInfo }
+      this.pincode = this.getScheduleInfo.pincode
     }
   }
 

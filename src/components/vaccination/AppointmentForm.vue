@@ -15,6 +15,11 @@
       :dialog="alertBox"
       @toggleAlertBox="toggleAlertBox"
     />
+    <success-failuer-alert
+      :msg="'Are you sure want to remove this beneficiary?'"
+      :dialog="alertBox"
+      @toggleAlertBox="successFailuerAlert"
+    />
     <v-dialog
       v-model="showDialog"
       fullscreen
@@ -37,78 +42,96 @@
           </v-toolbar-items>
         </v-toolbar>
         <div class="beneficiary-list-field container">
-          <div class="beneficiary-info">
-            <v-expansion-panels>
-              <template v-for="(beneficiary, i) in beneficiaries">
-                <v-expansion-panel
-                  @click="
-                    loadScheduleData(
-                      beneficiary.photo_id_number,
-                      beneficiary.scheduled
-                    )
-                  "
-                  :key="i"
-                  class="info-card"
-                >
-                  <v-expansion-panel-header>
-                    <h5>{{ beneficiary.name }}</h5>
-                    <v-spacer></v-spacer> <v-spacer></v-spacer>
-                    <!-- <span class="btn-text">Schedule</span> -->
-                    <span
-                      class="btn-text"
-                      v-if="beneficiary.scheduled"
-                      @click.stop="
-                        toggleScheduleDalog(
-                          'update',
-                          beneficiary.photo_id_number
-                        )
-                      "
-                      >Update</span
-                    >
-                    <span
-                      class="btn-text"
-                      v-else
-                      @click.stop="
-                        toggleScheduleDalog(
-                          'schedule',
-                          beneficiary.photo_id_number
-                        )
-                      "
-                      >Schedule</span
-                    >
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content v-if="beneficiary.scheduled">
-                    <p class="appointment-info">
-                      <span class="appointment-info-label">Date:</span>
-                      {{ getScheduleInfo.date }}
-                    </p>
-                    <p class="appointment-info">
-                      <span class="appointment-info-label">Slot:</span>
-                      {{ getScheduleInfo.slot }}
-                    </p>
-                    <p class="appointment-info">
-                      <span class="appointment-info-label">Vaccine:</span>
-                      {{ getScheduleInfo.vaccine }}
-                    </p>
-                    <p class="appointment-info">
-                      <span class="appointment-info-label">Center Name:</span>
-                      {{ getScheduleInfo.centerName }}
-                    </p>
-                    <p class="appointment-info">
-                      <span class="appointment-info-label">Adress:</span>
-                      {{ getScheduleInfo.centerAddress }}
-                    </p>
-                    <div
-                      class="delete-btn"
-                      @click="showConfirmBox(beneficiary.photo_id_number)"
-                    >
-                      Remove Beneficiary
-                    </div>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </template>
-            </v-expansion-panels>
-          </div>
+          <template v-if="beneficiaries.length">
+            <div class="beneficiary-info">
+              <v-expansion-panels>
+                <template v-for="(beneficiary, i) in beneficiaries">
+                  <v-expansion-panel
+                    @click="
+                      loadScheduleData(
+                        beneficiary.photo_id_number,
+                        beneficiary.scheduled
+                      )
+                    "
+                    :key="i"
+                    class="info-card"
+                    :class="{ 'avoid-clicks': !beneficiary.scheduled }"
+                  >
+                    <v-expansion-panel-header>
+                      <h5>{{ beneficiary.name }}</h5>
+                      <v-spacer></v-spacer> <v-spacer></v-spacer>
+                      <!-- <span class="btn-text">Schedule</span> -->
+                      <span
+                        class="btn-text text-primary"
+                        v-if="beneficiary.scheduled"
+                        @click.stop="
+                          toggleScheduleDalog(
+                            'update',
+                            beneficiary.photo_id_number
+                          )
+                        "
+                        >Update</span
+                      >
+                      <span
+                        class="btn-text text-danger"
+                        v-else
+                        @click.stop="
+                          toggleScheduleDalog(
+                            'schedule',
+                            beneficiary.photo_id_number
+                          )
+                        "
+                        >Schedule</span
+                      >
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content v-if="beneficiary.scheduled">
+                      <p class="appointment-info">
+                        <span class="appointment-info-label">Date:</span>
+                        {{ getScheduleInfo.date }}
+                      </p>
+                      <p class="appointment-info">
+                        <span class="appointment-info-label">Slot:</span>
+                        {{ getScheduleInfo.slot }}
+                      </p>
+                      <p class="appointment-info">
+                        <span class="appointment-info-label">Vaccine:</span>
+                        {{ getScheduleInfo.vaccine }}
+                      </p>
+                      <p class="appointment-info">
+                        <span class="appointment-info-label">Center Name:</span>
+                        {{ getScheduleInfo.centerName }}
+                      </p>
+                      <p class="appointment-info">
+                        <span class="appointment-info-label">Adress:</span>
+                        {{ getScheduleInfo.centerAddress }}
+                      </p>
+                      <div
+                        class="delete-btn"
+                        @click="showConfirmBox(beneficiary.photo_id_number)"
+                      >
+                        Remove Beneficiary
+                      </div>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </template>
+              </v-expansion-panels>
+            </div>
+          </template>
+          <template v-else>
+            <div class="emty-state">
+              <lottie-player
+                class="lottie-player"
+                autoplay
+                loop
+                mode="normal"
+                :src="`/assets/lotties/empty-state.json`"
+                :style="`width: 200px`"
+                background="transparent"
+              >
+              </lottie-player>
+              <p class="emty-text">No Center Found</p>
+            </div>
+          </template>
         </div>
       </v-card>
     </v-dialog>
@@ -120,6 +143,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
 import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
 import AlertBox from '@/components/shared/AlertBox.vue'
+import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 import { namespace } from 'vuex-class'
 import { BeneficiaryActions, ScheduleActions } from '@/types/types'
 import { BeneficiaryDetailsResponse } from '@/types/interface'
@@ -133,6 +157,7 @@ const login = namespace('Login')
     Beneficiary,
     ScheduleAppointment,
     AlertBox,
+    SuccessFailuerAlert,
   },
 })
 export default class AppointmentForm extends Vue {
@@ -141,6 +166,7 @@ export default class AppointmentForm extends Vue {
   scheduleDalog = false
   formType = 'schedule'
   alertBox = false
+  successFailuerAlert = false
   idNumber = ''
 
   @beneficiary.Getter
@@ -187,6 +213,10 @@ export default class AppointmentForm extends Vue {
     this.alertBox = false
   }
 
+  toggleSuccessFailuerAlert(): void {
+    this.successFailuerAlert = !this.successFailuerAlert
+  }
+
   loadScheduleData(photoIdNumber: string, isScheduled: boolean): void {
     if (isScheduled) {
       this.loadScheduleById(photoIdNumber)
@@ -219,6 +249,7 @@ export default class AppointmentForm extends Vue {
     .btn-text {
       text-align: right;
       margin-right: 1rem;
+      pointer-events: auto;
     }
     .appointment-info {
       font-size: 0.9rem;
@@ -242,5 +273,12 @@ export default class AppointmentForm extends Vue {
   color: $black;
   font-weight: bold;
   font-size: 1.2rem;
+}
+.emty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 30vh;
 }
 </style>

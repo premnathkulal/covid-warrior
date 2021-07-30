@@ -102,6 +102,7 @@ import {
 import { BeneficiaryActions } from '@/types/types'
 import { namespace } from 'vuex-class'
 import { BeneficiaryDetails } from '@/types/interface'
+import { NameErrorMessages, PhotoIdErrorMessages } from '@/utils/errorMessage'
 
 const beneficiary = namespace('Beneficiary')
 
@@ -149,8 +150,11 @@ export default class Beneficiary extends Vue {
 
   @Watch('beneficiaryError')
   setError(): void {
-    if (this.beneficiaryError) {
+    if (PhotoIdErrorMessages.includes(this.beneficiaryError)) {
       this.beneficiaryDetails.idNumber.error = this.beneficiaryError
+    }
+    if (NameErrorMessages.includes(this.beneficiaryError)) {
+      this.beneficiaryDetails.name.error = this.beneficiaryError
     }
   }
 

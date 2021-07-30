@@ -210,5 +210,9 @@ export default class App extends Vue {
   .bottom-drawer-leave-active {
     transition: all 0.5s;
   }
+
+  .avoid-clicks {
+    pointer-events: none;
+  }
 }
 </style>
