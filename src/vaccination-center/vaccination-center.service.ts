@@ -36,4 +36,16 @@ export class VaccinationCenterServices {
       data: result,
     }
   }
+
+  async findVaccinationCenterById(
+    centerID: string,
+  ): Promise<VaccinationCenters> {
+    const result = await this.appointmentCenterModule
+      .findOne({ center_id: parseInt(centerID) })
+      .exec()
+    return {
+      status: HttpStatus.OK,
+      data: [result],
+    }
+  }
 }

@@ -13,5 +13,6 @@ import { VaccinationCenterSchema } from './schemas/vaccination-center.schema'
   ],
   controllers: [VaccinationCenterController],
   providers: [VaccinationCenterServices, VaccinationCenterResolver],
+  exports: [VaccinationCenterServices],
 })
 export class VaccinationCenterModule {}

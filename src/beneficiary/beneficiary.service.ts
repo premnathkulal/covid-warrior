@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
+import {
+  ConflictException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { BeneficiaryResponse } from './dto/beneficiary-response.dto'
 import {
@@ -27,7 +32,7 @@ export class BeneficiaryService {
     )
 
     if (result) {
-      throw new NotFoundException('Beneficiary already added')
+      throw new ConflictException('Beneficiary already added')
     }
 
     const newBeneficiary = new this.beneficiariesModule({

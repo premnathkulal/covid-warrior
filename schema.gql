@@ -78,6 +78,16 @@ type Beneficiary {
   scheduled: Boolean!
 }
 
+type Schedule {
+  beneficiaryId: String!
+  centerID: String!
+  slot: String!
+  date: String!
+  vaccine: String!
+  centerName: String!
+  centerAddress: String!
+}
+
 type Query {
   states: [States!]!
   districts(stateId: Float!): Districts!

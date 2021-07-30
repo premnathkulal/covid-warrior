@@ -8,6 +8,7 @@ import {
   Param,
   Get,
   Delete,
+  HttpStatus,
 } from '@nestjs/common'
 import { ScheduleService } from './schedule.service'
 import { CreateSchedule } from './dto/create-schedule.dto'
@@ -20,15 +21,22 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
-import { ScheduleResponse } from './dto/schedule-response.dto'
+import {
+  ScheduleResponse,
+  ScheduleResponseById,
+} from './dto/schedule-response.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { UpdateSchedule } from './dto/update-schedule.dto'
 import { Schedule } from './dto/schedule.dto'
+import { VaccinationCenterServices } from 'src/vaccination-center/vaccination-center.service'
 
 @ApiTags('Schedule Appointment APIs')
 @Controller('schedule')
 export class ScheduleController {
-  constructor(private readonly scheduleService: ScheduleService) {}
+  constructor(
+    private readonly scheduleService: ScheduleService,
+    private readonly vaccinationCenterService: VaccinationCenterServices,
+  ) {}
 
   @ApiBearerAuth('JWT-auth')
   @ApiCreatedResponse({ type: ScheduleResponse })
@@ -50,8 +58,23 @@ export class ScheduleController {
   @ApiUnauthorizedResponse({ description: 'UnAuthorized' })
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Schedule> {
-    return await this.scheduleService.findOne(id)
+  async findOne(@Param('id') id: string): Promise<ScheduleResponseById> {
+    const { beneficiaryId, centerID, slot, date, vaccine } =
+      await this.scheduleService.findOne(id)
+    const result =
+      await this.vaccinationCenterService.findVaccinationCenterById(centerID)
+    return {
+      status: HttpStatus.OK,
+      scheduleData: {
+        beneficiaryId,
+        centerID,
+        slot,
+        date,
+        vaccine,
+        centerAddress: result.data[0].name,
+        centerName: result.data[0].address,
+      },
+    }
   }
 
   @ApiBearerAuth('JWT-auth')
