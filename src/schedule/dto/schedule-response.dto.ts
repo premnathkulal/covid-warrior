@@ -42,6 +42,10 @@ export class Schedule {
   @ApiProperty()
   @Field()
   centerAddress: string
+
+  @ApiProperty()
+  @Field()
+  pincode: string
 }
 @ObjectType()
 export class ScheduleResponseById {

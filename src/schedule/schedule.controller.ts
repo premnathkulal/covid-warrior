@@ -73,6 +73,7 @@ export class ScheduleController {
         vaccine,
         centerName: result.data[0].name,
         centerAddress: result.data[0].address,
+        pincode: result.data[0].pincode.toString(),
       },
     }
   }
