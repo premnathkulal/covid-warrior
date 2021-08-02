@@ -4,7 +4,7 @@
       :dialog="beneficiaryDalog"
       @toggleDialog="toggleBeneficiaryDalog"
     />
-    <schedule-appointment
+    <schedule-update-appointment
       :dialog="scheduleDalog"
       :formType="formType"
       :idNumber="idNumber"
@@ -16,9 +16,10 @@
       @toggleAlertBox="toggleAlertBox"
     />
     <success-failuer-alert
-      :msg="'Are you sure want to remove this beneficiary?'"
-      :dialog="alertBox"
-      @toggleAlertBox="successFailuerAlert"
+      :dialog="successFailuerDialog"
+      :alertMessage="alertMessage"
+      :isSuccess="isSuccess"
+      @toggleAlertBox="toggleSuccessFailuerBox"
     />
     <v-dialog
       v-model="showDialog"
@@ -58,31 +59,41 @@
                     :class="{ 'avoid-clicks': !beneficiary.scheduled }"
                   >
                     <v-expansion-panel-header>
-                      <h5>{{ beneficiary.name }}</h5>
+                      <h5 class="beneficiary-name">{{ beneficiary.name }}</h5>
                       <v-spacer></v-spacer> <v-spacer></v-spacer>
-                      <!-- <span class="btn-text">Schedule</span> -->
                       <span
-                        class="btn-text text-primary"
                         v-if="beneficiary.scheduled"
+                        class="btn-text text-primary pr-5"
                         @click.stop="
                           toggleScheduleDalog(
                             'update',
                             beneficiary.photo_id_number
                           )
                         "
-                        >Update</span
                       >
+                        Update
+                      </span>
                       <span
-                        class="btn-text text-danger"
                         v-else
+                        class="btn-text text-danger mr-0"
                         @click.stop="
                           toggleScheduleDalog(
                             'schedule',
                             beneficiary.photo_id_number
                           )
                         "
-                        >Schedule</span
+                        ><span class="d-none d-sm-block">Schedule</span>
+                        <v-icon color="red" class="d-block d-sm-none"
+                          >mdi-calendar-month</v-icon
+                        ></span
                       >
+                      <span
+                        v-if="!beneficiary.scheduled"
+                        class="btn-text mr-5"
+                        @click="showConfirmBox(beneficiary.photo_id_number)"
+                      >
+                        <v-icon color="red">mdi-trash-can</v-icon>
+                      </span>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content v-if="beneficiary.scheduled">
                       <p class="appointment-info">
@@ -107,7 +118,10 @@
                       </p>
                       <div
                         class="delete-btn"
-                        @click="showConfirmBox(beneficiary.photo_id_number)"
+                        @click="
+                          showConfirmBox(beneficiary.photo_id_number)
+                          deleteSchedule = true
+                        "
                       >
                         Remove Beneficiary
                       </div>
@@ -141,7 +155,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import Beneficiary from '@/components/vaccination/Beneficiary.vue'
-import ScheduleAppointment from '@/components/vaccination/ScheduleAppointment.vue'
+import ScheduleUpdateAppointment from '@/components/vaccination/ScheduleUpdateAppointment.vue'
 import AlertBox from '@/components/shared/AlertBox.vue'
 import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 import { namespace } from 'vuex-class'
@@ -155,7 +169,7 @@ const login = namespace('Login')
 @Component({
   components: {
     Beneficiary,
-    ScheduleAppointment,
+    ScheduleUpdateAppointment,
     AlertBox,
     SuccessFailuerAlert,
   },
@@ -168,6 +182,10 @@ export default class AppointmentForm extends Vue {
   alertBox = false
   successFailuerAlert = false
   idNumber = ''
+  successFailuerDialog = false
+  alertMessage = ''
+  isSuccess = false
+  deleteSchedule = false
 
   @beneficiary.Getter
   public beneficiaries!: BeneficiaryDetailsResponse[]
@@ -175,12 +193,22 @@ export default class AppointmentForm extends Vue {
   @schedule.Getter
   public getScheduleInfo!: any
 
+  @beneficiary.Getter
+  public beneficiaryError!: string
+
+  @beneficiary.Getter
+  public beneficiarySuccess!: boolean
+
   @beneficiary.Action(BeneficiaryActions.BENEFICIARIES)
   public loadBeneficiaries!: () => void
 
   @schedule.Action(ScheduleActions.SCHEDULE_BY_ID)
   // eslint-disable-next-line no-unused-vars
   public loadScheduleById!: (idNumber: string) => void
+
+  @beneficiary.Action(BeneficiaryActions.DELETE_BENEFICIARIES_SCHEDULE)
+  // eslint-disable-next-line no-unused-vars
+  public deleteBeneficiarySchedule!: (idNumber: string) => void
 
   @beneficiary.Action(BeneficiaryActions.DELETE_BENEFICIARIES)
   // eslint-disable-next-line no-unused-vars
@@ -196,6 +224,25 @@ export default class AppointmentForm extends Vue {
     }
   }
 
+  @Watch('beneficiaryError')
+  setError(): void {
+    if (this.beneficiaryError) {
+      this.alertMessage = 'Operation Failed'
+      this.isSuccess = false
+      this.successFailuerDialog = true
+    }
+  }
+
+  @Watch('beneficiarySuccess')
+  onSuccess(): void {
+    if (this.beneficiarySuccess) {
+      this.alertMessage = 'Success'
+      this.isSuccess = true
+      this.successFailuerDialog = true
+      this.beneficiaryDalog = false
+    }
+  }
+
   toggleBeneficiaryDalog(): void {
     this.beneficiaryDalog = !this.beneficiaryDalog
   }
@@ -208,7 +255,12 @@ export default class AppointmentForm extends Vue {
 
   toggleAlertBox(msg: boolean): void {
     if (msg && this.isLoginSuccess) {
-      this.deleteBeneficiary(this.idNumber)
+      if (this.deleteSchedule) {
+        this.deleteBeneficiarySchedule(this.idNumber)
+        this.deleteSchedule = false
+      } else {
+        this.deleteBeneficiary(this.idNumber)
+      }
     }
     this.alertBox = false
   }
@@ -226,6 +278,10 @@ export default class AppointmentForm extends Vue {
   showConfirmBox(photoIdNumber: string): void {
     this.idNumber = photoIdNumber
     this.alertBox = true
+  }
+
+  toggleSuccessFailuerBox(): void {
+    this.successFailuerDialog = !this.successFailuerDialog
   }
 
   created(): void {
@@ -246,9 +302,11 @@ export default class AppointmentForm extends Vue {
     border-left: 0.4rem solid $color-primary;
   }
   .beneficiary-info {
+    .beneficiary-name {
+      width: 5rem;
+    }
     .btn-text {
       text-align: right;
-      margin-right: 1rem;
       pointer-events: auto;
     }
     .appointment-info {

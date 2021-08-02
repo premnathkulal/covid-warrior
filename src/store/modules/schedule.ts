@@ -41,6 +41,7 @@ class Schedule extends VuexModule {
   public [ScheduleActions.SCHEDULE](scheduleDetails: any): void {
     this.context.commit(ScheduleMutations.LOADING)
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
+    this.context.commit(ScheduleMutations.SET_ERROR, '')
 
     scheduleAPI(scheduleDetails)
       .then(() => {
@@ -52,10 +53,12 @@ class Schedule extends VuexModule {
         )
       })
       .catch(error => {
-        this.context.commit(
-          ScheduleMutations.SET_ERROR,
-          error.response.data.message
-        )
+        if (error.response.data) {
+          this.context.commit(
+            ScheduleMutations.SET_ERROR,
+            error.response.data.message
+          )
+        }
       })
       .finally(() => {
         this.context.commit(ScheduleMutations.LOADING)
@@ -66,6 +69,7 @@ class Schedule extends VuexModule {
   public [ScheduleActions.UPDATE](scheduleDetails: any): void {
     this.context.commit(ScheduleMutations.LOADING)
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
+    this.context.commit(ScheduleMutations.SET_ERROR, '')
 
     updateScheduleAPI(scheduleDetails)
       .then(() => {
@@ -76,10 +80,12 @@ class Schedule extends VuexModule {
         )
       })
       .catch(error => {
-        this.context.commit(
-          ScheduleMutations.SET_ERROR,
-          error.response.data.message
-        )
+        if (error.response.data) {
+          this.context.commit(
+            ScheduleMutations.SET_ERROR,
+            error.response.data.message
+          )
+        }
       })
       .finally(() => {
         this.context.commit(ScheduleMutations.LOADING)

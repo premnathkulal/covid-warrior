@@ -1,6 +1,6 @@
 <template>
   <div class="profile-page">
-    <div class="profile-card container d-block">
+    <div v-if="userToken" class="profile-card container d-block">
       <div class="profile-img">
         <v-icon class="profile-img-placeholder">mdi-account-circle</v-icon>
       </div>
@@ -16,10 +16,11 @@
 <script lang="ts">
 import { ProfileInfo } from '@/types/interface'
 import { ProfileActions } from '@/types/types'
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 
 const profile = namespace('Profile')
+const login = namespace('Login')
 
 @Component
 export default class Profile extends Vue {
@@ -29,8 +30,19 @@ export default class Profile extends Vue {
   @profile.Action(ProfileActions.PROFILE)
   public loadProfileData!: () => void
 
-  created(): void {
+  @login.Getter
+  userToken!: string
+
+  @login.Getter
+  isLoginSuccess!: string
+
+  @Watch('isLoginSuccess')
+  loadUserProfileData(): void {
     this.loadProfileData()
+  }
+
+  created(): void {
+    this.loadUserProfileData()
   }
 }
 </script>

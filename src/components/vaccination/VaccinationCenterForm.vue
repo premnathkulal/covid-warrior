@@ -30,7 +30,6 @@
             label="Select State"
             dense
             solo
-            @change="onFilter()"
           ></v-select>
           <v-select
             v-model="district"
@@ -40,24 +39,19 @@
             label="Select District"
             dense
             solo
-            @change="onFilter()"
             :disabled="!state"
           ></v-select>
           <v-select
-            v-model="pincodes"
+            v-model="pincode"
             class="select"
-            :hint="`${pincodes ? pincodes.name : ''}`"
+            :hint="villiageName"
             :items="pinCodesList"
             item-text="pincode"
-            item-value="pincode"
-            label="Select Area"
-            persistent-hint
-            return-object
-            single-line
-            @change="onFilter()"
-            :disabled="!district"
+            label="Select District"
             dense
             solo
+            @change="onFilter()"
+            :disabled="!state"
           ></v-select>
           <div class="select">
             <v-dialog
@@ -140,7 +134,8 @@ export default class VaccinationCenterForm extends Vue {
 
   state = ''
   district = ''
-  pincodes = ''
+  pincode = ''
+  villiageName = ''
   date = this.currentDate
 
   @stateDistricts.Getter
@@ -172,7 +167,10 @@ export default class VaccinationCenterForm extends Vue {
     const stateInfo: State[] = this.states.filter((state: State) => {
       return state.state_name === this.state
     })
+    this.pincode = ''
+    this.district = ''
     this.loadDistrictsList(stateInfo[0].state_id)
+    this.onFilter()
   }
 
   @Watch('district')
@@ -182,7 +180,9 @@ export default class VaccinationCenterForm extends Vue {
         return district.district_name === this.district
       }
     )
+    this.pincode = ''
     this.loadPinCodesList(districtInfo[0].district_id)
+    this.onFilter()
   }
 
   toggleForm(): void {
@@ -198,6 +198,7 @@ export default class VaccinationCenterForm extends Vue {
       state: this.state,
       district: this.district,
       date: this.date,
+      pincode: this.pincode,
     })
   }
 }
@@ -213,6 +214,7 @@ export default class VaccinationCenterForm extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: $color-background;
 
   @media only screen and (max-width: 960px) {
     top: 6.5rem;

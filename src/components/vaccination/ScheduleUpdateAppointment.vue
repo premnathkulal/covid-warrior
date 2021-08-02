@@ -1,5 +1,11 @@
 <template>
   <v-row justify="center">
+    <success-failuer-alert
+      :dialog="successFailuerDialog"
+      :alertMessage="alertMessage"
+      :isSuccess="isSuccess"
+      @toggleAlertBox="toggleAlertBox"
+    />
     <v-dialog v-model="showDialog" persistent max-width="600px">
       <v-card>
         <v-card-title> </v-card-title>
@@ -96,6 +102,7 @@ import { isNumber } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { VaccinationCenter, VaccinationCenterFilter } from '@/types/interface'
 import { ScheduleActions, VaccinationCenterActions } from '@/types/types'
+import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 
 const vaccinationCenter = namespace('VaccinationCenter')
 const schedule = namespace('Schedule')
@@ -104,9 +111,10 @@ const schedule = namespace('Schedule')
   components: {
     CustomInput,
     CustomButton,
+    SuccessFailuerAlert,
   },
 })
-export default class ScheduleAppointment extends Vue {
+export default class ScheduleUpdateAppointment extends Vue {
   @Prop({ default: false }) dialog!: boolean
   @Prop({ default: 'schedule' }) formType!: string
   @Prop({ default: null }) idNumber!: string
@@ -132,12 +140,18 @@ export default class ScheduleAppointment extends Vue {
     vaccine: '',
   }
   vaccinationCenters: VaccinationCenter[] = []
+  successFailuerDialog = false
+  alertMessage = ''
+  isSuccess = false
 
   @vaccinationCenter.Getter
   vaccinationCentersList!: VaccinationCenter[]
 
   @schedule.Getter
   scheduleSuccess!: boolean
+
+  @schedule.Getter
+  scheduleError!: boolean
 
   @schedule.Getter
   public getScheduleInfo!: any
@@ -179,12 +193,27 @@ export default class ScheduleAppointment extends Vue {
 
   @Watch('scheduleSuccess')
   onSuccess(): void {
-    this.scheduleDetails = {
-      beneficiaryId: '',
-      centerId: '',
-      slot: '',
-      date: this.date,
-      vaccine: '',
+    if (this.scheduleSuccess) {
+      this.alertMessage = 'Success'
+      this.isSuccess = true
+      this.successFailuerDialog = true
+      this.scheduleDetails = {
+        beneficiaryId: '',
+        centerId: '',
+        slot: '',
+        date: this.date,
+        vaccine: '',
+      }
+      this.$emit('toggleDialog')
+    }
+  }
+
+  @Watch('scheduleError')
+  onFailuer(): void {
+    if (this.scheduleError) {
+      this.alertMessage = 'Operation Failed'
+      this.isSuccess = false
+      this.successFailuerDialog = true
     }
   }
 
@@ -247,6 +276,10 @@ export default class ScheduleAppointment extends Vue {
       ...this.scheduleDetails,
       beneficiaryId: this.idNumber,
     })
+  }
+
+  toggleAlertBox(): void {
+    this.successFailuerDialog = !this.successFailuerDialog
   }
 
   created() {

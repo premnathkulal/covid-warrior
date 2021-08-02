@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="toggle = false">
+  <div id="app" @click="allowProfile()">
     <v-app>
       <v-card :elevation="0">
         <v-toolbar
@@ -46,7 +46,12 @@
           <template v-slot:extension>
             <v-tabs v-model="currentTabName" fixed-tabs slider-color="green">
               <template v-for="item in tabOptions">
-                <v-tab class="tab-options" :to="item.to" :key="item.name">
+                <v-tab
+                  class="tab-options"
+                  :to="item.to"
+                  @click.stop="allowProfile()"
+                  :key="item.name"
+                >
                   <span class="tab-title pr-4 d-none d-sm-block">{{
                     item.name
                   }}</span>
@@ -149,9 +154,20 @@ export default class App extends Vue {
     window.location.reload()
   }
 
+  allowProfile(): boolean {
+    if (this.currentTabName === '/profile' && !this.userToken) {
+      this.toggle = true
+      return true
+    }
+    this.toggle = false
+    return true
+  }
+
   created(): void {
     this.locationTracker()
     this.isUserLoggedIn()
+    this.currentTabName = window.location.pathname
+    this.allowProfile()
   }
 }
 </script>

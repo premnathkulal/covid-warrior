@@ -135,9 +135,14 @@ const loadScheduleByIdAPI = (idNumber: string): Promise<AxiosResponse> => {
   return axiosApi.get(`${BASE_URL}schedule/${idNumber}`)
 }
 
-const deleteBeneficiaryAPI = (id: string): Promise<AxiosResponse> => {
+const deleteBeneficiaryScheduleAPI = (id: string): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axiosApi.delete(`${BASE_URL}schedule/${id}`)
+}
+
+const deleteBeneficiaryAPI = (id: string): Promise<AxiosResponse> => {
+  const BASE_URL = COVID_WARRIOR_API
+  return axiosApi.delete(`${BASE_URL}beneficiary/${id}`)
 }
 
 export {
@@ -159,4 +164,5 @@ export {
   updateScheduleAPI,
   loadScheduleByIdAPI,
   deleteBeneficiaryAPI,
+  deleteBeneficiaryScheduleAPI,
 }

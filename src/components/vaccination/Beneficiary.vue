@@ -103,6 +103,7 @@ import { BeneficiaryActions } from '@/types/types'
 import { namespace } from 'vuex-class'
 import { BeneficiaryDetails } from '@/types/interface'
 import { NameErrorMessages, PhotoIdErrorMessages } from '@/utils/errorMessage'
+import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 
 const beneficiary = namespace('Beneficiary')
 
@@ -110,6 +111,7 @@ const beneficiary = namespace('Beneficiary')
   components: {
     CustomInput,
     CustomButton,
+    SuccessFailuerAlert,
   },
 })
 export default class Beneficiary extends Vue {
@@ -150,11 +152,13 @@ export default class Beneficiary extends Vue {
 
   @Watch('beneficiaryError')
   setError(): void {
-    if (PhotoIdErrorMessages.includes(this.beneficiaryError)) {
-      this.beneficiaryDetails.idNumber.error = this.beneficiaryError
-    }
-    if (NameErrorMessages.includes(this.beneficiaryError)) {
-      this.beneficiaryDetails.name.error = this.beneficiaryError
+    if (this.beneficiaryError) {
+      if (PhotoIdErrorMessages.includes(this.beneficiaryError)) {
+        this.beneficiaryDetails.idNumber.error = this.beneficiaryError
+      }
+      if (NameErrorMessages.includes(this.beneficiaryError)) {
+        this.beneficiaryDetails.name.error = this.beneficiaryError
+      }
     }
   }
 
@@ -173,7 +177,6 @@ export default class Beneficiary extends Vue {
       }
       this.gender = 'Male'
       this.photoIdType = ''
-      this.$emit('toggleDialog')
     }
   }
 
@@ -232,6 +235,7 @@ export default class Beneficiary extends Vue {
       this.addBeneficiary(beneficiaryDetails)
     }
   }
+
   idNumberKeyPressActions(event: KeyboardEvent): boolean | void {
     if (this.photoIdType === 'Aadhar Card') {
       return isNumber(

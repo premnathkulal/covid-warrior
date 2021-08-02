@@ -4,6 +4,7 @@ import {
   addBeneficiaryAPI,
   deleteBeneficiaryAPI,
   getBeneficiariesAPI,
+  deleteBeneficiaryScheduleAPI,
 } from '@/utils/api'
 import {
   BeneficiaryDetails,
@@ -43,6 +44,8 @@ class Beneficiary extends VuexModule {
   ): void {
     this.context.commit(BeneficiaryMutations.LOADING)
     this.context.commit(BeneficiaryMutations.SET_SUCCESS, false)
+    this.context.commit(BeneficiaryMutations.SET_ERROR, '')
+
     addBeneficiaryAPI(beneficiaryDetails)
       .then(() => {
         this.context.dispatch(BeneficiaryActions.BENEFICIARIES)
@@ -84,9 +87,32 @@ class Beneficiary extends VuexModule {
   }
 
   @Action
+  public [BeneficiaryActions.DELETE_BENEFICIARIES_SCHEDULE](id: string): void {
+    this.context.commit(BeneficiaryMutations.SET_SUCCESS, false)
+    this.context.commit(BeneficiaryMutations.LOADING)
+    this.context.commit(BeneficiaryMutations.SET_ERROR, '')
+    deleteBeneficiaryScheduleAPI(id)
+      .then(() => {
+        this.context.dispatch(BeneficiaryActions.BENEFICIARIES)
+        this.context.commit(BeneficiaryMutations.SET_SUCCESS, true)
+      })
+      .catch(error => {
+        this.context.commit(BeneficiaryMutations.SET_SUCCESS, false)
+        this.context.commit(
+          BeneficiaryMutations.SET_ERROR,
+          error.response.data.message
+        )
+      })
+      .finally(() => {
+        this.context.commit(BeneficiaryMutations.LOADING)
+      })
+  }
+
+  @Action
   public [BeneficiaryActions.DELETE_BENEFICIARIES](id: string): void {
     this.context.commit(BeneficiaryMutations.SET_SUCCESS, false)
     this.context.commit(BeneficiaryMutations.LOADING)
+    this.context.commit(BeneficiaryMutations.SET_ERROR, '')
     deleteBeneficiaryAPI(id)
       .then(() => {
         this.context.dispatch(BeneficiaryActions.BENEFICIARIES)
