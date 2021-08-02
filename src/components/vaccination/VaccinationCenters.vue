@@ -1,5 +1,6 @@
 <template>
   <div class="vaccination-center">
+    <loading />
     <vaccination-center-form :states="statesList" />
     <vaccination-centers-list />
   </div>
@@ -12,6 +13,7 @@ import VaccinationCenterForm from '@/components/vaccination/VaccinationCenterFor
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
 import { State, VaccinationCenterFilter } from '@/types/interface'
+import Loading from '@/components/shared/Loading.vue'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
@@ -20,6 +22,7 @@ const location = namespace('Location')
   components: {
     VaccinationCentersList,
     VaccinationCenterForm,
+    Loading,
   },
 })
 export default class VaccinationCenters extends Vue {
