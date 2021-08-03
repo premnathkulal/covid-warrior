@@ -3,12 +3,10 @@
     <div class="news" v-if="topNewsList && !isLoading">
       <template v-for="(item, index) in topNewsList">
         <div :key="index">
-          <a
-            :href="item.url"
-            target="_blank"
-            class="short-news py-3 text-dark text-decoration-none"
-          >
-            <div class="image"><img :src="item.multimedia[0].url" /></div>
+          <a :href="item.url" target="_blank" class="short-news py-3 text-dark">
+            <div class="img-container">
+              <img class="img" :src="item.multimedia[0].url" />
+            </div>
             <div class="news-contents">
               <div class="news-title">{{ item.title }}</div>
               <div class="abstract d-none d-sm-block">{{ item.abstract }}</div>
@@ -75,12 +73,18 @@ export default class News extends Vue {
       background: $white;
       margin-bottom: 0.8rem;
       cursor: pointer;
-      .image {
-        img {
-          width: 15rem;
-          height: 10rem;
+      text-decoration: none;
+
+      .img-container {
+        width: 180px;
+        height: 150px;
+        .img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
         }
       }
+
       .news-contents {
         flex: 1;
         display: flex;
@@ -101,9 +105,13 @@ export default class News extends Vue {
       }
       @media screen and (max-width: 768px) {
         .image {
-          img {
-            width: 10rem;
-            height: 8rem;
+          width: 150px;
+          height: 150px;
+          background-color: red;
+          .img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
           }
         }
         .news-contents {
