@@ -67,7 +67,6 @@ class Beneficiary extends VuexModule {
   public [BeneficiaryMutations.BENEFICIARIES](
     data: BeneficiaryDetailsResponse[]
   ): void {
-    console.log(data)
     this.beneficiaryList = data
   }
 

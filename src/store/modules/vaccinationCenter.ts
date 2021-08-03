@@ -48,8 +48,8 @@ class VaccinationCenter extends VuexModule {
           response.data.data
         )
       })
-      .catch(error => {
-        console.log(error)
+      .catch(() => {
+        //
       })
       .finally(() => {
         this.context.commit(VaccinationCenterMutations.LOADING)

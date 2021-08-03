@@ -49,7 +49,6 @@ export default class SuccessFailuerAlert extends Vue {
 
   @Watch('isSuccess')
   setAnimation(): void {
-    console.log(this.isSuccess)
     this.animation = this.isSuccess
   }
 }

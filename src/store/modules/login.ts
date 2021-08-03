@@ -70,7 +70,6 @@ class Login extends VuexModule {
   [LoginActions.FACEBOOK_LOGIN](
     facebookAuthCode: string | (string | null)[]
   ): Promise<void> {
-    console.log('KOO')
     return facebookAuthAPI(facebookAuthCode)
       .then(response => {
         this.context.commit(LoginMutations.LOGIN, response.data.token)

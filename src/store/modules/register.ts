@@ -51,8 +51,7 @@ class Register extends VuexModule {
   [RegisterActions.REGISTER](userDetails: RegisterDetails): Promise<void> {
     this.context.commit(RegisterMutations.LOADING)
     return registerAPI(userDetails)
-      .then(response => {
-        console.log(response)
+      .then(() => {
         this.context.commit(RegisterMutations.REGISTER)
         this.context.commit(RegisterMutations.SET_ERROR, '')
       })
