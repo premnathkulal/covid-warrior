@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="toggle = false">
+  <div id="app" @click="allowProfile()">
     <v-app>
       <v-card :elevation="0">
         <v-toolbar
@@ -46,7 +46,12 @@
           <template v-slot:extension>
             <v-tabs v-model="currentTabName" fixed-tabs slider-color="green">
               <template v-for="item in tabOptions">
-                <v-tab class="tab-options" :to="item.to" :key="item.name">
+                <v-tab
+                  class="tab-options"
+                  :to="item.to"
+                  @click.stop="allowProfile()"
+                  :key="item.name"
+                >
                   <span class="tab-title pr-4 d-none d-sm-block">{{
                     item.name
                   }}</span>
@@ -81,22 +86,22 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
 import Home from '@/components/Home/Home.vue'
 import { namespace } from 'vuex-class'
-import { LocationActions, LoginActions, RegisterActions } from './types/types'
+import { LocationActions, LoginActions } from './types/types'
 import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
 import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
 import Profile from '@/components/Profile/Profile.vue'
+import Cookies from 'js-cookie'
 
 const updates = namespace('Updates')
 const location = namespace('Location')
 const login = namespace('Login')
-const register = namespace('Register')
 
 @Component({
   components: {
@@ -130,6 +135,15 @@ export default class App extends Vue {
   @updates.Action(UpdatesActions.UPDATES)
   public loadUpdates!: () => void
 
+  @Watch('$route')
+  trackNavigation(): void {
+    const token = Cookies.get('jwtToken')
+    if (!token) {
+      this.userLogout()
+      return
+    }
+  }
+
   locationTracker(): void {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -150,9 +164,20 @@ export default class App extends Vue {
     window.location.reload()
   }
 
+  allowProfile(): boolean {
+    if (this.currentTabName === '/profile' && !this.userToken) {
+      this.toggle = true
+      return true
+    }
+    this.toggle = false
+    return true
+  }
+
   created(): void {
     this.locationTracker()
     this.isUserLoggedIn()
+    this.currentTabName = window.location.pathname
+    this.allowProfile()
   }
 }
 </script>
@@ -210,6 +235,10 @@ export default class App extends Vue {
   .bottom-drawer-enter-active,
   .bottom-drawer-leave-active {
     transition: all 0.5s;
+  }
+
+  .avoid-clicks {
+    pointer-events: none;
   }
 }
 </style>

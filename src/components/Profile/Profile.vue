@@ -1,23 +1,55 @@
 <template>
   <div class="profile-page">
-    <div class="profile-card container d-block">
+    <loading v-if="isLoading" />
+    <div v-if="userToken && !isLoading" class="profile-card container d-block">
       <div class="profile-img">
         <v-icon class="profile-img-placeholder">mdi-account-circle</v-icon>
       </div>
       <div class="profile-info">
-        <div class="iserId">ondjhdhgjhgh1234</div>
-        <div class="username">username</div>
-        <div class="name">Name Name</div>
+        <div class="name">{{ getProfileInfo.name }}</div>
+        <div class="iserId">{{ getProfileInfo.id }}</div>
+        <div class="username">{{ getProfileInfo.username }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { ProfileInfo } from '@/types/interface'
+import { ProfileActions } from '@/types/types'
+import { Vue, Component, Watch } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+import Loading from '@/components/shared/Loading.vue'
 
-@Component
-export default class Profile extends Vue {}
+const profile = namespace('Profile')
+const login = namespace('Login')
+
+@Component({ components: { Loading } })
+export default class Profile extends Vue {
+  @profile.State
+  public isLoading!: boolean
+
+  @profile.Getter
+  public getProfileInfo!: ProfileInfo
+
+  @profile.Action(ProfileActions.PROFILE)
+  public loadProfileData!: () => void
+
+  @login.Getter
+  userToken!: string
+
+  @login.Getter
+  isLoginSuccess!: string
+
+  @Watch('isLoginSuccess')
+  loadUserProfileData(): void {
+    this.loadProfileData()
+  }
+
+  created(): void {
+    this.loadUserProfileData()
+  }
+}
 </script>
 
 <style lang="scss">

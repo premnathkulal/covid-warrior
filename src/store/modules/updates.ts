@@ -10,7 +10,7 @@ class Updates extends VuexModule {
   public isLoading = false
 
   @Mutation
-  public [UpdatesMutations.TOGGLE_LOADING](): void {
+  public [UpdatesMutations.LOADING](): void {
     this.isLoading = !this.isLoading
   }
 
@@ -21,11 +21,11 @@ class Updates extends VuexModule {
 
   @Action
   public [UpdatesActions.UPDATES](): void {
-    this.context.commit(UpdatesMutations.TOGGLE_LOADING)
+    this.context.commit(UpdatesMutations.LOADING)
     getUpdates().then((result: AxiosResponse) => {
       this.context.commit(UpdatesMutations.UPDATES, result.data.statewise)
       setTimeout(() => {
-        this.context.commit(UpdatesMutations.TOGGLE_LOADING)
+        this.context.commit(UpdatesMutations.LOADING)
       }, 2000)
     })
   }

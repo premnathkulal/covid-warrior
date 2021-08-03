@@ -5,6 +5,8 @@ import {
   PasswordErrorMessages,
   UserNameErrorMessages,
 } from '@/utils/errorMessage'
+import { RegisterDetails } from '@/types/interface'
+import { AxiosError } from 'axios'
 
 @Module({ namespaced: true })
 class Register extends VuexModule {
@@ -46,18 +48,17 @@ class Register extends VuexModule {
   }
 
   @Action
-  [RegisterActions.REGISTER](userDetails: any): Promise<void> {
+  [RegisterActions.REGISTER](userDetails: RegisterDetails): Promise<void> {
     this.context.commit(RegisterMutations.LOADING)
     return registerAPI(userDetails)
-      .then(response => {
-        console.log(response)
+      .then(() => {
         this.context.commit(RegisterMutations.REGISTER)
         this.context.commit(RegisterMutations.SET_ERROR, '')
       })
-      .catch((error: any) => {
+      .catch((error: AxiosError) => {
         this.context.commit(
           RegisterMutations.SET_ERROR,
-          error.response.data.message
+          error.response?.data.message
         )
       })
       .finally(() => {
@@ -65,11 +66,11 @@ class Register extends VuexModule {
       })
   }
 
-  get userNameErrorMsg(): any {
+  get userNameErrorMsg(): string {
     return this.userNameError
   }
 
-  get passwordErrorMsg(): any {
+  get passwordErrorMsg(): string {
     return this.passwordError
   }
 

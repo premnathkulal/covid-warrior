@@ -55,6 +55,7 @@ import CustomButton from '@/components/shared/CustomButton.vue'
 import { formValidator, resetFormError } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { RegisterActions } from '@/types/types'
+import { RegisterDetails } from '@/types/interface'
 
 const register = namespace('Register')
 
@@ -90,9 +91,11 @@ export default class Register extends Vue {
   isRegisterSuccess!: boolean
 
   @register.Action(RegisterActions.REGISTER)
-  public userRegister!: (userDetails: any) => void
+  // eslint-disable-next-line no-unused-vars
+  public userRegister!: (userDetails: RegisterDetails) => void
 
   @register.Action(RegisterActions.SET_ERROR)
+  // eslint-disable-next-line no-unused-vars
   public setError!: (errMsg: string) => void
 
   @Watch('userNameErrorMsg')
@@ -136,15 +139,7 @@ export default class Register extends Vue {
   }
 
   register(): void {
-    this.userRegister({
-      name: this.userDetails.name.value,
-      username: this.userDetails.username.value,
-      password: this.userDetails.password.value,
-    })
-    // this.userDetails.name.value = ''
-    // this.userDetails.username.value = ''
-    // this.userDetails.password.value = ''
-    // this.$emit('hideAuthScreen')
+    this.userRegister(this.userDetails)
   }
 }
 </script>

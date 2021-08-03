@@ -1,7 +1,11 @@
 <template>
   <div class="vaccination-center">
     <appointment-form :showDialog="showDialog" @toggleDialog="toggleDialog()" />
-    <div class="btn-mobile d-flex d-md-none" @click="toggleDialog()">
+    <div
+      v-if="isLoginSuccess"
+      class="btn-mobile d-flex d-md-none"
+      @click="toggleDialog()"
+    >
       <p class="btn-text">Book Appointment</p>
     </div>
     <div class="vaccination-center-form">
@@ -26,7 +30,6 @@
             label="Select State"
             dense
             solo
-            @change="onFilter()"
           ></v-select>
           <v-select
             v-model="district"
@@ -36,24 +39,19 @@
             label="Select District"
             dense
             solo
-            @change="onFilter()"
             :disabled="!state"
           ></v-select>
           <v-select
-            v-model="pincodes"
+            v-model="pincode"
             class="select"
-            :hint="`${pincodes ? pincodes.name : ''}`"
+            :hint="villiageName"
             :items="pinCodesList"
             item-text="pincode"
-            item-value="pincode"
-            label="Select Area"
-            persistent-hint
-            return-object
-            single-line
-            @change="onFilter()"
-            :disabled="!district"
+            label="Select District"
             dense
             solo
+            @change="onFilter()"
+            :disabled="!state"
           ></v-select>
           <div class="select">
             <v-dialog
@@ -99,7 +97,7 @@
           </div>
         </span>
       </div>
-      <div class="button d-none d-md-flex">
+      <div v-if="isLoginSuccess" class="button d-none d-md-flex">
         <p class="btn-text" @click="showDialog = true">Book Appointment</p>
       </div>
     </div>
@@ -111,17 +109,23 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import AppointmentForm from '@/components/vaccination/AppointmentForm.vue'
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
+import {
+  Districts,
+  PinCode,
+  State,
+  VaccinationCenter,
+  VaccinationCenterFilter,
+} from '@/types/interface'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
+const login = namespace('Login')
 
 @Component({
   components: { AppointmentForm },
 })
 export default class VaccinationCenterForm extends Vue {
-  @Prop({ default: null }) states!: any[]
-
-  items = ['Foo', 'Bar', 'Fizz', 'Buzz']
+  @Prop({ default: null }) states!: State[]
   currentDate = new Date().toISOString().substr(0, 10)
   menu = false
   datePickerModal = false
@@ -130,48 +134,55 @@ export default class VaccinationCenterForm extends Vue {
 
   state = ''
   district = ''
-  pincodes = ''
+  pincode = ''
+  villiageName = ''
   date = this.currentDate
 
   @stateDistricts.Getter
-  districtsList!: any[]
+  districtsList!: Districts[]
 
   @stateDistricts.Getter
-  pinCodesList!: any[]
+  pinCodesList!: PinCode[]
 
   @vaccinationCenter.Getter
-  vaccinationCenterList!: any[]
+  vaccinationCenterList!: VaccinationCenter[]
+
+  @login.Getter
+  public isLoginSuccess!: boolean
 
   @stateDistricts.Action(StateDistrictsActions.DISTRICTS)
-  public loadDistrictsList!: (stateId: string) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadDistrictsList!: (stateId: number) => void
 
   @stateDistricts.Action(StateDistrictsActions.PINCODES)
-  public loadPinCodesList!: (stateId: string) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadPinCodesList!: (stateId: number) => void
 
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
-  public loadVaccinationCenters!: (filterData: {
-    state?: string
-    district?: string
-    pincode?: string
-    date: string
-    lat?: string
-    lon?: string
-  }) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
 
   @Watch('state')
   loadDistricts(): void {
-    const stateInfo: any = this.states.filter((state: any) => {
+    const stateInfo: State[] = this.states.filter((state: State) => {
       return state.state_name === this.state
     })
+    this.pincode = ''
+    this.district = ''
     this.loadDistrictsList(stateInfo[0].state_id)
+    this.onFilter()
   }
 
   @Watch('district')
   createPinCodes(): void {
-    const districtInfo: any = this.districtsList.filter((district: any) => {
-      return district.district_name === this.district
-    })
+    const districtInfo: Districts[] = this.districtsList.filter(
+      (district: Districts) => {
+        return district.district_name === this.district
+      }
+    )
+    this.pincode = ''
     this.loadPinCodesList(districtInfo[0].district_id)
+    this.onFilter()
   }
 
   toggleForm(): void {
@@ -187,6 +198,7 @@ export default class VaccinationCenterForm extends Vue {
       state: this.state,
       district: this.district,
       date: this.date,
+      pincode: this.pincode,
     })
   }
 }
@@ -202,6 +214,7 @@ export default class VaccinationCenterForm extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: $color-background;
 
   @media only screen and (max-width: 960px) {
     top: 6.5rem;

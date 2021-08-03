@@ -1,7 +1,8 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import { googleAuthAPI, loginAPI } from '@/utils/api'
+import { facebookAuthAPI, googleAuthAPI, loginAPI } from '@/utils/api'
 import { LoginActions, LoginMutations } from '@/types/types'
 import Cookies from 'js-cookie'
+import { LoginDetails } from '@/types/interface'
 
 @Module({ namespaced: true })
 class Login extends VuexModule {
@@ -18,7 +19,7 @@ class Login extends VuexModule {
   @Mutation
   public [LoginMutations.LOGIN](token: string): void {
     this.loginSuccess = true
-    Cookies.set('jwtToken', token)
+    Cookies.set('jwtToken', token, { expires: 0.00069444 * 10 })
     this.token = token
   }
 
@@ -33,14 +34,14 @@ class Login extends VuexModule {
   }
 
   @Action
-  [LoginActions.LOGIN](authCredentials: any): Promise<void> {
+  [LoginActions.LOGIN](authCredentials: LoginDetails): Promise<void> {
     this.context.commit(LoginMutations.LOADING)
     return loginAPI(authCredentials)
       .then(response => {
         this.context.commit(LoginMutations.LOGIN, response.data.token)
         this.context.commit(LoginMutations.SET_ERROR, false)
       })
-      .catch((error: any) => {
+      .catch(() => {
         this.context.commit(LoginMutations.SET_ERROR, true)
       })
       .finally(() => {
@@ -49,13 +50,36 @@ class Login extends VuexModule {
   }
 
   @Action
-  ['LoginActions.GOOGLE_LOGIN'](): Promise<void> {
-    return googleAuthAPI()
+  [LoginActions.GOOGLE_LOGIN](
+    googleAuthCode: string | (string | null)[]
+  ): Promise<void> {
+    return googleAuthAPI(googleAuthCode)
       .then(response => {
-        console.log(response)
+        this.context.commit(LoginMutations.LOGIN, response.data.token)
+        this.context.commit(LoginMutations.SET_ERROR, false)
       })
-      .catch((error: any) => {
-        console.log(error)
+      .catch(() => {
+        //
+      })
+      .finally(() => {
+        this.context.commit(LoginMutations.LOADING)
+      })
+  }
+
+  @Action
+  [LoginActions.FACEBOOK_LOGIN](
+    facebookAuthCode: string | (string | null)[]
+  ): Promise<void> {
+    return facebookAuthAPI(facebookAuthCode)
+      .then(response => {
+        this.context.commit(LoginMutations.LOGIN, response.data.token)
+        this.context.commit(LoginMutations.SET_ERROR, false)
+      })
+      .catch(() => {
+        //
+      })
+      .finally(() => {
+        this.context.commit(LoginMutations.LOADING)
       })
   }
 
@@ -63,6 +87,7 @@ class Login extends VuexModule {
   public [LoginMutations.LOGOUT](): void {
     this.loginSuccess = false
     Cookies.remove('jwtToken')
+    Cookies.remove('authToken')
     this.token = ''
   }
 
@@ -74,7 +99,6 @@ class Login extends VuexModule {
   @Action
   public [LoginActions.IS_LOGGED_IN](): void {
     const token = Cookies.get('jwtToken')
-    console.log(token)
     if (token) {
       this.context.commit(LoginMutations.LOGIN, token)
       return

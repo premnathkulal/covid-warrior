@@ -7,6 +7,9 @@ import StateDistricts from '@/store/modules/stateDistricts'
 import VaccinationCenter from '@/store/modules/vaccinationCenter'
 import Login from '@/store/modules/login'
 import Register from '@/store/modules/register'
+import Profile from '@/store/modules/profile'
+import Beneficiary from '@/store/modules/beneficiary'
+import Schedule from '@/store/modules/schedule'
 
 Vue.use(Vuex)
 
@@ -22,5 +25,8 @@ export default new Vuex.Store({
     VaccinationCenter,
     Login,
     Register,
+    Profile,
+    Beneficiary,
+    Schedule,
   },
 })

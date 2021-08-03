@@ -16,21 +16,20 @@ class Location extends VuexModule {
     countryCodeISO3: '',
     freeformAddress: '',
     localName: '',
-    position: '',
   }
   public isLoading = false
   public latitude = 0
   public longitude = 0
 
   @Mutation
-  public [LocationMutations.TOGGLE_LOADING](): void {
+  public [LocationMutations.LOADING](): void {
     this.isLoading = !this.isLoading
   }
 
   @Mutation
-  public [LocationMutations.SET_LAT_LON](position: any): void {
-    this.latitude = Math.floor(position.latitude)
-    this.longitude = Math.floor(position.longitude)
+  public [LocationMutations.SET_LAT_LON](position: Position): void {
+    this.latitude = Math.floor(position.lat)
+    this.longitude = Math.floor(position.lon)
   }
 
   @Mutation
@@ -41,15 +40,12 @@ class Location extends VuexModule {
 
   @Action
   public [LocationActions.ADDRESS](position: Position): void {
-    this.context.commit(LocationMutations.TOGGLE_LOADING)
-    this.context.commit(LocationMutations.SET_LAT_LON, {
-      latitude: position.lat,
-      longitude: position.lon,
-    })
+    this.context.commit(LocationMutations.LOADING)
+    this.context.commit(LocationMutations.SET_LAT_LON, position)
     getAddressDetails(position.lat, position.lon).then(
       (result: AxiosResponse) => {
         const data = result.data.addresses[0]
-        this.context.commit(LocationMutations.TOGGLE_LOADING)
+        this.context.commit(LocationMutations.LOADING)
         this.context.commit(LocationMutations.ADDRESS, data)
       }
     )
@@ -57,6 +53,14 @@ class Location extends VuexModule {
 
   get getAddress(): Address {
     return this.address
+  }
+
+  get getLatitude(): number {
+    return this.latitude
+  }
+
+  get getLongitude(): number {
+    return this.longitude
   }
 }
 export default Location

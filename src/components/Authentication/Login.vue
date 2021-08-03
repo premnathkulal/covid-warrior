@@ -40,13 +40,17 @@
       <div class="social-btn-field">
         <div class="social-btn">
           <custom-button
-            @btnAction="googleLogin()"
+            @btnAction="redirectToAuthPage('google')"
             icon="mdi-google"
             btnName="google-btn"
           />
         </div>
         <div class="social-btn">
-          <custom-button icon="mdi-facebook" btnName="facebook-btn" />
+          <custom-button
+            @btnAction="redirectToAuthPage('facebook')"
+            icon="mdi-facebook"
+            btnName="facebook-btn"
+          />
         </div>
       </div>
     </div>
@@ -60,6 +64,8 @@ import CustomButton from '@/components/shared/CustomButton.vue'
 import { formValidator, resetFormError } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
 import { LoginActions } from '@/types/types'
+import Cookies from 'js-cookie'
+import { LoginDetails } from '@/types/interface'
 
 const login = namespace('Login')
 
@@ -78,14 +84,21 @@ export default class Login extends Vue {
 
   @login.Action(LoginActions.LOGIN)
   // eslint-disable-next-line no-unused-vars
-  public userLogin!: (authCredentials: any) => void
+  public userLogin!: (authCredentials: LoginDetails) => void
 
   @login.Action(LoginActions.SET_ERROR)
   // eslint-disable-next-line no-unused-vars
   public resetError!: (isError: boolean) => void
 
-  @login.Action('LoginActions.GOOGLE_LOGIN')
-  public googleAuthLogin!: () => void
+  @login.Action(LoginActions.GOOGLE_LOGIN)
+  // eslint-disable-next-line no-unused-vars
+  public googleAuthLogin!: (googleAuthCode: string | (string | null)[]) => void
+
+  @login.Action(LoginActions.FACEBOOK_LOGIN)
+  public facebookAuthLogin!: (
+    // eslint-disable-next-line no-unused-vars
+    facebookAuthCode: string | (string | null)[]
+  ) => void
 
   userDetails = {
     username: {
@@ -98,10 +111,28 @@ export default class Login extends Vue {
     },
   }
 
+  googleQuery = {
+    client_id:
+      '494955613474-2btd5ni02oqpdq1u03iebp0okvi4q5ok.apps.googleusercontent.com',
+    redirect_uri: 'https://covid-warrior-fe.herokuapp.com',
+    response_type: 'code',
+    scope: 'profile',
+  }
+
+  facebookQuery = {
+    client_id: '316546040012795',
+    redirect_uri: 'https://covid-warrior-fe.herokuapp.com/',
+    response_type: 'code',
+    scope: 'email',
+  }
+
+  googleAuthurl = `https://accounts.google.com/o/oauth2/v2/auth?`
+  faceBookAuthUrl = `https://www.facebook.com/v3.2/dialog/oauth?`
+  authType = 'normal'
+
   @Watch('errorMessage')
   setErrorMessage(): void {
     this.userDetails.password.error = this.errorMessage
-    console.log(this.errorMessage, this.userDetails)
   }
 
   @Watch('isLoginSuccess')
@@ -136,14 +167,45 @@ export default class Login extends Vue {
   }
 
   login(): void {
-    this.userLogin({
-      username: this.userDetails.username.value,
-      password: this.userDetails.password.value,
-    })
+    this.userLogin(this.userDetails)
   }
 
-  googleLogin(): void {
-    this.googleAuthLogin()
+  initAuthUrl(): void {
+    this.googleAuthurl += Object.entries(this.googleQuery)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join('&')
+
+    this.faceBookAuthUrl += Object.entries(this.facebookQuery)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join('&')
+  }
+
+  redirectToAuthPage(authType: string): void {
+    this.authType = authType
+    Cookies.set('authType', authType)
+    if (this.authType === 'google') {
+      window.location.href = this.googleAuthurl
+    } else if (this.authType === 'facebook') {
+      window.location.href = this.faceBookAuthUrl
+    }
+  }
+
+  mounted(): void {
+    const authType = Cookies.get('authType')
+    Cookies.remove('authType')
+    if (authType === 'google') {
+      this.googleAuthLogin(this.$route.query.code)
+    } else if (authType === 'facebook') {
+      this.facebookAuthLogin(this.$route.query.code)
+    }
+    if (this.$route.query.code) {
+      this.$router.push('/')
+      return
+    }
+  }
+
+  created(): void {
+    this.initAuthUrl()
   }
 }
 </script>

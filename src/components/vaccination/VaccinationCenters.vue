@@ -6,57 +6,65 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import VaccinationCentersList from '@/components/vaccination/VaccinationCentersList.vue'
 import VaccinationCenterForm from '@/components/vaccination/VaccinationCenterForm.vue'
 import { namespace } from 'vuex-class'
 import { StateDistrictsActions, VaccinationCenterActions } from '@/types/types'
+import { State, VaccinationCenterFilter } from '@/types/interface'
+import Loading from '@/components/shared/Loading.vue'
 
 const stateDistricts = namespace('StateDistricts')
 const vaccinationCenter = namespace('VaccinationCenter')
 const location = namespace('Location')
-
 @Component({
   components: {
     VaccinationCentersList,
     VaccinationCenterForm,
+    Loading,
   },
 })
 export default class VaccinationCenters extends Vue {
   date = new Date().toISOString().substr(0, 10)
+  isLoaded = false
 
   @stateDistricts.State
   public isLoading!: boolean
 
-  @location.State
-  public latitude!: number
+  @location.Getter
+  public getLatitude!: number
 
-  @location.State
-  public longitude!: number
+  @location.Getter
+  public getLongitude!: number
 
   @stateDistricts.Getter
-  statesList!: any[]
+  statesList!: State[]
 
   @stateDistricts.Action(StateDistrictsActions.STATES)
   public loadStatesList!: () => void
 
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
-  public loadVaccinationCenters!: (filterData: {
-    state?: string
-    district?: string
-    pincode?: string
-    date: string
-    latitude?: number
-    longitude?: number
-  }) => void
+  // eslint-disable-next-line no-unused-vars
+  public loadVaccinationCenters!: (filterData: VaccinationCenterFilter) => void
+
+  @Watch('getLatitude')
+  @Watch('getLongitude')
+  loadVaccinationCenter(): void {
+    if (!this.isLoaded) {
+      this.isLoaded = true
+      this.loadVaccinationCenters({
+        date: this.date,
+        lat: this.getLatitude,
+        lon: this.getLongitude,
+      })
+    }
+  }
 
   created(): void {
     this.loadStatesList()
-    this.loadVaccinationCenters({
-      date: this.date,
-      latitude: this.latitude,
-      longitude: this.longitude,
-    })
+    if (this.getLatitude && this.getLongitude) {
+      this.loadVaccinationCenter()
+    }
   }
 }
 </script>
