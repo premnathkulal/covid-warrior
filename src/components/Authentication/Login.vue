@@ -114,14 +114,14 @@ export default class Login extends Vue {
   googleQuery = {
     client_id:
       '494955613474-2btd5ni02oqpdq1u03iebp0okvi4q5ok.apps.googleusercontent.com',
-    redirect_uri: 'https://covid-warrior-fe.herokuapp.com',
+    redirect_uri: 'https://covid-warrior-app.herokuapp.com',
     response_type: 'code',
     scope: 'profile',
   }
 
   facebookQuery = {
     client_id: '316546040012795',
-    redirect_uri: 'https://covid-warrior-fe.herokuapp.com/',
+    redirect_uri: 'https://covid-warrior-app.herokuapp.com/',
     response_type: 'code',
     scope: 'email',
   }

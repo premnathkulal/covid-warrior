@@ -15,7 +15,7 @@ module.exports = {
   },
   ignorePatterns: ['shims*'],
   rules: {
-    'no-console': 'error',
+    // 'no-console': 'error',
     'no-debugger': 'error',
     quotemark: 'off',
     'prettier/prettier': [
@@ -34,15 +34,13 @@ module.exports = {
     'no-unused-vars': 'warn',
     'no-nested-ternary': 'error',
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
+  overrides: [{
+    files: [
+      '**/__tests__/*.{j,t}s?(x)',
+      '**/tests/unit/**/*.spec.{j,t}s?(x)',
+    ],
+    env: {
+      jest: true,
     },
-  ],
+  }, ],
 }

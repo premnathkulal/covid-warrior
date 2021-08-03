@@ -47,7 +47,7 @@
             :hint="villiageName"
             :items="pinCodesList"
             item-text="pincode"
-            label="Select District"
+            label="Select Pincode"
             dense
             solo
             @change="onFilter()"
