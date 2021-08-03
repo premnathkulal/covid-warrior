@@ -1,6 +1,7 @@
 <template>
   <div class="vaccination-center-list">
-    <template v-if="vaccinationCentersList.length">
+    <loading v-if="isLoading" />
+    <template v-else-if="vaccinationCentersList.length">
       <v-expansion-panels>
         <v-expansion-panel
           v-for="(item, index) in vaccinationCentersList"
@@ -39,11 +40,15 @@ import { Vue, Component } from 'vue-property-decorator'
 import VaccinationCenterInfo from '@/components/vaccination/VaccinationCentersInfo.vue'
 import { namespace } from 'vuex-class'
 import { VaccinationCenter } from '@/types/interface'
+import Loading from '@/components/shared/Loading.vue'
 
 const vaccinationCenter = namespace('VaccinationCenter')
 
-@Component({ components: { VaccinationCenterInfo } })
+@Component({ components: { VaccinationCenterInfo, Loading } })
 export default class VaccinationCentersList extends Vue {
+  @vaccinationCenter.State
+  public isLoading!: boolean
+
   @vaccinationCenter.Getter
   vaccinationCentersList!: VaccinationCenter[]
 }

@@ -19,7 +19,7 @@ class Login extends VuexModule {
   @Mutation
   public [LoginMutations.LOGIN](token: string): void {
     this.loginSuccess = true
-    Cookies.set('jwtToken', token)
+    Cookies.set('jwtToken', token, { expires: 0.00069444 })
     this.token = token
   }
 

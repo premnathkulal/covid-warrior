@@ -1,6 +1,5 @@
 <template>
   <div class="vaccination-center">
-    <loading />
     <vaccination-center-form :states="statesList" />
     <vaccination-centers-list />
   </div>

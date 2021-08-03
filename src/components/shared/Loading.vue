@@ -25,5 +25,8 @@ export default class Loading extends Vue {
 <style lang="scss">
 .dialog {
   z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

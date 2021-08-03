@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import Login from '@/components/Authentication/Login.vue'
 import Register from '@/components/Authentication/Register.vue'
 import { tabOptions } from '@/utils/uiData'
@@ -97,6 +97,7 @@ import { Position } from './types/interface'
 import { UpdatesActions } from '@/types/types'
 import VaccinationCenters from '@/components/vaccination/VaccinationCenters.vue'
 import Profile from '@/components/Profile/Profile.vue'
+import Cookies from 'js-cookie'
 
 const updates = namespace('Updates')
 const location = namespace('Location')
@@ -161,6 +162,15 @@ export default class App extends Vue {
     }
     this.toggle = false
     return true
+  }
+
+  @Watch('$route')
+  trackNavigation(): void {
+    const token = Cookies.get('jwtToken')
+    if (!token) {
+      this.userLogout()
+      return
+    }
   }
 
   created(): void {

@@ -1,6 +1,7 @@
 <template>
   <div class="profile-page">
-    <div v-if="userToken" class="profile-card container d-block">
+    <loading v-if="isLoading" />
+    <div v-if="userToken && !isLoading" class="profile-card container d-block">
       <div class="profile-img">
         <v-icon class="profile-img-placeholder">mdi-account-circle</v-icon>
       </div>
@@ -18,12 +19,16 @@ import { ProfileInfo } from '@/types/interface'
 import { ProfileActions } from '@/types/types'
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import Loading from '@/components/shared/Loading.vue'
 
 const profile = namespace('Profile')
 const login = namespace('Login')
 
-@Component
+@Component({ components: { Loading } })
 export default class Profile extends Vue {
+  @profile.State
+  public isLoading!: boolean
+
   @profile.Getter
   public getProfileInfo!: ProfileInfo
 

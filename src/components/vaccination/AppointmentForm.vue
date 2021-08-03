@@ -42,7 +42,8 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <div class="beneficiary-list-field container">
+        <loading v-if="isLoading" />
+        <div v-else class="beneficiary-list-field container">
           <template v-if="beneficiaries.length">
             <div class="beneficiary-info">
               <v-expansion-panels>
@@ -162,6 +163,8 @@ import { namespace } from 'vuex-class'
 import { BeneficiaryActions, ScheduleActions } from '@/types/types'
 import { BeneficiaryDetailsResponse } from '@/types/interface'
 
+import Loading from '@/components/shared/Loading.vue'
+
 const beneficiary = namespace('Beneficiary')
 const schedule = namespace('Schedule')
 const login = namespace('Login')
@@ -172,6 +175,7 @@ const login = namespace('Login')
     ScheduleUpdateAppointment,
     AlertBox,
     SuccessFailuerAlert,
+    Loading,
   },
 })
 export default class AppointmentForm extends Vue {
@@ -186,6 +190,9 @@ export default class AppointmentForm extends Vue {
   alertMessage = ''
   isSuccess = false
   deleteSchedule = false
+
+  @beneficiary.State
+  public isLoading!: boolean
 
   @beneficiary.Getter
   public beneficiaries!: BeneficiaryDetailsResponse[]
