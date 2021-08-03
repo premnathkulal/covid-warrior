@@ -145,9 +145,11 @@ export default class Beneficiary extends Vue {
   public beneficiarySuccess!: boolean
 
   @beneficiary.Action(BeneficiaryActions.SET_ERROR)
+  // eslint-disable-next-line no-unused-vars
   public setErrorMsg!: (errorMessage: string) => void
 
   @beneficiary.Action(BeneficiaryActions.ADD_BENEFICIARY)
+  // eslint-disable-next-line no-unused-vars
   public addBeneficiary!: (beneficiaryDetails: BeneficiaryDetails) => void
 
   @Watch('beneficiaryError')

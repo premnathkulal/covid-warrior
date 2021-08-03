@@ -100,7 +100,12 @@ import CustomInput from '@/components/shared/CustomInput.vue'
 import CustomButton from '@/components/shared/CustomButton.vue'
 import { isNumber } from '@/utils/formValidator'
 import { namespace } from 'vuex-class'
-import { VaccinationCenter, VaccinationCenterFilter } from '@/types/interface'
+import {
+  CreateUpdateSchedule,
+  ScheduleInfo,
+  VaccinationCenter,
+  VaccinationCenterFilter,
+} from '@/types/interface'
 import { ScheduleActions, VaccinationCenterActions } from '@/types/types'
 import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 
@@ -154,7 +159,7 @@ export default class ScheduleUpdateAppointment extends Vue {
   scheduleError!: boolean
 
   @schedule.Getter
-  public getScheduleInfo!: any
+  public getScheduleInfo!: ScheduleInfo
 
   @vaccinationCenter.Action(VaccinationCenterActions.VACCINATION_CENTER)
   // eslint-disable-next-line no-unused-vars
@@ -162,11 +167,11 @@ export default class ScheduleUpdateAppointment extends Vue {
 
   @schedule.Action(ScheduleActions.SCHEDULE)
   // eslint-disable-next-line no-unused-vars
-  public scheduleSlot!: (scheduleDetails: any) => void
+  public scheduleSlot!: (scheduleDetails: CreateUpdateSchedule) => void
 
   @schedule.Action(ScheduleActions.UPDATE)
   // eslint-disable-next-line no-unused-vars
-  public updateSchedule!: (scheduleDetails: any) => void
+  public updateSchedule!: (scheduleDetails: CreateUpdateSchedule) => void
 
   @schedule.Action(ScheduleActions.SCHEDULE_BY_ID)
   // eslint-disable-next-line no-unused-vars
@@ -280,10 +285,6 @@ export default class ScheduleUpdateAppointment extends Vue {
 
   toggleAlertBox(): void {
     this.successFailuerDialog = !this.successFailuerDialog
-  }
-
-  created() {
-    //
   }
 }
 </script>

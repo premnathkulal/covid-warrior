@@ -135,6 +135,15 @@ export default class App extends Vue {
   @updates.Action(UpdatesActions.UPDATES)
   public loadUpdates!: () => void
 
+  @Watch('$route')
+  trackNavigation(): void {
+    const token = Cookies.get('jwtToken')
+    if (!token) {
+      this.userLogout()
+      return
+    }
+  }
+
   locationTracker(): void {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -162,15 +171,6 @@ export default class App extends Vue {
     }
     this.toggle = false
     return true
-  }
-
-  @Watch('$route')
-  trackNavigation(): void {
-    const token = Cookies.get('jwtToken')
-    if (!token) {
-      this.userLogout()
-      return
-    }
   }
 
   created(): void {

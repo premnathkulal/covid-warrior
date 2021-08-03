@@ -130,3 +130,22 @@ export interface ProfileInfo {
   name: string
   username: string
 }
+
+export interface ScheduleInfo {
+  beneficiaryId: string
+  centerAddress: string
+  centerID: string
+  centerName: string
+  date: string
+  pincode: string
+  slot: string | string[]
+  vaccine: string
+}
+
+export interface CreateUpdateSchedule {
+  beneficiaryId: string
+  centerId: string
+  date: string
+  slot: string
+  vaccine: string
+}

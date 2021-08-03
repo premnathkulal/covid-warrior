@@ -9,13 +9,14 @@ import {
   updateScheduleAPI,
   loadScheduleByIdAPI,
 } from '@/utils/api'
+import { CreateUpdateSchedule, ScheduleInfo } from '@/types/interface'
 
 @Module({ namespaced: true })
 class Schedule extends VuexModule {
   public isLoading = false
   public isSuccess = false
   public errorMessage = ''
-  public scheduleInfo = {}
+  public scheduleInfo = {} as ScheduleInfo
 
   @Mutation
   public [ScheduleMutations.LOADING](): void {
@@ -38,7 +39,9 @@ class Schedule extends VuexModule {
   }
 
   @Action
-  public [ScheduleActions.SCHEDULE](scheduleDetails: any): void {
+  public [ScheduleActions.SCHEDULE](
+    scheduleDetails: CreateUpdateSchedule
+  ): void {
     this.context.commit(ScheduleMutations.LOADING)
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
     this.context.commit(ScheduleMutations.SET_ERROR, '')
@@ -66,7 +69,7 @@ class Schedule extends VuexModule {
   }
 
   @Action
-  public [ScheduleActions.UPDATE](scheduleDetails: any): void {
+  public [ScheduleActions.UPDATE](scheduleDetails: CreateUpdateSchedule): void {
     this.context.commit(ScheduleMutations.LOADING)
     this.context.commit(ScheduleMutations.SET_SUCCESS, false)
     this.context.commit(ScheduleMutations.SET_ERROR, '')
@@ -93,7 +96,7 @@ class Schedule extends VuexModule {
   }
 
   @Mutation
-  public [ScheduleMutations.SCHEDULE_BY_ID](data: any): void {
+  public [ScheduleMutations.SCHEDULE_BY_ID](data: ScheduleInfo): void {
     this.scheduleInfo = data
   }
 
@@ -108,8 +111,8 @@ class Schedule extends VuexModule {
           response.data.scheduleData
         )
       })
-      .catch(error => {
-        console.log(error)
+      .catch(() => {
+        //
       })
       .finally(() => {
         this.context.commit(ScheduleMutations.LOADING)
@@ -124,7 +127,7 @@ class Schedule extends VuexModule {
     return this.isSuccess
   }
 
-  get getScheduleInfo(): any {
+  get getScheduleInfo(): ScheduleInfo {
     return this.scheduleInfo
   }
 }

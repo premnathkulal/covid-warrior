@@ -133,7 +133,6 @@ export default class Login extends Vue {
   @Watch('errorMessage')
   setErrorMessage(): void {
     this.userDetails.password.error = this.errorMessage
-    console.log(this.errorMessage, this.userDetails)
   }
 
   @Watch('isLoginSuccess')

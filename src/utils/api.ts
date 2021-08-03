@@ -1,5 +1,6 @@
 import {
   BeneficiaryDetails,
+  CreateUpdateSchedule,
   LoginDetails,
   RegisterDetails,
 } from '@/types/interface'
@@ -106,12 +107,14 @@ const addBeneficiaryAPI = (
   })
 }
 
-const getBeneficiariesAPI = () => {
+const getBeneficiariesAPI = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axiosApi.get(`${BASE_URL}beneficiary`)
 }
 
-const scheduleAPI = (scheduleDetails: any): Promise<AxiosResponse> => {
+const scheduleAPI = (
+  scheduleDetails: CreateUpdateSchedule
+): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axiosApi.post(`${BASE_URL}schedule`, {
     ...scheduleDetails,
@@ -119,7 +122,9 @@ const scheduleAPI = (scheduleDetails: any): Promise<AxiosResponse> => {
   })
 }
 
-const updateScheduleAPI = (scheduleDetails: any): Promise<AxiosResponse> => {
+const updateScheduleAPI = (
+  scheduleDetails: CreateUpdateSchedule
+): Promise<AxiosResponse> => {
   const BASE_URL = COVID_WARRIOR_API
   return axiosApi.patch(
     `${BASE_URL}schedule/${scheduleDetails.beneficiaryId}`,

@@ -161,7 +161,7 @@ import AlertBox from '@/components/shared/AlertBox.vue'
 import SuccessFailuerAlert from '@/components/shared/SuccessFailuerAlert.vue'
 import { namespace } from 'vuex-class'
 import { BeneficiaryActions, ScheduleActions } from '@/types/types'
-import { BeneficiaryDetailsResponse } from '@/types/interface'
+import { BeneficiaryDetailsResponse, ScheduleInfo } from '@/types/interface'
 
 import Loading from '@/components/shared/Loading.vue'
 
@@ -198,7 +198,7 @@ export default class AppointmentForm extends Vue {
   public beneficiaries!: BeneficiaryDetailsResponse[]
 
   @schedule.Getter
-  public getScheduleInfo!: any
+  public getScheduleInfo!: ScheduleInfo
 
   @beneficiary.Getter
   public beneficiaryError!: string
