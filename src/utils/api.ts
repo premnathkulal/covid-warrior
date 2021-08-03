@@ -10,7 +10,7 @@ import axiosApi from '@/utils/axiosInterceptor'
 const TOM_TOM_API = 'https://api.tomtom.com/search/2/'
 const COVID_19_API = 'https://api.covid19india.org/data.json'
 const NEWS_API = 'https://api.nytimes.com/svc/'
-const COVID_WARRIOR_API = 'http://localhost:3000/'
+const COVID_WARRIOR_API = 'https://covid-warrior-app.herokuapp.com/'
 
 const getUpdates = (): Promise<AxiosResponse> => {
   const BASE_URL = COVID_19_API
