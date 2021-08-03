@@ -80,7 +80,7 @@ export class UserController {
   @Get('facebook')
   @UseGuards(AuthGuard('facebook'))
   async facebookLogin(@Req() req, @Res() response): Promise<void> {
-    response.cookie('authToken', req.user)
+    // response.setCookie('authToken', req.user)
     const userDetails = {
       status: HttpStatus.OK,
       token: req.user,
@@ -92,7 +92,7 @@ export class UserController {
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleLogin(@Req() req, @Res() response): Promise<void> {
-    response.cookie('authToken', req.user)
+    // response.setCookie('authToken', req.user)
     const userDetails = {
       status: HttpStatus.OK,
       token: req.user,
