@@ -33,14 +33,17 @@ module.exports = {
     ],
     'no-unused-vars': 'warn',
     'no-nested-ternary': 'error',
+    '@typescript-eslint/no-var-requires': 0,
   },
-  overrides: [{
-    files: [
-      '**/__tests__/*.{j,t}s?(x)',
-      '**/tests/unit/**/*.spec.{j,t}s?(x)',
-    ],
-    env: {
-      jest: true,
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
+      },
     },
-  }, ],
+  ],
 }
