@@ -13,11 +13,13 @@
             >{{ address.freeformAddress }}</span
           >
         </p>
-        <img
-          class="state-map ml-auto"
-          :src="`/assets/states/${currentStateUpdates.statecode}.png`"
-          :alt="currentStateUpdates.statecode"
-        />
+        <div class="image ml-auto">
+          <img
+            class="state-map"
+            :src="`/assets/states/${currentStateUpdates.statecode || 'IN'}.png`"
+            :alt="currentStateUpdates.statecode"
+          />
+        </div>
       </div>
       <div class="data-field py-5">
         <div class="display-data">
@@ -165,9 +167,14 @@ export default class StateWiseList extends Vue {
         }
       }
 
-      .state-map {
+      .image {
         width: 3rem;
         height: 3rem;
+        .state-map {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
       }
     }
 

@@ -24,7 +24,12 @@
           <div class="text-center">
             <v-menu>
               <template v-slot:activator="{ on: menu }">
-                <v-btn color="black" v-on="{ ...menu }" icon>
+                <v-btn
+                  aria-label="menu-btn"
+                  color="black"
+                  v-on="{ ...menu }"
+                  icon
+                >
                   <v-icon>mdi-dots-vertical</v-icon>
                 </v-btn>
               </template>

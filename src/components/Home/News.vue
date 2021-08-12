@@ -3,9 +3,18 @@
     <div class="news" v-if="topNewsList && !isLoading">
       <template v-for="(item, index) in topNewsList">
         <div :key="index">
-          <a :href="item.url" target="_blank" class="short-news py-3 text-dark">
+          <a
+            :href="item.url"
+            target="_blank"
+            rel="noreferrer"
+            class="short-news py-3 text-dark"
+          >
             <div class="img-container">
-              <img class="img" :src="item.multimedia[0].url" />
+              <img
+                class="img"
+                :src="item.multimedia[0].url"
+                alt="news-multimedia"
+              />
             </div>
             <div class="news-contents">
               <div class="news-title">{{ item.title }}</div>
