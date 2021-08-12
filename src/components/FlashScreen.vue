@@ -29,6 +29,7 @@ export default class FlashScreen extends Vue {}
 
   .title {
     font-family: $combo;
+    font-display: swap;
     font-weight: bold;
     font-size: 2rem;
   }

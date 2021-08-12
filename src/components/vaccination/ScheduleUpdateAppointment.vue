@@ -182,12 +182,10 @@ export default class ScheduleUpdateAppointment extends Vue {
   loadVaccinationCenter(): void {
     this.vaccinationCenters = []
     if (this.pincode && this.pincode.length === 6) {
-      setTimeout(() => {
-        this.loadVaccinationCenters({
-          date: this.scheduleDetails.date,
-          pincode: this.pincode,
-        })
-      }, 1000)
+      this.loadVaccinationCenters({
+        date: this.scheduleDetails.date,
+        pincode: this.pincode,
+      })
     }
   }
 

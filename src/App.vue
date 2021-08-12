@@ -192,6 +192,7 @@ export default class App extends Vue {
 @include pulse-bg();
 #app {
   background: $color-background;
+
   .toolbar {
     .toolbar-title {
       width: 100%;
@@ -199,6 +200,7 @@ export default class App extends Vue {
       align-items: center;
       justify-content: center;
       font-family: $combo;
+      font-display: swap;
       font-weight: bold;
       font-size: 2rem;
       color: $black;

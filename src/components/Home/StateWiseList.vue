@@ -31,7 +31,7 @@
           <p class="data-count">{{ currentStateUpdates.active }}</p>
         </div>
         <div class="display-data">
-          <p class="data-title text-success">Recovered</p>
+          <p class="data-title text-green">Recovered</p>
           <p class="data-count">{{ currentStateUpdates.recovered }}</p>
         </div>
         <div class="display-data">
@@ -59,7 +59,7 @@
             <p class="data-count">{{ currentStateUpdates.deltaconfirmed }}</p>
           </div>
           <div class="delta-data">
-            <p class="data-title pr-5 text-success">Recovered</p>
+            <p class="data-title pr-5 text-green">Recovered</p>
             <p class="data-count">{{ currentStateUpdates.deltarecovered }}</p>
           </div>
           <div class="delta-data">
@@ -161,9 +161,11 @@ export default class StateWiseList extends Vue {
         font-weight: bold;
         font-size: 1.4rem;
         padding: 0.5rem;
+        font-display: swap;
 
         .address {
           font-size: 0.8rem;
+          font-display: swap;
         }
       }
 
@@ -182,15 +184,18 @@ export default class StateWiseList extends Vue {
       width: 100%;
       display: flex;
       justify-content: space-around;
+      font-display: swap;
       font-weight: bold;
 
       .display-data {
         .data-title {
           font-size: 1rem;
           line-height: 10px;
+          font-display: swap;
         }
         .data-count {
           line-height: 5px;
+          font-display: swap;
         }
       }
     }
@@ -214,6 +219,7 @@ export default class StateWiseList extends Vue {
 
         .delta-title {
           padding: 0.5rem;
+          font-display: swap;
         }
 
         .lottie-player {
@@ -233,9 +239,14 @@ export default class StateWiseList extends Vue {
             text-align: left;
             width: 8rem;
             font-size: 1.2rem;
+            font-display: swap;
           }
         }
       }
+    }
+    .text-green {
+      color: #013b0e;
+      font-display: swap;
     }
   }
 }
