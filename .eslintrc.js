@@ -33,6 +33,7 @@ module.exports = {
     ],
     'no-unused-vars': 'warn',
     'no-nested-ternary': 'error',
+    '@typescript-eslint/no-var-requires': 0,
   },
   overrides: [
     {
