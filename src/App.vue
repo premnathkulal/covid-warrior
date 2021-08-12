@@ -143,7 +143,6 @@ export default class App extends Vue {
   @Watch('$route')
   trackNavigation(): void {
     const token = Cookies.get('jwtToken')
-    console.log(this.$route.name)
     if (!token && this.$route.name != 'Home') {
       this.userLogout()
       return
