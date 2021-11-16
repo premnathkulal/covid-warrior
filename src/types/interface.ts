@@ -81,6 +81,7 @@ export interface TopNews {
   byline: string
   published_date: string
   multimedia: Multimedia[]
+  abstract: string
 }
 
 export interface VaccinationCenter {

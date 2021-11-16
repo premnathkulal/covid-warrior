@@ -14,6 +14,7 @@ class News extends VuexModule {
       byline: '',
       published_date: '',
       multimedia: [{ url: '' }],
+      abstract: '',
     },
   ]
 
@@ -40,6 +41,7 @@ class News extends VuexModule {
   }
 
   get topNewsList(): TopNews[] {
+    console.log(this.topNews)
     return this.topNews
   }
 }

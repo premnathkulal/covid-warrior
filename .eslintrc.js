@@ -15,7 +15,7 @@ module.exports = {
   },
   ignorePatterns: ['shims*'],
   rules: {
-    'no-console': 'error',
+    // 'no-console': 'error',
     'no-debugger': 'error',
     quotemark: 'off',
     'prettier/prettier': [
@@ -35,15 +35,13 @@ module.exports = {
     'no-nested-ternary': 'error',
     '@typescript-eslint/no-var-requires': 0,
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
+  overrides: [{
+    files: [
+      '**/__tests__/*.{j,t}s?(x)',
+      '**/tests/unit/**/*.spec.{j,t}s?(x)',
+    ],
+    env: {
+      jest: true,
     },
-  ],
+  }, ],
 }

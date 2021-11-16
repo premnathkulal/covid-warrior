@@ -26,9 +26,13 @@
         </div>
         <div class="slots">
           <p class="slots-title">Slots</p>
-          <template v-for="(item, index) in centerInfo.slots">
-            <p class="slot-time" :key="index">{{ item }}</p>
-          </template>
+          <p
+            v-for="(item, index) in centerInfo.slots"
+            class="slot-time"
+            :key="index"
+          >
+            {{ item }}
+          </p>
         </div>
       </div>
     </div>
