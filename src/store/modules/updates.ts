@@ -24,7 +24,6 @@ class Updates extends VuexModule {
     this.context.commit(UpdatesMutations.LOADING)
     getUpdates().then((result: AxiosResponse) => {
       this.context.commit(UpdatesMutations.UPDATES, result.data.statewise)
-
       this.context.commit(UpdatesMutations.LOADING)
     })
   }

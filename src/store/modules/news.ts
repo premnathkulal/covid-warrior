@@ -41,7 +41,6 @@ class News extends VuexModule {
   }
 
   get topNewsList(): TopNews[] {
-    console.log(this.topNews)
     return this.topNews
   }
 }
