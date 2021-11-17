@@ -3,6 +3,7 @@
     <div class="news" v-if="topNewsList && !isLoading">
       <div v-for="(item, index) in topNewsList" :key="index">
         <a
+          v-if="item.title"
           :href="item.url"
           target="_blank"
           rel="noreferrer"
